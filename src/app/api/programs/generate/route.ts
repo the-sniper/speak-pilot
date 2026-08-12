@@ -179,12 +179,29 @@ export async function POST(req: Request): Promise<Response> {
           kickoff: curriculum.kickoffMessage,
         }).where(eq(programs.id, programId))
 
-        for (const week of curriculum.weeks) {
+        // Fix round 1 on Task 12, Finding 1(b): `week.n` is the MODEL's own
+        // number, and CurriculumSchema never constrained it to be unique or
+        // to fall inside 1..horizonWeeks — a real model can emit garbage
+        // here exactly as easily as the mock did (which collided on the same
+        // n for every week, deterministically, regardless of horizon; see
+        // src/lib/llm/providers/mock.ts). The rows this loop persists are
+        // the ones every downstream reader (program-view.ts, the advance
+        // route's existingWeekRow lookup) keys off of by n, so normalizing
+        // HERE — to the week's plain position in the array, 1-indexed — is
+        // the one place that guarantees every program's weeks are sequential
+        // and duplicate-free at the source, for a mock OR a real provider,
+        // without spending a retry (and, with a live key in .env, real
+        // money) re-prompting the model over what is purely a numbering
+        // cosmetic. `week.n` itself is still whatever the model said — nothing
+        // downstream reads it once persisted, so nothing is lost by not
+        // trusting it for the column that actually drives navigation.
+        for (const [i, week] of curriculum.weeks.entries()) {
           const weekId = randomUUID()
+          const n = i + 1
           await db.insert(programWeeks).values({
             id: weekId,
             programId,
-            n: week.n,
+            n,
             theme: week.theme,
           })
           if (week.scenarios.length > 0) {

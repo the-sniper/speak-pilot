@@ -177,6 +177,27 @@ function isPlacementArraySchema(node: unknown): boolean {
   return "learnerId" in props && "band" in props && "rationale" in props && "evidenceUtteranceIds" in props
 }
 
+// Fix round 1 on Task 12, Finding 1(c): matches CurriculumSchema.shape.weeks
+// (src/lib/schemas.ts) — an array of { n, theme, scenarios }. The generic
+// path-hashed number generator below (`fnv1a(path) % 5 + 1`) collides across
+// sibling array indices often enough that it produced n=5 for EVERY week of
+// EVERY freshly generated program regardless of horizonWeeks — not a rare
+// edge case, the deterministic default. The route that persists these rows
+// now re-numbers them sequentially at insert time regardless (see
+// programs/generate/route.ts), so this fix isn't load-bearing for
+// correctness anymore — but the SAME model["n"] value is also what streams
+// to the client mid-generation (the `weeks` SSE section, rendered as
+// "Week {w.n}" tiles by ProgramStream's WeeksSection) BEFORE that
+// persist-time renumbering ever runs, so leaving the mock producing
+// colliding numbers there would still make the demo look broken during
+// generation even after the persisted rows are fixed.
+function isWeekArraySchema(node: unknown): boolean {
+  const n = node as { type?: string; items?: { type?: string; properties?: Record<string, unknown> } } | null
+  if (!n || n.type !== "array" || !n.items || n.items.type !== "object") return false
+  const props = n.items.properties ?? {}
+  return "n" in props && "theme" in props && "scenarios" in props
+}
+
 // `plainLanguage` (SuccessCriterion) is rejected by src/lib/schemas.ts if it
 // contains a bare CEFR-shaped token (A1/A2/B1/B2/C1/C2/CEFR) anywhere — the
 // refine deliberately over-rejects, so this fixture avoids those characters
@@ -234,8 +255,15 @@ function genFromSchema(node: JsonSchemaNode | undefined, path: string, ctx: { te
       if (isPlacementArraySchema(node)) return mockPlacements(ctx.text)
       const min = node.minItems ?? 2
       const max = node.maxItems ?? Math.max(min, 2)
-      const n = Math.min(Math.max(min, 1), max)
-      return Array.from({ length: n }, (_, i) => genFromSchema(node.items, `${path}[${i}]`, ctx))
+      const count = Math.min(Math.max(min, 1), max)
+      const items = Array.from({ length: count }, (_, i) => genFromSchema(node.items, `${path}[${i}]`, ctx))
+      if (isWeekArraySchema(node)) {
+        // Overwrite the generically-generated `n` with the item's real
+        // 1-indexed position — sequential and unique by construction,
+        // instead of a hash that can (and did) collide across indices.
+        return items.map((item, i) => ({ ...(item as Record<string, unknown>), n: i + 1 }))
+      }
+      return items
     }
     case "string":
       return genString(path, node)

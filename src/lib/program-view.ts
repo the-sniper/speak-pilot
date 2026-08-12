@@ -94,17 +94,50 @@ export async function getProgramOverview(programId: string): Promise<ProgramOver
   const [program] = await db.select().from(programs).where(eq(programs.id, programId)).limit(1)
   if (!program) return null
 
+  // Fix round 1 on Task 12, Finding 1(a): programWeeks rows are NOT
+  // trustworthy as "the tile list" on their own. Curriculum generation
+  // persists one row per model-authored week (Task 9), the advance route
+  // separately creates one keyed by sequential weekNumber if none exists yet
+  // for that n (its own documented "edge case"), and — demonstrated live in
+  // review — the model/mock's own `n` numbering can duplicate and/or land
+  // outside 1..horizonWeeks. Generation now renumbers sequentially at
+  // persist time (see programs/generate/route.ts) and the mock provider no
+  // longer collides (mock.ts), but existing rows created before that fix
+  // are still in the DB, and nothing stops a future write path from
+  // reintroducing the same shape of bug — so this read path defends against
+  // duplicate/out-of-range rows unconditionally, not just for one dataset
+  // instance. Ordered `advancedAt` first (Postgres default: ASC sorts NULLs
+  // last) then `id` so which row wins a duplicate-n collision is 100%
+  // deterministic — an advanced row always beats a not-advanced duplicate,
+  // and ties break the same way every time. getWeekBrief applies the exact
+  // same ordering (Finding 2) so the two functions never disagree about
+  // which row is canonical for a given n.
   const weekRows = await db
     .select({ n: programWeeks.n, theme: programWeeks.theme, advancedAt: programWeeks.advancedAt })
     .from(programWeeks)
     .where(eq(programWeeks.programId, programId))
-    .orderBy(asc(programWeeks.n))
+    .orderBy(asc(programWeeks.advancedAt), asc(programWeeks.id))
 
-  const weeks: ProgramWeekSummary[] = weekRows.map(w => ({
-    n: w.n,
-    theme: w.theme,
-    advancedAt: w.advancedAt ? w.advancedAt.toISOString() : null,
-  }))
+  const canonicalByN = new Map<number, { theme: string; advancedAt: Date | null }>()
+  for (const w of weekRows) {
+    if (!canonicalByN.has(w.n)) canonicalByN.set(w.n, { theme: w.theme, advancedAt: w.advancedAt })
+  }
+
+  // The tile list is ALWAYS exactly 1..horizonWeeks — never the raw
+  // distinct-n count off the table, which could be short (a missing row) or
+  // long (a duplicate/out-of-range row) of that. A row present for n is
+  // used; a missing n synthesizes the identical "not advanced yet"
+  // placeholder getWeekBrief's own missing-row branch falls back to, so the
+  // two stay consistent with each other.
+  const weeks: ProgramWeekSummary[] = Array.from({ length: program.horizonWeeks }, (_, i) => {
+    const n = i + 1
+    const row = canonicalByN.get(n)
+    return {
+      n,
+      theme: row?.theme ?? `Week ${n}`,
+      advancedAt: row?.advancedAt ? row.advancedAt.toISOString() : null,
+    }
+  })
 
   // Trajectory: cohort mean sentence `total`, week by week, through
   // currentWeek. This is exactly the "one session per speaker, ordered into
@@ -206,26 +239,45 @@ export async function getWeekBrief(programId: string, n: number): Promise<WeekBr
   const [program] = await db.select().from(programs).where(eq(programs.id, programId)).limit(1)
   if (!program) return { status: "program_not_found" }
 
+  // Fix round 1 on Task 12, Finding 1(a) gap found while writing the
+  // regression test: the range check used to live ONLY in the "no row
+  // found" branch below, so a stray row that exists for an out-of-range n
+  // (exactly the n=5-on-a-3-week-horizon shape Finding 1 reproduced) would
+  // still resolve through the query below and render as "not advanced yet"
+  // — a week that can never actually be reached by advancing, since the
+  // advance route only ever creates rows at sequential weekNumber <=
+  // horizonWeeks. Checking the range unconditionally, before the row is
+  // even queried, means a stray out-of-range row can no longer be reached
+  // through this function at all, regardless of whether one exists.
+  if (n < 1 || n > program.horizonWeeks) return { status: "week_not_found" }
+
+  // Fix round 1 on Task 12, Finding 2: this used to be `.limit(1)` with no
+  // ORDER BY — with duplicate rows sharing an n (which existed in the DB at
+  // review time, and Finding 1 shows how they get created), which row
+  // Postgres happened to scan first was undefined, so an advanced week could
+  // intermittently render as "not advanced," or show a different row's
+  // theme/adjustments, on every request. Same ordering as
+  // getProgramOverview's canonicalByN (advancedAt asc — NULLs last by
+  // Postgres default — then id asc) so the two functions always agree on
+  // which row is canonical for a given n, deterministically, every time.
   const [week] = await db
     .select()
     .from(programWeeks)
     .where(and(eq(programWeeks.programId, programId), eq(programWeeks.n, n)))
+    .orderBy(asc(programWeeks.advancedAt), asc(programWeeks.id))
     .limit(1)
 
-  // No row for this n at all is NOT automatically "this week doesn't exist."
-  // Curriculum generation persists one programWeeks row per THEME the model
-  // produced (Task 9), and the advance route separately creates a row keyed
-  // by sequential weekNumber (currentWeek + 1) if one isn't already there
-  // for that n (see its "Edge case" comment) — the two numberings aren't
-  // guaranteed to line up, so a real program can easily have no row yet for
-  // an n that is still well within its horizon. Ambiguity resolution is
-  // explicit: a week that hasn't been advanced must render a clear
-  // "not advanced" state and an offer to advance, never a 404 — that only
-  // holds if a missing row within 1..horizonWeeks is treated the same as a
-  // row that exists but has no advancedAt. A 404 is reserved for n truly
-  // outside this program's horizon.
+  // No row for this n at all is NOT automatically "this week doesn't exist"
+  // — `n` is already confirmed in range by the guard above. Curriculum
+  // generation persists one programWeeks row per model-authored week (Task
+  // 9), and the advance route separately creates a row keyed by sequential
+  // weekNumber (currentWeek + 1) if one isn't already there for that n (see
+  // its "Edge case" comment) — the two numberings aren't guaranteed to line
+  // up, so a real program can easily have no row yet for an n that is still
+  // well within its horizon. Ambiguity resolution is explicit: a week that
+  // hasn't been advanced must render a clear "not advanced" state and an
+  // offer to advance, never a 404.
   if (!week) {
-    if (n < 1 || n > program.horizonWeeks) return { status: "week_not_found" }
     return {
       status: "not_advanced",
       programId,

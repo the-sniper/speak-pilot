@@ -142,13 +142,23 @@ function TrajectoryChart({ trajectory }: { trajectory: TrajectoryPoint[] }) {
 
   return (
     <div className="rounded-xl border border-[var(--line)] bg-[var(--paper-raised)] p-5">
-      <div className="mb-3 flex flex-wrap items-baseline gap-2">
-        <span className="font-mono text-2xl font-medium text-[var(--ink)]">{last.meanTotal.toFixed(1)}</span>
-        <span className={`font-mono text-sm font-medium ${delta < 0 ? "text-[var(--accent)]" : "text-[var(--ink-soft)]"}`}>
+      <div className="mb-3 flex flex-wrap items-baseline gap-x-4 gap-y-1.5">
+        {/* Each number gets its own tag, grouped in a nowrap span with the
+            number it covers — fix round 1 on Task 12 (minor finding): a
+            single trailing tag shared across both numbers could separate
+            from the current-value number when this row wraps on a narrow
+            viewport, leaving that number's honesty disclosure orphaned. */}
+        <span className="flex items-baseline gap-1.5 whitespace-nowrap">
+          <span className="font-mono text-2xl font-medium text-[var(--ink)]">{last.meanTotal.toFixed(1)}</span>
+          <SimulatedTag />
+        </span>
+        <span
+          className={`flex items-baseline gap-1.5 whitespace-nowrap font-mono text-sm font-medium ${delta < 0 ? "text-[var(--accent)]" : "text-[var(--ink-soft)]"}`}
+        >
           {delta >= 0 ? "+" : ""}
           {delta.toFixed(1)} since week {first.weekN}
+          <SimulatedTag />
         </span>
-        <SimulatedTag />
       </div>
       <svg viewBox={`0 0 ${width} ${height}`} className="w-full" role="img" aria-label="Cohort mean sentence score by week, constructed trajectory">
         <path d={linePath} fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
