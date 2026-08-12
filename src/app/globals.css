@@ -1,26 +1,97 @@
 @import "tailwindcss";
 
+/*
+ * Speak Pilot commits to one aesthetic: warm paper, ink, a single terracotta
+ * accent graduated by intensity for the five proficiency bands. This is a
+ * deliberate, single-theme choice (no prefers-color-scheme fork) — the
+ * palette below IS the product, not a default that happens to render.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #f6f1e6;
+  --paper-raised: #fbf8f1;
+  --ink: #201c16;
+  --ink-soft: #726a5b;
+  --ink-faint: #a89d88;
+  --line: #e2d8c2;
+  --accent: #b8451f;
+  --accent-ink: #fdf6ee;
+  --accent-soft: #f0dcc8;
+
+  --band-a1: #ede3cd;
+  --band-a2: #e2c69c;
+  --band-b1: #d59f66;
+  --band-b2: #c67740;
+  --band-c1: #a8461f;
+  --band-c1-ink: #fdf6ee;
+
+  --background: var(--paper);
+  --foreground: var(--ink);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-data);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* A faint paper grain so the flat cream field reads as material, not a CSS
+   fill. Fixed and behind everything; pure CSS, no network request. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.13  0 0 0 0 0.11  0 0 0 0 0.09  0 0 0 0.028 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-rise-in {
+  animation: rise-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    100deg,
+    var(--line) 30%,
+    #efe6d3 45%,
+    var(--line) 60%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise-in,
+  .skeleton-shimmer {
+    animation: none !important;
+  }
 }
