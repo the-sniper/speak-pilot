@@ -59,7 +59,14 @@ export type PlacementEvidence = {
   overriddenBand: Band | null
   rationale: string
   evidenceUtteranceIds: string[]
-  learner: { id: string; name: string; role: string }
+  // null only if `learners` is missing the row `placements.learnerId`
+  // references — which the schema's NOT NULL FK makes unreachable today.
+  // Left null rather than fabricated (e.g. the id standing in for a name)
+  // for the same reason the evidenceUtteranceIds join below refuses to
+  // paper over a missing utterance: a hole here is a data integrity bug
+  // upstream, and the UI must be able to tell "no data" from "a real name"
+  // rather than silently rendering a learner id as if it were a person.
+  learner: { id: string; name: string; role: string } | null
   utterances: UtteranceEvidence[]
 }
 
@@ -176,7 +183,7 @@ async function buildEvidence(row: PlacementRow): Promise<PlacementEvidence> {
     overriddenBand: (row.overriddenBand as Band | null) ?? null,
     rationale: row.rationale,
     evidenceUtteranceIds,
-    learner: learnerRow ?? { id: row.learnerId, name: row.learnerId, role: "" },
+    learner: learnerRow ?? null,
     utterances: utteranceEvidence,
   }
 }

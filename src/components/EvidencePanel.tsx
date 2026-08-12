@@ -332,9 +332,15 @@ function UtteranceEvidenceBlock({
       </div>
 
       {accuracies.length > 0 && (
-        <div className="flex flex-col gap-1.5">
+        <div className="flex flex-col gap-1.5 border-b border-dashed border-[var(--line)] pb-4">
+          {/* expertScores has no word/phone id — it is one accuracy score per
+              rater for the WHOLE utterance. This label has to say so
+              explicitly: it sits right above the word-chip row, which DOES
+              update per word, so an unlabelled granularity mismatch here
+              would read as "the spread for the selected word" when it never
+              is. See code review round 1, Finding 1. */}
           <span className="font-mono text-[10px] uppercase tracking-wide text-[var(--ink-faint)]">
-            Expert spread · accuracy · {accuracies.length} raters
+            Expert spread · whole utterance, not per word · accuracy · {accuracies.length} raters
           </span>
           <div className="relative h-6 rounded-full bg-[var(--paper)]">
             <div
@@ -351,14 +357,16 @@ function UtteranceEvidenceBlock({
             ))}
           </div>
           <span className="font-mono text-[10px] text-[var(--ink-faint)]">
-            {min === max ? `all raters agreed: ${max}/10` : `range ${min}–${max} of 10`}
+            {min === max
+              ? `all raters agreed on this whole recording: ${max}/10`
+              : `range ${min}–${max} of 10, across the whole recording`}
           </span>
         </div>
       )}
 
       <div className="flex flex-col gap-1.5">
         <span className="font-mono text-[10px] uppercase tracking-wide text-[var(--ink-faint)]">
-          Words · click one for its phoneme-level agreement
+          Words · click one for its OWN phoneme-level agreement below
         </span>
         <div className="flex flex-wrap gap-1.5">
           {utterance.words.map((w, i) => {
