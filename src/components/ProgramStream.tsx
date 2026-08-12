@@ -4,6 +4,7 @@ import { Fragment, useEffect, useReducer, useState, type ReactNode } from "react
 import { z } from "zod"
 import { BANDS } from "@/lib/bands"
 import { CohortSchema, CurriculumSchema, Placement as PlacementSchema } from "@/lib/schemas"
+import EvidencePanel from "./EvidencePanel"
 import PlacementCard, { BAND_BG, BAND_FG, type PlacementCardData } from "./PlacementCard"
 
 // Every payload type below is inferred straight from the same zod schemas
@@ -27,6 +28,13 @@ type State = {
   kickoff?: Kickoff
   error?: string
   done: boolean
+  // The evidence panel needs the persisted program id to resolve a
+  // placement's real DB row (see EvidencePanel / GET /api/placements). The
+  // SSE `placements` section only carries the model's schema-validated
+  // output — no DB-generated id — so this is only known once the `done`
+  // frame arrives with it. Lives in this reducer (not a sibling useState)
+  // so the effect below only ever dispatches, never calls a raw setState.
+  programId?: string
 }
 
 type Action =
@@ -36,7 +44,7 @@ type Action =
   | { type: "section"; key: "cadence"; payload: Cadence }
   | { type: "section"; key: "successCriteria"; payload: Criterion[] }
   | { type: "section"; key: "kickoff"; payload: Kickoff }
-  | { type: "done" }
+  | { type: "done"; programId: string }
   | { type: "error"; message: string }
   | { type: "reset" }
 
@@ -47,7 +55,7 @@ function reducer(state: State, action: Action): State {
     case "reset":
       return initialState
     case "done":
-      return { ...state, done: true }
+      return { ...state, done: true, programId: action.programId }
     case "error":
       return { ...state, error: action.message }
     case "section":
@@ -239,6 +247,7 @@ export default function ProgramStream({ brief, onProgramId }: Props) {
               // every section survived the trip to this client intact. Gate
               // success on our own receipt record, not the server's say-so.
               const missing = SECTION_ORDER.filter(key => !receivedKeys.has(key))
+              const data = frame.data as { programId?: string }
               if (missing.length > 0) {
                 settled = true
                 dispatch({
@@ -248,11 +257,20 @@ export default function ProgramStream({ brief, onProgramId }: Props) {
                     `never arrived intact: ${missing.join(", ")}. This is a lost or malformed update mid-stream, not a ` +
                     "generation failure — try again.",
                 })
+              } else if (!data.programId) {
+                // Same failure class as a dropped section: every section
+                // arrived, but without a program id the evidence panel can
+                // never resolve a real placement row — loud failure over a
+                // silently broken "View evidence" affordance.
+                settled = true
+                dispatch({
+                  type: "error",
+                  message: "The program generator reported success but never returned a program id. Try again.",
+                })
               } else {
                 settled = true
-                dispatch({ type: "done" })
-                const data = frame.data as { programId?: string }
-                if (data.programId) onProgramId(data.programId)
+                dispatch({ type: "done", programId: data.programId })
+                onProgramId(data.programId)
               }
             } else if (frame.event === "error") {
               settled = true
@@ -304,7 +322,7 @@ export default function ProgramStream({ brief, onProgramId }: Props) {
     return <ErrorCard message={state.error} onRetry={() => setAttempt(a => a + 1)} />
   }
 
-  return <div className="flex w-full flex-col gap-12">{renderSections(state)}</div>
+  return <div className="flex w-full flex-col gap-12">{renderSections(state, state.programId ?? null)}</div>
 }
 
 // Renders exactly one real card per arrived section, in SECTION_ORDER, then
@@ -314,24 +332,24 @@ export default function ProgramStream({ brief, onProgramId }: Props) {
 // SECTION_ORDER by hand. Reordering SECTION_ORDER reorders this for free;
 // adding a section to it is a compile error here until renderSectionCard's
 // switch grows a matching, exhaustively-checked case.
-function renderSections(state: State): ReactNode[] {
+function renderSections(state: State, programId: string | null): ReactNode[] {
   const nodes: ReactNode[] = []
   for (const key of SECTION_ORDER) {
     if (state[key] === undefined) {
       nodes.push(<SectionSkeleton key={key} kind={key} />)
       break
     }
-    nodes.push(<Fragment key={key}>{renderSectionCard(key, state)}</Fragment>)
+    nodes.push(<Fragment key={key}>{renderSectionCard(key, state, programId)}</Fragment>)
   }
   return nodes
 }
 
-function renderSectionCard(key: SectionKey, state: State): ReactNode {
+function renderSectionCard(key: SectionKey, state: State, programId: string | null): ReactNode {
   switch (key) {
     case "cohort":
       return state.cohort && <CohortCard cohort={state.cohort} />
     case "placements":
-      return state.placements && <PlacementsSection placements={state.placements} />
+      return state.placements && <PlacementsSection placements={state.placements} programId={programId} />
     case "weeks":
       return state.weeks && <WeeksSection weeks={state.weeks} />
     case "cadence":
@@ -382,7 +400,13 @@ function CohortCard({ cohort }: { cohort: Cohort }) {
   )
 }
 
-function PlacementsSection({ placements }: { placements: PlacementCardData[] }) {
+function PlacementsSection({
+  placements,
+  programId,
+}: {
+  placements: PlacementCardData[]
+  programId: string | null
+}) {
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const selected = placements.find(p => p.learnerId === selectedId) ?? null
 
@@ -420,7 +444,16 @@ function PlacementsSection({ placements }: { placements: PlacementCardData[] }) 
         ))}
       </div>
 
-      {selected && (
+      {selected && programId && (
+        <EvidencePanel
+          key={selected.learnerId}
+          programId={programId}
+          learnerId={selected.learnerId}
+          onClose={() => setSelectedId(null)}
+        />
+      )}
+
+      {selected && !programId && (
         <div className="animate-rise-in rounded-xl border border-[var(--accent)] bg-[var(--accent-soft)] p-4">
           <div className="mb-1.5 flex items-center gap-2">
             <span className="font-mono text-xs text-[var(--ink)]">{selected.learnerId}</span>
@@ -432,16 +465,9 @@ function PlacementsSection({ placements }: { placements: PlacementCardData[] }) 
             </span>
           </div>
           <p className="text-sm text-[var(--ink)]">{selected.rationale}</p>
-          <div className="mt-2 flex flex-wrap gap-1.5">
-            {selected.evidenceUtteranceIds.map(id => (
-              <span
-                key={id}
-                className="rounded border border-[var(--line)] bg-[var(--paper-raised)] px-1.5 py-0.5 font-mono text-[10px] text-[var(--ink-soft)]"
-              >
-                {id}
-              </span>
-            ))}
-          </div>
+          <p className="mt-2 font-mono text-[10px] text-[var(--ink-faint)]">
+            Full evidence (audio, phoneme-level agreement, override) unlocks once this program finishes generating.
+          </p>
         </div>
       )}
     </SectionShell>

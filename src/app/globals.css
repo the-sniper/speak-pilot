@@ -74,8 +74,36 @@ body::before {
   }
 }
 
+@keyframes drawer-slide-in {
+  from {
+    transform: translateX(28px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scrim-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .animate-rise-in {
   animation: rise-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-drawer-in {
+  animation: drawer-slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-scrim-in {
+  animation: scrim-fade-in 0.28s ease both;
 }
 
 .skeleton-shimmer {
@@ -91,6 +119,8 @@ body::before {
 
 @media (prefers-reduced-motion: reduce) {
   .animate-rise-in,
+  .animate-drawer-in,
+  .animate-scrim-in,
   .skeleton-shimmer {
     animation: none !important;
   }
