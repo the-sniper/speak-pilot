@@ -1312,7 +1312,7 @@ export const CACHE_DIR = path.join(process.cwd(), ".llm-cache")
 
 export function cacheKey(system: string, prompt: string, toolName: string, model: string): string {
   return crypto.createHash("sha256")
-    .update([system, prompt, toolName, model].join(" ")).digest("hex")
+    .update([system, prompt, toolName, model].join("\u0000")).digest("hex")
 }
 
 export function readCache(dir: string, key: string): unknown | null {
