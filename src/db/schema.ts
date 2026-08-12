@@ -134,7 +134,7 @@ export const agentRuns = pgTable("agent_runs", {
   error: text("error"),
   cacheHit: boolean("cache_hit").notNull().default(false),
   latencyMs: integer("latency_ms").notNull(),
-  cost: real("cost").notNull().default(0),
+  cost: real("cost"),                                  // null = unpriced model, cost unknown; 0 = genuinely free (mock, cache hit) — never conflate the two
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 

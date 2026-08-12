@@ -14,16 +14,29 @@ export const ANTHROPIC_MODEL_RATES: Record<string, { input: number; output: numb
   "claude-haiku-4-5": { input: 1.0, output: 5.0 },
 }
 
-function costFor(model: string, inputTokens: number, outputTokens: number): number {
+// `null` means "a real call happened but we don't know what it cost" — not
+// the same as `0` ("we know it cost nothing"). Distinguishing the two matters
+// once a model outside ANTHROPIC_MODEL_RATES gets used: a bare $0.00 next to
+// real priced rows in the Evals tab would read as a measurement, which it
+// isn't.
+function costFor(model: string, inputTokens: number, outputTokens: number): number | null {
   const rate = ANTHROPIC_MODEL_RATES[model]
-  if (!rate) return 0 // unpriced model — visible zero rather than a guessed number
+  if (!rate) return null
   return (inputTokens / 1_000_000) * rate.input + (outputTokens / 1_000_000) * rate.output
 }
 
 // Messages API with `tools` + `tool_choice: {type: "tool", name: toolName}`
-// and `strict: true` on the tool definition — the same schema shape adapter.ts
-// already produces for OpenAI's strict mode (additionalProperties:false, every
-// key required) is valid here too.
+// forcing the one tool, and `strict: true` on the tool definition — the same
+// schema shape adapter.ts already produces for OpenAI's strict mode
+// (additionalProperties:false, every key required) is valid here too.
+//
+// `strict: true` is documented Anthropic behavior, not a guess: "set
+// strict: true as a top-level field on the tool definition (alongside
+// name/description/input_schema), not on tool_choice. Schema must have
+// additionalProperties: false + required. Guarantees tool_use.input validates
+// exactly." (Anthropic API docs, Tool Use — Strict tool use, no beta header
+// required.) It sits on the tool object below, not on tool_choice, matching
+// that exactly.
 export const anthropicProvider: Provider = {
   name: "anthropic",
   async call({ system, prompt, toolName, jsonSchema, model }: ProviderCall) {

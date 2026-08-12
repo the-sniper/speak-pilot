@@ -10,7 +10,11 @@ export type ProviderCall = {
   model: string
 }
 
+// `cost` is nullable: `0` means genuinely free (mock — no API call happens
+// at all), `null` means a real call was made on a model whose $/token rate
+// this codebase hasn't verified. See adapter.ts's RunRow doc comment for why
+// that distinction matters to the Evals tab.
 export type Provider = {
   name: string
-  call(args: ProviderCall): Promise<{ raw: unknown; cost: number }>
+  call(args: ProviderCall): Promise<{ raw: unknown; cost: number | null }>
 }

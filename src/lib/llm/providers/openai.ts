@@ -1,16 +1,19 @@
 import type { Provider, ProviderCall } from "./types"
 
 // $ per 1M tokens. Deliberately left empty: this project has not verified
-// OpenAI's current published pricing against an authoritative source, and the
-// task brief's own instruction is to record cost 0 for an unpriced model
-// rather than guess a number that would later be reported as fact in the
-// Evals tab. Populate a model here only once its rate is confirmed against
-// OpenAI's pricing page, with the source noted alongside the entry.
+// OpenAI's current published pricing against an authoritative source. Populate
+// a model here only once its rate is confirmed against OpenAI's pricing page,
+// with the source noted alongside the entry.
 export const OPENAI_MODEL_RATES: Record<string, { input: number; output: number }> = {}
 
-function costFor(model: string, promptTokens: number, completionTokens: number): number {
+// `null` means "a real call happened but we don't know what it cost" — not
+// the same as `0` ("we know it cost nothing"). A bare $0.00 next to real
+// Anthropic-priced rows in the Evals tab would read as a measurement, which
+// it isn't; a fabricated non-zero number would be worse. `null` is the only
+// honest value here until OPENAI_MODEL_RATES has a verified entry.
+function costFor(model: string, promptTokens: number, completionTokens: number): number | null {
   const rate = OPENAI_MODEL_RATES[model]
-  if (!rate) return 0
+  if (!rate) return null
   return (promptTokens / 1_000_000) * rate.input + (completionTokens / 1_000_000) * rate.output
 }
 

@@ -1,6 +1,6 @@
 import crypto from "crypto"
 import { z } from "zod"
-import { CACHE_DIR, cacheKey, readCache, writeCache } from "./cache"
+import { CACHE_DIR, CacheMissInReplayError, cacheKey, readCache, writeCache } from "./cache"
 import { anthropicProvider } from "./providers/anthropic"
 import { mockProvider } from "./providers/mock"
 import { openaiProvider } from "./providers/openai"
@@ -9,6 +9,12 @@ import type { Provider } from "./providers/types"
 // Shape of one row this adapter writes to the `agent_runs` table (src/db/schema.ts).
 // Every attempt gets a row — successes AND failures — because the Evals tab is a
 // query over this table and a swallowed failure would become a missing metric.
+//
+// `cost` is nullable: `0` means genuinely free (mock provider, cache hit — no
+// API call happened, so $0 is a measurement, not a guess). `null` means "a
+// real call happened on a model whose price we haven't verified" — the Evals
+// tab must render that as "cost unknown", never as $0.00, or an unpriced
+// OpenAI call would read as free next to real Anthropic-priced rows.
 export type RunRow = {
   id: string
   kind: string
@@ -22,7 +28,7 @@ export type RunRow = {
   error: string | null
   cacheHit: boolean
   latencyMs: number
-  cost: number
+  cost: number | null
   createdAt: Date
 }
 
@@ -34,16 +40,27 @@ function resolveProvider(): Provider {
 }
 
 let currentProvider: Provider = resolveProvider()
+let usingTestProvider = false
 
-// The on-disk replay cache is only consulted for the real, env-selected
-// provider. Once a test injects a fake provider, caching is switched off for
-// the module's lifetime — the four adapter tests all use the literal strings
-// "s"/"p"/"t" with different fake behaviors, and a shared cache keyed only on
-// (system, prompt, toolName, model) would let one test's fixture leak into the
-// next. This also means unit tests never write into the real .llm-cache/
-// directory, so the committed replay corpus can't be accidentally polluted by
-// a test run.
-let cacheEnabled = true
+// The on-disk replay cache is normally CACHE_DIR (the committed .llm-cache/
+// corpus). `null` means "cache disabled" and is the default the moment a test
+// injects a fake provider (see __setProviderForTest) — the four core adapter
+// tests all use the literal strings "s"/"p"/"t" with different fake
+// behaviors, and a shared cache keyed only on (system, prompt, toolName,
+// model) would let one test's fixture leak into the next. This also means
+// ordinary unit tests never write into the real .llm-cache/ directory, so the
+// committed replay corpus can't be accidentally polluted by a test run.
+//
+// __setCacheDirForTest lets a test opt back into exercising the cache layer
+// (e.g. to prove REPLAY behavior end-to-end) while pointing it at a temp
+// directory instead of CACHE_DIR — see adapter.test.ts's REPLAY regression
+// test for the pattern.
+let testCacheDir: string | null = null
+
+function activeCacheDir(): string | null {
+  if (testCacheDir !== null) return testCacheDir
+  return usingTestProvider ? null : CACHE_DIR
+}
 
 async function defaultRunSink(row: RunRow): Promise<void> {
   const { db } = await import("@/db")
@@ -60,12 +77,24 @@ let runSink: (row: RunRow) => unknown = defaultRunSink
 /** Test seam — inject a fake provider so adapter tests need no network. */
 export function __setProviderForTest(p: Provider): void {
   currentProvider = p
-  cacheEnabled = false
+  usingTestProvider = true
 }
 
 /** Test seam — capture agent_runs rows in memory so adapter tests need no DB. */
 export function __setRunSinkForTest(fn: (row: RunRow) => unknown): void {
   runSink = fn
+}
+
+/**
+ * Test seam — point the replay cache at a temp directory instead of the real
+ * CACHE_DIR (or, with `null`, disable it again). Independent of
+ * __setProviderForTest: setting a dir here re-enables caching even when a
+ * fake provider is active, which is what a REPLAY regression test needs — the
+ * cache layer must be exercised for real, against a directory that is never
+ * the committed .llm-cache/ corpus.
+ */
+export function __setCacheDirForTest(dir: string | null): void {
+  testCacheDir = dir
 }
 
 // --- JSON Schema conversion --------------------------------------------------
@@ -112,17 +141,24 @@ export async function callWithSchema<T>(args: {
   kind: string
   briefLabel?: string
   maxRetries?: number
-}): Promise<{ data: T; runId: string; latencyMs: number; cost: number; cacheHit: boolean }> {
+}): Promise<{ data: T; runId: string; latencyMs: number; cost: number | null; cacheHit: boolean }> {
   const { prompt, system, schema, toolName, kind, briefLabel, maxRetries = 1 } = args
   const provider = currentProvider
   const model = process.env.LLM_MODEL ?? "mock-model"
   const jsonSchema = toStrictJsonSchema(schema)
   const key = cacheKey(system, prompt, toolName, model)
+  const cacheDir = activeCacheDir()
 
-  if (cacheEnabled) {
-    // Throws CacheMissInReplayError when REPLAY=1 and there's no entry — this
-    // is the guarantee that the deployed demo never calls a live provider.
-    const cached = readCache(CACHE_DIR, key)
+  if (cacheDir !== null) {
+    // Throws CacheMissInReplayError when REPLAY=1 and there's no file at all —
+    // this is the guarantee that the deployed demo never calls a live
+    // provider. That is only half the guarantee, though: a file CAN exist and
+    // still fail to parse against the current schema (a later task tightens a
+    // schema; the committed .llm-cache/ corpus goes stale). Falling through to
+    // a live call in that case would silently defeat REPLAY on exactly the
+    // realistic trigger this flag exists to prevent — so a present-but-invalid
+    // entry under REPLAY is fatal too, not a reason to regenerate.
+    const cached = readCache(cacheDir, key)
     if (cached !== null) {
       const parsed = schema.safeParse(cached)
       if (parsed.success) {
@@ -145,8 +181,12 @@ export async function callWithSchema<T>(args: {
         })
         return { data: parsed.data, runId, latencyMs: 0, cost: 0, cacheHit: true }
       }
-      // A cached blob that no longer validates is a bug in whatever run wrote
-      // it, not something to serve — fall through and regenerate live.
+      if (process.env.REPLAY === "1") {
+        throw new CacheMissInReplayError(key, parsed.error.message)
+      }
+      // Not under REPLAY: a cached blob that no longer validates is a bug in
+      // whatever run wrote it, not something to serve — fall through and
+      // regenerate live, since a real provider is actually reachable here.
     }
   }
 
@@ -178,7 +218,7 @@ export async function callWithSchema<T>(args: {
         cost,
         createdAt: new Date(),
       })
-      if (cacheEnabled) writeCache(CACHE_DIR, key, raw)
+      if (cacheDir !== null) writeCache(cacheDir, key, raw)
       return { data: parsed.data, runId, latencyMs, cost, cacheHit: false }
     }
 
