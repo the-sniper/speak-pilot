@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useReducer, useState, type ReactNode } from "react"
+import { Fragment, useEffect, useReducer, useState, type ReactNode } from "react"
 import { z } from "zod"
 import { BANDS } from "@/lib/bands"
 import { CohortSchema, CurriculumSchema, Placement as PlacementSchema } from "@/lib/schemas"
@@ -68,6 +68,17 @@ function reducer(state: State, action: Action): State {
   }
 }
 
+// A dropped frame must never fail silently: because rendering gates each
+// section on the previous one being present (see renderSections below), one
+// swallowed frame freezes every later section on its skeleton forever — the
+// exact "permanent skeleton" failure mode the completion watchdog exists to
+// catch. console.error here is the only diagnostic a developer gets for
+// which frame was lost and why, so every failure path logs before giving up
+// on that frame.
+function logDroppedFrame(reason: string, detail: unknown) {
+  console.error(`[ProgramStream] dropped an SSE frame — ${reason}`, detail)
+}
+
 function parseFrame(raw: string): { event: string; data: unknown } | null {
   let event = "message"
   let dataLine: string | null = null
@@ -75,12 +86,20 @@ function parseFrame(raw: string): { event: string; data: unknown } | null {
     if (line.startsWith("event:")) event = line.slice("event:".length).trim()
     else if (line.startsWith("data:")) dataLine = line.slice("data:".length).trim()
   }
-  if (dataLine === null) return null
-  try {
-    return { event, data: JSON.parse(dataLine) }
-  } catch {
+  if (dataLine === null) {
+    logDroppedFrame("no \"data:\" line found in the frame", raw)
     return null
   }
+  try {
+    return { event, data: JSON.parse(dataLine) }
+  } catch (err) {
+    logDroppedFrame("data line was not valid JSON", { raw, err })
+    return null
+  }
+}
+
+function logSectionValidationFailure(key: string, error: unknown, payload: unknown) {
+  logDroppedFrame(`"${key}" section payload failed client-side schema validation`, { error, payload })
 }
 
 type Props = {
@@ -98,6 +117,21 @@ export default function ProgramStream({ brief, onProgramId }: Props) {
     dispatch({ type: "reset" })
 
     async function run() {
+      // Tracked locally and synchronously, not read back from React state —
+      // the `state` this effect closed over is a snapshot from before any
+      // dispatches happened, so it can never tell us what's actually arrived
+      // by the time `done` shows up. This set is the completion watchdog's
+      // source of truth: at `done`, any SECTION_ORDER key missing from it
+      // means that frame was dropped somewhere (failed to parse, failed
+      // schema validation, or never sent), and the user must see a named
+      // error instead of a permanently-skeletoned card.
+      const receivedKeys = new Set<SectionKey>()
+      // True once a terminal dispatch (done-with-all-sections, or any error)
+      // has fired. If the stream's connection closes without ever reaching
+      // one, that is itself the same "permanent skeleton" failure the
+      // watchdog exists to prevent, so it gets the same treatment below.
+      let settled = false
+
       try {
         const res = await fetch("/api/programs/generate", {
           method: "POST",
@@ -138,44 +172,117 @@ export default function ProgramStream({ brief, onProgramId }: Props) {
               switch (raw.key) {
                 case "cohort": {
                   const parsed = CohortSchema.safeParse(raw.payload)
-                  if (parsed.success) dispatch({ type: "section", key: "cohort", payload: parsed.data })
+                  if (parsed.success) {
+                    receivedKeys.add("cohort")
+                    dispatch({ type: "section", key: "cohort", payload: parsed.data })
+                  } else {
+                    logSectionValidationFailure("cohort", parsed.error, raw.payload)
+                  }
                   break
                 }
                 case "placements": {
                   const parsed = z.array(PlacementSchema).safeParse(raw.payload)
-                  if (parsed.success) dispatch({ type: "section", key: "placements", payload: parsed.data })
+                  if (parsed.success) {
+                    receivedKeys.add("placements")
+                    dispatch({ type: "section", key: "placements", payload: parsed.data })
+                  } else {
+                    logSectionValidationFailure("placements", parsed.error, raw.payload)
+                  }
                   break
                 }
                 case "weeks": {
                   const parsed = CurriculumSchema.shape.weeks.safeParse(raw.payload)
-                  if (parsed.success) dispatch({ type: "section", key: "weeks", payload: parsed.data })
+                  if (parsed.success) {
+                    receivedKeys.add("weeks")
+                    dispatch({ type: "section", key: "weeks", payload: parsed.data })
+                  } else {
+                    logSectionValidationFailure("weeks", parsed.error, raw.payload)
+                  }
                   break
                 }
                 case "cadence": {
                   const parsed = CurriculumSchema.shape.cadence.safeParse(raw.payload)
-                  if (parsed.success) dispatch({ type: "section", key: "cadence", payload: parsed.data })
+                  if (parsed.success) {
+                    receivedKeys.add("cadence")
+                    dispatch({ type: "section", key: "cadence", payload: parsed.data })
+                  } else {
+                    logSectionValidationFailure("cadence", parsed.error, raw.payload)
+                  }
                   break
                 }
                 case "successCriteria": {
                   const parsed = CurriculumSchema.shape.successCriteria.safeParse(raw.payload)
-                  if (parsed.success) dispatch({ type: "section", key: "successCriteria", payload: parsed.data })
+                  if (parsed.success) {
+                    receivedKeys.add("successCriteria")
+                    dispatch({ type: "section", key: "successCriteria", payload: parsed.data })
+                  } else {
+                    logSectionValidationFailure("successCriteria", parsed.error, raw.payload)
+                  }
                   break
                 }
                 case "kickoff": {
                   const parsed = CurriculumSchema.shape.kickoffMessage.safeParse(raw.payload)
-                  if (parsed.success) dispatch({ type: "section", key: "kickoff", payload: parsed.data })
+                  if (parsed.success) {
+                    receivedKeys.add("kickoff")
+                    dispatch({ type: "section", key: "kickoff", payload: parsed.data })
+                  } else {
+                    logSectionValidationFailure("kickoff", parsed.error, raw.payload)
+                  }
                   break
                 }
+                default:
+                  logDroppedFrame(`"section" frame had an unrecognized key ("${String(raw.key)}")`, raw)
               }
             } else if (frame.event === "done") {
-              dispatch({ type: "done" })
-              const data = frame.data as { programId?: string }
-              if (data.programId) onProgramId(data.programId)
+              // Completion watchdog: the server sending `done` only means IT
+              // thinks generation finished — it says nothing about whether
+              // every section survived the trip to this client intact. Gate
+              // success on our own receipt record, not the server's say-so.
+              const missing = SECTION_ORDER.filter(key => !receivedKeys.has(key))
+              if (missing.length > 0) {
+                settled = true
+                dispatch({
+                  type: "error",
+                  message:
+                    `The program generator reported success, but ${missing.length === 1 ? "this section" : "these sections"} ` +
+                    `never arrived intact: ${missing.join(", ")}. This is a lost or malformed update mid-stream, not a ` +
+                    "generation failure — try again.",
+                })
+              } else {
+                settled = true
+                dispatch({ type: "done" })
+                const data = frame.data as { programId?: string }
+                if (data.programId) onProgramId(data.programId)
+              }
             } else if (frame.event === "error") {
+              settled = true
               const data = frame.data as { message?: string }
               dispatch({ type: "error", message: data.message ?? "The program generator returned an error." })
             }
           }
+        }
+
+        // The read loop above only exits when the connection closes. If it
+        // closed without leftover unterminated bytes, `buffer` should be
+        // empty — anything left means a frame arrived without its blank-line
+        // terminator, which means something upstream (proxy, server pacing
+        // change, truncated response) changed shape. Not fatal on its own
+        // (the watchdog above already judged completeness), but worth a
+        // loud warning since it's exactly the kind of thing that silently
+        // grows into a dropped frame later.
+        if (buffer.trim()) {
+          console.warn("[ProgramStream] stream closed with an unterminated trailing frame in the buffer", buffer)
+        }
+
+        // Connection closed but no `done`, `error`, or watchdog dispatch ever
+        // fired — the server hung up mid-stream. Same failure class as a
+        // dropped frame: without this, the UI would sit on its last-arrived
+        // skeleton forever with no signal that anything went wrong.
+        if (!cancelled && !settled) {
+          dispatch({
+            type: "error",
+            message: "The connection closed before the program finished streaming. Try again.",
+          })
         }
       } catch (err) {
         if (cancelled || controller.signal.aborted) return
@@ -197,34 +304,51 @@ export default function ProgramStream({ brief, onProgramId }: Props) {
     return <ErrorCard message={state.error} onRetry={() => setAttempt(a => a + 1)} />
   }
 
-  return (
-    <div className="flex w-full flex-col gap-12">
-      {state.cohort ? <CohortCard cohort={state.cohort} /> : <SectionSkeleton kind="cohort" />}
+  return <div className="flex w-full flex-col gap-12">{renderSections(state)}</div>
+}
 
-      {state.cohort &&
-        (state.placements ? (
-          <PlacementsSection placements={state.placements} />
-        ) : (
-          <SectionSkeleton kind="placements" />
-        ))}
+// Renders exactly one real card per arrived section, in SECTION_ORDER, then
+// one skeleton for the first section that hasn't arrived yet, then stops —
+// matching the previous section's presence gating the next, without a
+// second hand-written copy of the six-section sequence to keep in sync with
+// SECTION_ORDER by hand. Reordering SECTION_ORDER reorders this for free;
+// adding a section to it is a compile error here until renderSectionCard's
+// switch grows a matching, exhaustively-checked case.
+function renderSections(state: State): ReactNode[] {
+  const nodes: ReactNode[] = []
+  for (const key of SECTION_ORDER) {
+    if (state[key] === undefined) {
+      nodes.push(<SectionSkeleton key={key} kind={key} />)
+      break
+    }
+    nodes.push(<Fragment key={key}>{renderSectionCard(key, state)}</Fragment>)
+  }
+  return nodes
+}
 
-      {state.placements &&
-        (state.weeks ? <WeeksSection weeks={state.weeks} /> : <SectionSkeleton kind="weeks" />)}
-
-      {state.weeks &&
-        (state.cadence ? <CadenceCard cadence={state.cadence} /> : <SectionSkeleton kind="cadence" />)}
-
-      {state.cadence &&
-        (state.successCriteria ? (
-          <SuccessCriteriaCard items={state.successCriteria} />
-        ) : (
-          <SectionSkeleton kind="successCriteria" />
-        ))}
-
-      {state.successCriteria &&
-        (state.kickoff ? <KickoffCard kickoff={state.kickoff} /> : <SectionSkeleton kind="kickoff" />)}
-    </div>
-  )
+function renderSectionCard(key: SectionKey, state: State): ReactNode {
+  switch (key) {
+    case "cohort":
+      return state.cohort && <CohortCard cohort={state.cohort} />
+    case "placements":
+      return state.placements && <PlacementsSection placements={state.placements} />
+    case "weeks":
+      return state.weeks && <WeeksSection weeks={state.weeks} />
+    case "cadence":
+      return state.cadence && <CadenceCard cadence={state.cadence} />
+    case "successCriteria":
+      return state.successCriteria && <SuccessCriteriaCard items={state.successCriteria} />
+    case "kickoff":
+      return state.kickoff && <KickoffCard kickoff={state.kickoff} />
+    default: {
+      // Exhaustiveness check tied directly to SECTION_ORDER: if a key is
+      // ever added there without a case above, `key` is not `never` here and
+      // this fails to compile — the mechanical guarantee the code review
+      // asked for in place of a "keep these two in sync by hand" comment.
+      const exhaustive: never = key
+      return exhaustive
+    }
+  }
 }
 
 function SectionShell({ eyebrow, children }: { eyebrow: string; children: ReactNode }) {
@@ -419,6 +543,7 @@ function KickoffCard({ kickoff }: { kickoff: Kickoff }) {
           <button
             key={l}
             type="button"
+            aria-pressed={lang === l}
             onClick={() => setLang(l)}
             className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
               lang === l ? "bg-[var(--accent)] text-[var(--accent-ink)]" : "text-[var(--ink-soft)]"
