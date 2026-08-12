@@ -1,5 +1,5 @@
 import {
-  pgTable, text, integer, real, boolean, timestamp, jsonb, serial, primaryKey,
+  pgTable, text, integer, real, boolean, timestamp, jsonb, serial,
 } from "drizzle-orm/pg-core"
 
 export const orgs = pgTable("orgs", {
