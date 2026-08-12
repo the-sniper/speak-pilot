@@ -1,9 +1,18 @@
 export type PhoneToken = { phone: string; score: 0 | 1 | 2 | null; inserted: boolean }
 
+const BRACKET_PAIRS: Record<string, string> = { "{": "}", "(": ")", "[": "]" }
+const HAS_BRACKET = /[(){}[\]]/
+
 /**
  * speechocean762 notates per-expert phone verdicts inline against the reference:
  *   bare  -> 2 (correct)     {X} -> 1 (accented)
  *   (X)   -> 0 (wrong/missed) [X] -> inserted phone, unscored
+ *
+ * A malformed token (mismatched bracket types, e.g. "(EH0]"; a stray bracket
+ * character, e.g. "EH0)"; or nested/empty brackets, e.g. "{[X]}" / "()") throws
+ * rather than being silently coerced into some score. Malformed markup means our
+ * understanding of the data is wrong, and every downstream evidence claim would
+ * inherit a mis-scored phone if we guessed instead of failing loudly.
  */
 export function parsePhoneMarkup(expertPhones: string): PhoneToken[] {
   return expertPhones
@@ -11,12 +20,21 @@ export function parsePhoneMarkup(expertPhones: string): PhoneToken[] {
     .split(/\s+/)
     .filter(Boolean)
     .map((tok) => {
-      const m = /^([({[])(.+)[)}\]]$/.exec(tok)
-      if (!m) return { phone: tok, score: 2 as const, inserted: false }
-      const [, open, phone] = m
-      if (open === "{") return { phone, score: 1 as const, inserted: false }
-      if (open === "(") return { phone, score: 0 as const, inserted: false }
-      return { phone, score: null, inserted: true }
+      const open = tok[0]
+      if (open in BRACKET_PAIRS) {
+        const close = tok[tok.length - 1]
+        const phone = tok.slice(1, -1)
+        if (BRACKET_PAIRS[open] !== close || phone.length === 0 || HAS_BRACKET.test(phone)) {
+          throw new Error(`Malformed phone markup token "${tok}": mismatched or nested brackets`)
+        }
+        if (open === "{") return { phone, score: 1 as const, inserted: false }
+        if (open === "(") return { phone, score: 0 as const, inserted: false }
+        return { phone, score: null, inserted: true }
+      }
+      if (HAS_BRACKET.test(tok)) {
+        throw new Error(`Malformed phone markup token "${tok}": unexpected bracket character`)
+      }
+      return { phone: tok, score: 2 as const, inserted: false }
     })
 }
 
