@@ -71,9 +71,12 @@ describe("ProgramSchema successCriteria", () => {
     expect(ProgramSchema.shape.successCriteria.safeParse([crit, crit]).success).toBe(true)
   })
 
-  // Fix round 1: NO_CEFR must reject genuine CEFR usage without over-rejecting
-  // unrelated prose that happens to contain a bare band-shaped token (a room
-  // number, a pay grade, etc). See task-6-report.md for the full rationale.
+  // Fix round 2: reverted round 1's context-aware containsCefrJargon() back to the
+  // simple bare-token check. Round 1 made the guard precise but that precision
+  // leaked genuine CEFR jargon through any phrasing outside its closed verb/keyword
+  // list ("everyone should be B1", "aim for B1 by week 6", "target: C1", ...). The
+  // bare-token check deliberately over-rejects instead — see the rationale comment
+  // on SuccessCriterion.plainLanguage in schemas.ts for why that trade-off was made.
   const criterionWith = (plainLanguage: string) => ({
     plainLanguage,
     measurableProxy: "Completes 3 escalation scenarios with accuracy at or above 7",
@@ -84,6 +87,19 @@ describe("ProgramSchema successCriteria", () => {
       "Reach B2 on escalation calls",
       "Get everyone to CEFR level B1",
       "Move the team from A2 to B1",
+      // Round-2 leak list: phrasings the round-1 context-aware check let through
+      // because they used no verb from its closed list and no "level"/"proficiency"
+      // keyword. The bare-token check catches all of these by design.
+      "B2 by December",
+      "everyone should be B1",
+      "target: C1",
+      "we expect B2 fluency",
+      "aim for B1 by week 6",
+      "bring the cohort up to B2",
+      "everyone needs to be at B1",
+      "learners will be B2 speakers",
+      "B2 speaking ability",
+      "staff should test at B2",
     ]
     for (const plainLanguage of rejected) {
       const crit = criterionWith(plainLanguage)
@@ -94,18 +110,26 @@ describe("ProgramSchema successCriteria", () => {
     }
   })
 
-  it("no longer false-positives on unrelated prose containing a bare band-shaped token", () => {
-    const accepted = [
+  it("over-rejects incidental band-shaped tokens, by design", () => {
+    // See the rationale comment on SuccessCriterion.plainLanguage in schemas.ts:
+    // this is a deliberate trade-off, not an oversight. A band-shaped token in
+    // manager-facing prose about a language-training program is judged far more
+    // likely to be CEFR jargon than a room number or pay grade, so both of these
+    // are rejected even though neither actually references CEFR.
+    const rejected = [
       "Meet in Room B2 at noon to practice",
       "Employee grade A1 evaluation covers call handling",
-      "Handles an angry caller without switching to Korean",
     ]
-    for (const plainLanguage of accepted) {
+    for (const plainLanguage of rejected) {
       const crit = criterionWith(plainLanguage)
       expect(
         ProgramSchema.shape.successCriteria.safeParse([crit, crit]).success,
-        `expected "${plainLanguage}" to be accepted`,
-      ).toBe(true)
+        `expected "${plainLanguage}" to be rejected (accepted false positive by design)`,
+      ).toBe(false)
     }
+
+    // Sanity check: prose with no band-shaped token at all must still be accepted.
+    const crit = criterionWith("Handles an angry caller without switching to Korean")
+    expect(ProgramSchema.shape.successCriteria.safeParse([crit, crit]).success).toBe(true)
   })
 })

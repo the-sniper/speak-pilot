@@ -1,34 +1,7 @@
 import { z } from "zod"
 import { BANDS } from "./bands"
 
-// A bare CEFR-shaped token (e.g. "B2") is not, by itself, evidence of CEFR jargon —
-// it also matches room numbers ("Room B2"), pay grades ("grade A1"), etc. So instead
-// of flagging any occurrence of the token, we flag it only when it appears in a
-// construction that actually asserts a proficiency level:
-//   - the literal word "CEFR" anywhere,
-//   - a band token near "level"/"proficiency" ("CEFR level B1", "B1 proficiency"),
-//   - a target/movement verb directly governing a band token ("reach B2", "move to C1"),
-//   - a "from <band> to <band>" transition ("from A2 to B1").
-const BAND_TOKEN = "(?:A1|A2|B1|B2|C1|C2)"
-const CEFR_WORD = /\bCEFR\b/i
-const LEVEL_NEAR_BAND = new RegExp(
-  `\\b(?:level|proficiency)\\b[\\s\\S]{0,20}\\b${BAND_TOKEN}\\b|\\b${BAND_TOKEN}\\b[\\s\\S]{0,20}\\b(?:level|proficiency)\\b`,
-  "i",
-)
-const TARGET_VERB_TO_BAND = new RegExp(
-  `\\b(?:reach|reaches|reaching|hit|hits|hitting|attain|attains|attaining|achieve|achieves|achieving|get(?:s|ting)?\\s+to|move(?:s|d)?\\s+to|advance(?:s|d)?\\s+to)\\s+(?:the\\s+)?${BAND_TOKEN}\\b`,
-  "i",
-)
-const FROM_BAND_TO_BAND = new RegExp(`\\bfrom\\s+${BAND_TOKEN}\\s+to\\s+${BAND_TOKEN}\\b`, "i")
-
-function containsCefrJargon(s: string): boolean {
-  return (
-    CEFR_WORD.test(s) ||
-    LEVEL_NEAR_BAND.test(s) ||
-    TARGET_VERB_TO_BAND.test(s) ||
-    FROM_BAND_TO_BAND.test(s)
-  )
-}
+const NO_CEFR = /\b(A1|A2|B1|B2|C1|C2|CEFR)\b/i
 
 // BANDS is a readonly tuple. Zod 3.20+ accepts readonly tuples in z.enum; if the
 // installed Zod complains, widen with `z.enum([...BANDS] as [Band, ...Band[]])`.
@@ -52,7 +25,18 @@ export const CohortSchema = z.object({
 })
 
 export const SuccessCriterion = z.object({
-  plainLanguage: z.string().refine(s => !containsCefrJargon(s), {
+  // Deliberately over-rejects: any bare CEFR-shaped token (A1/A2/B1/B2/C1/C2) or the
+  // word "CEFR" fails this field, even in incidental phrasing like "Room B2" or
+  // "grade A1". In manager-facing prose about a language-training program, a
+  // band-shaped token is far more likely to be a CEFR proficiency claim than a room
+  // number, and enumerating every way a model can phrase a CEFR target ("everyone
+  // should be B1", "aim for B1 by week 6", "target: C1", ...) is unbounded — a
+  // narrower check that requires specific verbs or nearby keywords was tried and
+  // leaked genuine jargon through untested phrasings. Between the two failure modes,
+  // we accept the loud one: a false positive here is a rejected safeParse and a
+  // retry. The one we refuse is silent: CEFR jargon reaching a manager who was
+  // promised plain language, defeating the reason this field exists.
+  plainLanguage: z.string().refine(s => !NO_CEFR.test(s), {
     message: "plainLanguage must not contain CEFR codes",
   }),
   measurableProxy: z.string(),
