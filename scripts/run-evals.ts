@@ -1,4 +1,5 @@
 import "dotenv/config"
+import { randomUUID } from "crypto"
 import { EVAL_BRIEFS, type EvalBrief } from "../docs/eval-briefs"
 import { groundedPlacementsSchema } from "../src/lib/grounding"
 import { callWithSchema } from "../src/lib/llm/adapter"
@@ -37,6 +38,7 @@ async function runOneBrief(
   brief: EvalBrief,
   learnerBlocks: string,
   allowedIdsByLearner: Map<string, Set<string>>,
+  sweepId: string,
 ): Promise<BriefResult> {
   try {
     const cohortResult = await callWithSchema({
@@ -51,6 +53,7 @@ async function runOneBrief(
       toolName: "cohort",
       kind: "cohort",
       briefLabel: brief.label,
+      sweepId,
     })
     const cohort = cohortResult.data
 
@@ -66,6 +69,7 @@ async function runOneBrief(
       toolName: "placements",
       kind: "placement",
       briefLabel: brief.label,
+      sweepId,
     })
 
     const placementSummary = placementsResult.data.map(p => `${p.learnerId}: ${p.band}`).join(", ")
@@ -85,6 +89,7 @@ async function runOneBrief(
       toolName: "curriculum",
       kind: "curriculum",
       briefLabel: brief.label,
+      sweepId,
     })
 
     // Scenario-relevance judge: N=20, one representative scenario per brief
@@ -105,6 +110,7 @@ async function runOneBrief(
         toolName: "judge",
         kind: "judge",
         briefLabel: brief.label,
+        sweepId,
       })
       judged = true
     }
@@ -117,7 +123,13 @@ async function runOneBrief(
 
 async function main(): Promise<void> {
   const provider = process.env.LLM_PROVIDER ?? "mock"
-  console.log(`Eval sweep: ${EVAL_BRIEFS.length} briefs, LLM_PROVIDER=${provider}`)
+  // One id per script invocation, threaded through every callWithSchema call
+  // below (all 80 rows this run writes share it) — this is what lets
+  // src/lib/evals.ts's loadEvalsSummary() show exactly one sweep's numbers
+  // instead of pooling every sweep ever run into the same averages. Code
+  // review fix round 2 on Task 13.
+  const sweepId = randomUUID()
+  console.log(`Eval sweep ${sweepId}: ${EVAL_BRIEFS.length} briefs, LLM_PROVIDER=${provider}`)
   if (provider === "mock") {
     console.log(
       "Provider is mock — this sweep exercises the harness end to end (schema " +
@@ -140,7 +152,7 @@ async function main(): Promise<void> {
   for (const brief of EVAL_BRIEFS) {
     const label = `[${brief.label}/${EVAL_BRIEFS.length}] (${brief.category})`
     process.stdout.write(`${label} ${brief.text.slice(0, 70)}${brief.text.length > 70 ? "…" : ""} ... `)
-    const result = await runOneBrief(brief, learnerBlocks, allowedIdsByLearner)
+    const result = await runOneBrief(brief, learnerBlocks, allowedIdsByLearner, sweepId)
     if (result.ok) {
       succeeded++
       console.log(`ok${result.judged ? "" : " (no scenario to judge)"}`)
@@ -152,8 +164,8 @@ async function main(): Promise<void> {
 
   console.log("")
   console.log(`Done: ${succeeded} succeeded, ${failed} failed, of ${EVAL_BRIEFS.length} briefs.`)
-  console.log("Every attempt (success and failure) was written to agent_runs, tagged with brief_label.")
-  console.log("See /evals for the scored summary.")
+  console.log(`Every attempt (success and failure) was written to agent_runs, tagged with sweep_id=${sweepId}.`)
+  console.log("See /evals for the scored summary — it reads only the most recent sweep.")
 }
 
 main()

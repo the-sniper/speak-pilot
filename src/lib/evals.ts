@@ -1,4 +1,4 @@
-import { asc, isNotNull } from "drizzle-orm"
+import { asc, desc, eq, isNotNull } from "drizzle-orm"
 import type { InferSelectModel } from "drizzle-orm"
 import { EVAL_BRIEFS, type EvalBrief } from "../../docs/eval-briefs"
 import { HUMAN_SCENARIO_RELEVANCE_LABELS } from "../../docs/eval-human-labels"
@@ -140,9 +140,24 @@ export type FailureLogEntry = {
   createdAt: string
 }
 
-export type EvalsSummary = {
+// Identifies exactly which run of scripts/run-evals.ts produced the numbers
+// on the page — provider, model, how many briefs it covered, and when it
+// ran, all read from the sweep's OWN agent_runs rows (never from the current
+// process.env.LLM_PROVIDER, which describes the reader's environment, not
+// the data). Code review fix round 2 on Task 13: this is the fix for
+// "sweeps pool across providers" — the page must say what it's showing, not
+// just show it.
+export type SweepProvenance = {
+  sweepId: string
   provider: string
+  model: string
+  briefCount: number
+  ranAt: string
   isMock: boolean
+}
+
+export type EvalsSummary = {
+  sweep: SweepProvenance | null
   sweepRunCount: number
   briefsCovered: number
   totalBriefs: number
@@ -184,21 +199,94 @@ function adversarialNote(isMock: boolean, ranSuccessfully: boolean): string {
     : "Generation did not complete cleanly for this brief — see the failure log for the raw output."
 }
 
+/** The all-zero/empty summary shown when no eval sweep has ever been run. */
+function emptyEvalsSummary(): EvalsSummary {
+  return {
+    sweep: null,
+    sweepRunCount: 0,
+    briefsCovered: 0,
+    totalBriefs: EVAL_BRIEFS.length,
+    schemaConformance: schemaConformance([]),
+    placementAccuracy: placementAccuracy([]),
+    latency: latencyPercentiles([]),
+    cost: costSummary([]),
+    scenarioRelevance: {
+      judgeScores: [],
+      judgeMean: null,
+      humanLabeledCount: 0,
+      totalBriefs: EVAL_BRIEFS.length,
+      agreement: null,
+    },
+    failureLog: [],
+    adversarial: EVAL_BRIEFS
+      .filter((b: EvalBrief) => b.category === "adversarial")
+      .map(b => ({
+        label: b.label,
+        text: b.text,
+        ranSuccessfully: false,
+        note: "No eval sweep has been run yet — nothing to report for this brief.",
+      })),
+  }
+}
+
 /**
- * Loads and scores everything the Evals tab shows. Scoped to `agent_runs`
- * rows carrying a `brief_label` — i.e. rows scripts/run-evals.ts wrote — so
- * ordinary live-demo activity (someone typing a brief into the home page)
- * never gets silently folded into the reported eval numbers.
+ * Loads and scores everything the Evals tab shows — scoped to exactly ONE
+ * sweep, the most recently written one, never a pool across every sweep ever
+ * run. Code review fix round 2 on Task 13: `agent_runs.sweep_id` (written
+ * once per scripts/run-evals.ts invocation, shared by every row that run
+ * writes) is what makes "exactly one sweep" possible — without it, a later
+ * sweep under a different provider would silently average its rows together
+ * with an earlier sweep's (mock's included) in the same result set, and the
+ * headline number would quietly become a meaningless blend. Older sweeps
+ * stay in the table (useful history, and a future failure log might want
+ * them) but are never included in the numbers this function returns.
  */
 export async function loadEvalsSummary(): Promise<EvalsSummary> {
-  const provider = (process.env.LLM_PROVIDER ?? "mock").toLowerCase()
-  const isMock = provider === "mock"
+  const [latestSweepRow] = await db
+    .select({ sweepId: agentRuns.sweepId })
+    .from(agentRuns)
+    .where(isNotNull(agentRuns.sweepId))
+    .orderBy(desc(agentRuns.createdAt), desc(agentRuns.id))
+    .limit(1)
+
+  if (!latestSweepRow?.sweepId) {
+    return emptyEvalsSummary()
+  }
+  const sweepId = latestSweepRow.sweepId
 
   const sweepRuns = await db
     .select()
     .from(agentRuns)
-    .where(isNotNull(agentRuns.briefLabel))
+    .where(eq(agentRuns.sweepId, sweepId))
     .orderBy(asc(agentRuns.createdAt), asc(agentRuns.id))
+
+  if (sweepRuns.length === 0) {
+    // Unreachable in practice — sweepId above came from a real row — kept as
+    // a defensive fallback rather than assuming array non-emptiness.
+    return emptyEvalsSummary()
+  }
+
+  // Provenance is read from the sweep's OWN rows, never from the current
+  // process.env.LLM_PROVIDER — that env var describes whoever is loading
+  // this page right now, not the data being shown. A reader could have any
+  // provider configured locally while looking at a sweep someone else ran;
+  // `isMock` has to describe the sweep, not the reader. Every row a single
+  // run-evals.ts invocation writes shares one provider/model (both resolved
+  // once per process, in adapter.ts), so the first row's values apply to the
+  // whole sweep.
+  const briefCount = new Set(sweepRuns.map(r => r.briefLabel).filter((x): x is string => x !== null)).size
+  const ranAt = sweepRuns
+    .reduce((min, r) => (r.createdAt < min ? r.createdAt : min), sweepRuns[0].createdAt)
+    .toISOString()
+  const sweep: SweepProvenance = {
+    sweepId,
+    provider: sweepRuns[0].provider,
+    model: sweepRuns[0].model,
+    briefCount,
+    ranAt,
+    isMock: sweepRuns[0].provider.toLowerCase() === "mock",
+  }
+  const isMock = sweep.isMock
 
   const conformance = schemaConformance(sweepRuns)
   const latency = latencyPercentiles(sweepRuns)
@@ -275,10 +363,9 @@ export async function loadEvalsSummary(): Promise<EvalsSummary> {
     })
 
   return {
-    provider,
-    isMock,
+    sweep,
     sweepRunCount: sweepRuns.length,
-    briefsCovered: new Set(sweepRuns.map(r => r.briefLabel).filter((x): x is string => x !== null)).size,
+    briefsCovered: briefCount,
     totalBriefs: EVAL_BRIEFS.length,
     schemaConformance: conformance,
     placementAccuracy: placement,

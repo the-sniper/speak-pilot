@@ -127,6 +127,16 @@ export const agentRuns = pgTable("agent_runs", {
   provider: text("provider").notNull(),
   model: text("model").notNull(),
   briefLabel: text("brief_label"),                    // which eval brief, if any
+  // Which eval-sweep run wrote this row, if any — null for ordinary (non-eval)
+  // LLM calls, same as briefLabel. Every row scripts/run-evals.ts writes in a
+  // single invocation shares one sweepId (generated once per run, threaded
+  // through every callWithSchema call). This is what lets loadEvalsSummary
+  // (src/lib/evals.ts) show exactly one sweep's numbers instead of pooling
+  // every sweep ever run — without it, re-running the sweep under a different
+  // provider (Task 15) would silently average brand-new real rows together
+  // with old mock rows in the same result set. Code review fix round 2 on
+  // Task 13, Finding: "sweeps pool across providers."
+  sweepId: text("sweep_id"),
   input: jsonb("input").notNull(),
   output: jsonb("output"),
   ok: boolean("ok").notNull(),

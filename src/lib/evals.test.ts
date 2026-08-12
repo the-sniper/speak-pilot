@@ -1,3 +1,4 @@
+import { inArray } from "drizzle-orm"
 import { describe, it, expect } from "vitest"
 import { placementAccuracy, schemaConformance, latencyPercentiles, judgeAgreement } from "./evals"
 
@@ -45,5 +46,99 @@ describe("judgeAgreement", () => {
   })
   it("is 0 when they never agree", () => {
     expect(judgeAgreement([3, 3, 3], [0, 0, 0])).toBe(0)
+  })
+})
+
+// Code review fix round 2 on Task 13, CRITICAL finding: loadEvalsSummary used
+// to filter only on `brief_label IS NOT NULL`, so a later eval sweep (Task
+// 15, real provider) would silently get pooled together with every earlier
+// sweep (including this one, mock) in the same averages the moment both
+// existed in agent_runs — the exact failure the evals page exists to
+// prevent. This is the persisted guard: two sweeps, two different providers,
+// directly in agent_runs (bypassing scripts/run-evals.ts entirely, the same
+// way the reviewer independently re-derived the numbers from Postgres), and
+// asserts loadEvalsSummary reports ONLY the newer sweep's data and names it.
+describe("loadEvalsSummary — sweep isolation (regression, code review fix round 2)", () => {
+  it("scopes every metric to the most recently written sweep_id, and reports that sweep's own provenance", async () => {
+    const { db } = await import("@/db")
+    const { agentRuns, learners } = await import("@/db/schema")
+    const { BANDS } = await import("./bands")
+    const { loadEvalsSummary } = await import("./evals")
+    const { randomUUID } = await import("crypto")
+
+    const [learner] = await db
+      .select({ id: learners.id, trueBand: learners.trueBand })
+      .from(learners)
+      .limit(1)
+    expect(learner).toBeTruthy()
+
+    // A band at least two steps from the truth — bandDistance is a plain
+    // index difference (BANDS is NOT circular), so (trueIndex + 2) % 5 is
+    // guaranteed >= 2 away for every possible trueIndex in a 5-band table.
+    // Neither "exact" nor "within one" for the newer sweep's placement.
+    const trueIndex = BANDS.indexOf(learner.trueBand as (typeof BANDS)[number])
+    const farBand = BANDS[(trueIndex + 2) % BANDS.length]
+
+    const oldSweepId = `test-old-sweep-${randomUUID()}`
+    const newSweepId = `test-new-sweep-${randomUUID()}`
+
+    const baseRow = {
+      input: {},
+      ok: true as const,
+      attempt: 1,
+      error: null,
+      cacheHit: false,
+      latencyMs: 10,
+      cost: 0,
+    }
+
+    try {
+      // Older sweep: mock provider, placement is an EXACT match (distance 0)
+      // — if this leaked into the result, placementAccuracy.exact would be
+      // nonzero and n would be 2, not 1.
+      await db.insert(agentRuns).values({
+        ...baseRow,
+        id: randomUUID(),
+        kind: "placement",
+        provider: "mock",
+        model: "mock-model",
+        briefLabel: "test-brief-old",
+        sweepId: oldSweepId,
+        output: [{ learnerId: learner.id, band: learner.trueBand, rationale: "old", evidenceUtteranceIds: ["x"] }],
+        createdAt: new Date(Date.now() - 60_000),
+      })
+
+      // Newer sweep: a DIFFERENT provider, placement is far off (distance >= 2).
+      await db.insert(agentRuns).values({
+        ...baseRow,
+        id: randomUUID(),
+        kind: "placement",
+        provider: "test-provider-openai",
+        model: "test-model-gpt",
+        briefLabel: "test-brief-new",
+        sweepId: newSweepId,
+        output: [{ learnerId: learner.id, band: farBand, rationale: "new", evidenceUtteranceIds: ["x"] }],
+        createdAt: new Date(),
+      })
+
+      const summary = await loadEvalsSummary()
+
+      // Provenance names the NEWER sweep, not the older one, and not the
+      // reader's own LLM_PROVIDER env var (which is "mock" in this test run
+      // — the sweep's recorded provider is "test-provider-openai").
+      expect(summary.sweep).not.toBeNull()
+      expect(summary.sweep?.sweepId).toBe(newSweepId)
+      expect(summary.sweep?.provider).toBe("test-provider-openai")
+      expect(summary.sweep?.model).toBe("test-model-gpt")
+      expect(summary.sweep?.isMock).toBe(false)
+
+      // Metrics reflect ONLY the newer sweep's one placement — not pooled
+      // with the older sweep's exact-match row.
+      expect(summary.placementAccuracy.n).toBe(1)
+      expect(summary.placementAccuracy.exact).toBe(0)
+      expect(summary.placementAccuracy.withinOne).toBe(0)
+    } finally {
+      await db.delete(agentRuns).where(inArray(agentRuns.sweepId, [oldSweepId, newSweepId]))
+    }
   })
 })

@@ -21,6 +21,12 @@ export type RunRow = {
   provider: string
   model: string
   briefLabel: string | null
+  // Which eval-sweep run wrote this row, null for ordinary (non-eval) calls —
+  // same nullable-tag pattern as briefLabel. See the sweepId comment on
+  // agentRuns in src/db/schema.ts for why this exists: without it, the Evals
+  // tab has no way to show exactly one sweep's numbers instead of pooling
+  // every sweep ever run together.
+  sweepId: string | null
   input: unknown
   output: unknown
   ok: boolean
@@ -155,9 +161,10 @@ export async function callWithSchema<T>(args: {
   toolName: string
   kind: string
   briefLabel?: string
+  sweepId?: string
   maxRetries?: number
 }): Promise<{ data: T; runId: string; latencyMs: number; cost: number | null; cacheHit: boolean }> {
-  const { prompt, system, schema, toolName, kind, briefLabel, maxRetries = 1 } = args
+  const { prompt, system, schema, toolName, kind, briefLabel, sweepId, maxRetries = 1 } = args
   const provider = currentProvider
   const model = process.env.LLM_MODEL ?? "mock-model"
   const jsonSchema = toStrictJsonSchema(schema)
@@ -184,6 +191,7 @@ export async function callWithSchema<T>(args: {
           provider: provider.name,
           model,
           briefLabel: briefLabel ?? null,
+          sweepId: sweepId ?? null,
           input: { system, prompt, toolName },
           output: cached,
           ok: true,
@@ -223,6 +231,7 @@ export async function callWithSchema<T>(args: {
         provider: provider.name,
         model,
         briefLabel: briefLabel ?? null,
+        sweepId: sweepId ?? null,
         input: { system, prompt: currentPrompt, toolName },
         output: raw,
         ok: true,
@@ -244,6 +253,7 @@ export async function callWithSchema<T>(args: {
       provider: provider.name,
       model,
       briefLabel: briefLabel ?? null,
+      sweepId: sweepId ?? null,
       input: { system, prompt: currentPrompt, toolName },
       output: raw,
       ok: false,
