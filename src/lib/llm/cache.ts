@@ -27,20 +27,30 @@ export class CacheMissInReplayError extends Error {
 // is the replay corpus that makes the deployed demo work without LLM_API_KEY.
 export const CACHE_DIR = path.join(process.cwd(), ".llm-cache")
 
-// Separator between the four joined components of the cache key. Built at
+// Separator between the joined components of the cache key. Built at
 // runtime with String.fromCharCode(0) -- a NUL character -- rather than
 // written as a literal escape or raw byte in this source file: a real 0x00
 // byte embedded directly in a .ts file makes git treat the whole file as
 // binary (no diff, no blame, no `git apply`), which is exactly the bug this
 // replaces. The hashing behavior is unchanged: NUL still can't appear in any
-// of the four joined strings, so there's no risk of two different (system,
-// prompt, toolName, model) tuples hashing to the same key by accident of
-// concatenation, and the file itself stays plain, diffable UTF-8 text.
+// of the joined strings, so there's no risk of two different tuples hashing
+// to the same key by accident of concatenation, and the file itself stays
+// plain, diffable UTF-8 text.
 const KEY_SEPARATOR = String.fromCharCode(0)
 
-export function cacheKey(system: string, prompt: string, toolName: string, model: string): string {
+// Code review fix round 1, Finding 1 (Critical): `provider` was missing from
+// this key entirely. Two different providers (say, the mock provider and a
+// real "openai" call) using the same LLM_MODEL string for an identical
+// (system, prompt, toolName) collide on one cache file. A committed mock
+// fixture then gets served as if it were that provider's real output, AND
+// (see adapter.ts's cache-hit branch) gets logged into agent_runs tagged
+// with the CURRENTLY ACTIVE provider's name and `cacheHit: true` -- so a
+// fabricated response is recorded as a genuine, measured run. Under
+// REPLAY=1 (the deployed demo's mode) that is silent and unrecoverable.
+// Provider identity is now part of the hash, not just the model string.
+export function cacheKey(system: string, prompt: string, toolName: string, model: string, provider: string): string {
   return crypto.createHash("sha256")
-    .update([system, prompt, toolName, model].join(KEY_SEPARATOR))
+    .update([provider, system, prompt, toolName, model].join(KEY_SEPARATOR))
     .digest("hex")
 }
 

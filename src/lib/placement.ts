@@ -36,6 +36,21 @@ function fmtScore(n: number): string {
 }
 
 /**
+ * The exact utterance ids shown to a learner's evidence block — i.e. the ids
+ * the model actually had in context for that learner and is therefore
+ * allowed to cite. buildLearnerBlock's "utterance ids:" line is built from
+ * this same list, so the two can never drift apart: whatever gets displayed
+ * to the model is exactly what evidence-grounding validation (route.ts)
+ * checks citations against. A model citing a real id that exists in the DB
+ * but was truncated out of this list — or belongs to another learner — is
+ * exactly as much a grounding failure as citing an id that doesn't exist at
+ * all: it wasn't in what this learner's evidence actually showed.
+ */
+export function learnerEvidenceIds(l: LearnerWithScores): string[] {
+  return l.utterances.slice(0, MAX_IDS_SHOWN).map(u => u.id)
+}
+
+/**
  * Renders one learner's real evidence as the compact block from the build
  * guide (§2d):
  *
@@ -60,9 +75,9 @@ export function buildLearnerBlock(l: LearnerWithScores): string {
     .map(p => `${p.phone} (${p.count}x)`)
     .join(", ")
 
-  const ids = l.utterances.map(u => u.id)
+  const ids = learnerEvidenceIds(l)
   const idsLine =
-    ids.slice(0, MAX_IDS_SHOWN).join(", ") + (ids.length > MAX_IDS_SHOWN ? ", ..." : "")
+    ids.join(", ") + (l.utterances.length > MAX_IDS_SHOWN ? ", ..." : "")
 
   return [
     `${l.id} | ${sessionCount} sessions`,

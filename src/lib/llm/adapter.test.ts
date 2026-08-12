@@ -74,14 +74,15 @@ describe("callWithSchema — REPLAY with a stale cache entry (regression)", () =
     const system = "replay-stale-system"
     const prompt = "replay-stale-prompt"
     const toolName = "replay-stale-tool"
-    const key = cacheKey(system, prompt, toolName, model)
+    const providerName = "counting-fake"
+    const key = cacheKey(system, prompt, toolName, model, providerName)
     // Simulates a schema that tightened after this entry was recorded — the
     // file exists, but { n: "not a number" } no longer satisfies S.
     writeCache(dir, key, { n: "not a number" })
 
     let providerCallCount = 0
     __setProviderForTest({
-      name: "counting-fake",
+      name: providerName,
       call: async () => {
         providerCallCount++
         return { raw: { n: 1 }, cost: 0 }

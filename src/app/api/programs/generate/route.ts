@@ -5,8 +5,49 @@ import { db } from "@/db"
 import { placements as placementsTable, programs, programWeeks, scenarios } from "@/db/schema"
 import { callWithSchema } from "@/lib/llm/adapter"
 import { BAND_REFERENCE, PROGRAM_GENERATION_SYSTEM_PROMPT } from "@/lib/llm/prompts"
-import { buildLearnerBlock, loadCohortId, loadLearnersWithScores } from "@/lib/placement"
+import { buildLearnerBlock, learnerEvidenceIds, loadCohortId, loadLearnersWithScores } from "@/lib/placement"
 import { CohortSchema, CurriculumSchema, Placement } from "@/lib/schemas"
+
+// Code review fix round 1, Finding 2 (Important): Placement.evidenceUtteranceIds
+// only requires ids to be PRESENT (min(1)) — nothing in the base schema checks
+// that a cited id was actually part of the evidence shown to that specific
+// learner. A model could cite a real utterance id belonging to a DIFFERENT
+// learner, or a plausible-looking id that doesn't exist at all, and it would
+// pass schema validation, get persisted, and render as "grounded" evidence.
+// This wraps the base array schema in a superRefine that checks each
+// placement's citations against `allowedIdsByLearner` — exactly the ids
+// `learnerEvidenceIds` put in that learner's block (see placement.ts). It
+// plugs into callWithSchema's EXISTING retry loop (which already re-prompts
+// on any schema.safeParse failure, custom issues included) rather than
+// bolting on a second, bespoke retry path — a violation is reported and
+// retried/failed exactly like a shape error, with the offending learner and
+// id named in the message.
+function groundedPlacementsSchema(allowedIdsByLearner: Map<string, Set<string>>) {
+  return z.array(Placement).superRefine((rows, ctx) => {
+    rows.forEach((p, i) => {
+      const allowed = allowedIdsByLearner.get(p.learnerId)
+      if (!allowed) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: [i, "learnerId"],
+          message: `placement cites unknown learner "${p.learnerId}" — not in the seeded cohort`,
+        })
+        return
+      }
+      for (const id of p.evidenceUtteranceIds) {
+        if (!allowed.has(id)) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: [i, "evidenceUtteranceIds"],
+            message:
+              `learner ${p.learnerId} cites utterance id "${id}" which was not in the evidence ` +
+              "shown for that learner — refusing to persist unverifiable evidence",
+          })
+        }
+      }
+    })
+  })
+}
 
 export const runtime = "nodejs"
 export const maxDuration = 60
@@ -35,8 +76,8 @@ export async function POST(req: Request): Promise<Response> {
 
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
-      const emit = async (event: string, data: unknown) => {
-        if (sentAnyFrame) await sleep(PACE_MS)
+      const emit = async (event: string, data: unknown, opts?: { immediate?: boolean }) => {
+        if (sentAnyFrame && !opts?.immediate) await sleep(PACE_MS)
         sentAnyFrame = true
         controller.enqueue(encoder.encode(sseFrame(event, data)))
       }
@@ -82,6 +123,9 @@ export async function POST(req: Request): Promise<Response> {
         // brief's stated headcount is what the cohort card reports, not what
         // determines who gets grounded evidence and a placement.
         const learnerBlocks = cohortLearners.map(buildLearnerBlock).join("\n\n")
+        const allowedIdsByLearner = new Map(
+          cohortLearners.map(l => [l.id, new Set(learnerEvidenceIds(l))]),
+        )
         const placementsResult = await callWithSchema({
           system: PROGRAM_GENERATION_SYSTEM_PROMPT,
           prompt:
@@ -90,7 +134,7 @@ export async function POST(req: Request): Promise<Response> {
             `BAND REFERENCE:\n${BAND_REFERENCE}\n\n` +
             "Place each learner into a band using ONLY the evidence given for " +
             "that learner. Cite at least one of their utterance ids as evidence.",
-          schema: z.array(Placement),
+          schema: groundedPlacementsSchema(allowedIdsByLearner),
           toolName: "placements",
           kind: "placement",
         })
@@ -163,7 +207,10 @@ export async function POST(req: Request): Promise<Response> {
         await emit("done", { programId })
       } catch (err) {
         const message = err instanceof Error ? err.message : String(err)
-        await emit("error", { message })
+        // Minor fix, code review round 1: an error frame must reach the
+        // client immediately, not wait out the pacing floor meant for the
+        // "system doing work" feel of a successful stream.
+        await emit("error", { message }, { immediate: true })
       } finally {
         controller.close()
       }

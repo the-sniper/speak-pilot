@@ -57,9 +57,24 @@ let usingTestProvider = false
 // test for the pattern.
 let testCacheDir: string | null = null
 
+// Code review fix round 1, Finding 1f: this used to gate only on "was a fake
+// provider injected for a test," which left a real gap -- the ordinary,
+// non-test path with LLM_PROVIDER=mock (the project's default, see .env)
+// still resolved to the real committed CACHE_DIR and wrote mock fixtures
+// into it. The mock provider is deterministic and returns near-instantly, so
+// caching it buys nothing; the only effect was a shared corpus polluted with
+// synthetic output that a real provider could later collide with and serve
+// as if it were genuine (see cacheKey's provider dimension, added in the
+// same fix, which closes the collision itself -- this closes the "why does
+// mock output end up in the corpus at all" question). testCacheDir still
+// takes priority so a regression test can deliberately exercise the real
+// cache-read/write path (with a fake provider name) against a temp
+// directory, same pattern as the REPLAY-stale-cache test below.
 function activeCacheDir(): string | null {
   if (testCacheDir !== null) return testCacheDir
-  return usingTestProvider ? null : CACHE_DIR
+  if (usingTestProvider) return null
+  if (currentProvider === mockProvider) return null
+  return CACHE_DIR
 }
 
 async function defaultRunSink(row: RunRow): Promise<void> {
@@ -146,7 +161,7 @@ export async function callWithSchema<T>(args: {
   const provider = currentProvider
   const model = process.env.LLM_MODEL ?? "mock-model"
   const jsonSchema = toStrictJsonSchema(schema)
-  const key = cacheKey(system, prompt, toolName, model)
+  const key = cacheKey(system, prompt, toolName, model, provider.name)
   const cacheDir = activeCacheDir()
 
   if (cacheDir !== null) {
