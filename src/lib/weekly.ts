@@ -7,12 +7,23 @@
 // must return nothing — that is the structural guarantee, not a style
 // preference.
 
-/** One seeded session, flattened with that week's mean utterance total. */
+/**
+ * One seeded session, flattened with that week's mean utterance total.
+ *
+ * `total` is `null` when no real score can be attached to this session — the
+ * caller (the advance route) is expected to carry a learner's last KNOWN
+ * total forward across a missed week rather than pass 0, but `null` is what
+ * it passes when there is no known total to carry, at any distance back:
+ * every session this learner has ever had, up to and including this one, was
+ * missed. `null` is a deliberate "no claim can be made," not a stand-in for
+ * zero — see the movement fix note on meanTotalByLearner below for how it's
+ * kept from ever being rendered as a real score or a real drop.
+ */
 export type SessionRow = {
   learnerId: string
   weekN: number
   completed: boolean
-  total: number // mean sentence `total` across that week's utterances
+  total: number | null // mean sentence `total` across that week's utterances, or null if unknown
 }
 
 /**
@@ -47,9 +58,18 @@ function round2(n: number): number {
   return Math.round(n * 100) / 100
 }
 
+// Rows with total === null are skipped entirely — they contribute nothing to
+// the sum and nothing to the count. A learner whose only row(s) for a given
+// week are all null simply doesn't appear in the returned map at all, rather
+// than appearing with a fabricated mean of 0. That absence is what makes
+// "genuinely unknown" propagate correctly into computeWeeklyFacts's movement
+// list below: a learner missing from thisWeekMeans never gets a movement
+// entry, so there is no {from, to, deltaTotal} for a caller to misread as a
+// real (and possibly zero) score.
 function meanTotalByLearner(rows: SessionRow[]): Map<string, number> {
   const sums = new Map<string, { sum: number; n: number }>()
   for (const r of rows) {
+    if (r.total === null) continue
     const cur = sums.get(r.learnerId) ?? { sum: 0, n: 0 }
     cur.sum += r.total
     cur.n += 1
@@ -94,9 +114,17 @@ export function computeWeeklyFacts(
   }
 
   // Score movement: mean `total` this week minus mean `total` the previous
-  // week, per learner. A learner with no prior-week row (week 1, or any week
-  // where they simply have no earlier record) gets from === to, so
-  // deltaTotal is 0 — "no movement" rather than a fabricated cliff.
+  // week, per learner.
+  //   - No prior-week row at all (week 1), or a prior-week row that exists
+  //     but carries no known total (this learner has genuinely never had a
+  //     scored session as of last week): from === to, deltaTotal 0 —
+  //     "no movement is knowable, so report flat," the same convention
+  //     already used for week 1.
+  //   - No THIS-week known total at all (every session this learner has
+  //     ever had, through and including this week, was missed): the learner
+  //     is entirely absent from thisWeekMeans and therefore gets no entry in
+  //     `movement` — omitted, not reported as a 0. That's "genuinely
+  //     unknown," not "no movement."
   const thisWeekMeans = meanTotalByLearner(thisWeek)
   const prevWeekMeans = meanTotalByLearner(prevWeek)
   const movement: WeeklyFacts["movement"] = [...thisWeekMeans.entries()].map(([learnerId, to]) => {

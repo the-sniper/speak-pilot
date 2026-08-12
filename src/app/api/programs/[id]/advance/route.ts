@@ -1,5 +1,5 @@
 import { randomUUID } from "crypto"
-import { and, asc, eq, inArray } from "drizzle-orm"
+import { and, asc, eq, inArray, lte } from "drizzle-orm"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 import { db } from "@/db"
@@ -163,21 +163,23 @@ export async function POST(_req: Request, { params }: RouteParams): Promise<Resp
     return NextResponse.json({ error: "no learners found for this program's cohort" }, { status: 400 })
   }
 
+  // Fix round 1, Finding 1: this used to query only weekNumber and
+  // weekNumber-1, so a learner missed for BOTH of those weeks had nothing to
+  // carry forward from — lastKnownTotal, rebuilt empty every call, fell
+  // straight to a fabricated 0 for both rows, misrepresenting a "no data"
+  // gap as a real collapse to zero. The seed's "stopped" learner arc
+  // guarantees consecutive missed weeks exist in the demo cohort, so this
+  // wasn't hypothetical. Fix: load this learner's ENTIRE session history
+  // from week 1 through weekNumber (cheap at this scale — at most 24
+  // learners x 10 weeks) and walk it forward once, so lastKnownTotal can
+  // carry a real score across a gap of any width, not just one week.
   const sessionRowsDb = await db
     .select({ id: sessions.id, learnerId: sessions.learnerId, weekN: sessions.weekN, completed: sessions.completed })
     .from(sessions)
-    .where(and(inArray(sessions.learnerId, learnerIds), eq(sessions.weekN, weekNumber)))
+    .where(and(inArray(sessions.learnerId, learnerIds), lte(sessions.weekN, weekNumber)))
     .orderBy(asc(sessions.learnerId), asc(sessions.weekN))
-  const prevSessionRowsDb = weekNumber > 1
-    ? await db
-        .select({ id: sessions.id, learnerId: sessions.learnerId, weekN: sessions.weekN, completed: sessions.completed })
-        .from(sessions)
-        .where(and(inArray(sessions.learnerId, learnerIds), eq(sessions.weekN, weekNumber - 1)))
-        .orderBy(asc(sessions.learnerId), asc(sessions.weekN))
-    : []
-  const allSessionRowsDb = [...prevSessionRowsDb, ...sessionRowsDb]
 
-  const sessionIds = allSessionRowsDb.map(s => s.id)
+  const sessionIds = sessionRowsDb.map(s => s.id)
   const uttRowsDb = sessionIds.length
     ? await db.select({ sessionId: utterances.sessionId, total: utterances.total }).from(utterances)
         .where(inArray(utterances.sessionId, sessionIds))
@@ -191,18 +193,26 @@ export async function POST(_req: Request, { params }: RouteParams): Promise<Resp
 
   // Sessions come back ordered learnerId asc, weekN asc within a learner, so
   // walking them in order and remembering the last computable mean per
-  // learner is a correct forward carry — a missed week (no utterances) keeps
-  // the learner's last known score instead of a fabricated drop to 0, which
-  // would misrepresent "didn't show up" as "scored badly."
+  // learner is a correct forward carry across an arbitrary run of missed
+  // weeks — not just one. A missed week (no utterances) keeps the learner's
+  // last known score instead of a fabricated drop to 0, which would
+  // misrepresent "didn't show up" as "scored badly." If a learner has NEVER
+  // had a scored session by a given week (no carry-forward value exists
+  // yet), `total` is `null` — "genuinely unknown," not a stand-in for zero.
+  // computeWeeklyFacts (src/lib/weekly.ts) is what turns that null into an
+  // omitted movement entry rather than a fabricated numeric one; only the
+  // two weeks computeWeeklyFacts actually looks at (weekNumber and
+  // weekNumber-1) end up mattering downstream, but every earlier week still
+  // has to be walked here to seed lastKnownTotal correctly for those two.
   const lastKnownTotal = new Map<string, number>()
-  const sessionRows: SessionRow[] = allSessionRowsDb.map(s => {
+  const sessionRows: SessionRow[] = sessionRowsDb.map(s => {
     const totals = totalsBySession.get(s.id) ?? []
-    let total: number
+    let total: number | null
     if (totals.length > 0) {
       total = totals.reduce((a, b) => a + b, 0) / totals.length
       lastKnownTotal.set(s.learnerId, total)
     } else {
-      total = lastKnownTotal.get(s.learnerId) ?? 0
+      total = lastKnownTotal.get(s.learnerId) ?? null
     }
     return { learnerId: s.learnerId, weekN: s.weekN, completed: s.completed, total }
   })
