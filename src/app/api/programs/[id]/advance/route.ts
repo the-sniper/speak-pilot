@@ -233,10 +233,21 @@ export async function POST(_req: Request, { params }: RouteParams): Promise<Resp
   // ---- Code computes the facts. This is the only call to computeWeeklyFacts. ----
   const facts = computeWeeklyFacts(sessionRows, weekNumber, missedPhonemeRows)
 
+  // Fix round 2 on Task 12, Finding 2: this was `.limit(1)` with no
+  // ORDER BY — the identical non-determinism already fixed in
+  // src/lib/program-view.ts's getWeekBrief/getProgramOverview. This route is
+  // a second, independent reader AND writer of programWeeks (it updates
+  // existingWeekRow if found, inserts a new row keyed by weekNumber if not),
+  // so it has to agree with those two on which row is canonical for a given
+  // n or the three consumers could each act on a different duplicate. Same
+  // ordering (advancedAt asc — Postgres default NULLS LAST — then id asc)
+  // for the same reason: deterministic, and identical across all three call
+  // sites so none of them can disagree.
   const [existingWeekRow] = await db
     .select({ id: programWeeks.id, theme: programWeeks.theme })
     .from(programWeeks)
     .where(and(eq(programWeeks.programId, programId), eq(programWeeks.n, weekNumber)))
+    .orderBy(asc(programWeeks.advancedAt), asc(programWeeks.id))
     .limit(1)
 
   // ---- Model supplies judgement and wording only, over the computed facts. ----

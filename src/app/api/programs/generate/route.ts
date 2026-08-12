@@ -49,6 +49,46 @@ function groundedPlacementsSchema(allowedIdsByLearner: Map<string, Set<string>>)
   })
 }
 
+// Fix round 2 on Task 12, Finding 1: the persist loop renumbers curriculum
+// weeks to n = array index + 1 (fix round 1), which guarantees SEQUENTIAL,
+// duplicate-free numbering — but nothing bounded the COUNT. CurriculumSchema
+// (src/lib/schemas.ts) has no min/max on `weeks` and no cross-check against
+// horizonWeeks, so a provider returning MORE weeks than the horizon would
+// still get every one of them persisted, with n running past horizonWeeks —
+// rows getProgramOverview's read-side guard would correctly hide from the
+// tile list (it only ever shows 1..horizonWeeks), but that a real model has
+// no reason not to produce, unlike the mock's fixed-length output. Same
+// pattern as groundedPlacementsSchema above: a violation is a
+// schema.safeParse failure, so it flows through callWithSchema's EXISTING
+// retry loop — a real model gets a re-prompt with the named error instead of
+// this route silently writing rows past the horizon (or a mock-only band-aid
+// that a live model could still slip past).
+//
+// Rejects only weeks.length > horizonWeeks, not weeks.length !== horizonWeeks:
+// the advance route already has a documented, working "fewer weeks than
+// horizon" fallback (it creates a row on demand, keyed by sequential
+// weekNumber, the first time a week beyond what curriculum generation
+// produced needs to be advanced) — the mock provider currently always
+// returns exactly 2 weeks regardless of horizon, and requiring an exact
+// match would turn that pre-existing, already-handled shortfall into a
+// retry loop (and, with a live provider, a real re-prompt cost) for a shape
+// of curriculum this codebase already knows how to serve correctly. Only
+// "more weeks than the program can ever show" is the actual defect this
+// closes.
+function groundedCurriculumSchema(horizonWeeks: number) {
+  return CurriculumSchema.superRefine((data, ctx) => {
+    if (data.weeks.length > horizonWeeks) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["weeks"],
+        message:
+          `curriculum returned ${data.weeks.length} weeks, more than the ${horizonWeeks}-week horizon — ` +
+          "every persisted week must fall inside 1..horizonWeeks",
+      })
+    }
+  })
+}
+
 export const runtime = "nodejs"
 export const maxDuration = 60
 
@@ -107,13 +147,20 @@ export async function POST(req: Request): Promise<Response> {
           throw new Error("No learners found in the seeded cohort — has `npm run seed` been run?")
         }
 
+        // Extracted so the curriculum step below can ground weeks.length
+        // against the exact same number the programs row itself carries
+        // (fix round 2, Finding 1) — a second, independently-rounded copy of
+        // this expression would risk drifting from what actually got
+        // persisted as this program's horizon.
+        const horizonWeeks = Math.max(1, Math.round(cohort.horizonWeeks))
+
         // Persist as we go: a mid-stream refresh must not lose the cohort card.
         await db.insert(programs).values({
           id: programId,
           cohortId,
           brief,
           cohortSummary: cohort,
-          horizonWeeks: Math.max(1, Math.round(cohort.horizonWeeks)),
+          horizonWeeks,
           currentWeek: 0,
         })
         await emitSection("cohort", cohort)
@@ -162,12 +209,14 @@ export async function POST(req: Request): Promise<Response> {
           prompt:
             `BRIEF: ${brief}\n\n` +
             `COHORT UNDERSTANDING: role=${cohort.role}, l1=${cohort.l1}, ` +
-            `horizonWeeks=${cohort.horizonWeeks}\n\n` +
+            `horizonWeeks=${horizonWeeks}\n\n` +
             `PLACEMENTS: ${placementSummary}\n\n` +
             "Produce a complete curriculum: weekly themes with scenarios, a " +
             "cadence, success criteria in plain language, and a kickoff message " +
-            "in English and Korean.",
-          schema: CurriculumSchema,
+            "in English and Korean. " +
+            `Produce at most ${horizonWeeks} week${horizonWeeks === 1 ? "" : "s"} — never more than the ` +
+            "program's horizon; fewer is fine if that tells the story better.",
+          schema: groundedCurriculumSchema(horizonWeeks),
           toolName: "curriculum",
           kind: "curriculum",
         })
