@@ -115,6 +115,15 @@ async function loadQbrSessionRows(
 // nothing letter-shaped to echo back. The QBR page itself still renders the
 // real A1-C1 letters for a human reader (BandMovementTable in page.tsx) —
 // only the text handed to the model avoids them.
+//
+// Fix round 2, Finding A: a bare "level" is not self-explanatory — nothing
+// told the model what a level MEANS, so a real completion could plausibly
+// write "3 learners moved up a level" with no indication this is about
+// pronunciation at all, which is more opaque than the letters were, not
+// less. The BAND MOVEMENT header below and QBR_SYSTEM_PROMPT both now say
+// explicitly that levels are derived from pronunciation-accuracy scores
+// (1 = least accurate, 5 = most) and instruct the model to name
+// pronunciation explicitly when it describes movement.
 function bandLevel(band: QbrFacts["bandMovement"]["perLearner"][number]["startBand"]): number {
   return BANDS.indexOf(band) + 1
 }
@@ -126,18 +135,31 @@ function fmtBandMovement(facts: QbrFacts): string {
     .join("\n")
 }
 
-// Fix round 1, Finding 3 (continued): the per-request text this function
-// builds is kept 100% free of literal band letters — no A1/A2/B1/B2/C1
-// appears anywhere below, not even as a "don't write this" negative
-// example. QBR_SYSTEM_PROMPT (src/lib/llm/prompts.ts) is where the explicit
-// forbidden shape is spelled out, because that string is fixed and reviewed
-// once, not reconstructed per request — demonstrating a negative example
-// there is safe. Doing the same HERE would defeat the whole fix: an early
-// version of this function's trailing instruction spelled out
-// "A1/A2/B1/B2/C1" as an example of what not to write, which put a bare
+// Fix round 1, Finding 3 (continued) / Fix round 2, Finding B: the
+// per-request text this function builds — everything in `prompt`, facts
+// AND instructions — is kept 100% free of literal band letters. No
+// A1/A2/B1/B2/C1 appears anywhere below, not even as a "don't write this"
+// negative example: an early version of the trailing instruction spelled
+// those out as an example of what not to write, which put a bare
 // band-shaped token back into the prompt sent to the model — caught by this
-// route's own test suite (route.test.ts), which asserts the full prompt
-// text is letter-free, not just the facts block.
+// route's own test suite (route.test.ts), which asserts `prompt` is
+// letter-free.
+//
+// QBR_SYSTEM_PROMPT (src/lib/llm/prompts.ts) is the other half of what the
+// provider actually receives (`provider.call({ system, prompt })` — two
+// separate fields, not one). Round 1's report overstated coverage by
+// calling the combined result "the entire prompt text," when only `prompt`
+// (this function's output) had been checked; `system` still isn't part of
+// what THIS function builds, but round 2 closed the same gap in it — its
+// negative example now describes the forbidden SHAPE ("one capital letter
+// directly followed by one digit") instead of listing literal instances
+// like "A1"/"B2". `system` is a narrower claim than `prompt`, though, not
+// an identical one: it still names "CEFR" as a concept in fixed,
+// instructional text ("not CEFR proficiency assessments"), which is
+// deliberately allowed — see BAND_LETTER_CODE's comment in route.test.ts
+// for why that's a different thing from a letter-digit code appearing as
+// if it were ground truth to cite. Both fields are asserted independently
+// in route.test.ts, against the regex that actually matches each claim.
 function buildQbrPrompt(programBrief: string, facts: QbrFacts): string {
   const mostImprovedLines = facts.mostImproved.length
     ? facts.mostImproved
@@ -159,7 +181,16 @@ function buildQbrPrompt(programBrief: string, facts: QbrFacts): string {
     "COMPLETION:",
     `  ${facts.completion.completedSessions} of ${facts.completion.totalSessions} sessions completed (${fmtScore(facts.completion.ratePct)}%)`,
     "",
-    "BAND MOVEMENT (level 1-5, first known score -> most recent known score, this quarter):",
+    // Fix round 2, Finding A: "level 1-5" alone has no semantic anchor — a
+    // real completion could plausibly write "3 learners moved up a level"
+    // with nothing tying that to pronunciation at all. This header now says
+    // what a level IS (derived from expert pronunciation-accuracy scores,
+    // 1 = least accurate, 5 = most) so the model has something concrete to
+    // ground its plain-language description in, matching QBR_SYSTEM_PROMPT's
+    // rule to name pronunciation explicitly.
+    "BAND MOVEMENT (level 1-5, derived from expert pronunciation-accuracy",
+    "scores — 1 = least accurate pronunciation in this cohort, 5 = most;",
+    "first known score -> most recent known score, this quarter):",
     `  up ${facts.bandMovement.up}, down ${facts.bandMovement.down}, unchanged ${facts.bandMovement.same}`,
     fmtBandMovement(facts),
     "",
@@ -170,10 +201,11 @@ function buildQbrPrompt(programBrief: string, facts: QbrFacts): string {
     atRiskLines,
     "",
     "Write the QBR from these facts only. wins and risks must each cite a",
-    "specific number or named trend above. When citing band movement, describe",
-    "it in plain language exactly as given — \"moved up a level\", \"held",
-    "steady\" — never as a letter-and-number code. See your system",
-    "instructions for the exact forbidden shape and why.",
+    "specific number or named trend above. When citing band movement, name",
+    "pronunciation explicitly and describe it in plain language a manager",
+    "understands — \"moved up a level in pronunciation accuracy\", \"held",
+    "steady on pronunciation this quarter\" — never as a letter-and-number",
+    "code. See your system instructions for the exact forbidden shape and why.",
   ].join("\n")
 }
 

@@ -55,11 +55,17 @@ function validPayload(overrides: Record<string, unknown> = {}) {
   }
 }
 
-function fakeProvider(name: string, respond: (prompt: string) => unknown): Provider {
+// Fix round 2, Finding B: `respond` now also receives `system` — the round-1
+// version of this helper destructured only `{ prompt }`, so no test here
+// ever actually looked at what QBR_SYSTEM_PROMPT contains. `provider.call`
+// receives system and prompt as two separate fields; a claim that "the
+// prompt is letter-free" is silently narrower than "what the model receives
+// is letter-free" unless both are checked.
+function fakeProvider(name: string, respond: (prompt: string, system: string) => unknown): Provider {
   return {
     name,
-    async call({ prompt }) {
-      return { raw: respond(prompt), cost: 0 }
+    async call({ prompt, system }) {
+      return { raw: respond(prompt, system), cost: 0 }
     },
   }
 }
@@ -67,8 +73,28 @@ function fakeProvider(name: string, respond: (prompt: string) => unknown): Provi
 // Independent of route.ts's own NO_CEFR — a fresh regex here means this test
 // isn't just re-checking the guard against itself, it's an outside
 // assertion that the guard's own definition of "a CEFR-shaped token" is
-// what actually got kept out of both the prompt and the completion.
+// what actually got kept out of the model's completion. Matches NO_CEFR
+// exactly (route.ts) — this is what headline/narrative/wins/risks/
+// recommendation are checked against, because groundedQbrSchema rejects the
+// bare word CEFR from the model's OUTPUT too, not just a letter-digit code
+// (see schemas.ts's SuccessCriterion.plainLanguage for the established
+// precedent: never let the word "CEFR" reach a manager who was promised
+// plain language).
 const BARE_BAND_TOKEN = /\b(A1|A2|B1|B2|C1|C2|CEFR)\b/i
+
+// Fix round 2, Finding B: a narrower check for what `prompt` and `system`
+// (what the provider actually receives) must avoid — the letter-immediately-
+// followed-by-digit SHORTHAND specifically (A1/A2/B1/B2/C1/C2), not the bare
+// word "CEFR". Deliberately NOT the same regex as BARE_BAND_TOKEN above: the
+// word "CEFR" legitimately appears in QBR_SYSTEM_PROMPT as a named concept
+// ("these are not CEFR proficiency assessments"), in fixed, reviewed
+// instructional text explaining to the model what to avoid and why — the
+// same way WEEKLY_PASS_SYSTEM_PROMPT already says "no CEFR codes" in its own
+// rule text, unchallenged. That is a different thing from a letter-digit
+// code appearing as if it were a fact to cite (the round-1 bug: literal
+// "B1"/"B2" values interpolated as ground truth), which is the specific
+// shape this regex catches everywhere it could still hide.
+const BAND_LETTER_CODE = /\b(A1|A2|B1|B2|C1|C2)\b/i
 
 describe("POST /api/programs/[id]/qbr", () => {
   beforeAll(async () => {
@@ -190,23 +216,44 @@ describe("POST /api/programs/[id]/qbr", () => {
   // genString filler that passes the guard trivially without ever citing a
   // real fact — proving filler survives, not that a grounded completion does.
   //
-  // This fixture provider is deliberately NOT hand-authored, fixed text: it
-  // parses the actual "up N, down N, unchanged N" line out of the prompt it
-  // receives and echoes that real number back into `wins`, in plain
-  // "moved up a level" language with no letter code — the same move a real
-  // model plausibly makes when told to describe band movement "the same way
-  // you were given it." If the prompt still handed out letters, or the
-  // instruction still invited citing them, this is exactly the completion
-  // shape that would trip groundedQbrSchema and this test would fail with a
-  // 502, not a bad assertion.
-  it("a completion that describes band movement in plain language, grounded in the real up-count, passes the CEFR guard", async () => {
+  // Fix round 2, Finding A: a bare "level 1-5" has no semantic anchor — a
+  // real completion could write "3 learners moved up a level" with nothing
+  // tying that to pronunciation at all. Round 1's fixture hand-authored the
+  // "pronunciation level" qualifier in its OWN return value, which proved
+  // nothing about whether the model is actually told to include it — the
+  // test would have passed identically if the prompt never mentioned
+  // pronunciation. This version instead asserts the anchoring guidance is
+  // present in what the model receives (prompt AND system), independent of
+  // what the fixture chooses to write back.
+  //
+  // Fix round 2, Finding B: the fixture now also captures `system` —
+  // `provider.call({ system, prompt })` sends two separate fields, and round
+  // 1's fixture destructured only `prompt`, so QBR_SYSTEM_PROMPT (which
+  // still carried literal band letters as a "never write this" example) was
+  // never actually checked. Round 2 rewrote that example to describe the
+  // forbidden SHAPE ("one capital letter directly followed by one digit")
+  // instead of listing instances, so `system` is asserted letter-free here
+  // exactly like `prompt` is — no caveat, no narrower claim.
+  //
+  // The fixture provider itself is deliberately NOT hand-authored, fixed
+  // text: it parses the actual "up N, down N, unchanged N" line out of the
+  // prompt it receives and echoes that real number back into `wins`, in
+  // plain "moved up a level in pronunciation accuracy" language with no
+  // letter code — the same move a real model plausibly makes when told to
+  // describe band movement "the same way you were given it." If the prompt
+  // still handed out letters, or the instruction still invited citing them,
+  // this is exactly the completion shape that would trip groundedQbrSchema
+  // and this test would fail with a 502, not a bad assertion.
+  it("prompt+system instruct pronunciation-anchored, letter-free band movement, and a grounded completion passes the CEFR guard", async () => {
     const programId = await makeProgram({ horizonWeeks: 3, currentWeek: 0 })
     await callAdvance(programId)
     await callAdvance(programId) // week 2 — gives band movement something to describe
 
     let capturedPrompt = ""
-    __setProviderForTest(fakeProvider("grounded-plain-language", prompt => {
+    let capturedSystem = ""
+    __setProviderForTest(fakeProvider("grounded-plain-language", (prompt, system) => {
       capturedPrompt = prompt
+      capturedSystem = system
       const upMatch = /up (\d+), down (\d+), unchanged (\d+)/.exec(prompt)
       if (!upMatch) throw new Error("test fixture: BAND MOVEMENT up/down/unchanged line not found in prompt")
       const [, up, down, unchanged] = upMatch
@@ -228,14 +275,31 @@ describe("POST /api/programs/[id]/qbr", () => {
       // back in wins is exactly computeQbrFacts's own up-count for this run.
       expect(body.wins[0]).toContain(String(body.facts.bandMovement.up))
 
-      // The prompt itself never handed the model a letter to echo —
-      // fmtBandMovement now emits "level N", not a band letter.
-      expect(capturedPrompt).not.toMatch(BARE_BAND_TOKEN)
+      // Finding A: the model is actually INSTRUCTED to anchor "level" to
+      // pronunciation — checked against the raw prompt/system text, not
+      // against what the fixture chose to write back.
+      expect(capturedPrompt).toMatch(/pronunciation-accuracy\s+scores/i)
+      expect(capturedSystem).toMatch(/pronunciation accuracy/i)
+      expect(capturedSystem).toMatch(/name pronunciation explicitly/i)
+
+      // Finding B: BOTH fields the provider actually receives are free of
+      // the letter-digit shorthand (A1/A2/B1/B2/C1/C2), not just `prompt` —
+      // `system` still teaches the forbidden shape, now without spelling
+      // out a literal instance of it. `system` legitimately still names
+      // "CEFR" itself as a concept (see BAND_LETTER_CODE's comment above for
+      // why that's a deliberately narrower, more accurate claim than "every
+      // forbidden token never appears").
+      expect(capturedPrompt).not.toMatch(BAND_LETTER_CODE)
+      expect(capturedSystem).not.toMatch(BAND_LETTER_CODE)
+
       // ...and the surviving completion, grounded in that letter-free
-      // prompt, is itself letter-free — the guard and the instruction agree.
+      // prompt+system, is itself letter-free and names pronunciation —
+      // the guard and the instructions agree, and the qualifier the
+      // completion uses traces to an instruction, not test-author habit.
       expect(body.narrative).not.toMatch(BARE_BAND_TOKEN)
       expect(body.wins.join(" ")).not.toMatch(BARE_BAND_TOKEN)
       expect(body.risks.join(" ")).not.toMatch(BARE_BAND_TOKEN)
+      expect(body.wins.join(" ")).toMatch(/pronunciation/i)
     } finally {
       __setProviderForTest(mockProvider)
     }
