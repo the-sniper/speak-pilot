@@ -70,4 +70,42 @@ describe("ProgramSchema successCriteria", () => {
     }
     expect(ProgramSchema.shape.successCriteria.safeParse([crit, crit]).success).toBe(true)
   })
+
+  // Fix round 1: NO_CEFR must reject genuine CEFR usage without over-rejecting
+  // unrelated prose that happens to contain a bare band-shaped token (a room
+  // number, a pay grade, etc). See task-6-report.md for the full rationale.
+  const criterionWith = (plainLanguage: string) => ({
+    plainLanguage,
+    measurableProxy: "Completes 3 escalation scenarios with accuracy at or above 7",
+  })
+
+  it("still rejects genuine CEFR usage", () => {
+    const rejected = [
+      "Reach B2 on escalation calls",
+      "Get everyone to CEFR level B1",
+      "Move the team from A2 to B1",
+    ]
+    for (const plainLanguage of rejected) {
+      const crit = criterionWith(plainLanguage)
+      expect(
+        ProgramSchema.shape.successCriteria.safeParse([crit, crit]).success,
+        `expected "${plainLanguage}" to be rejected`,
+      ).toBe(false)
+    }
+  })
+
+  it("no longer false-positives on unrelated prose containing a bare band-shaped token", () => {
+    const accepted = [
+      "Meet in Room B2 at noon to practice",
+      "Employee grade A1 evaluation covers call handling",
+      "Handles an angry caller without switching to Korean",
+    ]
+    for (const plainLanguage of accepted) {
+      const crit = criterionWith(plainLanguage)
+      expect(
+        ProgramSchema.shape.successCriteria.safeParse([crit, crit]).success,
+        `expected "${plainLanguage}" to be accepted`,
+      ).toBe(true)
+    }
+  })
 })
