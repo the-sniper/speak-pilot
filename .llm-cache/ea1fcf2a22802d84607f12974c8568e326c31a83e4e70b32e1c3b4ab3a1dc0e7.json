@@ -1,0 +1,242 @@
+[
+  {
+    "learnerId": "learner-0001",
+    "band": "A1",
+    "rationale": "Deterministic mock placement for learner-0001: band assigned by cycling the fixed band table against learner index 0, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "000010011",
+      "000010035",
+      "000010053"
+    ]
+  },
+  {
+    "learnerId": "learner-0053",
+    "band": "A2",
+    "rationale": "Deterministic mock placement for learner-0053: band assigned by cycling the fixed band table against learner index 1, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "000530003",
+      "000530006",
+      "000530019"
+    ]
+  },
+  {
+    "learnerId": "learner-0112",
+    "band": "B1",
+    "rationale": "Deterministic mock placement for learner-0112: band assigned by cycling the fixed band table against learner index 2, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "001120010",
+      "001120013",
+      "001120024"
+    ]
+  },
+  {
+    "learnerId": "learner-0131",
+    "band": "B2",
+    "rationale": "Deterministic mock placement for learner-0131: band assigned by cycling the fixed band table against learner index 3, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "001310020",
+      "001310022",
+      "001310023"
+    ]
+  },
+  {
+    "learnerId": "learner-0482",
+    "band": "C1",
+    "rationale": "Deterministic mock placement for learner-0482: band assigned by cycling the fixed band table against learner index 4, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "004820005",
+      "004820015",
+      "004820041"
+    ]
+  },
+  {
+    "learnerId": "learner-0594",
+    "band": "A1",
+    "rationale": "Deterministic mock placement for learner-0594: band assigned by cycling the fixed band table against learner index 5, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "005940019",
+      "005940025",
+      "005940141"
+    ]
+  },
+  {
+    "learnerId": "learner-0736",
+    "band": "A2",
+    "rationale": "Deterministic mock placement for learner-0736: band assigned by cycling the fixed band table against learner index 6, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "007360004",
+      "007360006",
+      "007360036"
+    ]
+  },
+  {
+    "learnerId": "learner-1228",
+    "band": "B1",
+    "rationale": "Deterministic mock placement for learner-1228: band assigned by cycling the fixed band table against learner index 7, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "012280016",
+      "012280033",
+      "012280053"
+    ]
+  },
+  {
+    "learnerId": "learner-1404",
+    "band": "B2",
+    "rationale": "Deterministic mock placement for learner-1404: band assigned by cycling the fixed band table against learner index 8, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "014040005",
+      "014040013",
+      "014040027"
+    ]
+  },
+  {
+    "learnerId": "learner-1419",
+    "band": "C1",
+    "rationale": "Deterministic mock placement for learner-1419: band assigned by cycling the fixed band table against learner index 9, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "014190006",
+      "014190025",
+      "014190027"
+    ]
+  },
+  {
+    "learnerId": "learner-1422",
+    "band": "A1",
+    "rationale": "Deterministic mock placement for learner-1422: band assigned by cycling the fixed band table against learner index 10, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "014220001",
+      "014220003",
+      "014220021"
+    ]
+  },
+  {
+    "learnerId": "learner-1435",
+    "band": "A2",
+    "rationale": "Deterministic mock placement for learner-1435: band assigned by cycling the fixed band table against learner index 11, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "014350004",
+      "014350012",
+      "014350016"
+    ]
+  },
+  {
+    "learnerId": "learner-1447",
+    "band": "B1",
+    "rationale": "Deterministic mock placement for learner-1447: band assigned by cycling the fixed band table against learner index 12, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "014470007",
+      "014470017",
+      "014470026"
+    ]
+  },
+  {
+    "learnerId": "learner-1502",
+    "band": "B2",
+    "rationale": "Deterministic mock placement for learner-1502: band assigned by cycling the fixed band table against learner index 13, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "015020001",
+      "015020007",
+      "015020010"
+    ]
+  },
+  {
+    "learnerId": "learner-1503",
+    "band": "C1",
+    "rationale": "Deterministic mock placement for learner-1503: band assigned by cycling the fixed band table against learner index 14, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "015030001",
+      "015030005",
+      "015030006"
+    ]
+  },
+  {
+    "learnerId": "learner-2014",
+    "band": "A1",
+    "rationale": "Deterministic mock placement for learner-2014: band assigned by cycling the fixed band table against learner index 15, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "020140004",
+      "020140014",
+      "020140028"
+    ]
+  },
+  {
+    "learnerId": "learner-2030",
+    "band": "A2",
+    "rationale": "Deterministic mock placement for learner-2030: band assigned by cycling the fixed band table against learner index 16, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "020300005",
+      "020300053",
+      "020300056"
+    ]
+  },
+  {
+    "learnerId": "learner-5017",
+    "band": "B1",
+    "rationale": "Deterministic mock placement for learner-5017: band assigned by cycling the fixed band table against learner index 17, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "050170001",
+      "050170002",
+      "050170005"
+    ]
+  },
+  {
+    "learnerId": "learner-5418",
+    "band": "B2",
+    "rationale": "Deterministic mock placement for learner-5418: band assigned by cycling the fixed band table against learner index 18, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "054180014",
+      "054180015",
+      "054180021"
+    ]
+  },
+  {
+    "learnerId": "learner-6504",
+    "band": "C1",
+    "rationale": "Deterministic mock placement for learner-6504: band assigned by cycling the fixed band table against learner index 19, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "065040005",
+      "065040007",
+      "065040009"
+    ]
+  },
+  {
+    "learnerId": "learner-6902",
+    "band": "A1",
+    "rationale": "Deterministic mock placement for learner-6902: band assigned by cycling the fixed band table against learner index 20, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "069020006",
+      "069020020",
+      "069020024"
+    ]
+  },
+  {
+    "learnerId": "learner-8057",
+    "band": "A2",
+    "rationale": "Deterministic mock placement for learner-8057: band assigned by cycling the fixed band table against learner index 21, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "080570004",
+      "080570009",
+      "080570013"
+    ]
+  },
+  {
+    "learnerId": "learner-8063",
+    "band": "B1",
+    "rationale": "Deterministic mock placement for learner-8063: band assigned by cycling the fixed band table against learner index 22, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "080630011",
+      "080630014",
+      "080630019"
+    ]
+  },
+  {
+    "learnerId": "learner-9553",
+    "band": "B2",
+    "rationale": "Deterministic mock placement for learner-9553: band assigned by cycling the fixed band table against learner index 23, grounded in 3 evidence utterance(s) from the prompt.",
+    "evidenceUtteranceIds": [
+      "095530005",
+      "095530010",
+      "095530011"
+    ]
+  }
+]
