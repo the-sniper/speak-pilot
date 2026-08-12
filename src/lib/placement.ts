@@ -28,8 +28,11 @@ const MAX_PHONEMES_SHOWN = 3
 // A phone occurrence counts as "missed" when its cross-expert mean lands
 // below 1.5 on the 0 (wrong) / 1 (accented) / 2 (correct) scale produced by
 // phoneAgreement (src/lib/phonemes.ts) — i.e. experts leaned toward "wrong"
-// or "accented" rather than "correct" on average for that phone.
-const MISS_THRESHOLD = 1.5
+// or "accented" rather than "correct" on average for that phone. Exported so
+// other call sites needing the same "missed" definition (the weekly-pass
+// route's per-week phoneme facts) use this single source of truth instead of
+// re-declaring the cutoff.
+export const MISS_THRESHOLD = 1.5
 
 function fmtScore(n: number): string {
   return Number.isInteger(n) ? String(n) : n.toFixed(1)

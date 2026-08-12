@@ -87,6 +87,89 @@ function mockPlacements(text: string): unknown[] {
   })
 }
 
+// Mirrors the "WEEK NUMBER: <n>" / "HORIZON WEEKS: <n>" lines the weekly-pass
+// route puts at the top of its prompt (see
+// src/app/api/programs/[id]/advance/route.ts) so the mock can echo back a
+// schema-valid, real week number and stay inside the program's horizon
+// instead of guessing.
+const WEEK_NUMBER_RE = /WEEK NUMBER:\s*(\d+)/
+const HORIZON_WEEKS_RE = /HORIZON WEEKS:\s*(\d+)/
+
+// Grounded the same way mockPlacements grounds evidenceUtteranceIds: every
+// learner id the mock cites (atRisk, drafts[].learnerId) is copied out of the
+// prompt text, never invented. onTrack/slipped are also grounded in real ids
+// here for realism, even though the route overrides them with the
+// code-computed completed/missed lists before persisting — the fields the
+// route actually trusts from a live provider are atRisk, managerBrief,
+// curriculumAdjustments and drafts, and those are what must never cite a
+// fabricated learner.
+function mockWeeklyPass(text: string): unknown {
+  const learnerIds = extractLearnerIds(text)
+  if (learnerIds.length === 0) {
+    throw new Error(
+      "mock provider: no learner id found in the prompt for the weekly pass; " +
+        "refusing to invent one for onTrack/slipped/atRisk/drafts",
+    )
+  }
+
+  const weekNumber = Number(text.match(WEEK_NUMBER_RE)?.[1] ?? "1")
+  // Falls back to "no bound" (Infinity) when the route omits the line, so a
+  // caller that doesn't supply HORIZON WEEKS (e.g. a hand-rolled test prompt)
+  // still gets a next-week suggestion rather than a silently empty list.
+  const horizonWeeks = Number(text.match(HORIZON_WEEKS_RE)?.[1] ?? String(Infinity))
+  const half = Math.max(1, Math.floor(learnerIds.length / 2))
+  const onTrack = learnerIds.slice(0, half)
+  const slipped = learnerIds.slice(half)
+  const atRisk = learnerIds.slice(0, 1)
+
+  const draftLearners = learnerIds.slice(0, Math.min(2, learnerIds.length))
+  const drafts = draftLearners.map((learnerId, i) => ({
+    learnerId,
+    channel: i % 2 === 0 ? "email" : "slack",
+    subject: "Quick check-in on this week's practice",
+    body:
+      "Hi — noticed how this week's sessions went and wanted to check in. " +
+      "No pressure at all, just here if you want to pick it back up.",
+    reason: `Deterministic mock draft for ${learnerId}, grounded in this week's computed completion facts.`,
+  }))
+
+  // No valid next week left inside the horizon (this is the program's final
+  // week) — propose nothing rather than a fabricated out-of-range target.
+  // curriculumAdjustments has no minimum length in WeeklyPassSchema, so an
+  // empty array is schema-valid.
+  const nextWeek = weekNumber + 1
+  const curriculumAdjustments = nextWeek <= horizonWeeks
+    ? [{
+        weekN: nextWeek,
+        change: "Add one short roleplay drilling the sounds that came up most as misses this week.",
+        reason: "Grounded in this week's most-missed-phonemes fact from the practice sessions.",
+      }]
+    : []
+
+  return {
+    weekNumber,
+    onTrack,
+    slipped,
+    atRisk,
+    managerBrief:
+      `Week ${weekNumber} update: most of the team kept pace with this week's practice, and a ` +
+      "few need a nudge to catch back up. We're watching a couple of specific areas closely " +
+      "and adjusting next week's scenarios to match what actually came up in the sessions.",
+    curriculumAdjustments,
+    drafts,
+  }
+}
+
+function isWeeklyPassSchema(node: unknown): boolean {
+  const n = node as { type?: string; properties?: Record<string, unknown> } | null
+  if (!n || n.type !== "object" || !n.properties) return false
+  const props = n.properties
+  return (
+    "onTrack" in props && "slipped" in props && "atRisk" in props &&
+    "managerBrief" in props && "curriculumAdjustments" in props && "drafts" in props
+  )
+}
+
 function isPlacementArraySchema(node: unknown): boolean {
   const n = node as { type?: string; items?: { type?: string; properties?: Record<string, unknown> } } | null
   if (!n || n.type !== "array" || !n.items || n.items.type !== "object") return false
@@ -140,6 +223,7 @@ function genFromSchema(node: JsonSchemaNode | undefined, path: string, ctx: { te
 
   switch (node.type) {
     case "object": {
+      if (isWeeklyPassSchema(node)) return mockWeeklyPass(ctx.text)
       const props = node.properties ?? {}
       const keys = node.required ?? Object.keys(props)
       const out: Record<string, unknown> = {}

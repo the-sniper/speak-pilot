@@ -47,7 +47,11 @@ describe("mockProvider — schema validity", () => {
 
   it("produces a schema-valid WeeklyPassSchema object", async () => {
     const jsonSchema = toStrictJsonSchema(WeeklyPassSchema)
-    const { raw } = await mockProvider.call({ system: SYSTEM, prompt: "week 2 update", toolName: "weeklyPass", jsonSchema, model: "m" })
+    // Weekly-pass grounding (like placements) requires at least one real
+    // learner id in context — see "mockProvider — weekly pass" below for the
+    // grounding-specific assertions.
+    const prompt = "WEEK NUMBER: 2\n\nCOMPLETED THIS WEEK:\n  learner-0001: 1 session(s) completed"
+    const { raw } = await mockProvider.call({ system: SYSTEM, prompt, toolName: "weeklyPass", jsonSchema, model: "m" })
     const result = WeeklyPassSchema.safeParse(raw)
     expect(result.success, JSON.stringify(result.success ? null : result.error.issues)).toBe(true)
   })
@@ -95,6 +99,49 @@ describe("mockProvider — placements", () => {
     for (const p of arr) {
       for (const id of p.evidenceUtteranceIds) expect(promptIds.has(id)).toBe(true)
     }
+  })
+})
+
+describe("mockProvider — weekly pass", () => {
+  function weeklyPrompt(learnerIds: string[]): string {
+    const completed = learnerIds.map(id => `  ${id}: 1 session(s) completed`).join("\n")
+    return `WEEK NUMBER: 3\n\nCOMPLETED THIS WEEK:\n${completed}`
+  }
+
+  it("grounds onTrack, slipped, atRisk, and drafts in real learner ids from the prompt", async () => {
+    const jsonSchema = toStrictJsonSchema(WeeklyPassSchema)
+    const learnerIds = ["learner-0001", "learner-0002", "learner-0003", "learner-0004"]
+    const prompt = weeklyPrompt(learnerIds)
+    const { raw } = await mockProvider.call({ system: SYSTEM, prompt, toolName: "weeklyPass", jsonSchema, model: "m" })
+    const result = WeeklyPassSchema.safeParse(raw)
+    expect(result.success, JSON.stringify(result.success ? null : result.error.issues)).toBe(true)
+    if (!result.success) return
+
+    const allowed = new Set(learnerIds)
+    for (const id of [...result.data.onTrack, ...result.data.slipped, ...result.data.atRisk]) {
+      expect(allowed.has(id), `${id} must be a real learner id from the prompt`).toBe(true)
+    }
+    for (const d of result.data.drafts) {
+      expect(allowed.has(d.learnerId), `draft learnerId ${d.learnerId} must be a real learner id from the prompt`).toBe(true)
+    }
+  })
+
+  it("echoes the WEEK NUMBER line from the prompt", async () => {
+    const jsonSchema = toStrictJsonSchema(WeeklyPassSchema)
+    const { raw } = await mockProvider.call({
+      system: SYSTEM, prompt: weeklyPrompt(["learner-0009"]), toolName: "weeklyPass", jsonSchema, model: "m",
+    })
+    const result = WeeklyPassSchema.safeParse(raw)
+    expect(result.success).toBe(true)
+    if (!result.success) return
+    expect(result.data.weekNumber).toBe(3)
+  })
+
+  it("refuses to invent a learner id when the prompt names none", async () => {
+    const jsonSchema = toStrictJsonSchema(WeeklyPassSchema)
+    await expect(
+      mockProvider.call({ system: SYSTEM, prompt: "no learners named here", toolName: "weeklyPass", jsonSchema, model: "m" }),
+    ).rejects.toThrow(/refusing to invent/)
   })
 })
 
