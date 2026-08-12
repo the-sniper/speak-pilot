@@ -1,10 +1,10 @@
 import "dotenv/config"
-import { z } from "zod"
 import { EVAL_BRIEFS, type EvalBrief } from "../docs/eval-briefs"
+import { groundedPlacementsSchema } from "../src/lib/grounding"
 import { callWithSchema } from "../src/lib/llm/adapter"
 import { BAND_REFERENCE, PROGRAM_GENERATION_SYSTEM_PROMPT, SCENARIO_RELEVANCE_JUDGE_PROMPT } from "../src/lib/llm/prompts"
 import { buildLearnerBlock, learnerEvidenceIds, loadLearnersWithScores, type LearnerWithScores } from "../src/lib/placement"
-import { CohortSchema, CurriculumSchema, JudgeSchema, Placement } from "../src/lib/schemas"
+import { CohortSchema, CurriculumSchema, JudgeSchema } from "../src/lib/schemas"
 
 // Runs all 20 briefs from docs/eval-briefs.ts through the same three-step
 // generator POST /api/programs/generate uses (cohort -> placements ->
@@ -23,35 +23,11 @@ import { CohortSchema, CurriculumSchema, JudgeSchema, Placement } from "../src/l
 // Run this against LLM_PROVIDER=mock during normal development (Task 13);
 // Task 15 points the same, unchanged script at the real provider.
 
-// Mirrors groundedPlacementsSchema from src/app/api/programs/generate/route.ts.
-// Duplicated rather than imported: that route file isn't a library export,
-// and it's a reviewed, frozen surface this task must not touch.
-function groundedPlacementsSchema(allowedIdsByLearner: Map<string, Set<string>>) {
-  return z.array(Placement).superRefine((rows, ctx) => {
-    rows.forEach((p, i) => {
-      const allowed = allowedIdsByLearner.get(p.learnerId)
-      if (!allowed) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: [i, "learnerId"],
-          message: `placement cites unknown learner "${p.learnerId}" — not in the seeded cohort`,
-        })
-        return
-      }
-      for (const id of p.evidenceUtteranceIds) {
-        if (!allowed.has(id)) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            path: [i, "evidenceUtteranceIds"],
-            message:
-              `learner ${p.learnerId} cites utterance id "${id}" which was not in the evidence ` +
-              "shown for that learner — refusing to accept unverifiable evidence",
-          })
-        }
-      }
-    })
-  })
-}
+// groundedPlacementsSchema is imported from src/lib/grounding.ts — the same
+// function src/app/api/programs/generate/route.ts uses, so this sweep can
+// never silently diverge from the grounding rule production actually
+// enforces. Code review fix round 1 on Task 13, Finding 2: this used to be a
+// near-verbatim duplicate defined locally in this file.
 
 type BriefResult =
   | { ok: true; judged: boolean }

@@ -3,51 +3,17 @@ import { eq } from "drizzle-orm"
 import { z } from "zod"
 import { db } from "@/db"
 import { placements as placementsTable, programs, programWeeks, scenarios } from "@/db/schema"
+import { groundedPlacementsSchema } from "@/lib/grounding"
 import { callWithSchema } from "@/lib/llm/adapter"
 import { BAND_REFERENCE, PROGRAM_GENERATION_SYSTEM_PROMPT } from "@/lib/llm/prompts"
 import { buildLearnerBlock, learnerEvidenceIds, loadCohortId, loadLearnersWithScores } from "@/lib/placement"
-import { CohortSchema, CurriculumSchema, Placement } from "@/lib/schemas"
+import { CohortSchema, CurriculumSchema } from "@/lib/schemas"
 
-// Code review fix round 1, Finding 2 (Important): Placement.evidenceUtteranceIds
-// only requires ids to be PRESENT (min(1)) — nothing in the base schema checks
-// that a cited id was actually part of the evidence shown to that specific
-// learner. A model could cite a real utterance id belonging to a DIFFERENT
-// learner, or a plausible-looking id that doesn't exist at all, and it would
-// pass schema validation, get persisted, and render as "grounded" evidence.
-// This wraps the base array schema in a superRefine that checks each
-// placement's citations against `allowedIdsByLearner` — exactly the ids
-// `learnerEvidenceIds` put in that learner's block (see placement.ts). It
-// plugs into callWithSchema's EXISTING retry loop (which already re-prompts
-// on any schema.safeParse failure, custom issues included) rather than
-// bolting on a second, bespoke retry path — a violation is reported and
-// retried/failed exactly like a shape error, with the offending learner and
-// id named in the message.
-function groundedPlacementsSchema(allowedIdsByLearner: Map<string, Set<string>>) {
-  return z.array(Placement).superRefine((rows, ctx) => {
-    rows.forEach((p, i) => {
-      const allowed = allowedIdsByLearner.get(p.learnerId)
-      if (!allowed) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: [i, "learnerId"],
-          message: `placement cites unknown learner "${p.learnerId}" — not in the seeded cohort`,
-        })
-        return
-      }
-      for (const id of p.evidenceUtteranceIds) {
-        if (!allowed.has(id)) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            path: [i, "evidenceUtteranceIds"],
-            message:
-              `learner ${p.learnerId} cites utterance id "${id}" which was not in the evidence ` +
-              "shown for that learner — refusing to persist unverifiable evidence",
-          })
-        }
-      }
-    })
-  })
-}
+// groundedPlacementsSchema (evidence-citation grounding for a placements
+// array) now lives in src/lib/grounding.ts — shared with
+// scripts/run-evals.ts so the eval sweep can never silently drift from the
+// grounding rule this route actually enforces in production. Code review fix
+// round 1 on Task 13, Finding 2.
 
 // Fix round 2 on Task 12, Finding 1: the persist loop renumbers curriculum
 // weeks to n = array index + 1 (fix round 1), which guarantees SEQUENTIAL,

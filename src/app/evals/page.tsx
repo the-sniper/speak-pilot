@@ -128,19 +128,46 @@ function SweepStatus({ s }: { s: Awaited<ReturnType<typeof loadEvalsSummary>> })
   )
 }
 
+// Code review fix round 1 on Task 13, Finding 1 (Critical): the single mock
+// banner near the top of the page scrolls fully off-screen by the time a
+// reader reaches the numbers it disclaims — a cropped screenshot of any one
+// metric card (exactly the kind of screenshot the build guide's "legible to
+// a non-technical stakeholder" headline number invites) would be
+// indistinguishable from a real measurement. This badge repeats that
+// disclosure locally, on every headline number, so the caveat survives
+// partial reading and cropping, not just a full top-to-bottom read. Driven
+// by the same `isMock` (== `LLM_PROVIDER === "mock"`) the banner uses, so it
+// disappears on its own once Task 15's real sweep changes the provider — the
+// real numbers then stand unqualified, nothing hardcoded to remove later.
+function MockBadge() {
+  return (
+    <span
+      data-mock-badge=""
+      title="This figure comes from the deterministic mock provider, not a measured model — see the banner above."
+      className="inline-flex w-fit items-center gap-1 rounded-full border border-dashed border-[var(--accent)] bg-[var(--accent-soft)] px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase leading-none tracking-wide text-[var(--accent)]"
+    >
+      mock · not measured
+    </span>
+  )
+}
+
 function MetricCard({
-  eyebrow, value, caption, wide,
+  eyebrow, value, caption, wide, isMock,
 }: {
   eyebrow: string
   value: string
   caption?: string
   wide?: boolean
+  isMock: boolean
 }) {
   return (
     <div
       className={`flex flex-col gap-1.5 rounded-xl border border-[var(--line)] bg-[var(--paper-raised)] p-5 ${wide ? "sm:col-span-2" : ""}`}
     >
-      <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--ink-faint)]">{eyebrow}</p>
+      <div className="flex items-center justify-between gap-2">
+        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--ink-faint)]">{eyebrow}</p>
+        {isMock && <MockBadge />}
+      </div>
       <p className="font-mono text-3xl font-medium text-[var(--ink)]">{value}</p>
       {caption && <p className="text-[12px] leading-relaxed text-[var(--ink-soft)]">{caption}</p>}
     </div>
@@ -161,11 +188,13 @@ function SchemaConformanceSection({ s }: { s: Awaited<ReturnType<typeof loadEval
           eyebrow="Valid on first try"
           value={pct(c.firstTry)}
           caption="Fraction of logical calls whose attempt-1 output already matched the schema."
+          isMock={s.isMock}
         />
         <MetricCard
           eyebrow="Valid after retry"
           value={pct(c.afterRetry)}
           caption="Fraction of logical calls that eventually validated, first try or one retry."
+          isMock={s.isMock}
         />
       </div>
       <p className="font-mono text-[11px] text-[var(--ink-faint)]">{c.attempts} total attempts logged.</p>
@@ -184,8 +213,8 @@ function PlacementAccuracySection({ s }: { s: Awaited<ReturnType<typeof loadEval
         within-one-band are reported at equal weight: with five bands, ±1 is a generous metric on its own.
       </p>
       <div className="grid gap-3 sm:grid-cols-2">
-        <MetricCard eyebrow="Exact band match" value={p.n > 0 ? pct(p.exact) : "—"} />
-        <MetricCard eyebrow="Within one band" value={p.n > 0 ? pct(p.withinOne) : "—"} />
+        <MetricCard eyebrow="Exact band match" value={p.n > 0 ? pct(p.exact) : "—"} isMock={s.isMock} />
+        <MetricCard eyebrow="Within one band" value={p.n > 0 ? pct(p.withinOne) : "—"} isMock={s.isMock} />
       </div>
       <p className="font-mono text-[11px] text-[var(--ink-faint)]">
         {p.n > 0
@@ -242,12 +271,13 @@ function LatencyCostSection({ s }: { s: Awaited<ReturnType<typeof loadEvalsSumma
     <section className="flex flex-col gap-3">
       <SectionEyebrow>Latency &amp; cost</SectionEyebrow>
       <div className="grid gap-3 sm:grid-cols-2">
-        <MetricCard eyebrow="p50 latency" value={fmtMs(latency.p50)} />
-        <MetricCard eyebrow="p95 latency" value={fmtMs(latency.p95)} />
+        <MetricCard eyebrow="p50 latency" value={fmtMs(latency.p50)} isMock={s.isMock} />
+        <MetricCard eyebrow="p95 latency" value={fmtMs(latency.p95)} isMock={s.isMock} />
         <MetricCard
           eyebrow="Mean cost, priced calls"
           value={cost.meanKnownCost === null ? "cost unknown" : fmtCost(cost.meanKnownCost)}
           caption={`${cost.knownCount} call${cost.knownCount === 1 ? "" : "s"} with a known cost (0 = genuinely free — mock or a cache hit; never fabricated).`}
+          isMock={s.isMock}
         />
         <MetricCard
           eyebrow="Unpriced calls"
@@ -257,6 +287,7 @@ function LatencyCostSection({ s }: { s: Awaited<ReturnType<typeof loadEvalsSumma
               ? "A real call happened on a model whose price isn't configured — reported as unknown, never as $0.00."
               : "Every logged call had a known cost."
           }
+          isMock={s.isMock}
         />
       </div>
     </section>
@@ -279,11 +310,13 @@ function ScenarioRelevanceSection({ s }: { s: Awaited<ReturnType<typeof loadEval
           eyebrow="Judge mean score"
           value={r.judgeMean === null ? "—" : `${r.judgeMean.toFixed(1)} / 3`}
           caption={`${r.judgeScores.length} of ${r.totalBriefs} briefs judged.`}
+          isMock={s.isMock}
         />
         <MetricCard
           eyebrow="Judge / human agreement"
           value={r.agreement === null ? "not available" : pct(r.agreement)}
           caption={`${r.humanLabeledCount} of ${r.totalBriefs} briefs have a human label.`}
+          isMock={s.isMock}
         />
       </div>
       {r.agreement === null && (
