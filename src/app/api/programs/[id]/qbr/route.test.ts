@@ -55,14 +55,20 @@ function validPayload(overrides: Record<string, unknown> = {}) {
   }
 }
 
-function fakeProvider(name: string, respond: () => unknown): Provider {
+function fakeProvider(name: string, respond: (prompt: string) => unknown): Provider {
   return {
     name,
-    async call() {
-      return { raw: respond(), cost: 0 }
+    async call({ prompt }) {
+      return { raw: respond(prompt), cost: 0 }
     },
   }
 }
+
+// Independent of route.ts's own NO_CEFR — a fresh regex here means this test
+// isn't just re-checking the guard against itself, it's an outside
+// assertion that the guard's own definition of "a CEFR-shaped token" is
+// what actually got kept out of both the prompt and the completion.
+const BARE_BAND_TOKEN = /\b(A1|A2|B1|B2|C1|C2|CEFR)\b/i
 
 describe("POST /api/programs/[id]/qbr", () => {
   beforeAll(async () => {
@@ -170,5 +176,71 @@ describe("POST /api/programs/[id]/qbr", () => {
 
     const rows = await db.select().from(programQbrs).where(eq(programQbrs.programId, programId))
     expect(rows).toHaveLength(0)
+  })
+
+  // Fix round 1, Finding 3: the review found a real contradiction — the
+  // prompt used to hand the model literal band letters (via fmtBandMovement)
+  // and its own trailing instruction told it to "cite a specific number or
+  // named trend above," while groundedQbrSchema's CEFR guard rejects any
+  // bare A1/A2/B1/B2/C1 token anywhere in the output. A plausible completion
+  // that followed the "cite a trend" instruction using the exact band
+  // vocabulary it was just shown ("moved from B1 to B2") would fail its own
+  // grounding check. This had never been exercised: the mock provider has no
+  // QBR-specific handling, so QbrSchema always fell through to generic
+  // genString filler that passes the guard trivially without ever citing a
+  // real fact — proving filler survives, not that a grounded completion does.
+  //
+  // This fixture provider is deliberately NOT hand-authored, fixed text: it
+  // parses the actual "up N, down N, unchanged N" line out of the prompt it
+  // receives and echoes that real number back into `wins`, in plain
+  // "moved up a level" language with no letter code — the same move a real
+  // model plausibly makes when told to describe band movement "the same way
+  // you were given it." If the prompt still handed out letters, or the
+  // instruction still invited citing them, this is exactly the completion
+  // shape that would trip groundedQbrSchema and this test would fail with a
+  // 502, not a bad assertion.
+  it("a completion that describes band movement in plain language, grounded in the real up-count, passes the CEFR guard", async () => {
+    const programId = await makeProgram({ horizonWeeks: 3, currentWeek: 0 })
+    await callAdvance(programId)
+    await callAdvance(programId) // week 2 — gives band movement something to describe
+
+    let capturedPrompt = ""
+    __setProviderForTest(fakeProvider("grounded-plain-language", prompt => {
+      capturedPrompt = prompt
+      const upMatch = /up (\d+), down (\d+), unchanged (\d+)/.exec(prompt)
+      if (!upMatch) throw new Error("test fixture: BAND MOVEMENT up/down/unchanged line not found in prompt")
+      const [, up, down, unchanged] = upMatch
+      return validPayload({
+        narrative:
+          `${up} learners moved up a pronunciation level this quarter, ${down} moved down, and ` +
+          `${unchanged} held steady — completion stayed strong across the window.`,
+        wins: [`${up} of the cohort moved up a level in pronunciation accuracy this quarter.`],
+        risks: [`${down} learner(s) moved down a level and may need targeted review.`],
+      })
+    }))
+
+    try {
+      const res = await callQbr(programId)
+      expect(res.status).toBe(200)
+      const body = await res.json()
+
+      // Grounded in the real facts, not a coincidence: the number echoed
+      // back in wins is exactly computeQbrFacts's own up-count for this run.
+      expect(body.wins[0]).toContain(String(body.facts.bandMovement.up))
+
+      // The prompt itself never handed the model a letter to echo —
+      // fmtBandMovement now emits "level N", not a band letter.
+      expect(capturedPrompt).not.toMatch(BARE_BAND_TOKEN)
+      // ...and the surviving completion, grounded in that letter-free
+      // prompt, is itself letter-free — the guard and the instruction agree.
+      expect(body.narrative).not.toMatch(BARE_BAND_TOKEN)
+      expect(body.wins.join(" ")).not.toMatch(BARE_BAND_TOKEN)
+      expect(body.risks.join(" ")).not.toMatch(BARE_BAND_TOKEN)
+    } finally {
+      __setProviderForTest(mockProvider)
+    }
+
+    const rows = await db.select().from(programQbrs).where(eq(programQbrs.programId, programId))
+    expect(rows).toHaveLength(1)
   })
 })

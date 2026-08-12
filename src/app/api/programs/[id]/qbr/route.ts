@@ -3,6 +3,7 @@ import { and, asc, eq, inArray, lte } from "drizzle-orm"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 import { db } from "@/db"
+import { BANDS } from "@/lib/bands"
 import { learners, programQbrs, programs, programWeeks, sessions, utterances } from "@/db/schema"
 import { callWithSchema } from "@/lib/llm/adapter"
 import { QBR_SYSTEM_PROMPT } from "@/lib/llm/prompts"
@@ -102,13 +103,41 @@ async function loadQbrSessionRows(
   return { totalRows, accuracyRows }
 }
 
+// Fix round 1, Finding 3: this used to interpolate literal band letters
+// (m.startBand / m.endBand, e.g. "B1 -> B2") straight into the prompt, while
+// the trailing instruction told the model to "cite a specific number or
+// named trend" — and groundedQbrSchema's CEFR guard rejects any bare
+// A1/A2/B1/B2/C1 token anywhere in the model's output. A model that followed
+// the "cite a trend" instruction using the exact vocabulary it was just
+// shown ("moved from B1 to B2") would fail its own grounding check. Bare
+// numeric levels (1..5, via BANDS.indexOf) close this at the source: the
+// model is never shown a letter code for band movement at all, so there is
+// nothing letter-shaped to echo back. The QBR page itself still renders the
+// real A1-C1 letters for a human reader (BandMovementTable in page.tsx) —
+// only the text handed to the model avoids them.
+function bandLevel(band: QbrFacts["bandMovement"]["perLearner"][number]["startBand"]): number {
+  return BANDS.indexOf(band) + 1
+}
+
 function fmtBandMovement(facts: QbrFacts): string {
   if (facts.bandMovement.perLearner.length === 0) return "  (no learner has a comparable first/last score yet)"
   return facts.bandMovement.perLearner
-    .map(m => `  ${m.name}: ${m.startBand} -> ${m.endBand} (${m.direction})`)
+    .map(m => `  ${m.name}: level ${bandLevel(m.startBand)} -> level ${bandLevel(m.endBand)} (${m.direction})`)
     .join("\n")
 }
 
+// Fix round 1, Finding 3 (continued): the per-request text this function
+// builds is kept 100% free of literal band letters — no A1/A2/B1/B2/C1
+// appears anywhere below, not even as a "don't write this" negative
+// example. QBR_SYSTEM_PROMPT (src/lib/llm/prompts.ts) is where the explicit
+// forbidden shape is spelled out, because that string is fixed and reviewed
+// once, not reconstructed per request — demonstrating a negative example
+// there is safe. Doing the same HERE would defeat the whole fix: an early
+// version of this function's trailing instruction spelled out
+// "A1/A2/B1/B2/C1" as an example of what not to write, which put a bare
+// band-shaped token back into the prompt sent to the model — caught by this
+// route's own test suite (route.test.ts), which asserts the full prompt
+// text is letter-free, not just the facts block.
 function buildQbrPrompt(programBrief: string, facts: QbrFacts): string {
   const mostImprovedLines = facts.mostImproved.length
     ? facts.mostImproved
@@ -130,19 +159,21 @@ function buildQbrPrompt(programBrief: string, facts: QbrFacts): string {
     "COMPLETION:",
     `  ${facts.completion.completedSessions} of ${facts.completion.totalSessions} sessions completed (${fmtScore(facts.completion.ratePct)}%)`,
     "",
-    "BAND MOVEMENT (first known score -> most recent known score, this quarter):",
+    "BAND MOVEMENT (level 1-5, first known score -> most recent known score, this quarter):",
     `  up ${facts.bandMovement.up}, down ${facts.bandMovement.down}, unchanged ${facts.bandMovement.same}`,
     fmtBandMovement(facts),
     "",
-    "MOST IMPROVED (largest score gain this quarter):",
+    "MOST IMPROVED (largest gain in composite session score this quarter):",
     mostImprovedLines,
     "",
     "CURRENTLY AT RISK:",
     atRiskLines,
     "",
     "Write the QBR from these facts only. wins and risks must each cite a",
-    "specific number or named trend above. Never mention CEFR — the band",
-    "labels here are pronunciation-derived proxies, not CEFR levels.",
+    "specific number or named trend above. When citing band movement, describe",
+    "it in plain language exactly as given — \"moved up a level\", \"held",
+    "steady\" — never as a letter-and-number code. See your system",
+    "instructions for the exact forbidden shape and why.",
   ].join("\n")
 }
 

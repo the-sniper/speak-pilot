@@ -25,11 +25,19 @@ export default function WeekBrief({ n, theme, managerBrief, onTrack, slipped, at
     <div className="flex flex-col gap-8">
       {/* The Monday brief itself — plain sentences, large type, nothing
           technical. This is what a non-technical manager reads first and,
-          on a busy morning, possibly only. */}
+          on a busy morning, possibly only. It asserts a week-over-week
+          trend in prose, same as the movement figures below it, but had no
+          local disclosure of its own — the footer/banner-level caveat
+          exists elsewhere in the app, not on this card. Fix round 1 on
+          Task 14, Finding 2 (same gap found on the QBR's narrative block,
+          applied here too since the fix is a clean one-line addition). */}
       <section className="flex flex-col gap-2">
-        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--accent)]">
-          Week {n} · {theme}
-        </p>
+        <div className="flex items-center gap-2">
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--accent)]">
+            Week {n} · {theme}
+          </p>
+          {managerBrief && <SimulatedTag />}
+        </div>
         {managerBrief ? (
           <p className="font-display text-2xl italic leading-snug text-[var(--ink)] sm:text-[28px]">
             {managerBrief}

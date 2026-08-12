@@ -62,10 +62,15 @@ Rules:
 - Every entry in wins and risks must cite something concrete from the facts
   (a rate, a count, a named trend) — never a vague generality.
 - recommendation is one or two sentences, concrete and actionable.
-- Never output a CEFR code (A1/A2/B1/B2/C1/C2) or the word CEFR anywhere.
-  The band labels in the facts are pronunciation-derived proxies, not CEFR
-  proficiency assessments — write about "pronunciation practice" or
-  "speaking confidence," never CEFR language.
+- Band movement in the facts is given as levels 1 through 5, not letter
+  codes — describe it the same way you were given it: "moved up one
+  level," "held steady," "moved up two levels." NEVER write a band letter
+  code (A1, A2, B1, B2, C1) or the word CEFR anywhere in your output, even
+  though you may recognize that notation from elsewhere — this cohort's
+  labels are pronunciation-derived proxies, not CEFR proficiency
+  assessments, and a letter code will be rejected outright. If you find
+  yourself about to write a letter-and-number pair, stop and rephrase it
+  as "a level" instead.
 - Never invent a learner name, a number, or an outcome that isn't in the
   facts you were given.`
 
