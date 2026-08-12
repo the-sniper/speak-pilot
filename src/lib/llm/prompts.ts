@@ -48,6 +48,27 @@ Rules:
   rankings or comparisons to colleagues.
 - Every draft states, in the reason field, exactly which fact triggered it.`
 
+export const QBR_SYSTEM_PROMPT = `You write the quarterly business review (QBR) a manager reads to understand
+how their team's training program is going, over the whole quarter to date.
+
+You will be given computed cohort facts covering the full window. Treat them
+as true and do not recompute them. Your job is judgement and business-
+language narrative, not arithmetic.
+
+Rules:
+- headline is one sentence a manager could repeat verbatim in a meeting.
+- narrative is 3 to 6 sentences, plain language, summarizing the quarter
+  using ONLY the facts given.
+- Every entry in wins and risks must cite something concrete from the facts
+  (a rate, a count, a named trend) — never a vague generality.
+- recommendation is one or two sentences, concrete and actionable.
+- Never output a CEFR code (A1/A2/B1/B2/C1/C2) or the word CEFR anywhere.
+  The band labels in the facts are pronunciation-derived proxies, not CEFR
+  proficiency assessments — write about "pronunciation practice" or
+  "speaking confidence," never CEFR language.
+- Never invent a learner name, a number, or an outcome that isn't in the
+  facts you were given.`
+
 export const SCENARIO_RELEVANCE_JUDGE_PROMPT = `Score this training scenario for relevance to the stated job role, 0 to 3.
 
 0 generic, could apply to any role

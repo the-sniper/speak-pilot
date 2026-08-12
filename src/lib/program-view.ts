@@ -1,8 +1,9 @@
-import { and, asc, eq, inArray, lte } from "drizzle-orm"
+import { and, asc, desc, eq, inArray, lte } from "drizzle-orm"
 import { db } from "@/db"
 import {
-  drafts as draftsTable, learners, programs, programWeeks, sessions, utterances,
+  drafts as draftsTable, learners, programQbrs, programs, programWeeks, sessions, utterances,
 } from "@/db/schema"
+import type { QbrFacts } from "@/lib/qbr"
 import { computeWeeklyFacts, type SessionRow } from "@/lib/weekly"
 
 // Read-side query layer for the program overview and Monday-brief pages —
@@ -356,6 +357,75 @@ export async function getWeekBrief(programId: string, n: number): Promise<WeekBr
       advancedAt: week.advancedAt.toISOString(),
       movement,
       drafts,
+    },
+  }
+}
+
+export type QbrView = {
+  programId: string
+  brief: string
+  currentWeek: number
+  horizonWeeks: number
+  headline: string
+  narrative: string
+  wins: string[]
+  risks: string[]
+  recommendation: string
+  facts: QbrFacts
+  generatedAt: string
+}
+
+export type QbrResult =
+  | { status: "program_not_found" }
+  // Mirrors getWeekBrief's "not_advanced" ambiguity resolution: no weeks
+  // completed means there is nothing to review yet, not an empty narrative.
+  | { status: "no_weeks_completed"; programId: string; brief: string }
+  | { status: "not_generated"; programId: string; brief: string; currentWeek: number; horizonWeeks: number }
+  | { status: "ready"; data: QbrView }
+
+/**
+ * Reads the persisted QBR for a program (Task 14) — one row per program,
+ * upserted by POST /api/programs/[id]/qbr rather than accumulated, per that
+ * route's "persist rather than regenerate on every page load" decision.
+ * `facts` is returned exactly as generated: this function never recomputes
+ * cohort arithmetic, it only reads what the model was actually shown.
+ */
+export async function getQbrView(programId: string): Promise<QbrResult> {
+  const [program] = await db.select().from(programs).where(eq(programs.id, programId)).limit(1)
+  if (!program) return { status: "program_not_found" }
+  if (program.currentWeek < 1) return { status: "no_weeks_completed", programId, brief: program.brief }
+
+  const [row] = await db
+    .select()
+    .from(programQbrs)
+    .where(eq(programQbrs.programId, programId))
+    .orderBy(desc(programQbrs.generatedAt))
+    .limit(1)
+
+  if (!row) {
+    return {
+      status: "not_generated",
+      programId,
+      brief: program.brief,
+      currentWeek: program.currentWeek,
+      horizonWeeks: program.horizonWeeks,
+    }
+  }
+
+  return {
+    status: "ready",
+    data: {
+      programId,
+      brief: program.brief,
+      currentWeek: program.currentWeek,
+      horizonWeeks: program.horizonWeeks,
+      headline: row.headline,
+      narrative: row.narrative,
+      wins: row.wins as string[],
+      risks: row.risks as string[],
+      recommendation: row.recommendation,
+      facts: row.facts as QbrFacts,
+      generatedAt: row.generatedAt.toISOString(),
     },
   }
 }

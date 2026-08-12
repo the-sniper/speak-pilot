@@ -46,6 +46,20 @@ Nothing about the approve/edit flow changes in production: drafts still land as 
 and still require a human to approve or edit before anything happens with them — the scheduler only
 replaces the button, never the approval step.
 
+## QBR export
+
+`/program/[id]/qbr` is a printable page. The "Print / save as PDF" button on it calls
+`window.print()` — that's the entire export path. There is no PDF-generation library, no
+headless-browser render, no server-side rendering pipeline: the browser's own print dialog
+(and that dialog's own "Save as PDF" destination) is what produces the file. A print
+stylesheet keeps the honesty banner and every `simulated` tag visible on the printed page and
+hides on-screen-only controls (navigation, the Print/Regenerate buttons themselves).
+
+The QBR is generated once, on request (`POST /api/programs/[id]/qbr`), and persisted — reloading
+or printing the page does not call the model again. Cohort-level facts (completion rate, band
+movement, most-improved, at-risk) are computed in code from seeded session data, exactly like the
+weekly pass; the model receives those facts and writes the business-language narrative only.
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.

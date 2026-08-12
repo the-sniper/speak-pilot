@@ -125,3 +125,28 @@ body::before {
     animation: none !important;
   }
 }
+
+/*
+ * Print support for the QBR (Task 14). `window.print()` is the entire PDF
+ * path here — no headless-browser render, no PDF library — so what a
+ * browser's print engine does with this stylesheet is genuinely the whole
+ * feature, not a preview of one. Most browsers strip background colors and
+ * shadows from print by default; `print-color-adjust: exact` is what keeps
+ * the accent color, band-tinted borders, and the honesty banner's tint
+ * legible on paper instead of silently fading to plain black-on-white.
+ */
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Decorative grain texture: fine on screen, just toner on paper. */
+  body::before {
+    display: none;
+  }
+
+  @page {
+    margin: 1.4cm 1.2cm;
+  }
+}

@@ -19,12 +19,20 @@ export default async function ProgramPage({ params }: RouteParams) {
       <div className="mb-10 flex flex-col gap-3 border-b border-[var(--line)] pb-6">
         <div className="flex items-center justify-between gap-4">
           <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--accent)]">Program</p>
-          <Link
-            href="/"
-            className="font-mono text-[11px] uppercase tracking-wide text-[var(--ink-faint)] transition-colors hover:text-[var(--accent)]"
-          >
-            ← Home
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link
+              href={`/program/${programId}/qbr`}
+              className="font-mono text-[11px] uppercase tracking-wide text-[var(--ink-faint)] transition-colors hover:text-[var(--accent)]"
+            >
+              Quarterly review →
+            </Link>
+            <Link
+              href="/"
+              className="font-mono text-[11px] uppercase tracking-wide text-[var(--ink-faint)] transition-colors hover:text-[var(--accent)]"
+            >
+              ← Home
+            </Link>
+          </div>
         </div>
         <p className="max-w-2xl text-lg leading-relaxed text-[var(--ink)]">{overview.brief}</p>
         <p className="font-mono text-[12px] text-[var(--ink-soft)]">

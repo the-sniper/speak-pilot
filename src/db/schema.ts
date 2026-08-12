@@ -148,6 +148,27 @@ export const agentRuns = pgTable("agent_runs", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
+// One row per program, upserted by the QBR route rather than accumulated —
+// "persist rather than regenerate on every page load" (Task 14's ambiguity
+// resolution) means a reload must serve the same narrative and the same
+// facts it was generated against, not a freshly recomputed pair that could
+// drift from the prose describing them. `facts` is the exact QbrFacts object
+// (src/lib/qbr.ts) the model was shown, stored verbatim so the printed page
+// never needs to recompute cohort arithmetic to render — it only ever reads
+// what was actually generated.
+export const programQbrs = pgTable("program_qbrs", {
+  id: text("id").primaryKey(),
+  programId: text("program_id").notNull().references(() => programs.id),
+  weeksCompleted: integer("weeks_completed").notNull(),
+  headline: text("headline").notNull(),
+  narrative: text("narrative").notNull(),
+  wins: jsonb("wins").notNull(),
+  risks: jsonb("risks").notNull(),
+  recommendation: text("recommendation").notNull(),
+  facts: jsonb("facts").notNull(),
+  generatedAt: timestamp("generated_at").notNull().defaultNow(),
+})
+
 export const drafts = pgTable("drafts", {
   id: text("id").primaryKey(),
   programId: text("program_id").notNull().references(() => programs.id),
