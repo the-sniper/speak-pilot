@@ -83,7 +83,16 @@ export const QbrSchema = z.object({
   recommendation: z.string(),
 })
 
+// Scenario-relevance judge output — Appendix A rubric (0-3), used by
+// scripts/run-evals.ts's judge pass. "Output the score and one sentence of
+// justification" per SCENARIO_RELEVANCE_JUDGE_PROMPT (src/lib/llm/prompts.ts).
+export const JudgeSchema = z.object({
+  score: z.number().int().min(0).max(3),
+  justification: z.string(),
+})
+
 export type PlacementT = z.infer<typeof Placement>
 export type ProgramT = z.infer<typeof ProgramSchema>
 export type WeeklyPassT = z.infer<typeof WeeklyPassSchema>
 export type QbrT = z.infer<typeof QbrSchema>
+export type JudgeT = z.infer<typeof JudgeSchema>
