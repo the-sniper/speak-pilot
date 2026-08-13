@@ -239,6 +239,14 @@ after the fact:
   Production needs a real email/Slack integration behind the approve action, with its own
   audit trail, before an approved draft can actually reach a learner.
 
+## Known limitations
+
+Four things in this build are weaker than they look, and one number on the evals page should
+not be trusted as a quality signal. They are written up in
+[docs/follow-ups.md](docs/follow-ups.md) — including why the scenario-relevance judge's 3.0/3
+means less than it appears, and where the failure log can misattribute a model failure to
+infrastructure. Each was found by review and left in place deliberately, not overlooked.
+
 ## speechocean762 attribution
 
 Every recording, transcript, expert accuracy/fluency/prosodic/completeness score, and
