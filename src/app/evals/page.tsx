@@ -25,18 +25,20 @@ export default async function EvalsPage() {
   const sweep = s.sweep
 
   return (
-    <main className="mx-auto w-full max-w-4xl px-6 py-10">
-      <div className="mb-8 flex flex-col gap-3 border-b border-[var(--line)] pb-6">
+    <main className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6 sm:py-10">
+      <div className="mb-8 flex flex-col gap-4">
         <div className="flex items-center justify-between gap-4">
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--accent)]">Evals</p>
+          <span className="rounded-full bg-[var(--accent-soft)] px-3 py-1 font-display text-[12px] font-bold text-[var(--accent)]">
+            Evals
+          </span>
           <Link
             href="/"
-            className="font-mono text-[11px] uppercase tracking-wide text-[var(--ink-faint)] transition-colors hover:text-[var(--accent)]"
+            className="rounded-full border border-[var(--line)] bg-[var(--paper-raised)] px-3.5 py-1.5 text-[13px] font-semibold text-[var(--ink-soft)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
           >
-            ← Home
+            Home
           </Link>
         </div>
-        <h1 className="font-display text-2xl leading-snug text-[var(--ink)]">
+        <h1 className="font-display text-2xl font-extrabold tracking-tight leading-snug text-[var(--ink)] sm:text-3xl">
           What the system actually does, measured against real expert scores.
         </h1>
         <p className="max-w-2xl text-sm leading-relaxed text-[var(--ink-soft)]">

@@ -1,39 +1,50 @@
 @import "tailwindcss";
 
 /*
- * Speak Pilot commits to one aesthetic: warm paper, ink, a single terracotta
- * accent graduated by intensity for the five proficiency bands. This is a
- * deliberate, single-theme choice (no prefers-color-scheme fork) — the
- * palette below IS the product, not a default that happens to render.
+ * Speak Pilot visual system — aligned to Speak.com brand tokens scraped from
+ * their production stylesheet (Axiforma / navy / electric blue), adapted for
+ * a product demo rather than a marketing clone.
+ *
+ * Brand anchors from speak.com CSS:
+ *   navy #12205A · electric blue #1C49FF · periwinkle surfaces #F4F6FF / #DDE4FF
  */
 :root {
-  --paper: #f6f1e6;
-  --paper-raised: #fbf8f1;
-  --ink: #201c16;
-  --ink-soft: #726a5b;
-  --ink-faint: #a89d88;
-  --line: #e2d8c2;
-  --accent: #b8451f;
-  --accent-ink: #fdf6ee;
-  --accent-soft: #f0dcc8;
+  --navy: #12205a;
+  --navy-soft: #1a2d75;
+  --paper: #f4f6ff;
+  --paper-raised: #ffffff;
+  --ink: #12205a;
+  --ink-soft: #4a5578;
+  --ink-faint: #8b93b0;
+  --line: #dde4ff;
+  --accent: #1c49ff;
+  --accent-ink: #ffffff;
+  --accent-soft: #ebefff;
+  --accent-glow: #bbc8ff;
+  --violet: #8b61fd;
+  --lime: #e9ff6b;
 
-  --band-a1: #ede3cd;
-  --band-a2: #e2c69c;
-  --band-b1: #d59f66;
-  --band-b2: #c67740;
-  --band-c1: #a8461f;
-  --band-c1-ink: #fdf6ee;
+  --band-a1: #ebefff;
+  --band-a2: #bbc8ff;
+  --band-b1: #7b93ff;
+  --band-b2: #2848f5;
+  --band-c1: #12205a;
+  --band-c1-ink: #ffffff;
 
   --background: var(--paper);
   --foreground: var(--ink);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-body);
-  --font-display: var(--font-display);
   --font-mono: var(--font-data);
+}
+
+.font-display {
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
@@ -42,22 +53,10 @@ body {
   font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
 }
 
-/* A faint paper grain so the flat cream field reads as material, not a CSS
-   fill. Fixed and behind everything; pure CSS, no network request. */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.5;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.13  0 0 0 0 0.11  0 0 0 0 0.09  0 0 0 0.028 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
 @keyframes rise-in {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -76,7 +75,7 @@ body::before {
 
 @keyframes drawer-slide-in {
   from {
-    transform: translateX(28px);
+    transform: translateX(32px);
     opacity: 0;
   }
   to {
@@ -94,12 +93,22 @@ body::before {
   }
 }
 
+@keyframes wave-pulse {
+  0%,
+  100% {
+    transform: scaleY(0.55);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
 .animate-rise-in {
-  animation: rise-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: rise-in 0.55s var(--ease-out-expo) both;
 }
 
 .animate-drawer-in {
-  animation: drawer-slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: drawer-slide-in 0.4s var(--ease-out-expo) both;
 }
 
 .animate-scrim-in {
@@ -110,40 +119,101 @@ body::before {
   background: linear-gradient(
     100deg,
     var(--line) 30%,
-    #efe6d3 45%,
+    #f8f9ff 45%,
     var(--line) 60%
   );
   background-size: 200% 100%;
   animation: shimmer 1.8s ease-in-out infinite;
 }
 
+.speak-wave rect {
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .speak-wave rect:nth-child(1) {
+    animation: wave-pulse 1.6s ease-in-out infinite;
+  }
+  .speak-wave rect:nth-child(2) {
+    animation: wave-pulse 1.6s ease-in-out 0.12s infinite;
+  }
+  .speak-wave rect:nth-child(3) {
+    animation: wave-pulse 1.6s ease-in-out 0.24s infinite;
+  }
+  .speak-wave rect:nth-child(4) {
+    animation: wave-pulse 1.6s ease-in-out 0.36s infinite;
+  }
+}
+
+.btn-primary {
+  border-radius: 9999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition:
+    transform 0.2s var(--ease-out-expo),
+    box-shadow 0.2s var(--ease-out-expo),
+    background 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.btn-primary:hover:enabled {
+  background: #0f47d6;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px -10px rgb(28 73 255 / 0.55);
+}
+
+.btn-primary:active:enabled {
+  transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.btn-navy {
+  border-radius: 9999px;
+  background: var(--navy);
+  color: #ffffff;
+  font-weight: 600;
+  transition:
+    transform 0.2s var(--ease-out-expo),
+    opacity 0.2s ease;
+}
+
+.btn-navy:hover:enabled {
+  background: var(--navy-soft);
+  transform: translateY(-1px);
+}
+
+.btn-navy:active:enabled {
+  transform: scale(0.98);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-rise-in,
   .animate-drawer-in,
   .animate-scrim-in,
-  .skeleton-shimmer {
+  .skeleton-shimmer,
+  .speak-wave rect {
     animation: none !important;
+  }
+
+  .btn-primary:hover:enabled,
+  .btn-primary:active:enabled,
+  .btn-navy:hover:enabled,
+  .btn-navy:active:enabled {
+    transform: none;
   }
 }
 
-/*
- * Print support for the QBR (Task 14). `window.print()` is the entire PDF
- * path here — no headless-browser render, no PDF library — so what a
- * browser's print engine does with this stylesheet is genuinely the whole
- * feature, not a preview of one. Most browsers strip background colors and
- * shadows from print by default; `print-color-adjust: exact` is what keeps
- * the accent color, band-tinted borders, and the honesty banner's tint
- * legible on paper instead of silently fading to plain black-on-white.
- */
 @media print {
   * {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
-  }
-
-  /* Decorative grain texture: fine on screen, just toner on paper. */
-  body::before {
-    display: none;
   }
 
   @page {

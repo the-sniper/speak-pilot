@@ -73,7 +73,7 @@ export default function DraftCard({ draft: initial }: Props) {
     <div
       data-draft-id={draft.id}
       data-draft-status={draft.status}
-      className="animate-rise-in flex flex-col gap-3 rounded-xl border border-[var(--line)] bg-[var(--paper-raised)] p-4"
+      className="animate-rise-in flex flex-col gap-3 rounded-2xl border border-[var(--line)] bg-[var(--paper-raised)] p-4"
     >
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div className="flex flex-col gap-0.5">
@@ -98,7 +98,7 @@ export default function DraftCard({ draft: initial }: Props) {
       </div>
 
       <p className="rounded-lg border border-dashed border-[var(--line)] bg-[var(--paper)] px-3 py-2 text-[12px] leading-relaxed text-[var(--ink-soft)]">
-        <span className="font-mono text-[10px] uppercase tracking-wide text-[var(--ink-faint)]">Why this draft — </span>
+        <span className="text-[10px] font-medium text-[var(--ink-faint)]">Why this draft: </span>
         {draft.reason}
       </p>
 
@@ -119,7 +119,7 @@ export default function DraftCard({ draft: initial }: Props) {
               type="button"
               onClick={saveEdit}
               disabled={saving || !draftText.trim()}
-              className="rounded-full bg-[var(--ink)] px-4 py-1.5 text-xs font-medium text-[var(--paper)] transition-opacity disabled:opacity-40"
+              className="rounded-full bg-[var(--ink)] px-4 py-1.5 text-xs font-medium text-[var(--paper-raised)] transition-opacity active:scale-[0.98] disabled:opacity-40"
             >
               {saving ? "Saving…" : "Save edit"}
             </button>
@@ -152,7 +152,7 @@ export default function DraftCard({ draft: initial }: Props) {
             onClick={() => setShowOriginal(s => !s)}
             className="w-fit font-mono text-[10px] uppercase tracking-wide text-[var(--ink-faint)] underline decoration-dotted underline-offset-2 hover:text-[var(--accent)]"
           >
-            Edited by a human — {showOriginal ? "hide" : "show"} the model&apos;s original
+            Edited by a human - {showOriginal ? "hide" : "show"} the model&apos;s original
           </button>
           {showOriginal && (
             <p className="whitespace-pre-wrap rounded-lg border border-[var(--line)] bg-[var(--paper)] px-3 py-2 text-[12px] italic leading-relaxed text-[var(--ink-faint)]">
@@ -190,7 +190,7 @@ export default function DraftCard({ draft: initial }: Props) {
               type="button"
               onClick={approve}
               disabled={approving}
-              className="rounded-full bg-[var(--accent)] px-4 py-1.5 text-xs font-medium text-[var(--accent-ink)] transition-opacity disabled:opacity-40"
+              className="btn-primary px-4 py-1.5 text-xs disabled:opacity-40"
             >
               {approving ? "Approving…" : "Approve"}
             </button>

@@ -43,11 +43,11 @@ export default function GenerateQbrButton({ programId, hasExisting }: Props) {
         type="button"
         onClick={handleClick}
         disabled={busy}
-        className={`rounded-full px-5 py-2 text-sm font-medium transition-transform disabled:cursor-not-allowed disabled:opacity-40 ${
+        className={
           hasExisting
-            ? "border border-[var(--line)] text-[var(--ink-soft)] hover:enabled:border-[var(--accent)] hover:enabled:text-[var(--accent)]"
-            : "bg-[var(--accent)] text-[var(--accent-ink)] hover:enabled:-translate-y-px hover:enabled:shadow-[0_6px_16px_-6px_rgba(184,69,31,0.55)]"
-        }`}
+            ? "rounded-full border border-[var(--line)] px-5 py-2.5 text-sm font-semibold text-[var(--ink-soft)] transition-colors hover:enabled:border-[var(--accent)] hover:enabled:text-[var(--accent)] disabled:cursor-not-allowed disabled:opacity-40"
+            : "btn-primary px-5 py-2.5 text-sm disabled:opacity-40"
+        }
       >
         {busy ? "Generating…" : hasExisting ? "Regenerate QBR" : "Generate QBR"}
       </button>

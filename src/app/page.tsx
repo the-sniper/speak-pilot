@@ -6,33 +6,44 @@ import ProgramStream from "@/components/ProgramStream"
 
 export default function Home() {
   const [brief, setBrief] = useState<string | null>(null)
-  // Not yet consumed elsewhere on this screen — Task 10's evidence panel is
-  // the first thing that will need it. Captured here so ProgramStream's
-  // onProgramId contract has a real destination from day one.
-  const [, setProgramId] = useState<string | null>(null)
+  const [programId, setProgramId] = useState<string | null>(null)
 
   return (
-    <main className="flex flex-1 flex-col items-center">
+    <main className="flex flex-1 flex-col">
       {brief === null ? (
-        <div className="flex flex-1 items-center justify-center">
-          <BriefBox onSubmit={setBrief} />
-        </div>
+        <BriefBox onSubmit={setBrief} />
       ) : (
-        <div className="w-full max-w-5xl px-6 py-10">
-          <div className="mb-10 flex items-start justify-between gap-4 border-b border-[var(--line)] pb-4">
-            <p className="max-w-2xl text-sm leading-relaxed text-[var(--ink-soft)]">{brief}</p>
-            <button
-              type="button"
-              onClick={() => {
-                setBrief(null)
-                setProgramId(null)
-              }}
-              className="shrink-0 whitespace-nowrap font-mono text-[11px] uppercase tracking-wide text-[var(--ink-faint)] transition-colors hover:text-[var(--accent)]"
-            >
-              New program
-            </button>
+        <div className="flex flex-1 flex-col bg-[var(--paper)]">
+          <div className="border-b border-[var(--line)] bg-[var(--paper-raised)]/80">
+            <div className="mx-auto flex w-full max-w-[1100px] items-start justify-between gap-4 px-5 py-4 sm:px-8">
+              <div className="min-w-0 flex-1">
+                <p className="font-display text-[13px] font-semibold text-[var(--accent)]">
+                  Building your program
+                </p>
+                <p className="mt-1 max-w-2xl text-sm leading-relaxed text-[var(--ink-soft)]">
+                  {brief}
+                </p>
+                {programId ? (
+                  <p className="mt-1 font-mono text-[11px] text-[var(--ink-faint)]">
+                    id {programId.slice(0, 8)}…
+                  </p>
+                ) : null}
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setBrief(null)
+                  setProgramId(null)
+                }}
+                className="shrink-0 rounded-full border border-[var(--line)] bg-[var(--paper)] px-4 py-2 text-[13px] font-semibold text-[var(--ink-soft)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+              >
+                Start over
+              </button>
+            </div>
           </div>
-          <ProgramStream brief={brief} onProgramId={setProgramId} />
+          <div className="mx-auto w-full max-w-[1100px] flex-1 px-5 py-6 sm:px-8 sm:py-8">
+            <ProgramStream brief={brief} onProgramId={setProgramId} />
+          </div>
         </div>
       )}
     </main>

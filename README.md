@@ -36,16 +36,22 @@ calls in English, 10 weeks" — and turns it into a full program:
    second, independently-formed LLM label (an inter-model agreement rate, not human validation —
    see [Eval numbers](#eval-numbers) below).
 
+## Demo attribution
+
+Every screen shows a top bar (`src/components/DemoBanner.tsx`): this demo was created for
+[Speak](https://www.speak.com/). Speak Pilot is an internal concept demo.
+
 ## The honesty line
 
 > Northwind Support and its people are fictional. Every recording, score, and expert annotation
 > is real human-annotated learner speech from speechocean762 (CC BY 4.0). The week-over-week
-> trajectory is constructed — the dataset captures one session per speaker, so progress over time
+> trajectory is constructed - the dataset captures one session per speaker, so progress over time
 > is simulated by ordering real utterances. Placement accuracy is measured against real expert
 > consensus and is not simulated.
 
-This exact text is the banner (`src/components/HonestyBanner.tsx`) rendered on every screen in
-the app, not just here. A few things it doesn't spell out, stated plainly:
+This exact text lives in `src/components/DemoHonesty.tsx` ("About this demo" on the kickoff
+screen). Inline `simulated` tags still mark constructed trajectory claims at the point of use.
+A few things it doesn't spell out, stated plainly:
 
 - **The cohort of 24 speakers was curated**, not randomly sampled — `scripts/select-cohort.ts`
   deliberately seeds at least one speaker per band so the demo spans A1 through C1 instead of
@@ -57,7 +63,7 @@ the app, not just here. A few things it doesn't spell out, stated plainly:
   measured.** speechocean762 has no repeat-session data — each speaker recorded once. An
   "improving," "plateaued," or "declining" arc is a narrative device built by ordering that one
   real session's utterances by score, not a trend observed over calendar time. Every figure this
-  touches carries an inline `simulated` tag at the point of the claim, not only in this banner.
+  touches carries an inline `simulated` tag at the point of the claim, not only in the honesty disclosure.
 - **The QBR's "Print / save as PDF" button is `window.print()`.** That is the entire export
   path — there is no PDF-generation library, no headless-browser render, no server-side
   rendering pipeline. The browser's own print dialog (and that dialog's own "Save as PDF"

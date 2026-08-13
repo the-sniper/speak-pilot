@@ -6,7 +6,7 @@
 //
 // Every number this file produces is built from the same "one real session
 // per speaker, sorted into weeks" construction the rest of the app already
-// discloses (see SimulatedTag / HonestyBanner). Nothing here is a new kind
+// discloses (see SimulatedTag / DemoHonesty). Nothing here is a new kind
 // of fabrication — it is a wider window over facts that are already
 // constructed, computed the same carry-forward way weekly.ts computes them.
 

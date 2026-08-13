@@ -26,7 +26,7 @@ import { isMockProviderActive } from "@/lib/llm/adapter"
 //      there — including in a screenshot cropped to the main content area —
 //      no matter how far the page scrolls.
 export const MOCK_MODE_TEXT =
-  "Mock mode — this is placeholder output from the built-in mock provider, not model output. " +
+  "Mock mode - this is placeholder output from the built-in mock provider, not model output. " +
   "The real cached responses are served with LLM_PROVIDER=openai LLM_API_KEY= REPLAY=1 npm run dev."
 
 export default function MockModeBanner() {
@@ -36,13 +36,13 @@ export default function MockModeBanner() {
     <div
       data-mock-mode-banner=""
       role="status"
-      className="fixed inset-x-0 bottom-0 z-50 border-t-2 border-dashed border-[var(--accent)] bg-[var(--accent-soft)] px-4 py-2.5 text-center"
+      className="fixed inset-x-0 bottom-0 z-50 border-t-2 border-dashed border-[var(--accent)] bg-[var(--navy)] px-4 py-2.5 text-center"
     >
-      <p className="mx-auto max-w-3xl font-mono text-[11px] leading-relaxed text-[var(--ink)]">
-        <strong className="font-semibold uppercase tracking-wide text-[var(--accent)]">Mock mode —</strong>{" "}
+      <p className="mx-auto max-w-3xl font-mono text-[11px] leading-relaxed text-white/85">
+        <strong className="font-semibold tracking-wide text-[var(--lime)]">Mock mode -</strong>{" "}
         this is placeholder output from the built-in mock provider, not model output. The real cached
         responses are served with{" "}
-        <code className="rounded bg-[var(--paper)] px-1 py-0.5 text-[10px]">
+        <code className="rounded bg-white/10 px-1 py-0.5 text-[10px] text-white">
           LLM_PROVIDER=openai LLM_API_KEY= REPLAY=1 npm run dev
         </code>
         .

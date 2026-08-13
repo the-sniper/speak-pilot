@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useReducer, useState } from "react"
+import { createPortal } from "react-dom"
 import { BANDS, type Band } from "@/lib/bands"
 import type { PlacementEvidence, WordEvidence } from "@/lib/evidence"
 import { BAND_BG, BAND_FG } from "./PlacementCard"
@@ -49,7 +50,7 @@ function panelReducer(state: PanelState, action: PanelAction): PanelState {
 }
 
 // Single accent, graduated by intensity — the same visual law globals.css
-// states for the band ramp ("a single terracotta accent graduated by
+// states for the band ramp ("a single Speak-blue accent graduated by
 // intensity") extended here to phoneme/word correctness. Wrongness (low
 // score) reads as more accent coverage; correctness fades toward paper. No
 // second hue is introduced, so the "wrong phoneme" heat and the "high band"
@@ -144,8 +145,11 @@ export default function EvidencePanel({ programId, learnerId, onClose }: Props) 
   const activeWord: WordEvidence | null =
     activeUtt && selectedWordIdx !== null ? (activeUtt.words[selectedWordIdx] ?? null) : null
 
-  return (
-    <div className="fixed inset-0 z-50 flex justify-end">
+  // Portal to body: Placements sits inside SectionShell's animate-rise-in
+  // (transform), which would otherwise trap position:fixed to that section
+  // instead of the viewport - so the scrim only covered the content column.
+  const overlay = (
+    <div className="fixed inset-0 z-[100] flex justify-end">
       <button
         type="button"
         aria-label="Close evidence panel"
@@ -158,12 +162,12 @@ export default function EvidencePanel({ programId, learnerId, onClose }: Props) 
         aria-modal="true"
         aria-label={`Placement evidence for ${learnerId}`}
         data-evidence-panel={learnerId}
-        className="animate-drawer-in relative flex h-full w-full max-w-xl flex-col overflow-y-auto border-l border-[var(--line)] bg-[var(--paper)] shadow-[-24px_0_60px_-24px_rgba(32,28,22,0.35)]"
+        className="animate-drawer-in relative flex h-full w-full max-w-xl flex-col overflow-hidden border-l border-[var(--line)] bg-[var(--paper-raised)] shadow-[-24px_0_64px_-32px_rgb(18_32_90/0.45)]"
       >
         {/* Header */}
-        <div className="sticky top-0 z-10 flex items-start justify-between gap-3 border-b border-[var(--line)] bg-[var(--paper)]/95 px-6 py-5 backdrop-blur-sm">
+        <div className="flex shrink-0 items-start justify-between gap-3 border-b border-[var(--line)] bg-[var(--paper-raised)] px-5 py-4">
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--accent)]">
+            <p className="font-display text-sm font-semibold text-[var(--accent)]">
               Placement evidence
             </p>
             <p className="mt-1 font-mono text-sm text-[var(--ink)]">{learnerId}</p>
@@ -172,7 +176,7 @@ export default function EvidencePanel({ programId, learnerId, onClose }: Props) 
             type="button"
             onClick={onClose}
             aria-label="Close"
-            className="rounded-full border border-[var(--line)] bg-[var(--paper-raised)] p-2 text-[var(--ink-soft)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            className="rounded-full border border-[var(--line)] bg-[var(--paper)] p-2 text-[var(--ink-soft)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
           >
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
@@ -180,7 +184,7 @@ export default function EvidencePanel({ programId, learnerId, onClose }: Props) 
           </button>
         </div>
 
-        <div className="flex flex-1 flex-col gap-6 px-6 py-6">
+        <div className="flex flex-1 flex-col gap-6 overflow-y-auto px-5 py-5">
           {loading && <PanelSkeleton />}
 
           {loadError && (
@@ -228,16 +232,16 @@ export default function EvidencePanel({ programId, learnerId, onClose }: Props) 
 
                 <p className="text-[11px] leading-relaxed text-[var(--ink-faint)]">
                   Bands are pronunciation-derived proxies from speechocean762 expert scores, not CEFR
-                  assessments. The model&apos;s verdict is never edited — an override is stored alongside it.
+                  assessments. The model&apos;s verdict is never edited - an override is stored alongside it.
                 </p>
               </section>
 
               {/* Rationale */}
               <section>
-                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ink-faint)]">
+                <p className="text-sm font-medium text-[var(--ink-faint)]">
                   Model&apos;s rationale
                 </p>
-                <blockquote className="mt-2 border-l-2 border-[var(--accent)] pl-4 font-display text-lg italic leading-snug text-[var(--ink)]">
+                <blockquote className="mt-2 border-l-2 border-[var(--accent)] pl-4 font-display text-lg font-medium leading-snug text-[var(--ink)]">
                   &ldquo;{data.rationale}&rdquo;
                 </blockquote>
               </section>
@@ -283,6 +287,9 @@ export default function EvidencePanel({ programId, learnerId, onClose }: Props) 
       </div>
     </div>
   )
+
+  if (typeof document === "undefined") return null
+  return createPortal(overlay, document.body)
 }
 
 function BandReadout({ label, band, muted }: { label: string; band: Band | null; muted?: boolean }) {
@@ -302,7 +309,7 @@ function BandReadout({ label, band, muted }: { label: string; band: Band | null;
             muted ? "text-[var(--ink-faint)]" : ""
           }`}
         >
-          — none —
+          - none -
         </span>
       )}
     </div>
@@ -326,7 +333,7 @@ function UtteranceEvidenceBlock({
     <div className="flex flex-col gap-4 rounded-xl border border-[var(--line)] bg-[var(--paper-raised)] p-4">
       <div className="flex flex-col gap-2">
         <audio controls src={utterance.audioPath} className="w-full" data-testid="evidence-audio" />
-        <p className="font-display text-base italic leading-snug text-[var(--ink)]">
+        <p className="font-display text-base font-medium leading-snug text-[var(--ink)]">
           &ldquo;{utterance.text}&rdquo;
         </p>
       </div>
@@ -359,7 +366,7 @@ function UtteranceEvidenceBlock({
           <span className="font-mono text-[10px] text-[var(--ink-faint)]">
             {min === max
               ? `all raters agreed on this whole recording: ${max}/10`
-              : `range ${min}–${max} of 10, across the whole recording`}
+              : `range ${min}-${max} of 10, across the whole recording`}
           </span>
         </div>
       )}
@@ -397,7 +404,7 @@ function PhonemeStrip({ word }: { word: WordEvidence }) {
   return (
     <section className="animate-rise-in flex flex-col gap-3 rounded-xl border border-[var(--accent)] bg-[var(--accent-soft)] p-4">
       <div className="flex items-baseline justify-between">
-        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--accent)]">
+        <p className="font-display text-sm font-semibold text-[var(--accent)]">
           Phoneme agreement · &ldquo;{word.text}&rdquo;
         </p>
         <p className="font-mono text-[10px] text-[var(--ink-soft)]">5 experts, verdicts 0=wrong 1=accented 2=correct</p>
@@ -447,7 +454,7 @@ function PhonemeStrip({ word }: { word: WordEvidence }) {
                   {p.insertionsAfter.map((ins, k) => (
                     <span
                       key={k}
-                      title={`an expert heard an extra "${ins}" here — not in the reference`}
+                      title={`an expert heard an extra "${ins}" here - not in the reference`}
                       className="rounded-full border border-dashed border-[var(--accent)] px-1.5 py-0.5 font-mono text-[9px] italic text-[var(--accent)]"
                     >
                       +{ins}
@@ -461,7 +468,7 @@ function PhonemeStrip({ word }: { word: WordEvidence }) {
       </div>
 
       <p className="font-mono text-[10px] leading-relaxed text-[var(--ink-soft)]">
-        Dashed outline = experts disagreed on this phone (min–max span shown). Dashed pill = an expert heard a
+        Dashed outline = experts disagreed on this phone (min-max span shown). Dashed pill = an expert heard a
         sound that isn&apos;t in the reference transcript at all.
       </p>
     </section>

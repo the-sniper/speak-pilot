@@ -33,13 +33,13 @@ export default function WeekBrief({ n, theme, managerBrief, onTrack, slipped, at
           applied here too since the fix is a clean one-line addition). */}
       <section className="flex flex-col gap-2">
         <div className="flex items-center gap-2">
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--accent)]">
+          <p className="rounded-full bg-[var(--accent-soft)] px-3 py-1 font-display text-[12px] font-bold text-[var(--accent)]">
             Week {n} · {theme}
           </p>
           {managerBrief && <SimulatedTag />}
         </div>
         {managerBrief ? (
-          <p className="font-display text-2xl italic leading-snug text-[var(--ink)] sm:text-[28px]">
+          <p className="font-display text-2xl font-extrabold tracking-tight leading-snug text-[var(--ink)] sm:text-[1.75rem]">
             {managerBrief}
           </p>
         ) : (
@@ -63,12 +63,12 @@ export default function WeekBrief({ n, theme, managerBrief, onTrack, slipped, at
       {movement.length > 0 && (
         <section className="flex flex-col gap-3">
           <div className="flex items-center gap-2">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ink-faint)]">
+            <h2 className="font-display text-lg font-semibold tracking-tight text-[var(--ink)]">
               Score movement vs. last week
-            </p>
+            </h2>
             <SimulatedTag />
           </div>
-          <div className="flex flex-col divide-y divide-[var(--line)] overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--paper-raised)]">
+          <div className="flex flex-col divide-y divide-[var(--line)] overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--paper-raised)]">
             {movement.map(m => (
               <div key={m.learnerId} className="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5">
                 <span className="text-sm text-[var(--ink)]">{learnerLabel(m.learner)}</span>
@@ -90,13 +90,13 @@ export default function WeekBrief({ n, theme, managerBrief, onTrack, slipped, at
 
       {/* Curriculum adjustments, each with its reason. */}
       <section className="flex flex-col gap-3">
-        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ink-faint)]">
+        <h2 className="font-display text-lg font-semibold tracking-tight text-[var(--ink)]">
           Curriculum adjustments
-        </p>
+        </h2>
         {adjustments.length === 0 ? (
           <p className="text-sm text-[var(--ink-faint)]">No adjustments proposed this week.</p>
         ) : (
-          <div className="flex flex-col divide-y divide-[var(--line)] overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--paper-raised)]">
+          <div className="flex flex-col divide-y divide-[var(--line)] overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--paper-raised)]">
             {adjustments.map((a, i) => (
               <div key={i} className="flex flex-col gap-1 px-4 py-3.5">
                 <div className="flex items-center gap-2">
@@ -125,13 +125,13 @@ function Counter({
   tone: "neutral" | "warn"
 }) {
   return (
-    <div className="flex flex-col gap-1.5 rounded-xl border border-[var(--line)] bg-[var(--paper-raised)] p-4">
+    <div className="flex flex-col gap-1.5 rounded-2xl border border-[var(--line)] bg-[var(--paper-raised)] p-4">
       <span
         className={`font-mono text-3xl font-medium ${tone === "warn" && count > 0 ? "text-[var(--accent)]" : "text-[var(--ink)]"}`}
       >
         {count}
       </span>
-      <span className="font-mono text-[11px] uppercase tracking-wide text-[var(--ink-faint)]">{label}</span>
+      <span className="text-[12px] font-medium text-[var(--ink-faint)]">{label}</span>
       {count > 0 && (
         <p className="mt-1 line-clamp-2 text-[11px] leading-snug text-[var(--ink-soft)]">
           {learners.map(learnerLabel).join(", ")}

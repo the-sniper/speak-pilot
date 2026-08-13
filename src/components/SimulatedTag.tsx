@@ -1,11 +1,11 @@
 // Standing project constraint: the seeded dataset holds one real session per
 // speaker, no time dimension. Every week-over-week trajectory or
-// score-movement number is CONSTRUCTED — built by ordering real utterances
-// into a sequence of weeks, not measured over calendar time. The honesty
-// banner (src/components/HonestyBanner.tsx) discloses this globally, once,
-// at the top of the app; this tag repeats the disclosure locally, at every
-// individual point where that construction is being presented as if it were
-// a trend, so a manager skimming one number in isolation still sees it.
+// score-movement number is CONSTRUCTED - built by ordering real utterances
+// into a sequence of weeks, not measured over calendar time. DemoHonesty
+// (src/components/DemoHonesty.tsx) discloses this on the kickoff screen;
+// this tag repeats the disclosure locally, at every individual point where
+// that construction is being presented as if it were a trend, so a manager
+// skimming one number in isolation still sees it.
 export const SIMULATED_TOOLTIP =
   "Constructed, not measured over time: the dataset has one real session per speaker. " +
   "This figure is built by ordering real utterances into a week-over-week sequence."

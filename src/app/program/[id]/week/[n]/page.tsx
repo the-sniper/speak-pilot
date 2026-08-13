@@ -2,6 +2,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import AdvanceButton from "@/components/AdvanceButton"
 import DraftCard from "@/components/DraftCard"
+import PageHeader, { NavLink } from "@/components/PageHeader"
 import WeekBrief from "@/components/WeekBrief"
 import { getWeekBrief } from "@/lib/program-view"
 
@@ -20,18 +21,11 @@ export default async function WeekPage({ params }: RouteParams) {
   }
 
   return (
-    <main className="mx-auto w-full max-w-3xl px-6 py-10">
-      <div className="mb-8 flex items-center justify-between gap-4 border-b border-[var(--line)] pb-4">
-        <Link
-          href={`/program/${programId}`}
-          className="font-mono text-[11px] uppercase tracking-wide text-[var(--ink-faint)] transition-colors hover:text-[var(--accent)]"
-        >
-          ← Program overview
-        </Link>
-        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ink-faint)]">
-          Monday brief
-        </p>
-      </div>
+    <main className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6 sm:py-10">
+      <PageHeader
+        label="Monday brief"
+        actions={<NavLink href={`/program/${programId}`}>Program overview</NavLink>}
+      />
 
       {result.status === "not_advanced" ? (
         <NotAdvanced result={result} />
@@ -49,11 +43,11 @@ export default async function WeekPage({ params }: RouteParams) {
           />
 
           <section className="flex flex-col gap-3">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ink-faint)]">
-              Drafts · {result.data.drafts.length} awaiting review
-            </p>
+            <h2 className="font-display text-lg font-semibold tracking-tight text-[var(--ink)]">
+              Outreach drafts
+            </h2>
             {result.data.drafts.length === 0 ? (
-              <p className="text-sm text-[var(--ink-faint)]">No outreach was drafted for this week.</p>
+              <p className="text-sm text-[var(--ink-faint)]">No outreach drafts for this week.</p>
             ) : (
               <div className="flex flex-col gap-3">
                 {result.data.drafts.map(d => (
@@ -77,13 +71,13 @@ function NotAdvanced({
   const isPast = result.n <= result.currentWeek
 
   return (
-    <div className="flex flex-col gap-4 rounded-xl border border-dashed border-[var(--line)] bg-[var(--paper-raised)] p-6">
-      <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--accent)]">
+    <div className="flex flex-col gap-4 rounded-2xl border border-dashed border-[var(--line)] bg-[var(--paper-raised)] p-6">
+      <p className="font-display text-sm font-semibold text-[var(--accent)]">
         Week {result.n} · {result.theme}
       </p>
       <p className="text-base leading-relaxed text-[var(--ink)]">
         {isPast
-          ? "This week doesn't have a brief yet, even though later weeks might — that shouldn't happen. Try advancing from the program overview."
+          ? "This week doesn't have a brief yet, even though later weeks might - that shouldn't happen. Try advancing from the program overview."
           : "This week hasn't been advanced yet. There is no brief, no counters, and no drafts until it is."}
       </p>
       {isNext ? (
@@ -94,7 +88,7 @@ function NotAdvanced({
         />
       ) : (
         <p className="text-sm text-[var(--ink-faint)]">
-          Weeks advance in order — week {result.currentWeek + 1} needs to be advanced first.{" "}
+          Weeks advance in order - week {result.currentWeek + 1} needs to be advanced first.{" "}
           <Link href={`/program/${result.programId}`} className="text-[var(--accent)] underline decoration-dotted">
             Go to the program overview
           </Link>

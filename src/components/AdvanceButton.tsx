@@ -45,7 +45,7 @@ export default function AdvanceButton({ programId, targetWeek, redirectToWeek, l
         type="button"
         onClick={handleClick}
         disabled={busy}
-        className="rounded-full bg-[var(--accent)] px-5 py-2 text-sm font-medium text-[var(--accent-ink)] transition-transform hover:enabled:-translate-y-px hover:enabled:shadow-[0_6px_16px_-6px_rgba(184,69,31,0.55)] disabled:cursor-not-allowed disabled:opacity-40"
+        className="btn-primary px-5 py-2.5 text-sm disabled:opacity-40"
       >
         {busy ? "Advancing…" : (label ?? `Advance to week ${targetWeek}`)}
       </button>

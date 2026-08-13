@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import AdvanceButton from "@/components/AdvanceButton"
+import PageHeader, { NavLink } from "@/components/PageHeader"
 import SimulatedTag from "@/components/SimulatedTag"
 import { getProgramOverview, type ProgramWeekSummary, type TrajectoryPoint } from "@/lib/program-view"
 
@@ -13,71 +14,81 @@ export default async function ProgramPage({ params }: RouteParams) {
 
   const nextWeek = overview.currentWeek + 1
   const canAdvance = overview.currentWeek < overview.horizonWeeks
+  const progressPct = Math.round((overview.currentWeek / overview.horizonWeeks) * 100)
 
   return (
-    <main className="mx-auto w-full max-w-4xl px-6 py-10">
-      <div className="mb-10 flex flex-col gap-3 border-b border-[var(--line)] pb-6">
-        <div className="flex items-center justify-between gap-4">
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--accent)]">Program</p>
-          <div className="flex items-center gap-4">
-            <Link
-              href={`/program/${programId}/qbr`}
-              className="font-mono text-[11px] uppercase tracking-wide text-[var(--ink-faint)] transition-colors hover:text-[var(--accent)]"
-            >
-              Quarterly review →
-            </Link>
-            <Link
-              href="/"
-              className="font-mono text-[11px] uppercase tracking-wide text-[var(--ink-faint)] transition-colors hover:text-[var(--accent)]"
-            >
-              ← Home
-            </Link>
-          </div>
-        </div>
-        <p className="max-w-2xl text-lg leading-relaxed text-[var(--ink)]">{overview.brief}</p>
-        <p className="font-mono text-[12px] text-[var(--ink-soft)]">
-          Week {overview.currentWeek} of {overview.horizonWeeks} completed
+    <main className="mx-auto w-full max-w-[1400px] px-4 py-8 sm:px-6 sm:py-10">
+      <PageHeader
+        label="Program"
+        actions={
+          <>
+            <NavLink href={`/program/${programId}/qbr`}>Quarterly review</NavLink>
+            <NavLink href="/">Home</NavLink>
+          </>
+        }
+      >
+        <p className="max-w-3xl text-lg font-medium leading-relaxed text-[var(--ink)] sm:text-xl">
+          {overview.brief}
         </p>
+      </PageHeader>
+
+      <div className="mb-8 grid gap-3 sm:grid-cols-3">
+        <StatCard label="Week" value={`${overview.currentWeek} / ${overview.horizonWeeks}`} />
+        <StatCard label="Progress" value={`${progressPct}%`} />
+        <StatCard
+          label="Next action"
+          value={canAdvance ? `Advance week ${nextWeek}` : "Complete"}
+        />
       </div>
 
-      <div className="flex flex-col gap-10">
-        <TrajectorySection trajectory={overview.trajectory} />
+      <div className="grid gap-6 lg:grid-cols-12">
+        <div className="flex flex-col gap-6 lg:col-span-7">
+          <TrajectorySection trajectory={overview.trajectory} />
 
-        <section className="flex flex-col gap-3">
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ink-faint)]">
-            Weeks · {overview.horizonWeeks}-week horizon
-          </p>
-          <div className="grid gap-2 sm:grid-cols-2">
+          <section className="rounded-3xl border border-[var(--line)] bg-[var(--navy)] p-6 text-white">
+            <h2 className="font-display text-lg font-extrabold tracking-tight">Weekly advance</h2>
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/65">
+              Computes this week&apos;s facts from seeded session data, writes the Monday brief, and drafts any
+              outreach that needs a human&apos;s sign-off. In production this would run on a schedule.
+            </p>
+            <div className="mt-5">
+              {canAdvance ? (
+                <AdvanceButton
+                  programId={overview.id}
+                  targetWeek={nextWeek}
+                  redirectToWeek
+                  label={`Advance to week ${nextWeek}`}
+                />
+              ) : (
+                <p className="font-mono text-[12px] text-white/55">
+                  Program complete - every week through the {overview.horizonWeeks}-week horizon has been advanced.
+                </p>
+              )}
+            </div>
+          </section>
+        </div>
+
+        <section className="flex flex-col gap-3 lg:col-span-5">
+          <h2 className="font-display text-lg font-extrabold tracking-tight text-[var(--ink)]">
+            Weeks
+          </h2>
+          <div className="flex flex-col gap-2">
             {overview.weeks.map((w, i) => (
-              // Index, not w.n, is the React key: w.n is model-authored
-              // curriculum content (from the generation step, Task 9), not a
-              // guaranteed-unique identity — the mock provider can and does
-              // repeat it, same caveat ProgramStream's WeeksSection already
-              // documents for this exact field.
               <WeekTile key={i} programId={programId} week={w} />
             ))}
           </div>
         </section>
-
-        <section className="flex flex-col gap-3 rounded-xl border border-[var(--line)] bg-[var(--paper-raised)] p-5">
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ink-faint)]">
-            Weekly advance
-          </p>
-          <p className="max-w-xl text-sm text-[var(--ink-soft)]">
-            Computes this week&apos;s facts from seeded session data, writes the Monday brief, and drafts any
-            outreach that needs a human&apos;s sign-off before it goes anywhere. In production this would run on a
-            schedule; here it&apos;s a button so you can watch each week land.
-          </p>
-          {canAdvance ? (
-            <AdvanceButton programId={overview.id} targetWeek={nextWeek} redirectToWeek label={`Advance to week ${nextWeek}`} />
-          ) : (
-            <p className="font-mono text-[12px] text-[var(--ink-faint)]">
-              Program complete — every week through the {overview.horizonWeeks}-week horizon has been advanced.
-            </p>
-          )}
-        </section>
       </div>
     </main>
+  )
+}
+
+function StatCard({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-2xl border border-[var(--line)] bg-[var(--paper-raised)] px-4 py-3.5">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--ink-faint)]">{label}</p>
+      <p className="mt-1 font-display text-xl font-extrabold tracking-tight text-[var(--ink)]">{value}</p>
+    </div>
   )
 }
 
@@ -86,37 +97,42 @@ function WeekTile({ programId, week }: { programId: string; week: ProgramWeekSum
   return (
     <Link
       href={`/program/${programId}/week/${week.n}`}
-      className={`flex flex-col gap-1 rounded-xl border px-4 py-3 transition-colors ${
+      className={`flex items-center justify-between gap-3 rounded-2xl border px-4 py-3.5 transition-colors ${
         advanced
           ? "border-[var(--line)] bg-[var(--paper-raised)] hover:border-[var(--accent)]"
-          : "border-dashed border-[var(--line)] bg-transparent text-[var(--ink-faint)] hover:border-[var(--ink-faint)]"
+          : "border-dashed border-[var(--line)] bg-transparent hover:border-[var(--ink-faint)]"
       }`}
     >
-      <div className="flex items-center justify-between gap-2">
-        <span className="font-mono text-[11px] text-[var(--ink-faint)]">Week {week.n}</span>
-        <span
-          className={`font-mono text-[10px] uppercase tracking-wide ${advanced ? "text-[var(--accent)]" : "text-[var(--ink-faint)]"}`}
-        >
-          {advanced ? "brief ready" : "not advanced"}
-        </span>
+      <div className="min-w-0">
+        <p className="font-mono text-[11px] text-[var(--ink-faint)]">Week {week.n}</p>
+        <p className={`truncate text-sm font-semibold ${advanced ? "text-[var(--ink)]" : "text-[var(--ink-faint)]"}`}>
+          {week.theme}
+        </p>
       </div>
-      <span className={`text-sm ${advanced ? "text-[var(--ink)]" : "text-[var(--ink-faint)]"}`}>{week.theme}</span>
+      <span
+        className={`shrink-0 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide ${
+          advanced ? "bg-[var(--accent-soft)] text-[var(--accent)]" : "bg-[var(--paper)] text-[var(--ink-faint)]"
+        }`}
+      >
+        {advanced ? "Ready" : "Pending"}
+      </span>
     </Link>
   )
 }
 
 function TrajectorySection({ trajectory }: { trajectory: TrajectoryPoint[] }) {
   return (
-    <section className="flex flex-col gap-3">
-      <div className="flex items-center gap-2">
-        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ink-faint)]">
-          Cohort trajectory · mean sentence score
-        </p>
+    <section className="rounded-3xl border border-[var(--line)] bg-[var(--paper-raised)] p-5 sm:p-6">
+      <div className="mb-1 flex items-center gap-2">
+        <h2 className="font-display text-lg font-extrabold tracking-tight text-[var(--ink)]">
+          Cohort trajectory
+        </h2>
         <SimulatedTag />
       </div>
+      <p className="mb-4 text-sm text-[var(--ink-faint)]">Mean sentence score by week</p>
       {trajectory.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-[var(--line)] bg-[var(--paper-raised)] p-5 text-sm text-[var(--ink-faint)]">
-          No weeks advanced yet — advance week 1 below to start the trajectory.
+        <div className="rounded-2xl border border-dashed border-[var(--line)] bg-[var(--paper)] p-5 text-sm text-[var(--ink-faint)]">
+          No weeks advanced yet - advance week 1 to start the trajectory.
         </div>
       ) : (
         <TrajectoryChart trajectory={trajectory} />
@@ -149,13 +165,8 @@ function TrajectoryChart({ trajectory }: { trajectory: TrajectoryPoint[] }) {
   const linePath = trajectory.map((p, i) => `${i === 0 ? "M" : "L"} ${x(i).toFixed(1)} ${y(p.meanTotal).toFixed(1)}`).join(" ")
 
   return (
-    <div className="rounded-xl border border-[var(--line)] bg-[var(--paper-raised)] p-5">
+    <div>
       <div className="mb-3 flex flex-wrap items-baseline gap-x-4 gap-y-1.5">
-        {/* Each number gets its own tag, grouped in a nowrap span with the
-            number it covers — fix round 1 on Task 12 (minor finding): a
-            single trailing tag shared across both numbers could separate
-            from the current-value number when this row wraps on a narrow
-            viewport, leaving that number's honesty disclosure orphaned. */}
         <span className="flex items-baseline gap-1.5 whitespace-nowrap">
           <span className="font-mono text-2xl font-medium text-[var(--ink)]">{last.meanTotal.toFixed(1)}</span>
           <SimulatedTag />
@@ -169,9 +180,9 @@ function TrajectoryChart({ trajectory }: { trajectory: TrajectoryPoint[] }) {
         </span>
       </div>
       <svg viewBox={`0 0 ${width} ${height}`} className="w-full" role="img" aria-label="Cohort mean sentence score by week, constructed trajectory">
-        <path d={linePath} fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d={linePath} fill="none" stroke="var(--accent)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
         {trajectory.map((p, i) => (
-          <circle key={p.weekN} cx={x(i)} cy={y(p.meanTotal)} r="3.5" fill="var(--accent)" />
+          <circle key={p.weekN} cx={x(i)} cy={y(p.meanTotal)} r="4" fill="var(--accent)" />
         ))}
       </svg>
       <div className="mt-1 flex justify-between font-mono text-[10px] text-[var(--ink-faint)]">

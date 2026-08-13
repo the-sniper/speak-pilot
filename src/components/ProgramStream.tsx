@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { Fragment, useEffect, useReducer, useState, type ReactNode } from "react"
 import { z } from "zod"
 import { BANDS } from "@/lib/bands"
@@ -18,6 +19,15 @@ type Kickoff = z.infer<typeof CurriculumSchema.shape.kickoffMessage>
 
 const SECTION_ORDER = ["cohort", "placements", "weeks", "cadence", "successCriteria", "kickoff"] as const
 type SectionKey = (typeof SECTION_ORDER)[number]
+
+const SECTION_LABEL: Record<SectionKey, string> = {
+  cohort: "Cohort",
+  placements: "Placements",
+  weeks: "Curriculum",
+  cadence: "Cadence",
+  successCriteria: "Success",
+  kickoff: "Kickoff",
+}
 
 type State = {
   cohort?: Cohort
@@ -322,26 +332,62 @@ export default function ProgramStream({ brief, onProgramId }: Props) {
     return <ErrorCard message={state.error} onRetry={() => setAttempt(a => a + 1)} />
   }
 
-  return <div className="flex w-full flex-col gap-12">{renderSections(state, state.programId ?? null)}</div>
-}
+  const arrived = SECTION_ORDER.filter(key => state[key] !== undefined)
+  const nextPending = SECTION_ORDER.find(key => state[key] === undefined) ?? null
+  const programId = state.programId ?? null
+  const readyCount = arrived.length
+  const total = SECTION_ORDER.length
 
-// Renders exactly one real card per arrived section, in SECTION_ORDER, then
-// one skeleton for the first section that hasn't arrived yet, then stops —
-// matching the previous section's presence gating the next, without a
-// second hand-written copy of the six-section sequence to keep in sync with
-// SECTION_ORDER by hand. Reordering SECTION_ORDER reorders this for free;
-// adding a section to it is a compile error here until renderSectionCard's
-// switch grows a matching, exhaustively-checked case.
-function renderSections(state: State, programId: string | null): ReactNode[] {
-  const nodes: ReactNode[] = []
-  for (const key of SECTION_ORDER) {
-    if (state[key] === undefined) {
-      nodes.push(<SectionSkeleton key={key} kind={key} />)
-      break
-    }
-    nodes.push(<Fragment key={key}>{renderSectionCard(key, state, programId)}</Fragment>)
-  }
-  return nodes
+  return (
+    <div className="flex w-full flex-col gap-6">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[var(--line)] bg-[var(--paper-raised)] px-4 py-3">
+        <div className="min-w-0">
+          <p className="font-display text-[13px] font-bold text-[var(--ink)]">
+            {state.done
+              ? "Program ready"
+              : nextPending
+                ? `Writing ${SECTION_LABEL[nextPending].toLowerCase()}…`
+                : "Getting started…"}
+          </p>
+          <p className="text-[12px] text-[var(--ink-faint)]">
+            {readyCount} of {total} parts in
+          </p>
+        </div>
+        <div className="flex items-center gap-3">
+          <div
+            className="h-1.5 w-28 overflow-hidden rounded-full bg-[var(--line)] sm:w-40"
+            aria-hidden="true"
+          >
+            <div
+              className="h-full rounded-full bg-[var(--accent)] transition-[width] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+              style={{ width: `${(readyCount / total) * 100}%` }}
+            />
+          </div>
+          {state.done && programId ? (
+            <Link
+              href={`/program/${programId}`}
+              className="btn-primary px-4 py-2 text-sm"
+            >
+              See the full program
+            </Link>
+          ) : null}
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-8">
+        {arrived.map(key => (
+          <Fragment key={key}>
+            {renderSectionCard(key, state, programId)}
+          </Fragment>
+        ))}
+        {!state.done && nextPending ? (
+          <div className="rounded-3xl border border-[var(--line)] bg-[var(--paper-raised)] p-5 sm:p-7">
+            <SectionSkeleton kind={nextPending} />
+          </div>
+        ) : null}
+      </div>
+    </div>
+  )
 }
 
 function renderSectionCard(key: SectionKey, state: State, programId: string | null): ReactNode {
@@ -369,10 +415,12 @@ function renderSectionCard(key: SectionKey, state: State, programId: string | nu
   }
 }
 
-function SectionShell({ eyebrow, children }: { eyebrow: string; children: ReactNode }) {
+function SectionShell({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <section className="animate-rise-in flex flex-col gap-4">
-      <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--accent)]">{eyebrow}</p>
+    <section className="animate-rise-in flex flex-col gap-5">
+      <h2 className="font-display text-xl font-extrabold tracking-tight text-[var(--ink)] sm:text-2xl">
+        {title}
+      </h2>
       {children}
     </section>
   )
@@ -380,7 +428,7 @@ function SectionShell({ eyebrow, children }: { eyebrow: string; children: ReactN
 
 function DataChip({ label }: { label: string }) {
   return (
-    <span className="rounded-md border border-[var(--line)] bg-[var(--paper)] px-2.5 py-1 font-mono text-[11px] text-[var(--ink-soft)]">
+    <span className="rounded-full border border-[var(--line)] bg-[var(--paper)] px-2.5 py-1 font-mono text-[11px] text-[var(--ink-soft)]">
       {label}
     </span>
   )
@@ -388,8 +436,10 @@ function DataChip({ label }: { label: string }) {
 
 function CohortCard({ cohort }: { cohort: Cohort }) {
   return (
-    <SectionShell eyebrow="Cohort">
-      <p className="font-display text-2xl leading-snug text-[var(--ink)] sm:text-[28px]">{cohort.understanding}</p>
+    <SectionShell title="Cohort">
+      <p className="font-display text-2xl font-semibold tracking-tight leading-snug text-[var(--ink)] sm:text-[28px]">
+        {cohort.understanding}
+      </p>
       <div className="flex flex-wrap gap-2">
         <DataChip label={`${cohort.size} learners`} />
         <DataChip label={cohort.l1} />
@@ -411,7 +461,7 @@ function PlacementsSection({
   const selected = placements.find(p => p.learnerId === selectedId) ?? null
 
   return (
-    <SectionShell eyebrow={`Placements · ${placements.length} learners`}>
+    <SectionShell title={`Placements · ${placements.length} learners`}>
       <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
         <div className="flex items-center gap-1.5">
           {BANDS.map(b => (
@@ -454,7 +504,7 @@ function PlacementsSection({
       )}
 
       {selected && !programId && (
-        <div className="animate-rise-in rounded-xl border border-[var(--accent)] bg-[var(--accent-soft)] p-4">
+        <div className="animate-rise-in rounded-2xl border border-[var(--accent)] bg-[var(--accent-soft)] p-4">
           <div className="mb-1.5 flex items-center gap-2">
             <span className="font-mono text-xs text-[var(--ink)]">{selected.learnerId}</span>
             <span
@@ -485,7 +535,7 @@ function WeeksSection({ weeks }: { weeks: Week[] }) {
   const activeWeek = weeks[activeIdx] ?? null
 
   return (
-    <SectionShell eyebrow={`Curriculum · ${weeks.length} weeks`}>
+    <SectionShell title={`Curriculum · ${weeks.length} weeks`}>
       <div className="flex gap-2 overflow-x-auto pb-1">
         {weeks.map((w, i) => (
           <button
@@ -493,7 +543,7 @@ function WeeksSection({ weeks }: { weeks: Week[] }) {
             type="button"
             onClick={() => setSelectedIdx(i)}
             style={{ animationDelay: `${Math.min(i * 30, 300)}ms` }}
-            className={`animate-rise-in flex min-w-[132px] shrink-0 flex-col gap-1 rounded-xl border px-3.5 py-3 text-left transition-colors ${
+            className={`animate-rise-in flex min-w-[132px] shrink-0 flex-col gap-1 rounded-2xl border px-3.5 py-3 text-left transition-colors active:scale-[0.99] ${
               activeIdx === i
                 ? "border-[var(--accent)] bg-[var(--accent-soft)]"
                 : "border-[var(--line)] bg-[var(--paper-raised)] hover:border-[var(--ink-faint)]"
@@ -508,21 +558,22 @@ function WeeksSection({ weeks }: { weeks: Week[] }) {
       {activeWeek && (
         <div className="animate-rise-in grid gap-3 sm:grid-cols-2">
           {activeWeek.scenarios.map((s, i) => (
-            <div key={i} className="rounded-xl border border-[var(--line)] bg-[var(--paper-raised)] p-4">
-              <p className="font-display text-lg italic text-[var(--ink)]">{s.title}</p>
+            <div key={i} className="rounded-2xl border border-[var(--line)] bg-[var(--paper-raised)] p-4">
+              <p className="font-display text-lg font-semibold tracking-tight text-[var(--ink)]">{s.title}</p>
               <p className="mt-1 text-sm text-[var(--ink-soft)]">{s.situation}</p>
               <div className="mt-2.5 flex flex-wrap gap-1.5">
                 {s.targetPhrases.map((phrase, j) => (
                   <span
                     key={j}
-                    className="rounded border border-[var(--line)] px-1.5 py-0.5 text-[11px] text-[var(--ink-soft)]"
+                    className="rounded-md border border-[var(--line)] px-1.5 py-0.5 text-[11px] text-[var(--ink-soft)]"
                   >
                     {phrase}
                   </span>
                 ))}
               </div>
               <p className="mt-2.5 text-[12px] text-[var(--ink-faint)]">
-                <span className="font-mono uppercase tracking-wide">Success —</span> {s.successLooksLike}
+                <span className="font-medium text-[var(--ink-soft)]">Success: </span>
+                {s.successLooksLike}
               </p>
             </div>
           ))}
@@ -534,7 +585,7 @@ function WeeksSection({ weeks }: { weeks: Week[] }) {
 
 function CadenceCard({ cadence }: { cadence: Cadence }) {
   return (
-    <SectionShell eyebrow="Cadence">
+    <SectionShell title="Cadence">
       <p className="text-lg text-[var(--ink)]">
         <span className="font-mono text-xl font-medium text-[var(--accent)]">{cadence.sessionsPerWeek}</span>{" "}
         sessions a week,{" "}
@@ -547,8 +598,8 @@ function CadenceCard({ cadence }: { cadence: Cadence }) {
 
 function SuccessCriteriaCard({ items }: { items: Criterion[] }) {
   return (
-    <SectionShell eyebrow="Success criteria">
-      <div className="flex flex-col divide-y divide-[var(--line)] overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--paper-raised)]">
+    <SectionShell title="Success criteria">
+      <div className="flex flex-col divide-y divide-[var(--line)] overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--paper-raised)]">
         {items.map((c, i) => (
           <div key={i} className="animate-rise-in px-4 py-3.5" style={{ animationDelay: `${i * 60}ms` }}>
             <p className="text-base text-[var(--ink)]">{c.plainLanguage}</p>
@@ -563,7 +614,7 @@ function SuccessCriteriaCard({ items }: { items: Criterion[] }) {
 function KickoffCard({ kickoff }: { kickoff: Kickoff }) {
   const [lang, setLang] = useState<"en" | "ko">("en")
   return (
-    <SectionShell eyebrow="Kickoff message">
+    <SectionShell title="Kickoff message">
       <div className="flex items-center gap-1 self-start rounded-full border border-[var(--line)] bg-[var(--paper-raised)] p-1">
         {(["en", "ko"] as const).map(l => (
           <button
@@ -579,8 +630,8 @@ function KickoffCard({ kickoff }: { kickoff: Kickoff }) {
           </button>
         ))}
       </div>
-      <div className="rounded-xl border-l-4 border-[var(--accent)] bg-[var(--paper-raised)] p-5">
-        <p className="whitespace-pre-wrap font-display text-lg italic leading-relaxed text-[var(--ink)]">
+      <div className="rounded-2xl border border-[var(--line)] border-l-4 border-l-[var(--accent)] bg-[var(--paper-raised)] p-5">
+        <p className="whitespace-pre-wrap font-display text-lg leading-relaxed text-[var(--ink)]">
           {kickoff[lang]}
         </p>
       </div>
@@ -590,13 +641,13 @@ function KickoffCard({ kickoff }: { kickoff: Kickoff }) {
 
 function ErrorCard({ message, onRetry }: { message: string; onRetry: () => void }) {
   return (
-    <div className="animate-rise-in flex flex-col gap-3 rounded-xl border border-[var(--band-c1)] bg-[var(--accent-soft)] p-5">
-      <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--band-c1)]">Generation failed</p>
+    <div className="animate-rise-in flex flex-col gap-3 rounded-2xl border border-[var(--band-c1)] bg-[var(--accent-soft)] p-5">
+      <p className="font-display text-sm font-semibold text-[var(--band-c1)]">Generation failed</p>
       <p className="text-sm text-[var(--ink)]">{message}</p>
       <button
         type="button"
         onClick={onRetry}
-        className="self-start rounded-full bg-[var(--ink)] px-4 py-1.5 text-xs font-medium text-[var(--paper)]"
+        className="self-start rounded-full bg-[var(--ink)] px-4 py-1.5 text-xs font-medium text-[var(--paper-raised)] transition-transform active:scale-[0.98]"
       >
         Try again
       </button>

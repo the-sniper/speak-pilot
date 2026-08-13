@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import GenerateQbrButton from "@/components/GenerateQbrButton"
+import PageHeader, { NavLink } from "@/components/PageHeader"
 import PrintButton from "@/components/PrintButton"
 import SimulatedTag from "@/components/SimulatedTag"
 import { getQbrView, type QbrView } from "@/lib/program-view"
@@ -26,34 +27,29 @@ export default async function QbrPage({ params }: RouteParams) {
   if (result.status === "program_not_found") notFound()
 
   return (
-    <main className="mx-auto w-full max-w-3xl px-6 py-10 print:max-w-none print:px-0 print:py-0">
-      <div className="mb-8 flex items-center justify-between gap-4 border-b border-[var(--line)] pb-4 print:hidden">
-        <Link
-          href={`/program/${programId}`}
-          className="font-mono text-[11px] uppercase tracking-wide text-[var(--ink-faint)] transition-colors hover:text-[var(--accent)]"
-        >
-          ← Program overview
-        </Link>
-        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ink-faint)]">
-          Quarterly business review
-        </p>
+    <main className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6 sm:py-10 print:max-w-none print:px-0 print:py-0">
+      <div className="print:hidden">
+        <PageHeader
+          label="Quarterly review"
+          actions={<NavLink href={`/program/${programId}`}>Program overview</NavLink>}
+        />
       </div>
 
       {result.status === "no_weeks_completed" && (
         <Refusal
           programId={programId}
-          message="No weeks have been completed yet for this program — there is no quarter to review. Advance at least one week, then come back here."
+          message="No weeks have been completed yet for this program - there is no quarter to review. Advance at least one week, then come back here."
         />
       )}
 
       {result.status === "not_generated" && (
-        <div className="flex flex-col gap-4 rounded-xl border border-dashed border-[var(--line)] bg-[var(--paper-raised)] p-6">
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--accent)]">
+        <div className="flex flex-col gap-4 rounded-2xl border border-dashed border-[var(--line)] bg-[var(--paper-raised)] p-6">
+          <p className="font-display text-sm font-semibold text-[var(--accent)]">
             Week {result.currentWeek} of {result.horizonWeeks} completed
           </p>
           <p className="text-base leading-relaxed text-[var(--ink)]">
             No QBR has been generated for this program yet. Generating one computes this quarter&apos;s
-            facts from seeded session data and asks the model to write it up in one call — the result is
+            facts from seeded session data and asks the model to write it up in one call - the result is
             saved, so reloading this page won&apos;t regenerate it.
           </p>
           <GenerateQbrButton programId={programId} />
@@ -67,7 +63,7 @@ export default async function QbrPage({ params }: RouteParams) {
 
 function Refusal({ programId, message }: { programId: string; message: string }) {
   return (
-    <div className="flex flex-col gap-4 rounded-xl border border-dashed border-[var(--line)] bg-[var(--paper-raised)] p-6">
+    <div className="flex flex-col gap-4 rounded-2xl border border-dashed border-[var(--line)] bg-[var(--paper-raised)] p-6">
       <p className="text-base leading-relaxed text-[var(--ink)]">{message}</p>
       <Link href={`/program/${programId}`} className="text-sm text-[var(--accent)] underline decoration-dotted">
         Go to the program overview
@@ -84,7 +80,7 @@ function QbrReport({ view }: { view: QbrView }) {
           masthead so a page printed with no browser chrome still identifies
           itself. */}
       <header className="flex flex-col gap-2 border-b border-[var(--line)] pb-6 print:break-inside-avoid print:border-b-2 print:border-[var(--ink)] print:pb-3">
-        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--accent)]">
+        <p className="font-display text-sm font-semibold text-[var(--accent)]">
           Quarterly business review · Week {view.currentWeek} of {view.horizonWeeks}
         </p>
         <p className="max-w-2xl text-base leading-relaxed text-[var(--ink-soft)]">{view.brief}</p>
@@ -97,7 +93,7 @@ function QbrReport({ view }: { view: QbrView }) {
         <PrintButton />
         <GenerateQbrButton programId={view.programId} hasExisting />
         <p className="text-[11px] text-[var(--ink-faint)]">
-          &quot;Print / save as PDF&quot; opens your browser&apos;s print dialog — that dialog&apos;s own
+          &quot;Print / save as PDF&quot; opens your browser&apos;s print dialog - that dialog&apos;s own
           &quot;Save as PDF&quot; destination is the export path. There is no separate PDF generator.
         </p>
       </div>
@@ -116,7 +112,7 @@ function QbrReport({ view }: { view: QbrView }) {
           </p>
           <SimulatedTag />
         </div>
-        <h1 className="font-display text-2xl italic leading-snug text-[var(--ink)] sm:text-[28px]">
+        <h1 className="font-display text-2xl font-semibold tracking-tight leading-snug text-[var(--ink)] sm:text-[28px]">
           {view.headline}
         </h1>
         <p className="text-[15px] leading-relaxed text-[var(--ink-soft)]">{view.narrative}</p>
@@ -165,7 +161,7 @@ function QbrReport({ view }: { view: QbrView }) {
       </div>
 
       <section className="flex flex-col gap-2 rounded-xl border border-[var(--line)] bg-[var(--paper-raised)] p-5 print:break-inside-avoid">
-        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--accent)]">Recommendation</p>
+        <p className="font-display text-sm font-semibold text-[var(--accent)]">Recommendation</p>
         <p className="text-[15px] leading-relaxed text-[var(--ink)]">{view.recommendation}</p>
       </section>
 

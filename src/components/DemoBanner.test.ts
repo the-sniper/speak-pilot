@@ -1,7 +1,16 @@
 import { describe, it, expect } from "vitest"
-import { HONESTY_TEXT } from "./HonestyBanner"
+import { DEMO_BANNER_TEXT } from "./DemoBanner"
+import { HONESTY_TEXT } from "./DemoHonesty"
 
-describe("honesty banner copy", () => {
+describe("demo banner copy", () => {
+  it("attributes the demo to Speak", () => {
+    expect(DEMO_BANNER_TEXT).toContain("Made for Speak")
+    expect(DEMO_BANNER_TEXT).toContain("Speak Pilot")
+    expect(DEMO_BANNER_TEXT).toContain("concept demo")
+  })
+})
+
+describe("demo honesty disclosure", () => {
   it("names the corpus and its licence", () => {
     expect(HONESTY_TEXT).toContain("speechocean762")
     expect(HONESTY_TEXT).toContain("CC BY 4.0")

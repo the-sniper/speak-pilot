@@ -8,12 +8,7 @@ export type PlacementCardData = {
   evidenceUtteranceIds: string[]
 }
 
-// Text color per band background — matches the terracotta ramp in
-// globals.css. A1/A2/B1 sit on light fills (dark ink reads fine); B2/C1 are
-// dark enough that ink text would fail contrast, so those two use the light
-// accent ink instead (band-c1-ink is already defined for C1 in globals.css).
-// Exported so ProgramStream's band legend and selected-placement detail
-// strip use the exact same mapping instead of a second, driftable copy.
+// Text color per band — cool periwinkle → navy ramp matching Speak blues.
 export const BAND_FG: Record<Band, string> = {
   A1: "var(--ink)",
   A2: "var(--ink)",
@@ -45,9 +40,9 @@ export default function PlacementCard({ placement, selected, onSelect, style }: 
       aria-pressed={selected}
       onClick={() => onSelect?.(placement.learnerId)}
       style={style}
-      className={`animate-rise-in group flex flex-col gap-2 rounded-xl border bg-[var(--paper-raised)] p-3 text-left transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_20px_-12px_rgba(32,28,22,0.28)] ${
+      className={`animate-rise-in group flex flex-col gap-2 rounded-2xl border bg-[var(--paper)] p-3.5 text-left transition-[transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:shadow-[0_14px_28px_-18px_rgb(18_32_90/0.35)] active:scale-[0.99] ${
         selected
-          ? "border-[var(--accent)] shadow-[0_10px_20px_-12px_rgba(184,69,31,0.4)]"
+          ? "border-[var(--accent)] shadow-[0_14px_28px_-14px_rgb(28_73_255/0.45)]"
           : "border-[var(--line)]"
       }`}
     >
