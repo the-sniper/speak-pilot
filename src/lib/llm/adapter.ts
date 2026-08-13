@@ -38,8 +38,25 @@ export type RunRow = {
   createdAt: Date
 }
 
+// Server-only: which provider this process is actually configured to call,
+// resolved from LLM_PROVIDER exactly once, the same way resolveProvider()
+// below picks the live provider. Exported so server components can label
+// on-screen content by the ACTIVE provider without duplicating this mapping
+// or reading process.env.LLM_PROVIDER themselves — that var is never set in
+// the browser bundle, so a client component reading it directly would see
+// `undefined` and silently mislabel real output as mock (or vice versa).
+// This is a different question from evals.ts's SweepProvenance.isMock, which
+// describes a stored sweep's historical provider, not the current process.
+export function activeProviderName(): string {
+  return (process.env.LLM_PROVIDER ?? "mock").toLowerCase()
+}
+
+export function isMockProviderActive(): boolean {
+  return activeProviderName() === "mock"
+}
+
 function resolveProvider(): Provider {
-  const name = (process.env.LLM_PROVIDER ?? "mock").toLowerCase()
+  const name = activeProviderName()
   if (name === "openai") return openaiProvider
   if (name === "anthropic") return anthropicProvider
   return mockProvider

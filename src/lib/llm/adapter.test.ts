@@ -3,7 +3,14 @@ import fs from "fs"
 import os from "os"
 import path from "path"
 import { z } from "zod"
-import { callWithSchema, __setProviderForTest, __setRunSinkForTest, __setCacheDirForTest } from "./adapter"
+import {
+  callWithSchema,
+  __setProviderForTest,
+  __setRunSinkForTest,
+  __setCacheDirForTest,
+  activeProviderName,
+  isMockProviderActive,
+} from "./adapter"
 import { CacheMissInReplayError, cacheKey, writeCache } from "./cache"
 
 const S = z.object({ n: z.number() })
@@ -147,6 +154,57 @@ describe("callWithSchema — REPLAY with a stale cache entry (regression)", () =
       delete process.env.REPLAY
       __setCacheDirForTest(null)
       fs.rmSync(dir, { recursive: true, force: true })
+    }
+  })
+})
+
+// Pins the source MockModeBanner (src/components/MockModeBanner.tsx) reads
+// to decide whether the generation screen, program page, week page, and QBR
+// page show a mock-provider disclosure. This must track LLM_PROVIDER, not a
+// client-side env var (which is `undefined` in the browser) and not a
+// stored eval sweep's provider (a different, historical question answered
+// by evals.ts's SweepProvenance.isMock) — see MockModeBanner's doc comment.
+describe("activeProviderName / isMockProviderActive", () => {
+  it("resolves to mock when LLM_PROVIDER is unset, and reports isMock=true", () => {
+    const original = process.env.LLM_PROVIDER
+    delete process.env.LLM_PROVIDER
+    try {
+      expect(activeProviderName()).toBe("mock")
+      expect(isMockProviderActive()).toBe(true)
+    } finally {
+      if (original === undefined) delete process.env.LLM_PROVIDER
+      else process.env.LLM_PROVIDER = original
+    }
+  })
+
+  it("resolves to mock and isMock=true when LLM_PROVIDER=mock", () => {
+    const original = process.env.LLM_PROVIDER
+    process.env.LLM_PROVIDER = "mock"
+    try {
+      expect(activeProviderName()).toBe("mock")
+      expect(isMockProviderActive()).toBe(true)
+    } finally {
+      if (original === undefined) delete process.env.LLM_PROVIDER
+      else process.env.LLM_PROVIDER = original
+    }
+  })
+
+  it("reports isMock=false for openai and anthropic, the mirror-image bug being worse than under-labeling", () => {
+    const original = process.env.LLM_PROVIDER
+    try {
+      process.env.LLM_PROVIDER = "openai"
+      expect(activeProviderName()).toBe("openai")
+      expect(isMockProviderActive()).toBe(false)
+
+      process.env.LLM_PROVIDER = "anthropic"
+      expect(activeProviderName()).toBe("anthropic")
+      expect(isMockProviderActive()).toBe(false)
+
+      process.env.LLM_PROVIDER = "OpenAI"
+      expect(isMockProviderActive()).toBe(false)
+    } finally {
+      if (original === undefined) delete process.env.LLM_PROVIDER
+      else process.env.LLM_PROVIDER = original
     }
   })
 })
