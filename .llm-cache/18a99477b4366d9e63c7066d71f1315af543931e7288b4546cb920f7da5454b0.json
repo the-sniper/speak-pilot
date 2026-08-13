@@ -1,0 +1,474 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Foundation: Fast, accurate check-in flow",
+      "scenarios": [
+        {
+          "title": "Peak-hour check-in with a queue",
+          "situation": "Lobby is busy at 6:00 pm. You must greet, triage, and keep wait times acceptable while starting the check-in efficiently.",
+          "targetPhrases": [
+            "Welcome to [Hotel Name]. May I have your last name and a photo ID?",
+            "Thank you for your patience. Current wait time is about [X] minutes.",
+            "I can start your check-in while you wait. May I confirm your arrival date and room type?",
+            "Let me prepare your keys so we can finish quickly at the desk.",
+            "I’ll prioritize families/elderly—thank you for understanding."
+          ],
+          "successLooksLike": "Guest is greeted within 10 seconds, wait time is set, name and booking are confirmed accurately, and guest perceives momentum toward completion."
+        },
+        {
+          "title": "ID, payment, and deposit verification",
+          "situation": "At the desk, you must verify passport/ID, collect a credit card, and explain the refundable hold clearly.",
+          "targetPhrases": [
+            "May I please see your passport and the credit card used to book?",
+            "For incidentals, we place a refundable hold of TWD [amount]. It will be released by your bank within [X] days.",
+            "Would you like to use the same card or another form of payment?",
+            "I’ll keep your documents visible on the counter while I process this.",
+            "Here is the receipt showing the hold and today’s charges."
+          ],
+          "successLooksLike": "ID and payment are verified without errors, guest understands the hold, and there are no surprise charges later."
+        },
+        {
+          "title": "Name mismatch/third‑party booking at check-in",
+          "situation": "The booking name doesn’t match the guest’s ID (e.g., booked by a colleague or OTA). You must verify authorization and proceed smoothly.",
+          "targetPhrases": [
+            "I see the reservation is under a different name. May I confirm your relationship to the booker?",
+            "For your security, could you show the payment card or authorization email?",
+            "With your permission, I’ll contact the agency to confirm.",
+            "Thank you for your patience—once verified, we’ll complete your check-in right away.",
+            "While we wait, may I offer water and confirm your preferences?"
+          ],
+          "successLooksLike": "Authorization is confirmed per policy, tone stays friendly, and guest feels supported rather than suspected."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "Explain policies and set expectations without friction",
+      "scenarios": [
+        {
+          "title": "Clear explanation of deposits, taxes, and holds",
+          "situation": "Guest is unfamiliar with incidental holds and local taxes. Avoid jargon and prevent disputes later.",
+          "targetPhrases": [
+            "To keep things simple: tonight’s room is TWD [amount], tax is [X]%, and the refundable hold is TWD [amount].",
+            "You’ll only be charged for what you use; the hold is just a temporary block.",
+            "Would you like a printed summary or an email copy?",
+            "Do you have any questions about charges before we proceed?"
+          ],
+          "successLooksLike": "Guest can repeat back key amounts and timing; no surprise at checkout."
+        },
+        {
+          "title": "Policy clarity: breakfast, amenities, Wi‑Fi",
+          "situation": "Explain hours and access details so guests don’t return with complaints.",
+          "targetPhrases": [
+            "Breakfast is served from [time] to [time] on [floor].",
+            "Your Wi‑Fi username is your room number; the password is the family name in lowercase.",
+            "The gym and pool are open from [time]; please bring your key card.",
+            "If you need late checkout, let us know by [time] and we’ll check availability."
+          ],
+          "successLooksLike": "Guest leaves the desk knowing when/where/how for top amenities; fewer how-do-I? calls."
+        },
+        {
+          "title": "Late checkout request at check-in",
+          "situation": "Guest asks for late checkout during check-in. You must set policy and offer options.",
+          "targetPhrases": [
+            "Let me check availability for late checkout on your date.",
+            "Complimentary late checkout is until [time], subject to availability.",
+            "We can extend to [later time] for TWD [amount], or store your luggage for free.",
+            "What works best for your plans?"
+          ],
+          "successLooksLike": "Expectation is set, upsell is offered appropriately, and guest agrees to a clear plan noted in the system."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "Booking problems at the desk: solve, don’t stall",
+      "scenarios": [
+        {
+          "title": "Overbooking or room not ready at 3 pm",
+          "situation": "You must apologize, own the problem, present options, and compensate appropriately.",
+          "targetPhrases": [
+            "I’m sorry—we’re running behind on your room. I’ll take ownership and fix this now.",
+            "Option A: relax with a drink voucher while housekeeping finishes in [X] minutes.",
+            "Option B: we can move you to [upgrade/alternative] right away.",
+            "We’ll add [points/discount] for the inconvenience. Which do you prefer?"
+          ],
+          "successLooksLike": "Guest feels heard, receives two clear options, chooses one, and accepts a fair gesture."
+        },
+        {
+          "title": "Wrong room type assigned",
+          "situation": "The system shows a twin room but guest booked a king. You must correct without blame.",
+          "targetPhrases": [
+            "Thank you for flagging that. Let me check your original booking details.",
+            "I can move you to a king at no extra charge.",
+            "If you prefer to stay near the elevator, we have another option on [floor].",
+            "I’ll update your keys and note your preference for future stays."
+          ],
+          "successLooksLike": "Correct room delivered quickly; guest hears solution-first language, not excuses."
+        },
+        {
+          "title": "Third‑party OTA mismatch",
+          "situation": "OTA shows breakfast included; hotel system shows room‑only. Resolve without sending the guest away.",
+          "targetPhrases": [
+            "I see the difference. I’ll contact the OTA on your behalf while we offer breakfast today as a courtesy.",
+            "We’ll honor the listing for this stay and reconcile on the back end.",
+            "Thank you for booking with us—here’s your breakfast voucher for tomorrow."
+          ],
+          "successLooksLike": "Immediate courtesy solution provided; back-end follow-up started; no ping‑ponging the guest."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Payments and billing clarity",
+      "scenarios": [
+        {
+          "title": "Card declined at check-in",
+          "situation": "Payment fails on swipe. Stay calm, protect dignity, and present alternatives.",
+          "targetPhrases": [
+            "It looks like this card isn’t going through right now.",
+            "We can try the chip again, use contactless, or another card.",
+            "If you prefer, we can process via a payment link on your phone.",
+            "Take your time—let me know what’s easiest."
+          ],
+          "successLooksLike": "Alternate payment completed without embarrassment; queue impact minimized."
+        },
+        {
+          "title": "Prepaid vs. pay-at-hotel confusion",
+          "situation": "Guest insists they prepaid; system shows pay-at-hotel. Clarify and resolve.",
+          "targetPhrases": [
+            "Let’s review together. Do you have a confirmation showing payment taken?",
+            "Sometimes OTAs show the total but charge at check-in; I’ll verify now.",
+            "To avoid delay, we can proceed with a temporary hold and adjust once confirmed.",
+            "I’ll email you the final folio for peace of mind."
+          ],
+          "successLooksLike": "Guest agrees to a temporary plan and receives clear follow-up to correct any discrepancy."
+        },
+        {
+          "title": "Company or tax invoice request",
+          "situation": "Guest needs a company folio with tax ID. Capture details accurately.",
+          "targetPhrases": [
+            "Could you confirm the company name and uniform number (tax ID)?",
+            "Would you like the invoice in English, Chinese, or both?",
+            "I’ll attach it to your folio and email it to [address] by [time]."
+          ],
+          "successLooksLike": "Invoice is correct on first attempt; guest receives it when promised."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "theme": "Room readiness and special requests",
+      "scenarios": [
+        {
+          "title": "Early arrival—room not ready",
+          "situation": "Guest arrives at 10 am. Offer options and coordinate housekeeping.",
+          "targetPhrases": [
+            "Welcome! Your room will be ready around [time].",
+            "We can store your luggage and text you once it’s ready.",
+            "If you prefer immediate access, I can check an available upgrade for TWD [amount].",
+            "May I prioritize cleaning for your assigned room?"
+          ],
+          "successLooksLike": "Guest chooses between luggage storage, upgrade, or wait-with-perk; feels cared for."
+        },
+        {
+          "title": "Unavailable feature request",
+          "situation": "Guest wants a high floor with city view, but it’s sold out. Offer near equivalents.",
+          "targetPhrases": [
+            "I understand that view is important. Here are two close options: [quiet corner king] or [lower floor city peek].",
+            "If it helps, I can note this preference to prioritize next time.",
+            "Would you like me to set an alert if one frees up tonight?"
+          ],
+          "successLooksLike": "Guest accepts an alternative or a clear contingency plan without resentment."
+        },
+        {
+          "title": "Accessible room coordination",
+          "situation": "Guest requires accessibility features not noted in booking. Act with urgency and sensitivity.",
+          "targetPhrases": [
+            "Thank you for letting us know. I’ll secure a room with [features] right away.",
+            "Let me confirm: do you need a roll‑in shower, grab bars, or lowered switches?",
+            "We’ll have engineering check the setup before you head up."
+          ],
+          "successLooksLike": "Needs are confirmed respectfully; correct room provided promptly; guest safety and dignity protected."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "theme": "Complaint handling I: Room condition",
+      "scenarios": [
+        {
+          "title": "AC not cooling",
+          "situation": "Guest reports AC failure after check-in. You must coordinate engineering and offer options.",
+          "targetPhrases": [
+            "I’m sorry—that’s not the experience we want for you.",
+            "I’ll send engineering immediately and call you within 10 minutes.",
+            "If it’s not fixed in 15 minutes, we’ll move you to a new room or provide fans—your choice.",
+            "We’ll add [gesture] for the inconvenience."
+          ],
+          "successLooksLike": "Timeline is promised and met; guest chooses resolution; temperature complaint closed same hour."
+        },
+        {
+          "title": "Cleanliness issue on arrival",
+          "situation": "Guest finds hair in the bathroom. Respond with empathy and urgency.",
+          "targetPhrases": [
+            "I apologize for the oversight. I’ll arrange a reclean right away or move you to a fresh room—whichever you prefer.",
+            "Housekeeping is on the way in [X] minutes.",
+            "I will follow up personally once it’s done."
+          ],
+          "successLooksLike": "Sincere apology given; immediate action; guest ends call satisfied without escalation."
+        },
+        {
+          "title": "Odor or dampness complaint",
+          "situation": "Guest reports musty smell. Offer remedies and alternatives.",
+          "targetPhrases": [
+            "Thank you for telling us. We can ozone-treat the room, provide a dehumidifier, or move you.",
+            "What’s most comfortable for you tonight?",
+            "I’ll check back in 20 minutes to confirm it’s improved."
+          ],
+          "successLooksLike": "Guest selects an option; follow-up confirms resolution; incident logged."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "theme": "Complaint handling II: Noise and disturbances",
+      "scenarios": [
+        {
+          "title": "Late-night noise complaint",
+          "situation": "At 1 am, guest reports loud neighbors. Safety and swift resolution matter.",
+          "targetPhrases": [
+            "I’m sorry your rest is disturbed. I’ll alert security now.",
+            "Would you like a temporary room move while we resolve this?",
+            "We’ll add a quiet-room note for the remainder of your stay.",
+            "I’ll call back in 10 minutes to confirm it’s quiet."
+          ],
+          "successLooksLike": "Noise stops or guest is relocated within 15 minutes; follow-up call made; guest feels protected."
+        },
+        {
+          "title": "Renovation/elevator noise during day",
+          "situation": "Guest on a work call complains about drilling. Offer planning and alternatives.",
+          "targetPhrases": [
+            "I understand you need quiet for calls.",
+            "We can move you away from the work zone or provide a meeting room for [time].",
+            "Renovation hours are [time]; we’ll avoid scheduling housekeeping during your calls."
+          ],
+          "successLooksLike": "Practical alternative provided; guest’s schedule accommodated; complaint closed."
+        },
+        {
+          "title": "Public-area disturbance",
+          "situation": "Crowded lobby event creates guest frustration at check-in. De-escalate and offer a perk.",
+          "targetPhrases": [
+            "Thank you for your patience during the event.",
+            "To make this smoother, I’ll fast-track your keys and offer a drink voucher.",
+            "I can also arrange a quieter seating area while we finalize details."
+          ],
+          "successLooksLike": "Guest de-escalated; fast-tracked solution delivered; perk acknowledged as fair."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "theme": "Complaint handling III: Service delays and staff errors",
+      "scenarios": [
+        {
+          "title": "Guest transferred multiple times",
+          "situation": "Caller has been bounced between departments. Take ownership and solve.",
+          "targetPhrases": [
+            "I’m sorry you’ve had to repeat this. I’ll own it from here and stay on the line.",
+            "Here’s my plan: [steps]. May I confirm the outcome you want?",
+            "I will follow up within [X] minutes and share my direct extension."
+          ],
+          "successLooksLike": "Single-contact resolution; guest repeats issue once; clear timeline and follow-up delivered."
+        },
+        {
+          "title": "Wake-up call missed",
+          "situation": "Hotel error causes guest to be late. Apologize and offer remedy.",
+          "targetPhrases": [
+            "We missed the mark and I’m truly sorry.",
+            "Let me help update your transport and inform your contact if needed.",
+            "We’d like to offer [gesture] and set a redundant alarm for tomorrow."
+          ],
+          "successLooksLike": "Guest receives concrete help and a fair gesture; trust partially restored; incident documented."
+        },
+        {
+          "title": "Lost luggage assistance (not hotel fault)",
+          "situation": "Guest asks hotel to coordinate with airline. Offer empathy and limited but helpful support.",
+          "targetPhrases": [
+            "I can’t access the airline system directly, but I’ll help you file and track a claim.",
+            "Here’s a comfort kit and laundry credit for tonight.",
+            "We’ll notify you immediately if it’s delivered."
+          ],
+          "successLooksLike": "Guest feels supported despite limits; practical interim help provided; updates promised and met."
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "theme": "Complaint handling IV: Billing disputes",
+      "scenarios": [
+        {
+          "title": "Minibar charge dispute",
+          "situation": "Guest denies consuming minibar items. Stay neutral and solution-focused.",
+          "targetPhrases": [
+            "Thank you for letting us know. I’ll review the sensor log and housekeeping report.",
+            "While we investigate, I’ll remove the charge temporarily.",
+            "I’ll confirm the final outcome by [time/date]."
+          ],
+          "successLooksLike": "Charge is paused; guest receives investigation timeline; resolution communicated on time."
+        },
+        {
+          "title": "Parking or fee misunderstanding",
+          "situation": "Guest upset about a fee they didn’t expect. Clarify and consider goodwill adjustment.",
+          "targetPhrases": [
+            "I understand that wasn’t clear. Here’s how the fee works and where it’s shown.",
+            "Given the confusion, I can offer a one-time waiver or points.",
+            "What would you prefer?"
+          ],
+          "successLooksLike": "Guest accepts resolution; future confusion prevented by clearer signposting noted for follow-up."
+        },
+        {
+          "title": "Refund for unused nights",
+          "situation": "Guest checks out early due to plans change. Apply policy with empathy.",
+          "targetPhrases": [
+            "Let me review your rate terms. Some plans are nonrefundable, but I’ll see what flexibility we have.",
+            "We can issue a partial refund/credit of TWD [amount] or offer points for a future stay.",
+            "I’ll email confirmation today."
+          ],
+          "successLooksLike": "Outcome aligns with policy yet feels fair; documentation is clean and prompt."
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "theme": "Difficult guests and de-escalation under pressure",
+      "scenarios": [
+        {
+          "title": "Angry guest shouting at the desk",
+          "situation": "Maintain safety, lower the volume, and move to a private space while solving the issue.",
+          "targetPhrases": [
+            "I want to help. Let’s step over here where I can hear you clearly.",
+            "You shouldn’t have to deal with this—thank you for telling me.",
+            "Here’s what I can do right now: [option 1/option 2]."
+          ],
+          "successLooksLike": "Volume decreases; guest agrees to options; lobby atmosphere remains calm; staff safe."
+        },
+        {
+          "title": "Intoxicated guest at night",
+          "situation": "Guest is loud and unsafe. Use firm, respectful language and involve security.",
+          "targetPhrases": [
+            "For your safety, I can’t check you in right now. Let’s get you some water and a seat.",
+            "Our security team will assist to ensure everyone’s safety.",
+            "We can complete check-in once you’re ready or arrange alternate transport."
+          ],
+          "successLooksLike": "Risk reduced; clear boundaries set; incident managed without escalation to police when possible."
+        },
+        {
+          "title": "Bias or discriminatory remarks",
+          "situation": "Guest uses inappropriate language toward staff. Keep professional boundaries and redirect.",
+          "targetPhrases": [
+            "We’re here to help, and we treat everyone with respect. I can assist with your request, or we can pause this conversation.",
+            "Let’s focus on resolving your room concern now.",
+            "If this continues, I’ll need to end the interaction and involve a manager."
+          ],
+          "successLooksLike": "Boundaries enforced, service continues if respectful; staff supported and documented."
+        }
+      ]
+    },
+    {
+      "n": 11,
+      "theme": "Cross-cultural, VIP, and group check-ins",
+      "scenarios": [
+        {
+          "title": "VIP/elite member personalization",
+          "situation": "Recognize status, offer tailored benefits, and expedite check-in.",
+          "targetPhrases": [
+            "Welcome back, [Name]. Thank you for your loyalty.",
+            "We’ve pre-selected a quiet room on a higher floor. Would you prefer [option A] or [B]?",
+            "Your benefits today include [late checkout/upgrade/breakfast]."
+          ],
+          "successLooksLike": "VIP feels recognized; benefits explained succinctly; personalization noted for future stays."
+        },
+        {
+          "title": "Limited-English guest support",
+          "situation": "Guest struggles with English. Use simple language and visual aids/translation tools.",
+          "targetPhrases": [
+            "I will use simple English. One moment, I’ll show you on the map.",
+            "Please write your email here. Wi‑Fi: room number is username; family name is password.",
+            "I can translate with this app if you agree."
+          ],
+          "successLooksLike": "Understanding confirmed by teach-back; no critical info missed; dignity maintained."
+        },
+        {
+          "title": "Tour group or airline crew arrival",
+          "situation": "Manage fast group check-in with rooming list and key packets.",
+          "targetPhrases": [
+            "We’ll verify IDs and hand keys by group/flight number.",
+            "Breakfast times for the group are [time].",
+            "Any issues, please see me at this dedicated desk."
+          ],
+          "successLooksLike": "Group processed quickly; key errors minimal; information delivered once to the group efficiently."
+        }
+      ]
+    },
+    {
+      "n": 12,
+      "theme": "Follow-up, documentation, and handoffs",
+      "scenarios": [
+        {
+          "title": "Service recovery email or note",
+          "situation": "After resolving a complaint, send a concise message confirming actions and next steps.",
+          "targetPhrases": [
+            "Thank you again for your patience today.",
+            "As discussed, we [action] and added [gesture].",
+            "If anything feels unresolved, please contact me at [extension/email]."
+          ],
+          "successLooksLike": "Message is under 120 words, polite, specific, and sent within promised time."
+        },
+        {
+          "title": "Shift handover notes",
+          "situation": "Document incidents and promises for the next shift to avoid dropping the ball.",
+          "targetPhrases": [
+            "Guest in 1803: follow-up at 9 pm on AC fix; prefer room move if unresolved.",
+            "Promise logged: waive minibar pending investigation by 6 pm.",
+            "VIP arrival at 8 pm; prepare amenity and upgrade if available."
+          ],
+          "successLooksLike": "Handover is complete, actionable, and leads to seamless continuity for the guest."
+        },
+        {
+          "title": "Post-resolution call-back",
+          "situation": "Call the guest after a fix to confirm satisfaction and capture feedback.",
+          "targetPhrases": [
+            "I’m calling to make sure everything is now comfortable for you.",
+            "Is there anything else I can take care of before you rest?",
+            "Thank you for staying with us—your feedback helps us improve."
+          ],
+          "successLooksLike": "Guest confirms resolution; any remaining issues captured; CSAT request completed."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 2,
+    "minutesPerSession": 90
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Guests are checked in quickly and correctly, with IDs verified, deposits explained, and no confusion about policies.",
+      "measurableProxy": "Mystery-shop average check-in under 5 minutes; 90%+ of role-play check-ins meet QA rubric on verification and policy explanation."
+    },
+    {
+      "plainLanguage": "Front desk staff resolve common complaints on the first contact using clear apology-acknowledge-solve-follow-up language.",
+      "measurableProxy": "80%+ first-contact resolution in simulations; practice CSAT averages 4.5/5 or higher; escalation rate down 20% from baseline by Week 12."
+    },
+    {
+      "plainLanguage": "Staff confidently de-escalate tense situations and document cases so the next shift can continue seamlessly.",
+      "measurableProxy": "In three recorded role-plays, de-escalation checklist items hit 90%+; 100% of incidents have complete, actionable handover notes."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome to our 12-week Hotel Front Desk English program for Taipei. We will focus on two things that matter most at the desk: fast, accurate check-ins and calm, effective complaint handling. Each week you will practice role-plays based on real front-desk moments—peak-hour arrivals, payment issues, overbooking, room problems, noise complaints, billing disputes, and de-escalation. Expect lots of speaking, targeted phrases, quick feedback, and short writing tasks for follow-up emails and handover notes. Bring real examples from your shifts; we’ll adapt scenarios to your guests and policies. Sessions run 2 times per week for 90 minutes. By graduation, you should check guests in smoothly, prevent confusion before it starts, and resolve most complaints on the first contact with clear language and a professional tone.",
+    "ko": "대만 타이베이 호텔 프런트 데스크 직원을 위한 12주 영어 프로그램에 오신 것을 환영합니다. 이번 과정은 데스크에서 가장 중요한 두 가지—신속하고 정확한 체크인, 침착하고 효과적인 컴플레인 응대—에 집중합니다. 매주 실제 현장에서 자주 일어나는 상황으로 롤플레이를 합니다: 피크 시간 체크인, 결제 문제, 오버부킹, 객실 문제, 소음 민원, 청구 분쟁, 디에스컬레이션 등. 많이 말하고, 핵심 표현을 집중 훈련하며, 피드백을 빠르게 드립니다. 또한 후속 이메일과 인수인계 노트 같은 짧은 작성 과제도 포함됩니다. 근무 중 겪는 실제 사례를 가져오시면, 귀사 정책과 고객 유형에 맞게 시나리오를 조정합니다. 수업은 주 2회, 회당 90분으로 진행됩니다. 수료 시에는 체크인을 매끄럽게 처리하고, 오해를 사전에 막으며, 대부분의 컴플레인을 첫 접점에서 명확한 언어와 프로페셔널한 톤으로 해결할 수 있게 됩니다."
+  }
+}

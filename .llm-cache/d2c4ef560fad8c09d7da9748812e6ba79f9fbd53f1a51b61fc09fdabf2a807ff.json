@@ -1,0 +1,407 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Own the opening: set outcomes, agenda, and technical baseline",
+      "scenarios": [
+        {
+          "title": "Kickoff right after AE intro with 5 mixed stakeholders",
+          "situation": "You join a 45‑minute discovery/demo call after the Account Executive’s intro. You must align on outcomes and timebox the flow.",
+          "targetPhrases": [
+            "Before we dive in, can we align on the outcomes for today?",
+            "Here’s a quick agenda: A, B, C—does that work?",
+            "We’ll keep this to 45 minutes with 10 for Q&A.",
+            "If we run long, I’ll park items and follow up.",
+            "By the end of today, you’ll know whether this fits your use case."
+          ],
+          "successLooksLike": "SE states clear outcomes and agenda in under 2 minutes and gets verbal agreement from the group."
+        },
+        {
+          "title": "Elicit use case and success criteria fast",
+          "situation": "Prospect has multiple teams. You need to surface the highest‑value problem and define what “good” looks like.",
+          "targetPhrases": [
+            "What does success look like for you this quarter?",
+            "Which workflow is most painful today—and why?",
+            "If we solved X, what would the impact be?",
+            "Let’s write down 2–3 success criteria we can test in a POC."
+          ],
+          "successLooksLike": "SE narrows to one priority use case and restates 2–3 success criteria everyone agrees on."
+        },
+        {
+          "title": "Confirm technical baseline without derailing the call",
+          "situation": "Before the demo, you must check environment constraints and assumptions.",
+          "targetPhrases": [
+            "Which versions are you on today?",
+            "How are you authenticating users (SAML/OIDC)?",
+            "Any constraints I should know about—networking, data residency?",
+            "Let’s whiteboard your current flow for 60 seconds."
+          ],
+          "successLooksLike": "SE gathers key technical facts succinctly and keeps momentum to the demo."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "High‑impact discovery: quantify pain and align the demo path",
+      "scenarios": [
+        {
+          "title": "Map current workflow and friction points",
+          "situation": "User lead describes their process. You must uncover gaps without sounding accusatory.",
+          "targetPhrases": [
+            "Walk me through the last time this broke—step by step.",
+            "How often does that happen, and who’s affected?",
+            "What have you tried so far? What worked, what didn’t?",
+            "What’s the risk if this remains as‑is for another quarter?"
+          ],
+          "successLooksLike": "SE elicits concrete examples and frequency/impact, then summarizes back accurately."
+        },
+        {
+          "title": "Quantify value quickly",
+          "situation": "Finance sponsor asks for numbers. You must estimate value confidently with caveats.",
+          "targetPhrases": [
+            "If we assume X volume and Y minutes saved, that’s about Z hours/month.",
+            "Sanity check me on these inputs—reasonable?",
+            "Back‑of‑the‑envelope, that’s roughly $… in avoided cost.",
+            "We can validate these in a POC with real data."
+          ],
+          "successLooksLike": "SE presents a simple, defensible estimate and gets buy‑in on assumptions."
+        },
+        {
+          "title": "Align demo route to priorities",
+          "situation": "Time is short. You must choose the shortest path to value.",
+          "targetPhrases": [
+            "Given your priorities, I’ll skip setup and jump to outcome A.",
+            "We can go deep on B if time allows—sound good?",
+            "I’ll narrate trade‑offs as we go so you can decide."
+          ],
+          "successLooksLike": "SE adapts demo plan in real time and confirms it with the room."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "Demo narration under pressure: signposting and recovery",
+      "scenarios": [
+        {
+          "title": "Narrate a complex UI/API without losing non‑technical listeners",
+          "situation": "Mixed audience sees your live environment. You must keep it clear and paced.",
+          "targetPhrases": [
+            "I’ll start broad, then go deep on your use case.",
+            "On the left you’ll see…, this panel controls…, notice how…",
+            "Here’s the why: this reduces steps from X to Y.",
+            "Pause there—questions before I move on?",
+            "If you prefer code, here’s the equivalent API call."
+          ],
+          "successLooksLike": "SE keeps a logical flow, checks for understanding, and bridges UI to API cleanly."
+        },
+        {
+          "title": "Handle latency or demo breakage live",
+          "situation": "A screen lags and a request errors out during the call.",
+          "targetPhrases": [
+            "Thanks for bearing with me—looks like a connection lag.",
+            "I’ll switch to a safe dataset so you still see the outcome.",
+            "The error code suggests a config mismatch—here’s the fix.",
+            "Here’s what happened and how we avoid it in production."
+          ],
+          "successLooksLike": "SE stays calm, explains simply, uses a backup path, and restores confidence."
+        },
+        {
+          "title": "Use signposts and summaries to land the message",
+          "situation": "Stakeholders multitask. You must keep them oriented.",
+          "targetPhrases": [
+            "Three takeaways here are A, B, C.",
+            "We just saw how this shrinks time from X to Y.",
+            "If this maps to your process, we’re in good shape to POC."
+          ],
+          "successLooksLike": "SE repeats key points and ties them to the buyer’s outcomes."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Objection handling 1: budget, build‑vs‑buy, and security",
+      "scenarios": [
+        {
+          "title": "“We can build this in‑house.”",
+          "situation": "Engineering lead claims internal team can replicate your solution.",
+          "targetPhrases": [
+            "Totally fair—what’s on your build roadmap today?",
+            "Where would this live in your backlog and who owns it?",
+            "Let’s compare build effort vs. time‑to‑value and maintenance.",
+            "Here’s where customers found hidden costs."
+          ],
+          "successLooksLike": "SE acknowledges, explores, and reframes around total cost and speed without dismissiveness."
+        },
+        {
+          "title": "“It’s too expensive.”",
+          "situation": "Procurement challenges pricing before value is established.",
+          "targetPhrases": [
+            "Compared to what outcome or alternative?",
+            "Let’s anchor on the impact we sized earlier.",
+            "We can stage scope to hit budget while proving value.",
+            "Happy to share TCO and ROI assumptions for finance."
+          ],
+          "successLooksLike": "SE links price to outcomes, proposes scope options, and secures agreement to validate value."
+        },
+        {
+          "title": "Security and compliance deep concern",
+          "situation": "Security lead raises data privacy and certification requirements.",
+          "targetPhrases": [
+            "We’re SOC 2 Type II and ISO 27001—happy to share reports.",
+            "Data residency options are…, PII handling is…",
+            "We support SSO/SAML, SCIM, and role‑based access.",
+            "Let’s start a security review checklist and owners."
+          ],
+          "successLooksLike": "SE responds with clear evidence and proposes a concrete security review path."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "theme": "Technical deep dives: APIs, architecture, and integrations",
+      "scenarios": [
+        {
+          "title": "Walk an API endpoint end‑to‑end",
+          "situation": "Developer asks how to integrate quickly and safely.",
+          "targetPhrases": [
+            "Here’s the endpoint, required params, and example payload.",
+            "Requests are idempotent; here’s the retry logic.",
+            "Rate limits are X; webhooks back off with Y policy.",
+            "Let me show auth flow with OAuth 2.0."
+          ],
+          "successLooksLike": "SE explains API fundamentals clearly and tests with a real example or mock."
+        },
+        {
+          "title": "Explain architecture and data flow",
+          "situation": "Solutions architect wants to see how data moves and scales.",
+          "targetPhrases": [
+            "This is the control plane; this is the data plane.",
+            "Traffic flows from A to B; encryption in transit/at rest.",
+            "We scale horizontally; here’s failover at zone/region.",
+            "RTO is X, RPO is Y per our SLA."
+          ],
+          "successLooksLike": "SE diagrams a clear, accurate flow and answers scale/availability questions crisply."
+        },
+        {
+          "title": "Integrate with SSO and a third‑party system",
+          "situation": "Customer needs SSO plus an integration (e.g., Salesforce, Snowflake).",
+          "targetPhrases": [
+            "We support SAML/OIDC with Just‑In‑Time provisioning.",
+            "Here’s our SCIM profile for user sync.",
+            "For the connector, required scopes are…",
+            "We can test in sandbox and promote to prod with change control."
+          ],
+          "successLooksLike": "SE outlines steps, prerequisites, and risk controls with confidence."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "theme": "Objection handling 2: competitive, migration, and SLAs",
+      "scenarios": [
+        {
+          "title": "“Competitor X has feature Y.”",
+          "situation": "Prospect anchors on a competitor’s checklist item.",
+          "targetPhrases": [
+            "Where that feature matters most is…, and the trade‑off is…",
+            "We differ in how we deliver outcome A—here’s a side‑by‑side.",
+            "Can we test both in your workflow next week?"
+          ],
+          "successLooksLike": "SE acknowledges, contrasts on outcomes, and proposes a head‑to‑head test."
+        },
+        {
+          "title": "Plan a safe migration from incumbent",
+          "situation": "Customer worries about risk moving off an existing tool.",
+          "targetPhrases": [
+            "We can run side‑by‑side for N weeks.",
+            "Here are data export/import paths and validation checks.",
+            "Cutover plan with rollback is here—owners and dates."
+          ],
+          "successLooksLike": "SE presents a phased plan with validation and rollback that reduces perceived risk."
+        },
+        {
+          "title": "Set expectations on SLAs and support",
+          "situation": "Ops team asks about reliability and escalation.",
+          "targetPhrases": [
+            "Our uptime SLA is X% with credits at Y.",
+            "Priority‑1 response is within Z minutes, 24/7.",
+            "Here’s our escalation ladder and on‑call model."
+          ],
+          "successLooksLike": "SE states SLAs crisply and confirms they meet the customer’s risk profile."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "theme": "Make the business case: ROI, TCO, and KPIs",
+      "scenarios": [
+        {
+          "title": "Build a simple ROI model live",
+          "situation": "You need to validate value with a sponsor and finance.",
+          "targetPhrases": [
+            "Let’s lock inputs: volume, rates, time saved.",
+            "If we save Y minutes per task, that’s Z FTE‑hours/month.",
+            "We’ll stress‑test best/worst cases and midpoint.",
+            "Does finance accept these assumptions?"
+          ],
+          "successLooksLike": "SE co‑creates a small model and gets explicit agreement on inputs and ranges."
+        },
+        {
+          "title": "Compare TCO vs. status quo",
+          "situation": "Buyer wants to see cost drivers side‑by‑side.",
+          "targetPhrases": [
+            "One‑time vs. ongoing costs are here.",
+            "Hidden costs often show up as maintenance and support.",
+            "Here’s how usage‑based pricing scales with you."
+          ],
+          "successLooksLike": "SE lays out TCO transparently and ties it to earlier pain points."
+        },
+        {
+          "title": "Map technical wins to executive KPIs",
+          "situation": "You must translate features into outcomes the exec team cares about.",
+          "targetPhrases": [
+            "For you this means fewer incidents and faster cycle time.",
+            "This supports KPI A and initiative B this quarter.",
+            "We can measure success with these three metrics."
+          ],
+          "successLooksLike": "SE frames benefits in business terms and proposes concrete measurements."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "theme": "Multi‑stakeholder selling: exec summaries and simplification",
+      "scenarios": [
+        {
+          "title": "Deliver a 10‑minute executive demo",
+          "situation": "You have a VP join for only the first 10 minutes.",
+          "targetPhrases": [
+            "In one slide: the problem, our approach, expected impact.",
+            "The ask today is approval to POC starting next week.",
+            "If we’re aligned, next step is scheduling owners and dates."
+          ],
+          "successLooksLike": "SE lands a crisp story and secures a clear go/no‑go from the exec."
+        },
+        {
+          "title": "Explain a technical concept to non‑technical buyers",
+          "situation": "Legal and HR join; you must avoid jargon and analogize.",
+          "targetPhrases": [
+            "In plain terms, think of this like…",
+            "The important part for you is…, not the implementation detail.",
+            "Happy to dive deeper offline if helpful."
+          ],
+          "successLooksLike": "SE uses simple language and analogies; non‑technical listeners nod along and ask relevant questions."
+        },
+        {
+          "title": "Orchestrate a committee conversation",
+          "situation": "Four functions have different priorities.",
+          "targetPhrases": [
+            "Let’s capture each of your top concerns.",
+            "We’ll timebox to keep this moving and park items as needed.",
+            "I’ll summarize owners and decisions before we wrap."
+          ],
+          "successLooksLike": "SE balances voices, keeps time, and closes with decisions and owners."
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "theme": "POC scoping, risk management, and handoffs",
+      "scenarios": [
+        {
+          "title": "Scope a POC with clear exit criteria",
+          "situation": "You need to define what will be tested and how success is measured.",
+          "targetPhrases": [
+            "POC objective is…, success means we see X/Y/Z.",
+            "Test cases and data sets will be…",
+            "Decision date is…, with these sign‑offs."
+          ],
+          "successLooksLike": "SE documents objective, tests, data, owners, and decision date with buyer agreement."
+        },
+        {
+          "title": "Plan risks and mitigations",
+          "situation": "Stakeholders worry about unknowns.",
+          "targetPhrases": [
+            "Top risks we see are A/B/C; mitigations are…",
+            "We’ll meet twice weekly to unblock.",
+            "If risk C happens, rollback plan is…"
+          ],
+          "successLooksLike": "SE proactively lists risks with plans and establishes a cadence to unblock."
+        },
+        {
+          "title": "Handoff to delivery or customer success",
+          "situation": "POC is green‑lit; you must transition smoothly.",
+          "targetPhrases": [
+            "Here’s the context doc and decisions to date.",
+            "Meet your delivery lead—roles and contact paths.",
+            "We’ll stay engaged on technical questions; CS owns day‑to‑day."
+          ],
+          "successLooksLike": "SE ensures no context is lost and the customer knows exactly who does what next."
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "theme": "Close strong: recap, next steps, and de‑escalation",
+      "scenarios": [
+        {
+          "title": "Recap and secure commitments at the end of a call",
+          "situation": "You must convert interest into concrete next steps.",
+          "targetPhrases": [
+            "To recap, you said A/B/C matter most.",
+            "Next steps I propose are…, by when can we decide?",
+            "Who else needs to sign off so we can schedule?"
+          ],
+          "successLooksLike": "SE restates value, proposes dates/owners, and gets verbal commitment."
+        },
+        {
+          "title": "Write a crisp follow‑up email",
+          "situation": "You send a same‑day recap with decisions and actions.",
+          "targetPhrases": [
+            "Subject: Recap and Next Steps – [Meeting Name/Date]",
+            "Decisions:…, Open items:…, Owners:…, Due:…",
+            "Attaching the deck, POC one‑pager, and calculator."
+          ],
+          "successLooksLike": "SE sends a concise, accurate email that advances the deal and is easy to forward."
+        },
+        {
+          "title": "De‑escalate a frustrated prospect after multiple transfers",
+          "situation": "Prospect was routed three times before reaching you and is annoyed.",
+          "targetPhrases": [
+            "I hear your frustration—and I’m sorry for the runaround.",
+            "I’ll own this from here and get you an answer today.",
+            "Here’s the plan and the timeline—does that work?",
+            "I’ll follow up in writing right after this call."
+          ],
+          "successLooksLike": "SE validates emotion, takes ownership, and provides a clear plan that calms the situation."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 2,
+    "minutesPerSession": 90
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Open demos with clear outcomes and a confirmed agenda in under two minutes.",
+      "measurableProxy": "Role‑play rubric average ≥4/5 on “opening & alignment”; 80% of recorded sessions include an explicit outcome statement in the first 2 minutes."
+    },
+    {
+      "plainLanguage": "Narrate complex workflows clearly and recover smoothly from live demo issues.",
+      "measurableProxy": "In 5‑minute demo drills: 120–160 WPM, <8 fillers, and a pass on the recovery checklist (backup path + cause explained + confidence restored)."
+    },
+    {
+      "plainLanguage": "Handle top objections (price, build‑vs‑buy, security, competitor) without defensiveness and end with a confirming question.",
+      "measurableProxy": "Objection‑handling circuit score ≥4/5 across 4 scenarios; ≥70% include an evidence point and a confirming question."
+    },
+    {
+      "plainLanguage": "Write concise follow‑up emails that move deals forward with owners and dates.",
+      "measurableProxy": "Email samples score ≥4/5 on clarity, accuracy, and actionability; 90% include decisions, open items, owners, and dates."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome to Sales Engineering English: Technical Demos and Objection Handling. Over 10 weeks, we’ll practice the exact moments that win or lose deals—opening with clear outcomes, narrating complex workflows, handling tough objections, and closing with crisp next steps. Expect two 90‑minute sessions per week with role plays, drill circuits, and practical take‑aways (email templates, checklists, and one‑pagers). Come with a recent call or POC you can reference. We’ll keep it fast, real, and directly tied to your pipeline.",
+    "ko": "세일즈 엔지니어 영어 프로그램(기술 데모 및 이견 처리)에 오신 것을 환영합니다. 10주 동안 거래의 성패를 좌우하는 순간들을 집중 연습합니다: 명확한 목표로 시작하기, 복잡한 워크플로우를 쉽게 설명하기, 까다로운 이견에 전문적으로 대응하기, 명확한 다음 단계로 마무리하기. 주 2회 90분 세션으로 롤플레이, 드릴, 실전 템플릿(이메일, 체크리스트, 원페이지)까지 제공합니다. 최근 진행 중인 콜이나 POC 사례를 준비해 주세요. 빠르고 현실적이며, 실제 파이프라인에 바로 도움이 되도록 진행합니다."
+  }
+}

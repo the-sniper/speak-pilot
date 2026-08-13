@@ -1,0 +1,570 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Shared norms for clear English in a KR–JP merger",
+      "scenarios": [
+        {
+          "title": "Set working agreements for mixed-language meetings",
+          "situation": "Kick off the first joint squad meeting to agree on how we speak, capture notes, and make decisions in English.",
+          "targetPhrases": [
+            "To make sure we're aligned…",
+            "Let's speak slowly and avoid idioms.",
+            "One person at a time, please.",
+            "Can we agree on a single source of truth?",
+            "Let's timebox this to five minutes.",
+            "We'll capture owners and due dates."
+          ],
+          "successLooksLike": "The team agrees on simple-English norms, turn-taking, and note-taking with owners and dates; people repeat back key decisions before moving on."
+        },
+        {
+          "title": "Clarify ambiguous terms across KR/JP contexts",
+          "situation": "A term like \"service\" or \"campaign\" means different things to each company; align on a definition.",
+          "targetPhrases": [
+            "When you say X, do you mean…?",
+            "Let's define X as… for this project.",
+            "I might be misunderstanding—do you mean…?",
+            "Could you give a concrete example?",
+            "For avoidance of doubt…",
+            "Let's document this in the glossary."
+          ],
+          "successLooksLike": "People surface and resolve different interpretations quickly and record a shared definition without side debates."
+        },
+        {
+          "title": "Polite repair when you miss something",
+          "situation": "You didn't catch a colleague's point in English and need them to rephrase without slowing the meeting too much.",
+          "targetPhrases": [
+            "Sorry, could you say that again more slowly?",
+            "Could you rephrase that another way?",
+            "Let me repeat what I heard… is that right?",
+            "I lost the thread—what’s the key point?",
+            "Can we park details and capture an action?",
+            "Thanks—that’s clear now."
+          ],
+          "successLooksLike": "Requests for clarification are brief and respectful; restatements show correct understanding and the meeting stays on track."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "Concise status and async updates",
+      "scenarios": [
+        {
+          "title": "45‑second standup update",
+          "situation": "Daily standup with mixed KR/JP team where time is tight.",
+          "targetPhrases": [
+            "Yesterday I…",
+            "Today I…",
+            "I’m blocked by…",
+            "ETA is…",
+            "I need help from…",
+            "No updates since last check-in."
+          ],
+          "successLooksLike": "Updates are under 45 seconds, follow the format, and make blockers and asks explicit so others can help."
+        },
+        {
+          "title": "Clear Slack/Teams update across time zones",
+          "situation": "Posting an async update so the other office knows progress while you sleep.",
+          "targetPhrases": [
+            "Context: …",
+            "Update: …",
+            "Risk/Blocker: …",
+            "Decision needed by…",
+            "Owner: …",
+            "Next checkpoint: …"
+          ],
+          "successLooksLike": "Posts include context, owner, date, and a clear ask so no follow-up is needed to act."
+        },
+        {
+          "title": "Handover at end of day",
+          "situation": "Passing an in-progress task to a counterpart before sign-off.",
+          "targetPhrases": [
+            "Current status is…",
+            "Open questions are…",
+            "If X happens, do Y (fallback).",
+            "Please confirm receipt.",
+            "Linked docs are here…",
+            "I’ll pick it up at… (time/day)."
+          ],
+          "successLooksLike": "The receiver can continue work without pinging for basics; handovers get a quick acknowledgment."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "Backlog grooming and scope alignment",
+      "scenarios": [
+        {
+          "title": "Clarify acceptance criteria",
+          "situation": "User story is vague; align on what \"done\" looks like.",
+          "targetPhrases": [
+            "What problem are we solving?",
+            "Definition of Done is…",
+            "Out of scope: …",
+            "Success metric is…",
+            "Edge cases include…",
+            "Let’s add examples."
+          ],
+          "successLooksLike": "Stories have clear acceptance criteria with examples; no rework due to misinterpretation."
+        },
+        {
+          "title": "Split oversized stories",
+          "situation": "Break down a large item to deliver earlier value.",
+          "targetPhrases": [
+            "Can we slice by user flow?",
+            "Must‑have vs nice‑to‑have",
+            "What’s the minimum viable?",
+            "Let’s ship A first, then B.",
+            "Dependencies are…",
+            "This reduces risk because…"
+          ],
+          "successLooksLike": "Work is split into smaller increments with a rationale and identified dependencies."
+        },
+        {
+          "title": "Push back on scope creep",
+          "situation": "Stakeholder adds last-minute asks during grooming.",
+          "targetPhrases": [
+            "Given the deadline, adding X means dropping Y.",
+            "Impact vs effort suggests…",
+            "Can we defer this to next sprint?",
+            "What is the actual user impact?",
+            "I propose option 1/2…",
+            "Let’s decide by…"
+          ],
+          "successLooksLike": "Team negotiates scope trade-offs calmly and documents a clear decision and next steps."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Requirements and cross-functional handoffs",
+      "scenarios": [
+        {
+          "title": "Engineer requests spec clarification",
+          "situation": "Requirements are unclear; avoid building the wrong thing.",
+          "targetPhrases": [
+            "I need a concrete example of…",
+            "What are the non‑functional requirements?",
+            "Which edge cases matter most?",
+            "What does success look like in numbers?",
+            "Can we align on error handling?",
+            "Let’s capture this as an action item."
+          ],
+          "successLooksLike": "Questions lead to specific, testable requirements; decisions are captured with owners and dates."
+        },
+        {
+          "title": "Ops raises operational constraints",
+          "situation": "Operations flags risk with current plan (SLA, staffing, support hours).",
+          "targetPhrases": [
+            "From an operations view…",
+            "Our SLA requires…",
+            "Peak load/seasonality is…",
+            "Risk is… mitigation is…",
+            "We need a fallback plan.",
+            "Can we pilot with a subset?"
+          ],
+          "successLooksLike": "Plan is adjusted to respect ops constraints, with a clear mitigation and pilot where needed."
+        },
+        {
+          "title": "Actionable spec comment in English",
+          "situation": "Leave a clear comment on a spec or PR that moves work forward.",
+          "targetPhrases": [
+            "Suggestion: … because …",
+            "Could you clarify X by adding…",
+            "This conflicts with Y—recommend…",
+            "Blocking vs non‑blocking: …",
+            "Resolve if agreed.",
+            "Thanks—this helps us ship."
+          ],
+          "successLooksLike": "Comments are polite, specific, and lead to timely updates without back-and-forth."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "theme": "Roadmap and OKR alignment across companies",
+      "scenarios": [
+        {
+          "title": "Explain a trade‑off to leadership",
+          "situation": "Present options with impact, effort, and risk to get a decision.",
+          "targetPhrases": [
+            "Option A/B with pros/cons…",
+            "We can deliver X by Y if we drop Z.",
+            "Impact vs effort matrix suggests…",
+            "Risks and mitigations are…",
+            "We recommend…",
+            "Decision needed by…"
+          ],
+          "successLooksLike": "Leaders understand options quickly and make a decision in the meeting."
+        },
+        {
+          "title": "Negotiate priorities between KR/JP platforms",
+          "situation": "Two similar features compete for resources; seek a shared plan.",
+          "targetPhrases": [
+            "Where do our goals overlap?",
+            "Feature parity vs differentiation",
+            "What is the shared metric?",
+            "Can we align on a joint MVP?",
+            "Phased approach: …",
+            "Let’s review in two weeks."
+          ],
+          "successLooksLike": "Teams agree on a joint MVP and phased plan tied to a shared metric."
+        },
+        {
+          "title": "Set quarterly OKRs in simple English",
+          "situation": "Define outcomes everyone can understand and measure.",
+          "targetPhrases": [
+            "Objective: … (why it matters)",
+            "Key Result: increase/decrease… to…",
+            "Baseline is… target is…",
+            "Owner is…",
+            "Checkpoints: …",
+            "Dependencies: …"
+          ],
+          "successLooksLike": "OKRs are concise, measurable, and owned; both teams interpret them the same way."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "theme": "Incident response and blameless postmortems",
+      "scenarios": [
+        {
+          "title": "Join an incident bridge call",
+          "situation": "Cross-company outage; speak clearly under pressure.",
+          "targetPhrases": [
+            "Incident commander is…",
+            "Current impact is…",
+            "Mitigation/workaround is…",
+            "Next update at…",
+            "Owner for action is…",
+            "We need to roll back/disable feature flag."
+          ],
+          "successLooksLike": "Updates are crisp, roles are clear, and actions happen without repeating requests."
+        },
+        {
+          "title": "On‑call handover",
+          "situation": "Shift change across time zones during an incident.",
+          "targetPhrases": [
+            "Status at handover: …",
+            "Open actions and owners: …",
+            "Known risks: …",
+            "Escalation path is…",
+            "If X, then Y.",
+            "Acknowledged—taking ownership."
+          ],
+          "successLooksLike": "Incoming on-call takes over smoothly; no gaps or duplicated work."
+        },
+        {
+          "title": "Write a blameless postmortem summary",
+          "situation": "Summarize timeline, root cause, and follow-ups for a mixed audience.",
+          "targetPhrases": [
+            "Summary: …",
+            "Root cause was…",
+            "Contributing factors…",
+            "What went well/What to improve…",
+            "Action items with owners and dates…",
+            "We will prevent recurrence by…"
+          ],
+          "successLooksLike": "Summary is readable by non-specialists and leads to concrete prevention actions."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "theme": "Data migration and systems integration",
+      "scenarios": [
+        {
+          "title": "Map data fields and definitions",
+          "situation": "Align schema and field meaning to merge two systems.",
+          "targetPhrases": [
+            "Schema/field mapping for…",
+            "Source/target example: …",
+            "Null/empty handling is…",
+            "We need a sample payload.",
+            "Backward compatible with…",
+            "Let’s document assumptions."
+          ],
+          "successLooksLike": "Mappings are unambiguous with examples; edge cases and assumptions are documented."
+        },
+        {
+          "title": "Agree on API contract",
+          "situation": "Define request/response, errors, and versioning.",
+          "targetPhrases": [
+            "Contract: endpoint/method…",
+            "Idempotent? Yes/No—because…",
+            "Error codes and messages are…",
+            "Versioning strategy is…",
+            "Timeout/retry policy is…",
+            "Rate limits are…"
+          ],
+          "successLooksLike": "Both sides can implement independently; contract covers errors and performance."
+        },
+        {
+          "title": "Plan cutover and rollback",
+          "situation": "Choose a safe migration window and fallback.",
+          "targetPhrases": [
+            "Cutover window is…",
+            "Rollback window is…",
+            "Dry run results…",
+            "Canary plan: …",
+            "Go/No‑Go criteria: …",
+            "Communication plan is…"
+          ],
+          "successLooksLike": "Cutover plan has criteria, timing, and comms; rollback is tested and owned."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "theme": "QA, UAT, and release management",
+      "scenarios": [
+        {
+          "title": "Handoff test cases",
+          "situation": "QA shares what to test and how to reproduce issues.",
+          "targetPhrases": [
+            "Test scope is…",
+            "Repro steps: …",
+            "Expected vs actual…",
+            "Severity/Priority…",
+            "Blocked by…",
+            "Ready for sign‑off when…"
+          ],
+          "successLooksLike": "Test cases are executable without pinging QA; sign-off criteria are known."
+        },
+        {
+          "title": "Triage a blocker bug",
+          "situation": "Decide whether to fix now or defer.",
+          "targetPhrases": [
+            "Impact is… users affected…",
+            "Workaround exists/none.",
+            "Fix estimate is…",
+            "Risk of shipping with bug is…",
+            "Recommend fix now/defer.",
+            "Decision: go/no‑go."
+          ],
+          "successLooksLike": "Team agrees quickly on action with owner and timeline; release risk is explicit."
+        },
+        {
+          "title": "Coordinate a feature-flagged release",
+          "situation": "Staged rollout with monitoring and rollback.",
+          "targetPhrases": [
+            "Enable at X% of users.",
+            "Metrics to watch are…",
+            "Rollback if metric exceeds…",
+            "Release notes: …",
+            "Communication to support: …",
+            "Post-release check at…"
+          ],
+          "successLooksLike": "Rollout steps are clear; support and ops know what to expect and when."
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "theme": "Negotiation and conflict de‑escalation",
+      "scenarios": [
+        {
+          "title": "Resolve ownership confusion",
+          "situation": "Two teams think the other owns a task.",
+          "targetPhrases": [
+            "Who is the owner for…?",
+            "Let’s use RACI: Responsible/Accountable…",
+            "I propose ownership sits with… because…",
+            "Due date is…",
+            "Please confirm in writing.",
+            "Thank you—confirmed."
+          ],
+          "successLooksLike": "Ownership and dates are resolved in one conversation and recorded."
+        },
+        {
+          "title": "Reduce tension about rework",
+          "situation": "A team is frustrated about changing requirements.",
+          "targetPhrases": [
+            "I hear your concern about…",
+            "What’s the objective we share?",
+            "Here’s what we can keep vs change.",
+            "Let’s focus on impact, not blame.",
+            "Next concrete step is…",
+            "We’ll review in… days."
+          ],
+          "successLooksLike": "Tone stays professional; both sides agree on a path forward and follow-up time."
+        },
+        {
+          "title": "Push back on an unrealistic deadline",
+          "situation": "A leader requests delivery that risks quality.",
+          "targetPhrases": [
+            "With current scope, the earliest date is…",
+            "Risks are… mitigations are…",
+            "We can meet the date if we drop X.",
+            "What outcome matters most?",
+            "Proposed compromise is…",
+            "Please confirm the decision."
+          ],
+          "successLooksLike": "A realistic plan is accepted, or trade-offs are documented with leader approval."
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "theme": "Process harmonization and RACI",
+      "scenarios": [
+        {
+          "title": "Propose a combined workflow",
+          "situation": "Merge two different ways of working into one lightweight process.",
+          "targetPhrases": [
+            "Current state vs future state…",
+            "Pain points are…",
+            "Proposed workflow: …",
+            "RACI for each step…",
+            "SLA/Handoff points are…",
+            "Pilot and feedback plan…"
+          ],
+          "successLooksLike": "The proposal is understood and a small pilot with owners and dates is approved."
+        },
+        {
+          "title": "Document the single source of truth",
+          "situation": "Decide where roadmaps, specs, and decisions live.",
+          "targetPhrases": [
+            "Our single source of truth is…",
+            "Version control via…",
+            "Access/permissions are…",
+            "Decision log location is…",
+            "Archive old docs by…",
+            "Maintenance owner is…"
+          ],
+          "successLooksLike": "Everyone knows where to find current docs; old sources are deprecated with a date."
+        },
+        {
+          "title": "Agree on meeting hygiene",
+          "situation": "Standardize agendas, notes, and action tracking.",
+          "targetPhrases": [
+            "Agenda sent by…",
+            "Roles: host/timekeeper/note‑taker.",
+            "Decisions and actions at top.",
+            "Owner and due date for each action.",
+            "Parking lot for tangents.",
+            "Close with next steps."
+          ],
+          "successLooksLike": "Meetings start on time, end with clear actions, and notes are posted within 24 hours."
+        }
+      ]
+    },
+    {
+      "n": 11,
+      "theme": "Vendors and senior stakeholders",
+      "scenarios": [
+        {
+          "title": "Align with an external vendor in English",
+          "situation": "Kickoff call to clarify SOW and interfaces.",
+          "targetPhrases": [
+            "Per the Statement of Work…",
+            "Assumptions are…",
+            "Deliverables and dates are…",
+            "Change request process is…",
+            "Escalation path is…",
+            "Next checkpoint is…"
+          ],
+          "successLooksLike": "Vendor repeats back scope and dates correctly; change and escalation paths are written."
+        },
+        {
+          "title": "Leadership progress update",
+          "situation": "Brief update to execs who have 10 minutes.",
+          "targetPhrases": [
+            "In one slide: status/risks/asks.",
+            "Green/Yellow/Red because…",
+            "Top risks and mitigations…",
+            "We need a decision on…",
+            "Next milestone is…",
+            "Thank you—questions?"
+          ],
+          "successLooksLike": "Leaders quickly grasp status and make or confirm needed decisions in the meeting."
+        },
+        {
+          "title": "Respond to a scope change request",
+          "situation": "Stakeholder asks for new features mid‑sprint; provide an impact assessment.",
+          "targetPhrases": [
+            "Thanks for the request—here’s impact.",
+            "Cost/benefit summary is…",
+            "Options A/B with timelines…",
+            "Recommend…",
+            "Effect on existing commitments…",
+            "Please approve option by…"
+          ],
+          "successLooksLike": "Stakeholder chooses an option based on a clear, concise impact summary."
+        }
+      ]
+    },
+    {
+      "n": 12,
+      "theme": "Documentation, knowledge transfer, and closeout",
+      "scenarios": [
+        {
+          "title": "Write a clear how‑to",
+          "situation": "Create a step‑by‑step guide another team can follow without help.",
+          "targetPhrases": [
+            "In this guide you will…",
+            "Prerequisites are…",
+            "Step‑by‑step: …",
+            "Known issues and workarounds…",
+            "Owner for updates is…",
+            "Last reviewed on…"
+          ],
+          "successLooksLike": "Another team completes the task using only the guide; no clarifying pings needed."
+        },
+        {
+          "title": "Record a crisp handover",
+          "situation": "End-of-project handover of systems/processes.",
+          "targetPhrases": [
+            "Scope of handover is…",
+            "Contacts and escalation…",
+            "Runbooks and locations…",
+            "Open risks and mitigations…",
+            "Next review date…",
+            "Please acknowledge receipt."
+          ],
+          "successLooksLike": "Receiving team confirms they have what they need and acknowledges ownership."
+        },
+        {
+          "title": "Run a brief retrospective",
+          "situation": "Close the program with a focus on improving cross-company English collaboration.",
+          "targetPhrases": [
+            "What went well/What to improve/Actions.",
+            "Let’s keep/stop/start…",
+            "One concrete behavior change is…",
+            "Owner and due date…",
+            "We’ll check progress on…",
+            "Thank you for the collaboration."
+          ],
+          "successLooksLike": "Team agrees on 2–3 concrete behavior changes and assigns owners and dates. "
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 2,
+    "minutesPerSession": 90
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Status updates and meeting talk are short, structured, and easy to act on.",
+      "measurableProxy": "In a sample of 50 standup updates, 80% follow the Yesterday/Today/Blockers format and stay under 45 seconds."
+    },
+    {
+      "plainLanguage": "Meeting notes consistently show clear owners and dates so work moves without chasing people.",
+      "measurableProxy": "Across four weeks, 90% of meeting notes reviewed include action items with an owner and due date."
+    },
+    {
+      "plainLanguage": "Cross-team handoffs don’t require extra back-and-forth to understand what to do next.",
+      "measurableProxy": "Compared to month 1, reduce clarification messages on handovers by 30% in months 2–3 (sample Slack/Teams threads)."
+    },
+    {
+      "plainLanguage": "Leadership and vendor updates lead to decisions in the room (not after many emails).",
+      "measurableProxy": "In a sample of 10 leader/vendor updates, at least 8 end with a documented decision and next step within the meeting or same day."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome to the KR–JP Integration English Program. Over the next 12 weeks, we’ll use practical scenarios from our merger work—incident bridges, backlog grooming, roadmap alignment, vendor calls, and more—to build a simple, shared way of working in English. Our norms: speak slowly, avoid idioms, confirm understanding, and always capture owners and dates. It’s okay to ask \"Can you say that another way?\" or \"Let me repeat what I heard.\" Clarity beats perfect grammar. In mixed groups, default to English so everyone can participate. Thank you for committing to clear, respectful communication.",
+    "ko": "KR–JP 통합 영어 프로그램에 오신 것을 환영합니다. 앞으로 12주 동안, 사고 대응 브리지 콜, 백로그 그루밍, 로드맵 정렬, 벤더 미팅 등 실제 통합 업무 상황을 사용하여 영어로 단순하고 공유 가능한 업무 방식을 만들겠습니다. 우리의 기본 규칙: 천천히 말하기, 관용구 피하기, 이해 확인하기, 그리고 반드시 담당자와 마감일을 기록하기. \"다른 표현으로 말씀해 주실 수 있나요?\", \"제가 이해한 바를 다시 말해 보겠습니다\"라고 말해도 괜찮습니다. 완벽한 문법보다 명확함이 더 중요합니다. 혼합 팀에서는 모두가 참여할 수 있도록 기본적으로 영어를 사용합시다. 명확하고 존중하는 소통에 함께해 주셔서 감사합니다."
+  }
+}

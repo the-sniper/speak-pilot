@@ -1,0 +1,392 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Taking control after a bad transfer",
+      "scenarios": [
+        {
+          "title": "Rebuilding trust after three transfers",
+          "situation": "You receive a caller who has been transferred multiple times and is openly frustrated. You must take ownership, acknowledge the poor experience, and reset the call.",
+          "targetPhrases": [
+            "I can hear how frustrating this has been.",
+            "My name is __, and I’m owning this for you.",
+            "We won’t do another blind transfer.",
+            "Here’s what I’m going to do in the next 2 minutes.",
+            "I’ll stay with you while we sort this out."
+          ],
+          "successLooksLike": "Agent quickly acknowledges the issue, states ownership, and sets a short agenda within 60–90 seconds. Caller calms down and agrees to proceed."
+        },
+        {
+          "title": "Fast context check without making the caller repeat",
+          "situation": "You skim past notes and summarize what’s happened so far to avoid asking the customer to repeat everything.",
+          "targetPhrases": [
+            "Let me summarize what I see so you don’t have to repeat it.",
+            "If I miss anything, please correct me.",
+            "So far I see tickets A, B, and C and two failed callbacks."
+          ],
+          "successLooksLike": "Agent gives a concise, accurate recap and confirms details, saving time and preventing rehashing."
+        },
+        {
+          "title": "Security verification with an impatient VIP",
+          "situation": "A VIP customer wants immediate help but you must complete verification.",
+          "targetPhrases": [
+            "Before we continue, I need to complete a quick security check.",
+            "This takes less than 30 seconds.",
+            "Thank you for bearing with me—now we can move fast."
+          ],
+          "successLooksLike": "Agent performs verification swiftly with clear rationale; customer cooperates without feeling blocked."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "De‑escalation and emotional control",
+      "scenarios": [
+        {
+          "title": "Allowing a vent, then steering to facts",
+          "situation": "Caller is upset and speaks quickly. You need to listen, validate, and then transition to problem-solving.",
+          "targetPhrases": [
+            "I’m listening—please tell me what happened from your perspective.",
+            "Thank you for explaining. Here’s what I can do right now.",
+            "Let’s tackle this step by step."
+          ],
+          "successLooksLike": "Agent uses one clear empathy statement, avoids interrupting, and guides the call into a structured approach within 2 minutes."
+        },
+        {
+          "title": "Interruptions and raised voices",
+          "situation": "Customer talks over you. You must respectfully regain control without escalating further.",
+          "targetPhrases": [
+            "I want to get this right for you; may I finish this one sentence?",
+            "I’ll give you the floor right after this detail.",
+            "Here’s why this step matters."
+          ],
+          "successLooksLike": "Agent calmly sets turn-taking, keeps voice steady, and completes key explanation without argument."
+        },
+        {
+          "title": "Threat to cancel or churn",
+          "situation": "Customer threatens to cancel unless issue is fixed today. You must acknowledge impact and present realistic options.",
+          "targetPhrases": [
+            "I understand why you’d consider leaving.",
+            "Here’s what I can commit to today.",
+            "If this isn’t resolved by X, I will escalate to Y and update you by Z."
+          ],
+          "successLooksLike": "Agent doesn’t overpromise; offers concrete path and timelines that the customer accepts."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "Driving technical diagnosis live",
+      "scenarios": [
+        {
+          "title": "From symptoms to a clear problem statement",
+          "situation": "Transform a vague complaint into a testable problem statement and first hypothesis.",
+          "targetPhrases": [
+            "To confirm, the problem is happening when ____.",
+            "Let’s try a quick check to isolate the cause.",
+            "If we see X, that points to Y."
+          ],
+          "successLooksLike": "Agent formulates a concise problem statement and proposes the next diagnostic step that the customer agrees to try."
+        },
+        {
+          "title": "Collecting logs/screens while keeping rapport",
+          "situation": "You need logs or screenshots that take time. Keep the customer engaged and informed.",
+          "targetPhrases": [
+            "This next step takes about two minutes—here’s why it helps.",
+            "While that runs, may I confirm a couple details?",
+            "I’ll tell you exactly what I’m looking for in the results."
+          ],
+          "successLooksLike": "Agent sets expectation on time, fills silence productively, and obtains usable artifacts."
+        },
+        {
+          "title": "Live workaround to restore service",
+          "situation": "Production impact is high. You must provide a safe workaround before a full fix.",
+          "targetPhrases": [
+            "Our priority is to restore functionality now.",
+            "Here’s a safe temporary workaround.",
+            "We’ll document risks and roll back if needed."
+          ],
+          "successLooksLike": "Agent explains risk clearly, confirms customer consent, and restores partial service quickly."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Policy, boundaries, and saying no without friction",
+      "scenarios": [
+        {
+          "title": "Declining a request that violates policy",
+          "situation": "Customer asks for something you cannot approve (e.g., extended refunds).",
+          "targetPhrases": [
+            "I want to help, and here’s what I can authorize today.",
+            "What I can’t do is __ because __.",
+            "The best alternative is __."
+          ],
+          "successLooksLike": "Agent explains policy in plain language, offers a viable alternative, and keeps the relationship intact."
+        },
+        {
+          "title": "Requesting a policy exception",
+          "situation": "You believe an exception is warranted. You must set expectations and secure internal approval.",
+          "targetPhrases": [
+            "Given the impact, I’m requesting an exception.",
+            "Approval typically takes __ hours.",
+            "I’ll update you by __ even if there’s no news."
+          ],
+          "successLooksLike": "Agent outlines steps and timeline, avoids promising outcomes, and gets customer buy‑in."
+        },
+        {
+          "title": "Explaining SLAs without legalese",
+          "situation": "Customer misinterprets SLA terms. You must clarify what’s covered and timelines.",
+          "targetPhrases": [
+            "Our SLA measures __, which means __.",
+            "You’re eligible for __ under section __, and here’s how that applies today.",
+            "Let me translate that into next steps."
+          ],
+          "successLooksLike": "Agent clarifies SLA in simple terms and links it to concrete next actions."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "theme": "Incident and outage communications",
+      "scenarios": [
+        {
+          "title": "Known incident—owning the message",
+          "situation": "There’s an active incident impacting the customer. You need to acknowledge it, provide status, and avoid speculation.",
+          "targetPhrases": [
+            "We have a known incident affecting __.",
+            "Current impact is __; the workaround is __.",
+            "Next update at __. I’ll reach out proactively."
+          ],
+          "successLooksLike": "Agent conveys accurate scope, offers a workaround, and sets an update cadence the customer agrees to."
+        },
+        {
+          "title": "Bridge call with engineering",
+          "situation": "You host a live bridge with engineers and the customer, translating technical updates into customer language.",
+          "targetPhrases": [
+            "Let me put that in plain terms.",
+            "Action items for the next 15 minutes are __.",
+            "I’ll keep minutes and share them after the call."
+          ],
+          "successLooksLike": "Agent keeps the call organized, translates jargon, and records clear actions and owners."
+        },
+        {
+          "title": "When there is no ETA",
+          "situation": "You must communicate uncertainty credibly without sounding evasive.",
+          "targetPhrases": [
+            "I don’t have an ETA yet, and here’s why.",
+            "What I can commit to is __.",
+            "We’ll reassess at __ based on __."
+          ],
+          "successLooksLike": "Agent states unknowns transparently, commits to process updates, and maintains trust."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "theme": "Negotiating credits and make‑goods",
+      "scenarios": [
+        {
+          "title": "SLA credit discussion under pressure",
+          "situation": "Customer demands maximum credit. You must calculate eligibility and negotiate calmly.",
+          "targetPhrases": [
+            "Based on our records, downtime was __, which maps to __ credit.",
+            "Today I can authorize __.",
+            "If we learn more, I’ll adjust accordingly."
+          ],
+          "successLooksLike": "Agent states data clearly, offers authorized credit, and gains acceptance without escalations."
+        },
+        {
+          "title": "Goodwill gesture without admitting fault",
+          "situation": "Service impact is disputed. Offer a gesture while protecting the company position.",
+          "targetPhrases": [
+            "Without assigning fault, I can offer __ as a goodwill gesture.",
+            "Our goal is to make you whole.",
+            "Here’s how we’ll document this today."
+          ],
+          "successLooksLike": "Agent uses careful language, provides a reasonable gesture, and the customer agrees to close the issue."
+        },
+        {
+          "title": "Multi‑invoice or multi‑region billing",
+          "situation": "Customer’s account spans regions/invoices; you must explain how credits apply.",
+          "targetPhrases": [
+            "Credit will appear on invoice __ by __.",
+            "For region __, the rate and policy differ: __.",
+            "I’ll send a line‑item breakdown."
+          ],
+          "successLooksLike": "Agent explains application timing and scope; customer confirms understanding."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "theme": "Handoffs, collaboration, and warm transfers",
+      "scenarios": [
+        {
+          "title": "Warm transfer with full context",
+          "situation": "You need to bring a specialist on the line without losing momentum or repeating information.",
+          "targetPhrases": [
+            "I’ll stay with you while I bring in our specialist.",
+            "Here’s a 20‑second summary for context: __.",
+            "Specialist, the customer’s priority is __."
+          ],
+          "successLooksLike": "Agent delivers a crisp summary, keeps ownership, and ensures the customer feels supported."
+        },
+        {
+          "title": "Coordinating internal and external actions",
+          "situation": "Multiple teams must act in parallel. You need clear owners and timelines.",
+          "targetPhrases": [
+            "Let’s assign owners and times: __ owns __ by __.",
+            "If we’re blocked, we’ll escalate via __.",
+            "I’ll send the action tracker after this call."
+          ],
+          "successLooksLike": "Agent secures explicit commitments and confirms them with all parties."
+        },
+        {
+          "title": "Preventing the ‘ping‑pong’ effect",
+          "situation": "Customer is bounced between teams. You must stop the loop and create a single thread of ownership.",
+          "targetPhrases": [
+            "I’ll be your single point of contact.",
+            "All updates will come from me in this ticket.",
+            "You won’t need to repeat yourself again."
+          ],
+          "successLooksLike": "Agent centralizes communication and the customer experiences a single, coherent process."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "theme": "Clarity across accents and fast speech",
+      "scenarios": [
+        {
+          "title": "Polite clarification without stigma",
+          "situation": "You struggle to understand a fast or accented speaker. You must clarify efficiently and respectfully.",
+          "targetPhrases": [
+            "Could you please say that once more, a bit slower?",
+            "Let me repeat that back to confirm.",
+            "Did you mean X as in X‑ray, or Y as in Yankee?"
+          ],
+          "successLooksLike": "Agent requests repetition or spelling gracefully, confirms understanding, and keeps pace."
+        },
+        {
+          "title": "Numbers, domains, and codes",
+          "situation": "You must capture serials, URLs, or IPs accurately over the phone.",
+          "targetPhrases": [
+            "Reading that back: one‑nine‑two dot one‑six‑eight dot __.",
+            "Let me confirm the domain: __ dot com.",
+            "I’ll spell it using NATO: __."
+          ],
+          "successLooksLike": "Agent confirms critical strings accurately using standard phonetics."
+        },
+        {
+          "title": "When silence is needed",
+          "situation": "You need 30–60 seconds of silence to read logs or notes without losing the customer.",
+          "targetPhrases": [
+            "I’m going to read for about 45 seconds to be precise.",
+            "I’ll narrate what I’m checking as I go.",
+            "Thanks for holding—here’s what I found."
+          ],
+          "successLooksLike": "Agent sets expectation for silence, narrates briefly, and returns with a clear update."
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "theme": "Crystal‑clear closures and written follow‑ups",
+      "scenarios": [
+        {
+          "title": "Summarizing decisions and next steps",
+          "situation": "Before ending the call, you must restate outcomes, owners, and timelines.",
+          "targetPhrases": [
+            "Before we wrap, here’s what we decided: __.",
+            "You can expect my update by __ via __.",
+            "If anything slips, I’ll tell you before the deadline."
+          ],
+          "successLooksLike": "Agent ends with a concise, accurate summary; the customer confirms and thanks the agent."
+        },
+        {
+          "title": "High‑impact recap email",
+          "situation": "Send a same‑day summary email that aligns with what was said and prevents rework.",
+          "targetPhrases": [
+            "Subject: Summary and next steps for __.",
+            "Here’s the timeline we agreed on: __.",
+            "Reply to this thread if anything looks off."
+          ],
+          "successLooksLike": "Email matches the call, has clear bullets and owners, and receives no corrective replies."
+        },
+        {
+          "title": "Ticket notes for internal handover",
+          "situation": "Write internal notes that let the next agent succeed without contacting the customer again.",
+          "targetPhrases": [
+            "Customer context: __. Technical context: __.",
+            "What’s been tried: __ and results: __.",
+            "Next action if customer calls back: __."
+          ],
+          "successLooksLike": "Notes are searchable, structured, and allow any agent to pick up seamlessly."
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "theme": "Capstone: end‑to‑end escalations",
+      "scenarios": [
+        {
+          "title": "Complex outage + credit + policy exception",
+          "situation": "Customer experiences an outage during a maintenance window and demands full credit plus a policy exception.",
+          "targetPhrases": [
+            "Here’s what’s in scope and out of scope.",
+            "I can authorize __ today; I’ll seek approval for __ by __.",
+            "You’ll get updates at __ with owner __."
+          ],
+          "successLooksLike": "Agent manages scope, sets realistic commitments, and secures customer agreement to the plan."
+        },
+        {
+          "title": "Executive‑level bridge with competing priorities",
+          "situation": "Multiple executives join; they want speed, clarity, and accountability.",
+          "targetPhrases": [
+            "Let’s agree on the immediate objective for the next 15 minutes.",
+            "Current status in one sentence: __.",
+            "Owners: __ by __; risks: __."
+          ],
+          "successLooksLike": "Agent leads with structure, keeps control, and earns executive confidence."
+        },
+        {
+          "title": "Recovery and relationship repair",
+          "situation": "Issue is resolved but trust is damaged. You must close with a forward‑looking plan.",
+          "targetPhrases": [
+            "Here’s what we’re doing to prevent this next time.",
+            "I’ll schedule a follow‑up to share the root cause summary.",
+            "Thank you for staying with us—your feedback shaped our fix."
+          ],
+          "successLooksLike": "Agent articulates prevention steps, invites feedback, and leaves the customer feeling heard and retained."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 3,
+    "minutesPerSession": 60
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Agents keep control of tough escalation calls and calm angry customers without needing a supervisor to jump in.",
+      "measurableProxy": "20% reduction in supervisor interventions on English escalation calls by Week 8 compared to baseline."
+    },
+    {
+      "plainLanguage": "Agents set clear next steps and timelines that customers accept and remember.",
+      "measurableProxy": "30% increase in calls with documented next steps acknowledged by the customer (QA scorecards) by Week 6."
+    },
+    {
+      "plainLanguage": "Agents explain incidents, SLAs, and credits in simple language the customer understands.",
+      "measurableProxy": "15% improvement in QA rubric items for clarity and policy explanation; 10% drop in repeat contacts on the same issue by Week 10."
+    },
+    {
+      "plainLanguage": "Agents write precise follow‑ups that match what was promised on the call.",
+      "measurableProxy": "25% increase in same‑day recap emails that require no corrections (peer review) by Week 9."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome to our 10‑week Escalation Call Mastery program. You’ll practice real support scenarios—angry transfers, outage updates, policy exceptions, credits, and executive bridge calls. Expect three 60‑minute sessions per week with roleplays, coaching, and targeted phrases you can use the same day. Our goal: you stay in control, set clear next steps, and turn tough calls into trust.",
+    "ko": "10주간 에스컬레이션 콜 마스터리 프로그램에 오신 것을 환영합니다. 실제 지원 상황—여러 번의 잘못된 연결 후 진정시키기, 장애 공지, 정책 예외, 크레딧 협상, 임원 브리지 콜—을 집중적으로 연습합니다. 주 3회 60분 세션으로 롤플레이, 코칭, 바로 써먹을 수 있는 핵심 표현을 훈련합니다. 목표는 간단합니다: 통화를 주도하고, 다음 단계를 명확히 제시하며, 어려운 전화를 신뢰로 전환하는 것입니다."
+  }
+}

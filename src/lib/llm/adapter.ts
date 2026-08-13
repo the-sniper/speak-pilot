@@ -219,7 +219,54 @@ export async function callWithSchema<T>(args: {
 
   for (let attempt = 1; attempt <= totalAttempts; attempt++) {
     const started = Date.now()
-    const { raw, cost } = await provider.call({ system, prompt: currentPrompt, toolName, jsonSchema, model })
+
+    // Transport errors (a network failure inside fetch — DNS, timeout,
+    // connection reset — as opposed to a schema-validation failure on a
+    // response that DID arrive) throw out of provider.call() itself, before
+    // it ever returns {raw, cost}. Found by Task 15's real OpenAI sweep:
+    // brief 9 failed with "fetch failed," and the row count for that sweep's
+    // `ok = false` rows was ZERO despite a real, observed failure — the
+    // exception propagated straight out of this function without ever
+    // reaching either runSink call below, so the failure log the Evals tab
+    // renders was blind to it, and this function's every-attempt-is-logged
+    // guarantee was silently false for exactly this failure class. Caught
+    // here and logged the same as a schema-validation failure (ok: false,
+    // the transport error's message in `error`, `output: null` since no
+    // response body exists to show) so a network failure is exactly as
+    // visible in agent_runs and the failure log as any other kind — then
+    // either retried (same prompt — this wasn't a validation problem, so
+    // there's nothing to feed back) or, on the last attempt, rethrown so the
+    // caller's behavior (run-evals.ts's per-brief try/catch, the generate
+    // route's error SSE frame) is unchanged.
+    let callResult: { raw: unknown; cost: number | null }
+    try {
+      callResult = await provider.call({ system, prompt: currentPrompt, toolName, jsonSchema, model })
+    } catch (err) {
+      const latencyMs = Date.now() - started
+      const transportErrorText = err instanceof Error ? err.message : String(err)
+      lastErrorText = transportErrorText
+      await runSink({
+        id: crypto.randomUUID(),
+        kind,
+        provider: provider.name,
+        model,
+        briefLabel: briefLabel ?? null,
+        sweepId: sweepId ?? null,
+        input: { system, prompt: currentPrompt, toolName },
+        output: null,
+        ok: false,
+        attempt,
+        error: transportErrorText,
+        cacheHit: false,
+        latencyMs,
+        cost: null,
+        createdAt: new Date(),
+      })
+      if (attempt < totalAttempts) continue
+      throw new Error(`callWithSchema: ${toolName} failed with a transport error after ${totalAttempts} attempt(s): ${transportErrorText}`)
+    }
+
+    const { raw, cost } = callResult
     const latencyMs = Date.now() - started
     const parsed = schema.safeParse(raw)
     const runId = crypto.randomUUID()

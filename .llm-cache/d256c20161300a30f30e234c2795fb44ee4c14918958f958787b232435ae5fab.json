@@ -1,0 +1,395 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Discovery to Demo: Set the technical agenda and earn the right to show the product",
+      "scenarios": [
+        {
+          "title": "Kick off after AE handoff",
+          "situation": "You join a discovery call after the AE's intro. You must clarify goals, time, and who needs what before showing anything.",
+          "targetPhrases": [
+            "Thanks for the context—before we dive in, can we confirm the goal for today?",
+            "We have 30 minutes; does that still work for everyone?",
+            "Who else will be evaluating this from the security/ops side?",
+            "By the end, I'd like to show X and agree on next steps.",
+            "Does that align with what you need to see?",
+            "If we run out of time, I'll prioritize your top two use cases."
+          ],
+          "successLooksLike": "Rep opens with a clear purpose, confirms time and stakeholders, and aligns on outcomes before sharing screen."
+        },
+        {
+          "title": "Map pains to a tight demo agenda",
+          "situation": "The prospect shared pains. You need to translate them into a short, relevant demo flow.",
+          "targetPhrases": [
+            "From what I heard, you're trying to…",
+            "Let me map our demo to your workflow: first…, then…",
+            "We can skip features that aren't relevant today.",
+            "Stop me anytime; I’ll adjust.",
+            "I'll show the happy path and one edge case."
+          ],
+          "successLooksLike": "Rep states the customer problem in plain language and proposes a 2–3 step demo that the buyer agrees to."
+        },
+        {
+          "title": "Timeboxing and signposting",
+          "situation": "You must control pace and expectations during the meeting.",
+          "targetPhrases": [
+            "I'll start with a 3-minute overview, then a live demo, then Q&A.",
+            "Quick checkpoint: is this pace okay?",
+            "I’m parking that question and will return to it.",
+            "If we have 5 minutes left, I’ll move to next steps."
+          ],
+          "successLooksLike": "Rep keeps the meeting on track, signals transitions, and protects time for next steps."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "Storyboarding a crisp technical demo",
+      "scenarios": [
+        {
+          "title": "Frame the problem and promised outcome",
+          "situation": "Open the demo with a one-minute story that connects their problem to your solution and the business outcome.",
+          "targetPhrases": [
+            "In 60 seconds: you said X; we solve it by Y; the outcome is Z.",
+            "Success looks like reducing time from A to B.",
+            "Here's the before/after.",
+            "I’ll show exactly how we get there."
+          ],
+          "successLooksLike": "Rep delivers a concise setup that makes the demo’s relevance obvious to both technical and business listeners."
+        },
+        {
+          "title": "Navigate environments smoothly",
+          "situation": "Switching between sandbox, admin, and end-user views without losing the audience.",
+          "targetPhrases": [
+            "I'll use our sandbox to avoid touching production.",
+            "I’m switching tabs to the admin view.",
+            "If auth times out, I’ll refresh via SSO.",
+            "I’ll zoom in so you can see the key fields."
+          ],
+          "successLooksLike": "Rep moves through environments confidently, narrates what’s happening, and avoids dead air."
+        },
+        {
+          "title": "Clear transitions and labeling",
+          "situation": "Avoid getting lost in UI; use narration to make each step meaningful.",
+          "targetPhrases": [
+            "Now that we've connected the data source, let's…",
+            "What you’re seeing here is…",
+            "Let me pause and check: is this relevant?",
+            "Next, I’ll highlight the part that saves your team time."
+          ],
+          "successLooksLike": "Rep labels each step, checks relevance, and ties features to value."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "Live troubleshooting without losing trust",
+      "scenarios": [
+        {
+          "title": "Handle SSO/login hiccups",
+          "situation": "Your SSO session fails during the demo. You need to recover fast and keep confidence.",
+          "targetPhrases": [
+            "Looks like SSO didn't complete; here's the quick fix.",
+            "If we can't resolve in 60 seconds, I'll move on and send a clip.",
+            "We support SAML and OIDC; IT can configure this in under 30 minutes."
+          ],
+          "successLooksLike": "Rep acknowledges the issue calmly, applies a fix or pivots within a minute, and maintains control of the meeting."
+        },
+        {
+          "title": "Data not loading or wrong dataset",
+          "situation": "The expected dataset isn’t appearing. You must isolate the issue and continue.",
+          "targetPhrases": [
+            "I’m not seeing the dataset yet; I’ll swap to a pre-seeded example.",
+            "To isolate the issue, I'll check credentials and network.",
+            "This is what happens if the API key is scoped read-only."
+          ],
+          "successLooksLike": "Rep explains what’s happening in simple terms, uses a backup, and avoids technical rabbit holes."
+        },
+        {
+          "title": "Latency during queries",
+          "situation": "Queries run slowly on the call. You need to set expectations and adjust.",
+          "targetPhrases": [
+            "You may notice a slight delay; in production we see under 200 ms.",
+            "I'll reduce the data volume to keep things crisp.",
+            "We can instrument a quick test in your environment."
+          ],
+          "successLooksLike": "Rep normalizes the delay, demonstrates a workaround, and proposes a concrete follow-up test."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Security, privacy, and compliance objections",
+      "scenarios": [
+        {
+          "title": "Answer posture questions with authority",
+          "situation": "Security lead asks about audits, encryption, and data residency.",
+          "targetPhrases": [
+            "We are SOC 2 Type II; audit report and pen test are available under NDA.",
+            "Data is encrypted at rest (AES-256) and in transit (TLS 1.2+).",
+            "We offer EU data residency and VPC deployment options."
+          ],
+          "successLooksLike": "Rep answers precisely, avoids overclaiming, and offers verifiable evidence and next steps."
+        },
+        {
+          "title": "PII handling and access control",
+          "situation": "The team worries about sensitive data exposure and permissions.",
+          "targetPhrases": [
+            "We support field-level masking and role-based access control.",
+            "Only hashed identifiers are stored.",
+            "Admins can enforce SSO and MFA."
+          ],
+          "successLooksLike": "Rep explains controls in buyer language and ties them to risk reduction."
+        },
+        {
+          "title": "Move the security review forward",
+          "situation": "You need to turn questions into a concrete plan with owners and dates.",
+          "targetPhrases": [
+            "I can complete your security questionnaire by Friday.",
+            "Our trust portal has docs you can share internally.",
+            "Let's loop in your security lead for a 20-minute deep dive."
+          ],
+          "successLooksLike": "Rep secures a scheduled security session and shares the right artifacts promptly."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "theme": "Integration and architecture deep dives",
+      "scenarios": [
+        {
+          "title": "Map to legacy systems and APIs",
+          "situation": "Prospect asks how you connect to their legacy stack and event flows.",
+          "targetPhrases": [
+            "We connect via REST and webhook; do you have an event bus?",
+            "Our connector handles retries and backoff.",
+            "For on-prem, we use an agent that lives in your VPC."
+          ],
+          "successLooksLike": "Rep draws a simple map from source to destination, calls out dependencies, and confirms feasibility."
+        },
+        {
+          "title": "Throughput, limits, and scaling",
+          "situation": "Engineers probe on rate limits, throughput, and backfills.",
+          "targetPhrases": [
+            "We batch requests to respect rate limits.",
+            "Throughput scales horizontally; here are the caps.",
+            "Backfill runs at X records/minute; incremental is near real-time."
+          ],
+          "successLooksLike": "Rep states constraints clearly and offers tested numbers or ranges without hedging."
+        },
+        {
+          "title": "Whiteboard the architecture",
+          "situation": "You need to explain how components interact and how you roll back safely.",
+          "targetPhrases": [
+            "Here's the high-level architecture.",
+            "This component depends on your IdP and network allowlist.",
+            "The rollback plan is to revert to snapshot and cut over off-peak."
+          ],
+          "successLooksLike": "Rep communicates a clear diagram verbally, surfaces risks, and presents a rollback plan."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "theme": "Competitive and status-quo objections",
+      "scenarios": [
+        {
+          "title": "\"We already use X\"",
+          "situation": "Prospect prefers an incumbent or internal tool. You must find gaps without attacking.",
+          "targetPhrases": [
+            "Totally understand—many teams use X; where does it fall short?",
+            "Customers switch for Y and Z; I'll show that in 2 minutes.",
+            "We can coexist during a pilot; no rip-and-replace."
+          ],
+          "successLooksLike": "Rep validates the current tool, uncovers unmet needs, and proposes a low-risk test."
+        },
+        {
+          "title": "Build vs. buy",
+          "situation": "Engineering wants to build it. You need to surface hidden costs and risks.",
+          "targetPhrases": [
+            "What would it cost to build and maintain this internally?",
+            "Our roadmap covers edge cases you’d need to staff.",
+            "We provide SLAs and support so your team stays focused."
+          ],
+          "successLooksLike": "Rep frames total cost and risk in numbers and secures agreement to evaluate side-by-side."
+        },
+        {
+          "title": "Price, TCO, and ROI",
+          "situation": "You must connect technical value to financial outcomes.",
+          "targetPhrases": [
+            "Let’s quantify ROI: fewer tickets, faster time-to-value.",
+            "Total cost includes maintenance and on-call.",
+            "We can stage licenses to fit budget cycles."
+          ],
+          "successLooksLike": "Rep ties features to measurable savings and aligns on a budget-friendly path."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "theme": "Designing and running a high-velocity POC",
+      "scenarios": [
+        {
+          "title": "Define scope and success",
+          "situation": "You need a crisp 2-week pilot plan with outcomes everyone accepts.",
+          "targetPhrases": [
+            "For a 2-week pilot, success is A, B, C.",
+            "We’ll meet twice weekly to unblock.",
+            "I’ll share a mutual action plan with owners and dates."
+          ],
+          "successLooksLike": "Rep writes a simple plan with metrics, cadence, and owners; prospect agrees on success criteria."
+        },
+        {
+          "title": "Access, data, and safety",
+          "situation": "Secure the right dataset and permissions without risking production.",
+          "targetPhrases": [
+            "We need a non-production dataset of N rows.",
+            "Please grant a least-privilege service account.",
+            "We’ll document every change in a runbook."
+          ],
+          "successLooksLike": "Rep requests precise access, documents steps, and mitigates risk upfront."
+        },
+        {
+          "title": "Risk and rollback",
+          "situation": "Anticipate what could go wrong and how you’ll back out.",
+          "targetPhrases": [
+            "If X breaks, the workaround is Y.",
+            "We’ll test in a sandbox before cutover.",
+            "Here’s how we back out safely."
+          ],
+          "successLooksLike": "Rep names top risks and has a credible rollback plan the buyer accepts."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "theme": "Multi-threading stakeholders and moving the deal",
+      "scenarios": [
+        {
+          "title": "Translate across audiences",
+          "situation": "You present to both execs and engineers in one meeting.",
+          "targetPhrases": [
+            "For the exec view: outcomes; for engineers: how it works.",
+            "In one sentence: why this matters to ops.",
+            "I’ll avoid jargon and explain terms as we go."
+          ],
+          "successLooksLike": "Rep adjusts language and depth on the fly so everyone tracks and stays engaged."
+        },
+        {
+          "title": "Navigate procurement and legal",
+          "situation": "You must understand their process and keep momentum.",
+          "targetPhrases": [
+            "What does your procurement process look like?",
+            "We can start the security review in parallel.",
+            "Let’s map key dates to your quarter close."
+          ],
+          "successLooksLike": "Rep uncovers steps, parallelizes workstreams, and avoids end-of-quarter surprises."
+        },
+        {
+          "title": "Lock next steps with a MAP",
+          "situation": "Turn the meeting into concrete actions.",
+          "targetPhrases": [
+            "Here’s the mutual action plan I propose.",
+            "Can we assign owners for each task?",
+            "I’ll send calendar holds to keep momentum."
+          ],
+          "successLooksLike": "Rep leaves with owners, dates, and meetings booked."
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "theme": "De-escalation and recovery after setbacks",
+      "scenarios": [
+        {
+          "title": "Repair after a bad demo",
+          "situation": "Your last demo missed the mark. You need to apologize, reset, and regain trust.",
+          "targetPhrases": [
+            "I’m sorry the demo missed the mark—here’s what I’ll change.",
+            "Thank you for the candid feedback.",
+            "Let’s agree on a reset agenda focused on your use case."
+          ],
+          "successLooksLike": "Rep takes ownership, proposes a targeted redo, and gets agreement to continue."
+        },
+        {
+          "title": "Handle a skeptical engineer",
+          "situation": "A technical stakeholder challenges feasibility or claims.",
+          "targetPhrases": [
+            "Great question—here’s what we can and can’t do.",
+            "Let’s test that assumption together.",
+            "If it doesn’t meet the bar, I’ll say so."
+          ],
+          "successLooksLike": "Rep stays calm, sets boundaries, and converts skepticism into a testable plan."
+        },
+        {
+          "title": "Write a tight recap that moves the deal",
+          "situation": "Follow up with a written summary that drives action.",
+          "targetPhrases": [
+            "Subject: Recap, decisions, and next steps",
+            "Today we decided X; open questions: Y.",
+            "Next actions, owners, and dates:"
+          ],
+          "successLooksLike": "Rep sends a concise email that captures decisions accurately and prompts timely responses."
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "theme": "RFPs and closing technical validation",
+      "scenarios": [
+        {
+          "title": "Answer RFPs clearly and concisely",
+          "situation": "You must respond to long RFPs without fluff or ambiguity.",
+          "targetPhrases": [
+            "Answer: Supported/Not supported/Planned with date.",
+            "Evidence: link to docs, SOC report, or customer proof.",
+            "Constraint: requires Enterprise SKU."
+          ],
+          "successLooksLike": "Rep provides direct answers with evidence and no overpromising."
+        },
+        {
+          "title": "Final validation with IT/Security",
+          "situation": "Last technical call to confirm there are no blocking risks.",
+          "targetPhrases": [
+            "Any critical risks left before you can recommend a go?",
+            "Let’s confirm the pilot results vs success criteria.",
+            "Are you comfortable signing off from a technical standpoint?"
+          ],
+          "successLooksLike": "Rep secures explicit technical sign-off or a clear path to it."
+        },
+        {
+          "title": "Clean handoff to implementation",
+          "situation": "Transition from sale to delivery without dropping context.",
+          "targetPhrases": [
+            "Here’s your onboarding checklist.",
+            "I’ll introduce your CSM and share the runbook.",
+            "We’ll schedule a kickoff within 1 week of signature."
+          ],
+          "successLooksLike": "Rep documents decisions, introduces delivery team, and books the kickoff."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 2,
+    "minutesPerSession": 60
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Reps run a focused 15-minute demo that maps to the customer’s top use case, with clear signposting and a crisp explanation of value.",
+      "measurableProxy": "Scores 4/5+ on a live-demo rubric (clarity, relevance, pacing, time to first value < 5 minutes) in two consecutive role-plays."
+    },
+    {
+      "plainLanguage": "Reps handle common objections (security, integration, price) calmly, answer clearly, and secure an agreed next step.",
+      "measurableProxy": "In objection role-plays, maintains 120–160 wpm, ≤2 filler words per minute, and books a concrete next step in 80%+ of scenarios."
+    },
+    {
+      "plainLanguage": "Reps send concise recap emails that capture decisions and owners and move the deal forward.",
+      "measurableProxy": "Emails are ≤150 words, include 3+ bullet points, and score 4/5+ on accuracy (names, dates, action items) according to a rubric."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome to the Sales Engineer program focused on technical demos and objection handling. Over 10 weeks, we’ll meet twice per week for 60 minutes. Expect high-rep role-plays, targeted feedback, and reusable templates. Bring one active opportunity, your demo environment, and your top three objections. Success means you can run a tight 15-minute demo mapped to their use case, handle security/integration/price questions with confidence, and leave every meeting with a clear next step. We’ll support different language levels with sentence frames, model answers, and stretch challenges.",
+    "ko": "기술 데모와 이의 제기 대응에 집중한 세일즈 엔지니어 프로그램에 오신 것을 환영합니다. 10주 동안 주 2회, 회당 60분으로 진행됩니다. 반복 롤플레이, 정확한 피드백, 재사용 가능한 템플릿을 제공합니다. 현재 진행 중인 기회 1건, 데모 환경, 자주 받는 이의 제기 상위 3가지를 준비해 주세요. 목표는 고객의 사용 사례에 맞춘 15분 데모를 깔끔하게 수행하고, 보안/연동/가격 질문에 자신 있게 답하며, 매 회의마다 분명한 다음 단계를 확보하는 것입니다. 다양한 언어 수준을 위해 문장 프레임, 모범 답안, 심화 과제를 함께 제공합니다."
+  }
+}

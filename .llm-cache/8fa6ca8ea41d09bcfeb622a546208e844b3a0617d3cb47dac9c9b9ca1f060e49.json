@@ -1,0 +1,257 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Control the call and diagnose problems fast",
+      "scenarios": [
+        {
+          "title": "Taking back ownership after a triple transfer",
+          "situation": "A frustrated customer has been transferred three times and demands a supervisor. You must de-escalate, take ownership, and move the call toward a solution.",
+          "targetPhrases": [
+            "I can see how frustrating this has been.",
+            "I’m taking ownership of this now.",
+            "Here’s what I’m going to do in the next 10 minutes.",
+            "Before we fix this, can I confirm…?",
+            "If we get disconnected, I’ll call you back at…",
+            "Let me summarize what I’ve heard so far.",
+            "Thanks for your patience while I pull this up."
+          ],
+          "successLooksLike": "Agent calmly acknowledges the frustration, states ownership, confirms key facts, and sets an immediate action plan with a callback safeguard; the customer agrees to continue with the agent."
+        },
+        {
+          "title": "Fast, secure verification without sounding scripted",
+          "situation": "You need to verify the customer quickly for a sensitive account task while keeping rapport.",
+          "targetPhrases": [
+            "For security, I’ll need to verify…",
+            "You can share just the last four digits.",
+            "I’ll keep this brief—two questions.",
+            "Thanks—that matches our records.",
+            "I appreciate you confirming that.",
+            "Let me explain why we ask for this."
+          ],
+          "successLooksLike": "Agent completes verification in under 60 seconds, explains the why in plain English, and keeps the customer engaged and cooperative."
+        },
+        {
+          "title": "Diagnosing a vague issue with structured probing",
+          "situation": "Customer says, “It doesn’t work.” You must narrow the problem and prioritize next steps.",
+          "targetPhrases": [
+            "When did you first notice this?",
+            "What exactly happens when you click…?",
+            "Let’s try one quick check.",
+            "If that doesn’t work, we’ll escalate.",
+            "To make sure I’ve got this right…",
+            "On a scale of urgency, where is this for you?"
+          ],
+          "successLooksLike": "Agent uses a clear question funnel, confirms understanding, and proposes a time-boxed test, gaining agreement on the next step or escalation."
+        },
+        {
+          "title": "Managing holds and silences professionally",
+          "situation": "You need 2–3 minutes to check logs without creating dead air or anxiety.",
+          "targetPhrases": [
+            "May I place you on a brief hold while I check?",
+            "This will take about two minutes.",
+            "Thank you for holding—here’s what I found.",
+            "I’m still here, just pulling up…",
+            "I can stay on the line while you try that."
+          ],
+          "successLooksLike": "Agent requests permission, sets a time expectation, provides progress updates, and returns with a concise finding or next step."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "De-escalation, expectation setting, and policy talk",
+      "scenarios": [
+        {
+          "title": "Owning an SLA miss and resetting expectations",
+          "situation": "A delivery or response-time promise was missed. You must apologize, explain simply, and offer a concrete recovery plan.",
+          "targetPhrases": [
+            "You’re right—we missed the mark.",
+            "Here’s what happened in plain terms…",
+            "Here’s what I can do today…",
+            "You’ll have an update by…",
+            "I’ve applied a courtesy credit of…",
+            "I’ll monitor this personally and email you."
+          ],
+          "successLooksLike": "Agent gives a plain-English cause, a specific make-good with timelines, and restores confidence; the customer accepts the plan."
+        },
+        {
+          "title": "Saying no to an out-of-policy request without losing trust",
+          "situation": "Customer asks for something you can’t approve. You must protect policy and keep rapport.",
+          "targetPhrases": [
+            "I wish I could approve that as-is.",
+            "Here’s what the policy allows…",
+            "Here’s a workaround that gets you 80% there.",
+            "If we did X for you, we’d need Y from your side.",
+            "Let me escalate for an exception review.",
+            "I don’t want to promise what I can’t deliver."
+          ],
+          "successLooksLike": "Agent clearly states constraints, offers viable alternatives, and secures agreement on the best available path without overpromising."
+        },
+        {
+          "title": "Live chat: juggling two conversations without dropping tone",
+          "situation": "You are handling two concurrent chats. You must keep tone warm, set micro-ETAs, and summarize progress.",
+          "targetPhrases": [
+            "Thanks for waiting—I’m with you.",
+            "I’m handling another case too; responses may take 1–2 minutes.",
+            "Here’s a quick summary so far…",
+            "Could I place this chat on a brief hold to investigate?",
+            "I’ll be back in 60 seconds with an update."
+          ],
+          "successLooksLike": "Agent maintains responsiveness with timestamped micro-ETAs, uses brief summaries, and prevents duplicate questions or confusion across threads."
+        },
+        {
+          "title": "Turning a refund demand into a solution-focused offer",
+          "situation": "Customer demands a full refund. You must explore impact and present options the customer can accept.",
+          "targetPhrases": [
+            "Let’s separate symptoms from impact.",
+            "If a full refund is the only acceptable outcome, here’s the process…",
+            "Alternatively, I can ship a replacement today.",
+            "Which option works better for you?",
+            "I recommend… because…",
+            "I’ll email a confirmation right after this."
+          ],
+          "successLooksLike": "Agent reframes to outcomes, offers two clear options with rationale, and secures the customer’s decision with written confirmation."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "Guide, troubleshoot, and explain like an expert",
+      "scenarios": [
+        {
+          "title": "Coaching a non-technical user through a multi-step fix",
+          "situation": "Customer needs to complete a 5–6 step process. You must pace, check understanding, and keep confidence high.",
+          "targetPhrases": [
+            "We’ll go step by step.",
+            "Tell me what you see on your screen.",
+            "Click the gear icon in the top right.",
+            "If something looks different, say ‘pause’ and we’ll adjust.",
+            "That’s exactly it—nice job.",
+            "Let’s test to confirm it’s resolved."
+          ],
+          "successLooksLike": "Agent gives precise micro-instructions, monitors comprehension, praises progress, and verifies resolution with a meaningful test."
+        },
+        {
+          "title": "Running a screen-share and narrating clearly",
+          "situation": "You initiate a secure screen-share, explain controls, and document evidence without confusing the customer.",
+          "targetPhrases": [
+            "I’ll send a secure screen-share link now.",
+            "You’ll see a prompt—please click Allow.",
+            "You’re in control at all times.",
+            "I’ll highlight where to click.",
+            "I’m taking a quick screenshot to document this."
+          ],
+          "successLooksLike": "Agent explains consent and control, narrates the interface simply, and captures artifacts while maintaining the customer’s trust."
+        },
+        {
+          "title": "Explaining root cause and prevention without jargon",
+          "situation": "Issue is resolved. You must explain what broke, what you fixed, and how to prevent it—plainly and briefly.",
+          "targetPhrases": [
+            "In short, what broke was…",
+            "The fix we applied was…",
+            "To prevent this, do…",
+            "The trade-off is…",
+            "Most customers won’t notice this, but…",
+            "If this recurs, here’s the fast path to help."
+          ],
+          "successLooksLike": "Agent gives a one-minute, non-technical explanation with an actionable prevention step and a clear recontact path."
+        },
+        {
+          "title": "Summarizing and confirming agreement before ending",
+          "situation": "Close the interaction with a crisp recap of decisions, owners, and timelines.",
+          "targetPhrases": [
+            "Here’s what we decided…",
+            "You’ll do X; I’ll do Y.",
+            "You can expect this by…",
+            "Did I miss anything important?",
+            "I’ll send a recap now."
+          ],
+          "successLooksLike": "Agent confirms mutual commitments and timing, invites corrections, and sends a written summary within minutes."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Handoffs, written follow-through, and public channels",
+      "scenarios": [
+        {
+          "title": "Escalating to Tier 2 with a crisp, testable hypothesis",
+          "situation": "You must open a ticket to Tier 2 with repro steps, impact, and what you’ve ruled out so far.",
+          "targetPhrases": [
+            "Working hypothesis:",
+            "Customer impact:",
+            "Repro steps:",
+            "Expected vs actual:",
+            "Tried/ruled out:",
+            "Attachments and timestamps included."
+          ],
+          "successLooksLike": "Agent creates a ticket that allows Tier 2 to reproduce on first attempt and start work without bouncing back for basics."
+        },
+        {
+          "title": "Writing a clear, apologetic resolution email",
+          "situation": "After resolving, send a short email that apologizes, explains, and sets next steps.",
+          "targetPhrases": [
+            "I’m sorry for the trouble this caused.",
+            "Here’s what happened in one sentence:",
+            "What we did today:",
+            "What you need to do next:",
+            "I’ll check back on…",
+            "If anything slips, reply to this email and it pings me."
+          ],
+          "successLooksLike": "Agent sends a 5–7 sentence email with apology, plain-English cause, actions taken, customer next steps, and a follow-up date."
+        },
+        {
+          "title": "Coordinating with a partner team without dropping the ball",
+          "situation": "You need help from another team (e.g., Billing, Engineering). You must secure ownership and an ETA while owning comms.",
+          "targetPhrases": [
+            "Flagging for visibility:",
+            "What I need from you:",
+            "Customer-facing ETA:",
+            "I’ll own comms to the customer.",
+            "Please confirm ownership and next update time."
+          ],
+          "successLooksLike": "Agent aligns on owner, next update time, and customer-facing ETA in writing, and keeps the customer informed without gaps."
+        },
+        {
+          "title": "Moving a public social media complaint into a private, solvable thread",
+          "situation": "A customer posts an angry tweet. You must acknowledge publicly and shift to a private channel to collect details.",
+          "targetPhrases": [
+            "We hear you and want to make this right.",
+            "Can you DM your order/email?",
+            "Let’s take this to a private channel so we can share details.",
+            "We’ll post a public follow-up once resolved.",
+            "Thanks for giving us a chance to fix this."
+          ],
+          "successLooksLike": "Agent responds within SLA, invites DM with specifics, resolves privately, and posts a brief public closure note. "
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 3,
+    "minutesPerSession": 60
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Agents de-escalate heated interactions quickly and keep control of the call.",
+      "measurableProxy": "Average time from first sign of anger to neutral/agreeing language under 2:00; QA empathy/ownership markers ≥ 4/5 on 80% of sampled contacts."
+    },
+    {
+      "plainLanguage": "Agents set clear expectations and meet their commitments.",
+      "measurableProxy": "95% of stated callbacks/ETAs met; reopen rate under 5% within 7 days."
+    },
+    {
+      "plainLanguage": "Tickets and handoffs are clear, complete, and actionable on first read.",
+      "measurableProxy": "Peer-reviewed ticket quality ≥ 90% using rubric (hypothesis, repro, steps tried, impact); bounce-backs under 10%."
+    },
+    {
+      "plainLanguage": "Written communication is concise, professional, and error-free.",
+      "measurableProxy": "Email/chat QA grammar/style ≥ 90%; average customer effort score ≤ 2.0; CSAT ≥ 4.6 for written channels."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome to the 4-week Customer Support English Sprint. Our goal is for every agent to operate confidently at a high professional level across calls, chat, and email by next month. We’ll focus on de-escalation, fast diagnosis, clear expectation-setting, crisp handoffs, and polished written follow-ups. Format: 3 x 60-minute sessions per week with targeted role-plays, micro-feedback, and take-home drills. What we need from you: show up on time, bring one recent tough case each week, practice 15 minutes a day using the phrase banks, and record one mock each week for feedback. This is a global, mixed-L1 cohort—plain English, respectful turn-taking, and camera-on for role-plays. Let’s get to work.",
+    "ko": "4주간 고객 지원 영어 스프린트에 오신 것을 환영합니다. 다음 달까지 모든 에이전트가 전화, 채팅, 이메일에서 전문적으로 자신 있게 대응하는 것을 목표로 합니다. 이번 과정은 불만 진정, 신속한 진단, 명확한 기대치 설정, 부서 간 인계, 완성도 높은 서면 후속 조치에 집중합니다. 운영 방식: 주 3회 60분 세션(역할극, 피드백, 과제 드릴 포함). 준비 사항: 제시간에 참석하고, 매주 최근의 어려웠던 사례 1건을 가져오며, 표현 모음으로 매일 15분 연습하고, 주 1회 모의 녹음을 제출하세요. 이 과정은 글로벌(다국어) 코호트입니다—평이한 영어를 사용하고, 서로 배려하며 발언하며, 역할극에서는 카메라 온을 원칙으로 합니다. 지금 시작합시다."
+  }
+}

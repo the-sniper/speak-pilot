@@ -1,0 +1,194 @@
+[
+  {
+    "learnerId": "learner-0001",
+    "band": "C1",
+    "rationale": "Accuracy is consistently 8–10 with multiple 9–10 scores; fits ≥8.6 band.",
+    "evidenceUtteranceIds": [
+      "000010053"
+    ]
+  },
+  {
+    "learnerId": "learner-0053",
+    "band": "B2",
+    "rationale": "Accuracy mostly 8–9 with some 6–7; average in low 8s, within 8.0–8.6.",
+    "evidenceUtteranceIds": [
+      "000530037"
+    ]
+  },
+  {
+    "learnerId": "learner-0112",
+    "band": "B1",
+    "rationale": "Mixed highs (8–9) and lows (4–5); average in mid‑7s, within 7.0–8.0.",
+    "evidenceUtteranceIds": [
+      "001120013"
+    ]
+  },
+  {
+    "learnerId": "learner-0131",
+    "band": "C1",
+    "rationale": "Stable 8–9 accuracy; average ≈8.6, at/above C1 threshold.",
+    "evidenceUtteranceIds": [
+      "001310020"
+    ]
+  },
+  {
+    "learnerId": "learner-0482",
+    "band": "C1",
+    "rationale": "Frequent 9–10 accuracy; clearly above 8.6.",
+    "evidenceUtteranceIds": [
+      "004820045"
+    ]
+  },
+  {
+    "learnerId": "learner-0594",
+    "band": "B1",
+    "rationale": "Accuracy clusters 7–8 with an outlier 3; average ≈7.0 fits 7.0–8.0.",
+    "evidenceUtteranceIds": [
+      "005940141"
+    ]
+  },
+  {
+    "learnerId": "learner-0736",
+    "band": "A2",
+    "rationale": "Accuracy mainly 5–7 with one 9; average ≈6.1 fits 5.5–7.0.",
+    "evidenceUtteranceIds": [
+      "007360004"
+    ]
+  },
+  {
+    "learnerId": "learner-1228",
+    "band": "B1",
+    "rationale": "After an early 3, accuracy stays 7–8; average ≈7.1 in 7.0–8.0.",
+    "evidenceUtteranceIds": [
+      "012280016"
+    ]
+  },
+  {
+    "learnerId": "learner-1404",
+    "band": "A1",
+    "rationale": "Multiple low accuracy scores (3–5) and instability; average <5.5.",
+    "evidenceUtteranceIds": [
+      "014040088"
+    ]
+  },
+  {
+    "learnerId": "learner-1419",
+    "band": "A2",
+    "rationale": "Accuracy ranges 3–9 with many 7s; average ≈6.9 in 5.5–7.0.",
+    "evidenceUtteranceIds": [
+      "014190060"
+    ]
+  },
+  {
+    "learnerId": "learner-1422",
+    "band": "A2",
+    "rationale": "Accuracy spans 3–9 with many 5–8; average ≈5.9 in 5.5–7.0.",
+    "evidenceUtteranceIds": [
+      "014220001"
+    ]
+  },
+  {
+    "learnerId": "learner-1435",
+    "band": "B1",
+    "rationale": "Mostly 7–9 accuracy with some 6; average ≈7.8 in 7.0–8.0.",
+    "evidenceUtteranceIds": [
+      "014350012"
+    ]
+  },
+  {
+    "learnerId": "learner-1447",
+    "band": "B2",
+    "rationale": "Accuracy steady at 8–9; average ≈8.5 fits 8.0–8.6.",
+    "evidenceUtteranceIds": [
+      "014470053"
+    ]
+  },
+  {
+    "learnerId": "learner-1502",
+    "band": "B1",
+    "rationale": "Accuracy varies 3–8; average ≈7.0 sits in 7.0–8.0.",
+    "evidenceUtteranceIds": [
+      "015020007"
+    ]
+  },
+  {
+    "learnerId": "learner-1503",
+    "band": "B1",
+    "rationale": "Mostly 7–9 with one 3; average mid‑7s in 7.0–8.0.",
+    "evidenceUtteranceIds": [
+      "015030027"
+    ]
+  },
+  {
+    "learnerId": "learner-2014",
+    "band": "B1",
+    "rationale": "Generally 8–9 with one 4; average mid‑7s in 7.0–8.0.",
+    "evidenceUtteranceIds": [
+      "020140032"
+    ]
+  },
+  {
+    "learnerId": "learner-2030",
+    "band": "B1",
+    "rationale": "Mostly 7–8 with one 4; average ≈7.3 in 7.0–8.0.",
+    "evidenceUtteranceIds": [
+      "020300073"
+    ]
+  },
+  {
+    "learnerId": "learner-5017",
+    "band": "B1",
+    "rationale": "Strong 8–9 with a 3 outlier; average mid‑7s in 7.0–8.0.",
+    "evidenceUtteranceIds": [
+      "050170099"
+    ]
+  },
+  {
+    "learnerId": "learner-5418",
+    "band": "C1",
+    "rationale": "Consistent 8–9 with many 9s; average ≈8.7+, above 8.6.",
+    "evidenceUtteranceIds": [
+      "054180059"
+    ]
+  },
+  {
+    "learnerId": "learner-6504",
+    "band": "B2",
+    "rationale": "Largely 8–9 with a 10; average ≈8.4 in 8.0–8.6.",
+    "evidenceUtteranceIds": [
+      "065040077"
+    ]
+  },
+  {
+    "learnerId": "learner-6902",
+    "band": "A1",
+    "rationale": "Several 3–4 accuracy scores with few highs; average ≈5.1, below 5.5.",
+    "evidenceUtteranceIds": [
+      "069020059"
+    ]
+  },
+  {
+    "learnerId": "learner-8057",
+    "band": "B2",
+    "rationale": "Accuracy steady around 8 with a 9; average ≈8.0, placed in 8.0–8.6.",
+    "evidenceUtteranceIds": [
+      "080570053"
+    ]
+  },
+  {
+    "learnerId": "learner-8063",
+    "band": "C1",
+    "rationale": "Frequent 9s with occasional 8; average ≈8.7–9.0, above 8.6.",
+    "evidenceUtteranceIds": [
+      "080630053"
+    ]
+  },
+  {
+    "learnerId": "learner-9553",
+    "band": "B2",
+    "rationale": "Accuracy mostly 8–9; average ≈8.5 in 8.0–8.6.",
+    "evidenceUtteranceIds": [
+      "095530041"
+    ]
+  }
+]

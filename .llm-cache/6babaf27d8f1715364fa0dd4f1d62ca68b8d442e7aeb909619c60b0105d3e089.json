@@ -1,0 +1,194 @@
+[
+  {
+    "learnerId": "learner-0001",
+    "band": "C1",
+    "rationale": "Avg accuracy ≈8.8 across provided sentences (mostly 8–10 with one 6); aligns with C1 threshold. Fluency/prosody stable.",
+    "evidenceUtteranceIds": [
+      "000010011"
+    ]
+  },
+  {
+    "learnerId": "learner-0053",
+    "band": "B2",
+    "rationale": "Avg accuracy ≈8.1 (mostly 8–9 with a few 6–7); fits B2 range.",
+    "evidenceUtteranceIds": [
+      "000530003"
+    ]
+  },
+  {
+    "learnerId": "learner-0112",
+    "band": "B1",
+    "rationale": "Accuracy fluctuates 4–9 with avg ≈7.5; fits B1.",
+    "evidenceUtteranceIds": [
+      "001120010"
+    ]
+  },
+  {
+    "learnerId": "learner-0131",
+    "band": "C1",
+    "rationale": "Consistently high accuracy (mostly 8–9), avg ≈8.6; at C1 cutoff.",
+    "evidenceUtteranceIds": [
+      "001310020"
+    ]
+  },
+  {
+    "learnerId": "learner-0482",
+    "band": "C1",
+    "rationale": "High accuracy across samples with avg ≈8.8 (many 9–10s); C1.",
+    "evidenceUtteranceIds": [
+      "004820005"
+    ]
+  },
+  {
+    "learnerId": "learner-0594",
+    "band": "B1",
+    "rationale": "Avg accuracy ≈7.0 (mix of 3–8s); fits B1 boundary.",
+    "evidenceUtteranceIds": [
+      "005940019"
+    ]
+  },
+  {
+    "learnerId": "learner-0736",
+    "band": "A2",
+    "rationale": "Avg accuracy ≈6.1 (several 5–6s, one 9); A2.",
+    "evidenceUtteranceIds": [
+      "007360004"
+    ]
+  },
+  {
+    "learnerId": "learner-1228",
+    "band": "B1",
+    "rationale": "Avg accuracy ≈7.1 (range 3–8, trending 7–8); B1.",
+    "evidenceUtteranceIds": [
+      "012280016"
+    ]
+  },
+  {
+    "learnerId": "learner-1404",
+    "band": "A1",
+    "rationale": "Low accuracy overall with avg ≈4.7 (several 3–6s, zeros in other metrics); A1.",
+    "evidenceUtteranceIds": [
+      "014040005"
+    ]
+  },
+  {
+    "learnerId": "learner-1419",
+    "band": "A2",
+    "rationale": "Avg accuracy ≈6.9 (mix of 3–9 with many 7s); A2.",
+    "evidenceUtteranceIds": [
+      "014190006"
+    ]
+  },
+  {
+    "learnerId": "learner-1422",
+    "band": "A2",
+    "rationale": "Accuracy varies 3–9 with avg ≈5.9; A2.",
+    "evidenceUtteranceIds": [
+      "014220001"
+    ]
+  },
+  {
+    "learnerId": "learner-1435",
+    "band": "B1",
+    "rationale": "Avg accuracy ≈7.8 (mostly 7–9 with one 6); B1.",
+    "evidenceUtteranceIds": [
+      "014350004"
+    ]
+  },
+  {
+    "learnerId": "learner-1447",
+    "band": "B2",
+    "rationale": "Avg accuracy ≈8.5 (steady 8–9s); B2.",
+    "evidenceUtteranceIds": [
+      "014470007"
+    ]
+  },
+  {
+    "learnerId": "learner-1502",
+    "band": "B1",
+    "rationale": "Avg accuracy ≈7.0 (range 3–8 with many 7–8s); B1.",
+    "evidenceUtteranceIds": [
+      "015020001"
+    ]
+  },
+  {
+    "learnerId": "learner-1503",
+    "band": "B1",
+    "rationale": "Avg accuracy ≈7.4 (mix of 3–10, mostly 7–9); B1.",
+    "evidenceUtteranceIds": [
+      "015030001"
+    ]
+  },
+  {
+    "learnerId": "learner-2014",
+    "band": "B1",
+    "rationale": "Avg accuracy ≈7.7 (mostly 7–9 with one 4); B1.",
+    "evidenceUtteranceIds": [
+      "020140004"
+    ]
+  },
+  {
+    "learnerId": "learner-2030",
+    "band": "B1",
+    "rationale": "Avg accuracy ≈7.3 across 10 sessions (steady 7–8s, one 4); B1.",
+    "evidenceUtteranceIds": [
+      "020300005"
+    ]
+  },
+  {
+    "learnerId": "learner-5017",
+    "band": "B1",
+    "rationale": "Avg accuracy ≈7.7 (mostly 8–9 with one low 3); B1.",
+    "evidenceUtteranceIds": [
+      "050170001"
+    ]
+  },
+  {
+    "learnerId": "learner-5418",
+    "band": "C1",
+    "rationale": "High accuracy avg ≈8.7 (frequent 9s); C1.",
+    "evidenceUtteranceIds": [
+      "054180014"
+    ]
+  },
+  {
+    "learnerId": "learner-6504",
+    "band": "B2",
+    "rationale": "Avg accuracy ≈8.4 (consistent 8–9s); B2.",
+    "evidenceUtteranceIds": [
+      "065040005"
+    ]
+  },
+  {
+    "learnerId": "learner-6902",
+    "band": "A1",
+    "rationale": "Avg accuracy ≈5.1 (several 3–6s and lows); A1.",
+    "evidenceUtteranceIds": [
+      "069020006"
+    ]
+  },
+  {
+    "learnerId": "learner-8057",
+    "band": "B2",
+    "rationale": "Avg accuracy ≈8.0 (steady 7–9s); at B2 lower bound.",
+    "evidenceUtteranceIds": [
+      "080570004"
+    ]
+  },
+  {
+    "learnerId": "learner-8063",
+    "band": "C1",
+    "rationale": "Avg accuracy ≈8.7 with many 9s; C1.",
+    "evidenceUtteranceIds": [
+      "080630011"
+    ]
+  },
+  {
+    "learnerId": "learner-9553",
+    "band": "B2",
+    "rationale": "Avg accuracy ≈8.5 (mostly 8–9s); B2.",
+    "evidenceUtteranceIds": [
+      "095530005"
+    ]
+  }
+]

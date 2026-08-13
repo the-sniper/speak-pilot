@@ -1,0 +1,200 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Stabilize live calls and chats: control the flow, verify, probe, and de‑escalate",
+      "scenarios": [
+        {
+          "title": "De-escalating a caller who has been transferred three times about a double charge",
+          "situation": "Phone call with an angry customer who says they’ve repeated themselves to multiple agents about a duplicate billing charge. You must take ownership, calm the situation, verify details, investigate, and resolve or commit to a clear next step and timeline.",
+          "targetPhrases": [
+            "I’m sorry you’ve had to repeat this; I’ll own this for you now.",
+            "Let me pull up your account—may I confirm your full name and the last 4 digits on the card?",
+            "I hear your frustration; here’s what I can do right now.",
+            "I’ll stay with you while I investigate; this should take about two minutes.",
+            "Thank you for your patience—here’s what I found.",
+            "I can issue a refund of $X today; you’ll see it in 3–5 business days.",
+            "If we get disconnected, I’ll call you back at this number."
+          ],
+          "successLooksLike": "Agent lowers the temperature within 60 seconds, confirms identity and the issue, gives a time-bound plan, narrates holds, explains findings in simple language, and resolves or gives a dated commitment without another blind transfer."
+        },
+        {
+          "title": "Finding the real issue behind “Where is my order?”",
+          "situation": "Chat with a customer asking about a late package. You need to confirm the order, check tracking, identify carrier or address issues, and offer clear options.",
+          "targetPhrases": [
+            "To help you quickly, could you confirm the order number and delivery address?",
+            "I’m checking the tracking now—one moment, please.",
+            "It looks like a carrier delay; here are your options.",
+            "I can expedite a replacement or issue a refund—what works better for you?",
+            "You’ll receive an email confirmation right after we finish."
+          ],
+          "successLooksLike": "Agent confirms order details, states the actual cause in plain terms, offers two concrete options, and documents the outcome with a confirmation sent to the customer."
+        },
+        {
+          "title": "Resetting expectations after a long hold",
+          "situation": "You answer a call after a long queue. The customer is impatient. Acknowledge the wait, set a plan, and offer a callback option if resolution will take time.",
+          "targetPhrases": [
+            "Thank you for waiting—I know your time is valuable.",
+            "I want to resolve this without more transfers; here’s my plan.",
+            "This will take about X minutes—would you prefer a callback instead?",
+            "I’ll stay on the line while I connect you to billing and brief them.",
+            "Before I place you on a brief hold, is there anything else I should know?"
+          ],
+          "successLooksLike": "Agent acknowledges the wait, lays out next steps with timing, offers a callback choice, and avoids dead air by narrating actions and warm-transferring with a brief summary when needed."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "Policy language that keeps customers: refunds, replacements, and clean handoffs",
+      "scenarios": [
+        {
+          "title": "Saying no to an out-of-policy refund without losing the customer",
+          "situation": "Customer requests a refund outside the return window. You must decline clearly, explain why, and offer alternatives that feel helpful.",
+          "targetPhrases": [
+            "I understand why you’re asking; let me explain our policy briefly.",
+            "While I can’t refund today, here are two options I can offer.",
+            "As a one-time courtesy, I can provide a credit of $X.",
+            "I want to make this right within what I’m allowed to do.",
+            "Does that solution work for you?"
+          ],
+          "successLooksLike": "Agent states the policy in simple, neutral language, offers two concrete alternatives, checks acceptance, and ends with goodwill while keeping CSAT intact."
+        },
+        {
+          "title": "Explaining a replacement and shipping timeline",
+          "situation": "Warranty replacement is approved but stock is tight. Set expectations, provide the case number, and outline shipping and follow-up.",
+          "targetPhrases": [
+            "I’ve submitted the replacement—your case number is [####].",
+            "The estimated ship date is [date], and delivery usually takes [X] days.",
+            "I’ll email you the tracking link as soon as it’s generated.",
+            "If it hasn’t shipped by [date], I will follow up personally.",
+            "Would you prefer standard or expedited shipping?"
+          ],
+          "successLooksLike": "Agent provides case number, clear dates, shipping options, and a promised follow-up, then documents everything in the ticket."
+        },
+        {
+          "title": "Warm transfer to Tier 2 with a clean handoff",
+          "situation": "Issue needs a specialist. Summarize the case, introduce the customer to Tier 2, and stay on briefly to ensure continuity.",
+          "targetPhrases": [
+            "I’m bringing in a specialist to help—please stay with me.",
+            "Here’s a 15-second summary for my colleague: [issue, steps tried, goal].",
+            "[Customer name], this is [Agent name] from Tier 2 who handles [area].",
+            "I’ll stay on for the first minute to ensure a smooth handoff.",
+            "Before I go, is there anything else you want me to mention?"
+          ],
+          "successLooksLike": "Agent gives a concise summary, introduces both parties by name, confirms next owner, and exits only after both confirm understanding—no re-explaining needed."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "Troubleshooting that builds trust: step-by-step guidance and incident comms",
+      "scenarios": [
+        {
+          "title": "Walking a non-technical user through a 2FA login fix",
+          "situation": "Caller can’t log in due to two-factor authentication issues. You need to guide step by step, verify each step, and confirm success.",
+          "targetPhrases": [
+            "Let’s go step by step—I’ll wait after each step.",
+            "What do you see on your screen now?",
+            "Please tap “Send code,” then read me the 6-digit code.",
+            "If it doesn’t arrive, we’ll try an alternate method.",
+            "Great—you’re back in. Is anything else not working?"
+          ],
+          "successLooksLike": "Agent paces the call, checks comprehension at each step, confirms resolution, and summarizes what changed."
+        },
+        {
+          "title": "Guiding an app reinstall without losing the chat",
+          "situation": "In chat, you need the user to reinstall the app. Keep rapport, prevent drop-off, and verify the result.",
+          "targetPhrases": [
+            "I’ll stay here while you uninstall and reinstall; this won’t erase your data.",
+            "When you’re ready, type “ready” and we’ll continue.",
+            "If the chat disconnects, use case # [####] to reach me again.",
+            "After reinstall, please log in and confirm the version number.",
+            "Thanks for sticking with me—how’s it working now?"
+          ],
+          "successLooksLike": "Agent sets expectations, keeps the customer engaged during delays, verifies version and outcome, and logs exact steps taken."
+        },
+        {
+          "title": "Explaining a temporary outage and offering follow-up",
+          "situation": "Service is down for some users. Communicate the impact, ETA, workaround, and how you’ll notify the customer.",
+          "targetPhrases": [
+            "We’re experiencing a temporary outage affecting [feature/region].",
+            "The current estimate to fix is [timeframe].",
+            "I’ve added your case to the incident—you’ll get updates automatically.",
+            "I can set an alert to call or email you as soon as it’s resolved.",
+            "In the meantime, here’s a workaround you can use."
+          ],
+          "successLooksLike": "Agent states the issue without jargon, gives ETA and workaround, enrolls the customer for updates, and sets a clear follow-up trigger."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Retention and closure: saves, surveys, and crisp follow-ups",
+      "scenarios": [
+        {
+          "title": "Saving a cancellation due to price or missing features",
+          "situation": "Customer requests to cancel. Explore reasons, propose targeted alternatives, and secure either a save or a clean cancel.",
+          "targetPhrases": [
+            "I appreciate your honesty—what’s driving the cancellation?",
+            "Based on what you said, two options could help.",
+            "I can extend a promotion of [X] to bridge the gap.",
+            "If we try [option] for 30 days, would you be open to reassessing?",
+            "If you still prefer to cancel, I’ll process it now and confirm by email."
+          ],
+          "successLooksLike": "Agent uncovers the root reason, offers tailored options with value, attempts a save once, and if declined, cancels cleanly with written confirmation."
+        },
+        {
+          "title": "Turning a resolved complaint into a positive review/CSAT",
+          "situation": "After resolving an issue, politely request feedback that reflects the outcome without sounding scripted.",
+          "targetPhrases": [
+            "Thank you for giving us a chance to fix this.",
+            "Did I resolve your issue today?",
+            "If so, may I send a quick survey link? Your feedback helps me directly.",
+            "A short comment like “quick and clear support” really helps.",
+            "Here’s the direct link—it takes about 20 seconds."
+          ],
+          "successLooksLike": "Agent confirms resolution, requests feedback naturally, and sends an easy link—no pressure, just a clear, courteous ask."
+        },
+        {
+          "title": "Writing a concise follow-up email that closes the loop",
+          "situation": "After a call, send a summary email with actions, dates, and contact details so the customer doesn’t need to call back.",
+          "targetPhrases": [
+            "Subject: Today’s support summary — case #[####]",
+            "Here’s what we did today: [bulleted steps].",
+            "Next steps and dates: [who/when].",
+            "If anything changes, reply to this email or call me at [number].",
+            "Thanks for your patience—I’m here to help."
+          ],
+          "successLooksLike": "Agent sends a same-day summary with steps, owners, and dates; customer knows exactly what will happen and how to reach the agent."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 4,
+    "minutesPerSession": 45
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Agents handle English contacts without unnecessary transfers, keep control of the call, confirm understanding, and leave the customer with clear next steps.",
+      "measurableProxy": "Reduce transfer rate on English calls/chats by 20% and raise First Contact Resolution by 10% vs. the four-week pre-training baseline."
+    },
+    {
+      "plainLanguage": "Customers feel heard and informed; tense calls de-escalate quickly while staying within handle-time targets.",
+      "measurableProxy": "Improve CSAT for English interactions by +0.3 points (or +15%) and cut supervisor-call requests by 25% vs. baseline."
+    },
+    {
+      "plainLanguage": "Agents use policy language to say no while preserving goodwill and preventing repeat contacts.",
+      "measurableProxy": "Maintain CSAT ≥80% on out-of-policy decisions and reduce reopen/return contacts on the same case by 20%."
+    },
+    {
+      "plainLanguage": "Documentation and handoffs are clear; Tier 2 doesn’t need the customer to repeat details.",
+      "measurableProxy": "QA rubric scores for notes/handoffs average ≥90%, and repeat contacts due to unclear notes drop by 30%."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome to a 4‑week Customer Service English sprint. We’ll focus on live calls and chat for billing errors, shipping delays, troubleshooting, tough “no” conversations, and retention saves. Expect 4 x 45‑minute sessions per week with targeted role‑plays, coaching, and ready‑to‑use job aids. Please bring two real tickets each week. By week 4, you’ll de‑escalate faster, set expectations clearly, and close the loop with confident summaries and follow‑ups.",
+    "ko": "환영합니다! 4주간의 고객지원 영어 집중 과정입니다. 실제 통화/채팅 상황(중복 청구, 배송 지연, 기술 문제 해결, 정책상 거절, 유지/이탈 방지)에 바로 쓰이는 표현을 집중 연습합니다. 주 4회, 회당 45분으로 진행되며 역할연습, 코칭, 현장용 스크립트와 체크리스트가 제공됩니다. 매주 실제 티켓 2건을 준비해 오세요. 4주차에는 더 빠른 디에스컬레이션, 명확한 기대치 설정, 자신 있는 요약과 후속 조치를 수행하게 됩니다."
+  }
+}

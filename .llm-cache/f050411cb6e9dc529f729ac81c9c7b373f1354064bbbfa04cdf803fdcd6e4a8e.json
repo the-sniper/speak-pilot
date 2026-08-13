@@ -1,0 +1,466 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Setting the tone and taking ownership from the first contact",
+      "scenarios": [
+        {
+          "title": "Calming a caller who was transferred twice already",
+          "situation": "Inbound phone call. The customer sounds frustrated after being transferred multiple times. You must apologize, take ownership, and keep them on the line.",
+          "targetPhrases": [
+            "I’m sorry you’ve had to repeat this.",
+            "I’ll own this from here and stay with you.",
+            "Let me quickly verify your account so I can help."
+          ],
+          "successLooksLike": "Rep acknowledges the poor experience, states clear ownership, verifies the account without sounding robotic, and reduces tension within 60 seconds."
+        },
+        {
+          "title": "Fast, professional first response in live chat",
+          "situation": "New chat opens while two other chats are active. You need to greet, set timing expectations, and verify the account without sounding rushed.",
+          "targetPhrases": [
+            "Thanks for reaching out—give me up to two minutes to review.",
+            "Could you confirm your email or account ID?",
+            "I’ll keep you updated every minute until we resolve this."
+          ],
+          "successLooksLike": "Rep sends a warm greeting within 30 seconds, requests one verification item, and sets a concrete update interval."
+        },
+        {
+          "title": "Acknowledging a backlog with a realistic timeline (email)",
+          "situation": "A customer emails twice about the same issue. You must acknowledge the delay and provide a specific next step and time.",
+          "targetPhrases": [
+            "Thanks for your patience—here’s where we are now.",
+            "I’ll update you by [time/day], even if there’s no new information.",
+            "You don’t need to follow up; I’ll take care of it."
+          ],
+          "successLooksLike": "Rep sets a credible update time, avoids vague promises, and claims ownership to prevent further chasers."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "Diagnosing the real problem with probing and paraphrasing",
+      "scenarios": [
+        {
+          "title": "Clarifying a vague complaint on a call",
+          "situation": "Customer says, “It just doesn’t work.” You must narrow down symptoms without sounding accusatory.",
+          "targetPhrases": [
+            "To make sure I understand, when does it stop working?",
+            "What do you see on your screen right now?",
+            "Let me say that back to you—did I get it right?"
+          ],
+          "successLooksLike": "Rep gathers at least two concrete symptoms and confirms understanding before offering a fix."
+        },
+        {
+          "title": "Collecting technical details without jargon",
+          "situation": "You need device, OS, and app version from a non-technical user in chat.",
+          "targetPhrases": [
+            "Which device are you using—phone, tablet, or computer?",
+            "Please tap Settings > About; what version number do you see?",
+            "If it’s easier, I can wait while you check."
+          ],
+          "successLooksLike": "Rep elicits the required details using simple steps and patience, avoiding technical slang."
+        },
+        {
+          "title": "Bridging language gaps",
+          "situation": "Customer struggles with English. You must simplify language and check comprehension.",
+          "targetPhrases": [
+            "I’ll keep this simple and step-by-step.",
+            "Can you try this now and tell me what happens?",
+            "If I speak too fast, please tell me to slow down."
+          ],
+          "successLooksLike": "Rep uses short sentences, one instruction at a time, and confirms understanding without pressure."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "Verification and compliance under pressure",
+      "scenarios": [
+        {
+          "title": "Enforcing verification with an angry customer",
+          "situation": "Caller refuses security questions, demands immediate action. You must keep rapport while enforcing policy.",
+          "targetPhrases": [
+            "For your security, I need to confirm two details.",
+            "I want to help, and this protects your account.",
+            "Once we verify, I’ll move you to the front of the line."
+          ],
+          "successLooksLike": "Rep calmly explains why verification is required, offers a quickest-path option, and completes verification."
+        },
+        {
+          "title": "Explaining information you cannot share",
+          "situation": "Customer asks for another user’s data. You must decline clearly and offer compliant alternatives.",
+          "targetPhrases": [
+            "I can’t share that without verified consent.",
+            "Here’s what I can provide today.",
+            "We can send a secure consent link if you prefer."
+          ],
+          "successLooksLike": "Rep refuses firmly but politely and guides the customer to a compliant next step."
+        },
+        {
+          "title": "Handling a data deletion request",
+          "situation": "Email ticket requests account deletion under privacy law. You must confirm identity and outline next steps and timelines.",
+          "targetPhrases": [
+            "To process this request, we’ll need to verify the account owner.",
+            "Here are the steps and the usual timeline.",
+            "I’ll confirm once the deletion is complete."
+          ],
+          "successLooksLike": "Rep provides a clear checklist and timeline, avoids legal jargon, and sets an update cadence."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Guiding step-by-step troubleshooting remotely",
+      "scenarios": [
+        {
+          "title": "Resetting a password with 2FA on a call",
+          "situation": "User can’t log in and is locked out of email. You must guide a phone-based 2FA reset.",
+          "targetPhrases": [
+            "Please open the login page—tell me when you see it.",
+            "Click ‘Forgot password’ and choose ‘Text code’.",
+            "I’ll stay with you until you’re back in."
+          ],
+          "successLooksLike": "Rep paces instructions, checks progress after each step, and confirms successful login."
+        },
+        {
+          "title": "Clearing app cache on Android and iOS",
+          "situation": "Performance issues reported via chat. You must give platform-specific steps succinctly.",
+          "targetPhrases": [
+            "On Android: Settings > Apps > [App] > Storage > Clear cache.",
+            "On iOS: Reinstalling keeps your data; shall we proceed?",
+            "If that doesn’t help, we’ll try the next step."
+          ],
+          "successLooksLike": "Rep tailors steps to the device, warns about effects, and sequences alternatives."
+        },
+        {
+          "title": "Setting up a secure screen share",
+          "situation": "Customer needs visual help. You must obtain consent and set up screen share safely.",
+          "targetPhrases": [
+            "I’ll only see this window, not your whole screen.",
+            "Please close anything private before we start.",
+            "You can stop sharing anytime."
+          ],
+          "successLooksLike": "Rep explains boundaries, gets explicit consent, and starts/stops share smoothly."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "theme": "Outage communication and expectation management",
+      "scenarios": [
+        {
+          "title": "Delivering a no-ETA status update",
+          "situation": "Known outage with no estimated resolution time. Customer demands a timeline.",
+          "targetPhrases": [
+            "We’re experiencing a service interruption affecting [area].",
+            "Our engineers are investigating; I’ll update you by [time].",
+            "I’ll create an alert so you don’t need to check back."
+          ],
+          "successLooksLike": "Rep names the issue, avoids guessing ETAs, and sets proactive updates."
+        },
+        {
+          "title": "Explaining credit policy during an outage",
+          "situation": "High-value customer asks for compensation before resolution.",
+          "targetPhrases": [
+            "Here’s how credits work during outages.",
+            "I can pre-approve a provisional credit of [amount].",
+            "I’ll confirm the final credit after services are restored."
+          ],
+          "successLooksLike": "Rep explains policy in plain terms and documents a concrete, fair next step."
+        },
+        {
+          "title": "Calming hold-time frustration",
+          "situation": "Caller complains about long holds. You must reset expectations and provide options.",
+          "targetPhrases": [
+            "Thanks for holding—here’s what I’ve done so far.",
+            "I can call you back within [time], or we can continue now.",
+            "Your time matters; I’ll make this efficient."
+          ],
+          "successLooksLike": "Rep acknowledges inconvenience, summarizes progress, and offers a callback choice."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "theme": "Explaining policies: refunds, eligibility, and alternatives",
+      "scenarios": [
+        {
+          "title": "Declining a refund with empathy",
+          "situation": "Customer requests a refund outside policy. You must say no while preserving goodwill.",
+          "targetPhrases": [
+            "I understand this is frustrating.",
+            "Based on our policy, I can’t approve a refund today.",
+            "Here’s what I can do for you right now."
+          ],
+          "successLooksLike": "Rep shows empathy, states policy once, and offers a meaningful alternative."
+        },
+        {
+          "title": "Explaining prorated credits",
+          "situation": "Customer wants to know how a partial-month credit is calculated.",
+          "targetPhrases": [
+            "Your plan is [amount] per month, so the daily rate is [amount].",
+            "You used [days], so your credit is [amount].",
+            "I’ll send this breakdown in writing."
+          ],
+          "successLooksLike": "Rep explains the math clearly and documents it in CRM and email."
+        },
+        {
+          "title": "Handling price increase concerns",
+          "situation": "Customer upset about a price rise; considering canceling.",
+          "targetPhrases": [
+            "Here’s what’s changing and why.",
+            "Let me review options to reduce your cost.",
+            "We can lock in this rate for [period] if you prefer."
+          ],
+          "successLooksLike": "Rep explains reasons plainly and proposes at least one cost-saving option."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "theme": "Preventing and performing escalations gracefully",
+      "scenarios": [
+        {
+          "title": "Last attempt before escalation",
+          "situation": "Customer demands a supervisor. You must attempt one more solution respectfully.",
+          "targetPhrases": [
+            "Before I transfer, may I try one more quick step?",
+            "If that doesn’t work, I’ll connect you right away.",
+            "I’ll stay on the line during the transfer."
+          ],
+          "successLooksLike": "Rep seeks permission for one quick attempt and honors the promise to escalate if it fails."
+        },
+        {
+          "title": "Warm transfer to Tier 2",
+          "situation": "Issue requires specialist support. You must brief Tier 2 and reassure the customer.",
+          "targetPhrases": [
+            "Here’s a 30-second summary: issue, steps tried, result.",
+            "Customer is verified; case ID is [number].",
+            "I’ll introduce you both and then stay until you’re set."
+          ],
+          "successLooksLike": "Rep delivers a concise handoff that prevents the customer from repeating themselves."
+        },
+        {
+          "title": "Requesting an exception",
+          "situation": "You believe a one-time exception is warranted. You must ask a supervisor and set expectations with the customer.",
+          "targetPhrases": [
+            "Given the situation, I recommend a one-time exception.",
+            "I’ll confirm within [time] after approval.",
+            "If not approved, here’s our best alternative."
+          ],
+          "successLooksLike": "Rep frames a clear business case and communicates timelines and outcomes transparently."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "theme": "Multitasking in live chat without losing warmth",
+      "scenarios": [
+        {
+          "title": "Juggling three chats effectively",
+          "situation": "You are handling three chats and must set micro-deadlines and keep tone friendly.",
+          "targetPhrases": [
+            "I’m reviewing your case now—back in under two minutes.",
+            "Thank you for your patience; here’s the next step.",
+            "If I’m quiet, I’m working on your issue."
+          ],
+          "successLooksLike": "Rep uses brief, friendly updates and meets the promised micro-deadlines."
+        },
+        {
+          "title": "Returning from hold with value",
+          "situation": "After internal checks, return to the customer with progress and next steps.",
+          "targetPhrases": [
+            "Here’s what I checked and what it means for you.",
+            "Next, we’ll try this step together.",
+            "Does that plan work for you?"
+          ],
+          "successLooksLike": "Rep summarizes internal work and gains agreement on the next action."
+        },
+        {
+          "title": "Moving a complex chat to a call",
+          "situation": "Chat is not efficient for a complex issue. Suggest switching to a quick call.",
+          "targetPhrases": [
+            "This may be faster on a short call—about five minutes.",
+            "I can call you now or schedule a time.",
+            "I’ll email the summary after the call."
+          ],
+          "successLooksLike": "Rep offers a clear benefit, gives choices, and follows through with a summary."
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "theme": "Documentation and follow-through that prevent reopenings",
+      "scenarios": [
+        {
+          "title": "Writing crisp CRM notes",
+          "situation": "After a call, you must document using action–result–next step so the next agent is set up for success.",
+          "targetPhrases": [
+            "Action:",
+            "Result:",
+            "Next step by [owner/date]:"
+          ],
+          "successLooksLike": "Rep captures what happened and what’s next in under four lines with clear ownership."
+        },
+        {
+          "title": "Post-resolution email that customers keep",
+          "situation": "Send an email with steps, links, and a friendly close so customers can self-serve next time.",
+          "targetPhrases": [
+            "Here’s a quick recap of what we fixed:",
+            "If this happens again, try:",
+            "We’re here if you need us."
+          ],
+          "successLooksLike": "Rep sends a scannable email with numbered steps and links within 15 minutes of resolution."
+        },
+        {
+          "title": "Shift handoff that actually helps",
+          "situation": "You must pass a partially resolved case to the next shift with zero loss of context.",
+          "targetPhrases": [
+            "Customer context:",
+            "What’s been tried:",
+            "What to do next and when:"
+          ],
+          "successLooksLike": "Rep leaves enough detail so the next agent can act without re-contacting the customer."
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "theme": "Creating value moments: retention and right-fit recommendations",
+      "scenarios": [
+        {
+          "title": "Suggesting a plan upgrade that solves the root problem",
+          "situation": "After fixing an issue, you spot a usage limit problem. Offer an upgrade without pressure.",
+          "targetPhrases": [
+            "Based on your usage, this plan removes the limit.",
+            "Many customers in your situation chose this.",
+            "If you like, I can set it up now—no pressure."
+          ],
+          "successLooksLike": "Rep links recommendation to the customer’s need and asks for permission to proceed."
+        },
+        {
+          "title": "Saving a cancellation with a fair offer",
+          "situation": "Customer wants to cancel after a negative experience. Offer an appropriate retention option.",
+          "targetPhrases": [
+            "I’m sorry we missed the mark.",
+            "Here are two options that reduce cost or improve fit.",
+            "Which would you like to try?"
+          ],
+          "successLooksLike": "Rep shows empathy, presents two realistic options, and records the decision."
+        },
+        {
+          "title": "Cross-selling an add-on that prevents repeat issues",
+          "situation": "Customer repeatedly hits a security limit; propose a relevant add-on.",
+          "targetPhrases": [
+            "This add-on automates the step that caused the issue.",
+            "It costs [amount] per month and saves [time/steps].",
+            "I can start a free trial today."
+          ],
+          "successLooksLike": "Rep ties the add-on to a specific pain point and secures consent to trial or decline."
+        }
+      ]
+    },
+    {
+      "n": 11,
+      "theme": "Clear, global English in calls, chat, and email",
+      "scenarios": [
+        {
+          "title": "Avoiding slang and idioms in email",
+          "situation": "Write to a global audience; make instructions culture-neutral and literal.",
+          "targetPhrases": [
+            "To avoid confusion, here are simple steps:",
+            "First, Next, Finally",
+            "If anything is unclear, tell me which step."
+          ],
+          "successLooksLike": "Rep uses plain words, logical sequencing, and checks for clarity."
+        },
+        {
+          "title": "Speaking clearly with non-native customers",
+          "situation": "On a call, slow down, chunk information, and confirm understanding.",
+          "targetPhrases": [
+            "I’ll speak slowly and in short parts.",
+            "Please tell me if I should repeat.",
+            "Can you tell me the last step you completed?"
+          ],
+          "successLooksLike": "Rep paces speech, pauses for feedback, and verifies progress without judgment."
+        },
+        {
+          "title": "Apologizing without overpromising",
+          "situation": "You must apologize and take responsibility without admitting legal fault or making unrealistic promises.",
+          "targetPhrases": [
+            "I’m sorry for the trouble this caused.",
+            "Here’s what I can do today.",
+            "I’ll update you by [time] with the next step."
+          ],
+          "successLooksLike": "Rep offers a specific action and timeline instead of vague assurances."
+        }
+      ]
+    },
+    {
+      "n": 12,
+      "theme": "Quality close-out and survey requests",
+      "scenarios": [
+        {
+          "title": "Hitting the QA checklist on a mock call",
+          "situation": "Practice greeting, empathy, verification, problem-solving, confirmation, and close.",
+          "targetPhrases": [
+            "Thanks for contacting us—how can I help today?",
+            "Let me confirm I understood:",
+            "Is there anything else I can help you with?"
+          ],
+          "successLooksLike": "Rep demonstrates the full flow smoothly and meets internal QA rubrics."
+        },
+        {
+          "title": "Closing to prevent reopenings",
+          "situation": "Before ending, confirm resolution and next steps so the case stays closed.",
+          "targetPhrases": [
+            "We’ve completed [solution].",
+            "If this happens again, try [step] first.",
+            "I’ll send a summary right after this call."
+          ],
+          "successLooksLike": "Rep confirms resolution, gives a prevention tip, and states the follow-up channel."
+        },
+        {
+          "title": "Asking for CSAT ethically",
+          "situation": "Customer seems satisfied. Ask for survey feedback without pressure or incentives.",
+          "targetPhrases": [
+            "You may receive a short survey after this.",
+            "Your feedback helps us improve.",
+            "Thank you for your time today."
+          ],
+          "successLooksLike": "Rep requests feedback politely and keeps the tone customer-first."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 5,
+    "minutesPerSession": 10
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Agents set the right tone and take ownership from the first contact, even with frustrated customers.",
+      "measurableProxy": "QA scores for Greeting/Empathy/Ownership average 4/5 or higher across three consecutive audits."
+    },
+    {
+      "plainLanguage": "Agents resolve common issues without unnecessary escalation by giving clear, step-by-step guidance.",
+      "measurableProxy": "First Contact Resolution increases 10% on targeted issue codes; escalation rate decreases 10% from baseline."
+    },
+    {
+      "plainLanguage": "Agents communicate status and policies clearly without creating false expectations.",
+      "measurableProxy": "Percentage of tickets with time-bound updates rises to 90%+; “broken promise” tags fall below 3%."
+    },
+    {
+      "plainLanguage": "Written communication and CRM notes are concise, accurate, and useful for the next agent.",
+      "measurableProxy": "QA writing rubric averages 85%+; case reopen rate drops by 15%; handoff sufficiency rated 90%+ by peers."
+    },
+    {
+      "plainLanguage": "Quality improves without harming efficiency.",
+      "measurableProxy": "Average Handle Time stays within ±5% of baseline while CSAT improves by 0.3 points or more."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome to your 12-week Customer Support English program. We designed this for busy teams: just 10 minutes a day, five days a week. Each micro-lesson practices real scenarios—de-escalating after multiple transfers, verifying identity under pressure, guiding step-by-step fixes, explaining policies, writing crisp notes, and closing for CSAT. You’ll see target phrases you can use right away on phone, chat, and email. Success looks like calmer calls, clearer messages, fewer escalations, and stronger QA/CSAT with the same handle time. Let’s build confidence, one focused practice at a time.",
+    "ko": "12주간 고객지원 영어 프로그램에 오신 것을 환영합니다. 바쁜 팀을 위해 설계되어, 하루 10분씩 주 5일만 투자하면 됩니다. 각 마이크로 학습은 실제 상황을 연습합니다—여러 번 전환된 고객 진정시키기, 압박 속 신원 확인, 단계별 문제 해결 안내, 정책 설명, 정확한 메모 작성, CSAT로 마무리하기. 전화, 채팅, 이메일에서 바로 쓸 수 있는 핵심 표현을 제공합니다. 성공은 더 차분한 통화, 더 명확한 메시지, 더 적은 에스컬레이션, 동일한 처리 시간으로 개선된 QA/CSAT로 보여집니다. 매일 짧고 집중된 연습으로 자신감을 함께 키워갑시다."
+  }
+}

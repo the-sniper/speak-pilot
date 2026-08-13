@@ -1,3 +1,4 @@
+import { unwrapArrayTransportResponse, wrapArraySchemaForTransport } from "../transport"
 import type { Provider, ProviderCall } from "./types"
 
 // $ per 1M tokens. Deliberately left empty: this project has not verified
@@ -29,6 +30,11 @@ export const openaiProvider: Provider = {
       throw new Error("LLM_API_KEY is not set — cannot call the OpenAI provider. Use LLM_PROVIDER=mock or REPLAY=1.")
     }
 
+    // OpenAI's function-calling `parameters` must describe a JSON object —
+    // see src/lib/llm/transport.ts for why groundedPlacementsSchema (array-
+    // rooted) needs wrapping here and nowhere else.
+    const { schema: parameters, wrapped } = wrapArraySchemaForTransport(jsonSchema)
+
     const res = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -47,7 +53,7 @@ export const openaiProvider: Provider = {
             function: {
               name: toolName,
               description: `Return output conforming exactly to the ${toolName} schema.`,
-              parameters: jsonSchema,
+              parameters,
               strict: true,
             },
           },
@@ -65,7 +71,8 @@ export const openaiProvider: Provider = {
     const toolCall = body?.choices?.[0]?.message?.tool_calls?.[0]
     if (!toolCall) throw new Error("OpenAI response contained no tool call")
 
-    const raw: unknown = JSON.parse(toolCall.function.arguments)
+    const parsedArgs: unknown = JSON.parse(toolCall.function.arguments)
+    const raw = unwrapArrayTransportResponse(parsedArgs, wrapped)
     const usage = body?.usage ?? {}
     const cost = costFor(model, usage.prompt_tokens ?? 0, usage.completion_tokens ?? 0)
     return { raw, cost }

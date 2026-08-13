@@ -1,0 +1,194 @@
+[
+  {
+    "learnerId": "learner-0001",
+    "band": "C1",
+    "rationale": "Acc mostly 8–10 with one dip to 6; avg ≈9 and strong fluency/prosody. Falls above 8.6 → C1. Evidence sample: 000010053.",
+    "evidenceUtteranceIds": [
+      "000010053"
+    ]
+  },
+  {
+    "learnerId": "learner-0053",
+    "band": "B2",
+    "rationale": "Accuracy mostly 7–9; avg ≈8.2 with steady fluency. Fits 8.0–8.6 → B2. Evidence: 000530037.",
+    "evidenceUtteranceIds": [
+      "000530037"
+    ]
+  },
+  {
+    "learnerId": "learner-0112",
+    "band": "B1",
+    "rationale": "Wide variance (4–9) but average ≈7.5 across shown items; within 7.0–8.0 → B1. Evidence: 001120024.",
+    "evidenceUtteranceIds": [
+      "001120024"
+    ]
+  },
+  {
+    "learnerId": "learner-0131",
+    "band": "C1",
+    "rationale": "Consistent 8–9 accuracies; avg ≈8.6, meeting 8.6+ threshold → C1. Evidence: 001310061.",
+    "evidenceUtteranceIds": [
+      "001310061"
+    ]
+  },
+  {
+    "learnerId": "learner-0482",
+    "band": "C1",
+    "rationale": "Accuracies 8–10, avg ≈8.8 with strong fluency/prosody → C1. Evidence: 004820045.",
+    "evidenceUtteranceIds": [
+      "004820045"
+    ]
+  },
+  {
+    "learnerId": "learner-0594",
+    "band": "B1",
+    "rationale": "Accuracy ranges 3–8; average ≈7.0 across listed items → B1. Evidence: 005940025.",
+    "evidenceUtteranceIds": [
+      "005940025"
+    ]
+  },
+  {
+    "learnerId": "learner-0736",
+    "band": "A2",
+    "rationale": "Accuracy mostly 5–7 with one 9; average ≈6.1 → A2. Evidence: 007360045.",
+    "evidenceUtteranceIds": [
+      "007360045"
+    ]
+  },
+  {
+    "learnerId": "learner-1228",
+    "band": "B1",
+    "rationale": "Accuracy spans 3–8; average ≈7.1 → B1. Evidence: 012280206.",
+    "evidenceUtteranceIds": [
+      "012280206"
+    ]
+  },
+  {
+    "learnerId": "learner-1404",
+    "band": "A1",
+    "rationale": "Frequent low accuracies (3–6) with few highs; average ≈4.7 → A1. Evidence: 014040028.",
+    "evidenceUtteranceIds": [
+      "014040028"
+    ]
+  },
+  {
+    "learnerId": "learner-1419",
+    "band": "A2",
+    "rationale": "Accuracy varies 3–9; average ≈6.9 sits in 5.5–7.0 → A2. Evidence: 014190059.",
+    "evidenceUtteranceIds": [
+      "014190059"
+    ]
+  },
+  {
+    "learnerId": "learner-1422",
+    "band": "A2",
+    "rationale": "Accuracy 3–9; average ≈5.9 → A2. Evidence: 014220038.",
+    "evidenceUtteranceIds": [
+      "014220038"
+    ]
+  },
+  {
+    "learnerId": "learner-1435",
+    "band": "B1",
+    "rationale": "Accuracy generally 6–9; average ≈7.8 → B1. Evidence: 014350020.",
+    "evidenceUtteranceIds": [
+      "014350020"
+    ]
+  },
+  {
+    "learnerId": "learner-1447",
+    "band": "B2",
+    "rationale": "Accuracies mainly 8–9; average ≈8.5 → B2. Evidence: 014470038.",
+    "evidenceUtteranceIds": [
+      "014470038"
+    ]
+  },
+  {
+    "learnerId": "learner-1502",
+    "band": "B1",
+    "rationale": "Accuracy 3–8; average ≈7.0 across items → B1. Evidence: 015020022.",
+    "evidenceUtteranceIds": [
+      "015020022"
+    ]
+  },
+  {
+    "learnerId": "learner-1503",
+    "band": "B1",
+    "rationale": "Accuracy ranges 3–10; average ≈7.4 → B1. Evidence: 015030041.",
+    "evidenceUtteranceIds": [
+      "015030041"
+    ]
+  },
+  {
+    "learnerId": "learner-2014",
+    "band": "B1",
+    "rationale": "Accuracy mostly 7–9 with a 4; average ≈7.7 → B1. Evidence: 020140045.",
+    "evidenceUtteranceIds": [
+      "020140045"
+    ]
+  },
+  {
+    "learnerId": "learner-2030",
+    "band": "B1",
+    "rationale": "Accuracy 4–8; average ≈7.3 → B1. Evidence: 020300053.",
+    "evidenceUtteranceIds": [
+      "020300053"
+    ]
+  },
+  {
+    "learnerId": "learner-5017",
+    "band": "B1",
+    "rationale": "Accuracy 3–9; average ≈7.7 → B1. Evidence: 050170051.",
+    "evidenceUtteranceIds": [
+      "050170051"
+    ]
+  },
+  {
+    "learnerId": "learner-5418",
+    "band": "C1",
+    "rationale": "Accuracies 8–9 throughout; average ≈8.7 → C1. Evidence: 054180059.",
+    "evidenceUtteranceIds": [
+      "054180059"
+    ]
+  },
+  {
+    "learnerId": "learner-6504",
+    "band": "B2",
+    "rationale": "Acc mostly 8–9 with a 10; average ≈8.4 → B2. Evidence: 065040049.",
+    "evidenceUtteranceIds": [
+      "065040049"
+    ]
+  },
+  {
+    "learnerId": "learner-6902",
+    "band": "A1",
+    "rationale": "Accuracies frequently 3–7; average ≈5.1 → A1. Evidence: 069020044.",
+    "evidenceUtteranceIds": [
+      "069020044"
+    ]
+  },
+  {
+    "learnerId": "learner-8057",
+    "band": "B2",
+    "rationale": "Accuracy steady at 7–9 (mostly 8); average ≈8.0, meeting 8.0–8.6 band → B2. Evidence: 080570053.",
+    "evidenceUtteranceIds": [
+      "080570053"
+    ]
+  },
+  {
+    "learnerId": "learner-8063",
+    "band": "C1",
+    "rationale": "Accuracies 8–9 (mostly 9); average ≈8.7 → C1. Evidence: 080630062.",
+    "evidenceUtteranceIds": [
+      "080630062"
+    ]
+  },
+  {
+    "learnerId": "learner-9553",
+    "band": "B2",
+    "rationale": "Acc 8–9 throughout; average ≈8.5 → B2. Evidence: 095530041.",
+    "evidenceUtteranceIds": [
+      "095530041"
+    ]
+  }
+]

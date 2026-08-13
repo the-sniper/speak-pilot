@@ -1,0 +1,231 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "High-stakes openings, de‑escalation, and clear diagnosis",
+      "scenarios": [
+        {
+          "title": "De-escalate a customer who’s been transferred three times (phone)",
+          "situation": "A frustrated customer has been bounced between agents. You’re the fourth. They’re speaking quickly, interrupting, and threatening to cancel.",
+          "targetPhrases": [
+            "I can hear how frustrating this has been—thank you for staying on the line.",
+            "You won’t have to repeat yourself; I’m owning this until it’s fixed.",
+            "In one sentence, the main issue is… did I get that right?",
+            "Let’s agree on the next 10 minutes: I’ll verify, diagnose, and offer options.",
+            "Is it okay if I place you on a brief hold while I check that? I’ll be 60 seconds."
+          ],
+          "successLooksLike": "The agent calms the customer within 90 seconds, states ownership, accurately summarizes the issue, gains permission for a short hold, and secures agreement to continue without the customer asking for a supervisor."
+        },
+        {
+          "title": "Security verification on a recorded line before account access",
+          "situation": "The customer wants you to change billing details. You must comply with PCI/PII policy while keeping momentum.",
+          "targetPhrases": [
+            "Before I access your account, I need to verify two details for security.",
+            "For your privacy, please don’t read the full card number aloud.",
+            "Once verified, I can update the billing address immediately.",
+            "We take security seriously; here’s what I can and can’t do on this line."
+          ],
+          "successLooksLike": "The agent completes verification without collecting prohibited data, explains boundaries clearly, and transitions smoothly into resolution steps without sounding robotic."
+        },
+        {
+          "title": "Probing to diagnose without blame",
+          "situation": "The user insists “your product is broken” but provides vague symptoms across browser and mobile.",
+          "targetPhrases": [
+            "To pinpoint this, I’ll ask a few quick questions—about one minute.",
+            "When did this first happen, and what changed right before it?",
+            "Let’s try one check together: [specific step]. What do you see now?",
+            "Thanks—that tells me it’s likely [x]. Here’s our plan."
+          ],
+          "successLooksLike": "The agent asks focused questions, gets one replicable symptom, confirms environment, and proposes a clear plan the customer agrees to follow."
+        },
+        {
+          "title": "Follow-up email after a heated chat (cool-down + next steps)",
+          "situation": "Chat ended tense. You must send a concise email that resets tone, confirms facts, and sets expectations.",
+          "targetPhrases": [
+            "Subject: I’m owning your case—next steps inside",
+            "Here’s what I captured: [bullet 1–3].",
+            "Today I will: [action]. By [time/zone], you’ll get: [deliverable].",
+            "If this slips, I’ll update you by [time]. You won’t need to chase me."
+          ],
+          "successLooksLike": "The email is under 130 words, includes a one-line summary, 2–3 bullets of facts, a concrete ETA, and a promise to proactively update, resulting in no follow-up “any update?” reply for 24 hours."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "Resolution language, policy boundaries, and warm handoffs",
+      "scenarios": [
+        {
+          "title": "Step-by-step remote troubleshooting with professional holds",
+          "situation": "You must talk a non-technical user through a 6-step fix while managing silence and holds.",
+          "targetPhrases": [
+            "I’ll guide you step by step—please tell me what you see after each step.",
+            "I’ll stay with you during the restart. This may be silent for 90 seconds.",
+            "If anything looks different on your screen, say ‘Pause’ and we’ll adjust.",
+            "Great—that means steps 1–3 worked. Here’s step 4."
+          ],
+          "successLooksLike": "The agent keeps control of pacing, narrates holds, confirms after each step, and reaches resolution or a documented blocker without sounding impatient."
+        },
+        {
+          "title": "Delivering bad news with options (within policy)",
+          "situation": "Customer requests a full refund outside policy. You must say no without escalating emotion and still create a win.",
+          "targetPhrases": [
+            "I’ve reviewed your case carefully—here’s what I can do today.",
+            "Within policy, I can offer [credit/partial refund/extended support].",
+            "If we choose [option A], you’ll get [benefit] by [time].",
+            "I want to be fair and consistent; here’s why we can’t do [request]."
+          ],
+          "successLooksLike": "The agent clearly declines the out-of-policy request, offers two concrete alternatives, explains rationale, and confirms customer choice without manager intervention."
+        },
+        {
+          "title": "Warm handoff to Tier 2 without the customer repeating",
+          "situation": "Issue needs specialist access. You must conference in Tier 2, brief them, and stay on until ownership is clear.",
+          "targetPhrases": [
+            "I’m looping in our specialist now—I’ll brief them so you don’t repeat.",
+            "Summary for Tier 2: [who], [issue], [what we’ve tried], [ask], [urgency/impact].",
+            "I’ll remain on the line until we confirm next steps and owner.",
+            "Ticket #[number] reflects this summary—adding you now."
+          ],
+          "successLooksLike": "Tier 2 receives a crisp 30-second summary, confirms ownership and ETA while the customer is present, and the customer expresses confidence that the case won’t restart from zero."
+        },
+        {
+          "title": "Case notes that prevent re-explaining (public vs. internal)",
+          "situation": "You must write a public update for the customer and a separate internal note for engineering.",
+          "targetPhrases": [
+            "Public: Plain language, actions done, what happens next, by when.",
+            "Internal: Steps taken, logs, exact error text, hypothesis, next test.",
+            "Avoid jargon in public; include full detail in internal.",
+            "Action required: [customer/agent/team] by [deadline]."
+          ],
+          "successLooksLike": "Public note is readable to a non-expert with clear next step and ETA; internal note has reproducible steps and data, enabling the next agent to continue without new questions."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "Incidents, expectations, and retention tactics",
+      "scenarios": [
+        {
+          "title": "Live incident/outage communication",
+          "situation": "Multiple customers are impacted. You must acknowledge, set expectations, and avoid overpromising.",
+          "targetPhrases": [
+            "We’re aware of a broader incident affecting [scope].",
+            "Current status: [impact]. Next update by [time zone].",
+            "Temporary workaround: [x].",
+            "We’ll notify you when it’s resolved—you don’t need to check in."
+          ],
+          "successLooksLike": "The agent names the incident, gives an honest status and next update time, offers any workaround, and reduces inbound follow-ups."
+        },
+        {
+          "title": "Handling repeat contacts and callback commitments",
+          "situation": "Customer has contacted three times this week. You must stop the loop and create a reliable callback plan.",
+          "targetPhrases": [
+            "I see you’ve had to reach out multiple times—I’m closing that loop now.",
+            "Here’s my callback window: [time range, time zone].",
+            "If I miss you, I’ll send a written update with next steps.",
+            "Let’s confirm the best number and time zone."
+          ],
+          "successLooksLike": "The agent acknowledges repeat effort, sets a concrete callback window, confirms contact details, and follows through so the customer doesn’t contact again before the agreed time."
+        },
+        {
+          "title": "Negotiating partial refunds or service credits",
+          "situation": "Service degraded for part of the month. You must calculate and offer a fair credit.",
+          "targetPhrases": [
+            "Based on impact from [date] to [date], the fair credit is [amount/%].",
+            "I can apply this today; it will appear by [statement/date].",
+            "If you prefer, we can extend your plan by [x] days instead.",
+            "Which option works best for you?"
+          ],
+          "successLooksLike": "The agent ties the offer to dates and impact, names the amount confidently, offers one alternative, and secures agreement without needing a supervisor."
+        },
+        {
+          "title": "Multi-chat triage with concise, human macro use",
+          "situation": "You’re handling three chat sessions at once. You need to personalize macros and keep response times low.",
+          "targetPhrases": [
+            "Personalized macro: add name + 1 detail, remove irrelevant lines.",
+            "I’m here—working on this now. Back with you in ~1 minute.",
+            "Quick check: Did that step change the error message?",
+            "I’ll watch for your reply while I prepare the next step."
+          ],
+          "successLooksLike": "Responses stay under 20 seconds on average, macros are personalized, and each chat advances one step per turn without the customer asking if you’re still there."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Executive-level communication, recovery, and QA excellence",
+      "scenarios": [
+        {
+          "title": "Managing a VIP/enterprise stakeholder call",
+          "situation": "Two stakeholders join: a sponsor and an end user. You must balance business impact and technical detail.",
+          "targetPhrases": [
+            "I’ll split this into impact, root cause hypothesis, and next actions.",
+            "For the sponsor: business impact is [x]; ETA to risk reduction is [time].",
+            "For the user: here’s the exact fix we’re testing and why.",
+            "I’ll send a one-page recap in 15 minutes."
+          ],
+          "successLooksLike": "Both stakeholders feel heard; the sponsor gets clear risk/ETA while the user gets actionable steps. The call ends with agreement on actions and timing."
+        },
+        {
+          "title": "Turning a cancellation request into a retention save",
+          "situation": "Customer wants to cancel due to a recurring bug. You must acknowledge pain, offer a targeted fix/credit, and restate value.",
+          "targetPhrases": [
+            "If we fix [specific blocker], would keeping your plan make sense?",
+            "Here’s a targeted fix and a [credit/extension] for the disruption.",
+            "To make this effortless, I’ll implement it now and follow up by [time].",
+            "If it falls short, I’ll process cancellation without you calling back."
+          ],
+          "successLooksLike": "The agent explores a conditional save, proposes a fix plus goodwill, executes immediately, and sets a short follow-up. Customer agrees to pause cancellation."
+        },
+        {
+          "title": "Owning an internal error and committing to corrective action",
+          "situation": "Our team caused a delay. You must apologize, explain without excuses, and present a corrective plan.",
+          "targetPhrases": [
+            "We missed the mark—here’s exactly where our process failed.",
+            "I’m accountable for the fix and the follow-up timeline.",
+            "Immediate corrective action: [x]. Prevention: [y].",
+            "You’ll hear from me by [time] with proof of completion."
+          ],
+          "successLooksLike": "The agent gives a clean apology, names the failure point, outlines immediate and preventive actions, and meets the proof-of-completion deadline."
+        },
+        {
+          "title": "Post-resolution follow-up that earns positive CSAT",
+          "situation": "Issue resolved. You send a short message that confirms outcome and invites feedback without begging.",
+          "targetPhrases": [
+            "I’m checking that everything works as expected on your end.",
+            "Here’s what we changed and how to spot it working.",
+            "If anything isn’t perfect, reply to me directly—no queue.",
+            "If we nailed it, a quick survey may pop up—thanks for your feedback."
+          ],
+          "successLooksLike": "The follow-up is timely, personalized, and closes the loop. The customer confirms success and is primed to leave positive feedback without being pressured."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 4,
+    "minutesPerSession": 75
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Agents calm upset customers quickly, set expectations, and keep control of the conversation.",
+      "measurableProxy": "In recorded role-plays, an empathy + ownership statement occurs within 30 seconds; customer interruption rate drops by 50% within the first 90 seconds."
+    },
+    {
+      "plainLanguage": "Agents explain complex steps clearly the first time and document so the next person can continue without starting over.",
+      "measurableProxy": "90% of call audits show sequenced instructions with confirmation after each step; 0 follow-up questions from Tier 2 about what was already tried in 8/10 handoffs."
+    },
+    {
+      "plainLanguage": "Agents write concise, customer-ready updates that reduce repeat contacts.",
+      "measurableProxy": "Average follow-up email under 130 words with one-sentence summary, bullets, and ETA; ‘any update?’ replies drop by 30% over the program."
+    },
+    {
+      "plainLanguage": "Agents stay within policy while creating fair outcomes that retain customers.",
+      "measurableProxy": "In simulations, 80% of out-of-policy cases end with a documented alternative offer and explicit customer agreement without supervisor escalation."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome to our 4‑week Customer Support English Sprint. Our goal is clear: by next month, you’ll communicate at a high professional level across phone, chat, and email—calming tense situations, setting crisp expectations, and driving resolution without escalations. Expect four 75‑minute sessions per week, with targeted practice, real call simulations, and fast feedback. Bring recent tickets you’re proud of—and ones that were tough. We’ll turn both into repeatable language you can use the same day. Let’s get to work.",
+    "ko": "4주간 고객 지원 영어 스프린트에 오신 것을 환영합니다. 목표는 명확합니다. 다음 달까지 전화, 채팅, 이메일에서 모두 전문적으로 소통하여 긴장을 빠르게 완화하고, 명확한 기대치를 제시하며, 불필요한 이관 없이 해결을 이끌어내는 것입니다. 주 4회, 회당 75분 수업으로 구성되며, 실제 콜 시뮬레이션과 즉각적인 피드백을 통해 바로 써먹을 수 있는 표현을 훈련합니다. 최근 처리한 ‘잘 된’ 티켓과 ‘어려웠던’ 티켓을 가져오세요. 둘 다 당장 현장에서 쓰는 언어로 바꿔 드립니다. 지금 시작합시다."
+  }
+}

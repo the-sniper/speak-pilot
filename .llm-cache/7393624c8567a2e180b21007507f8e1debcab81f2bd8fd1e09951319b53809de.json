@@ -1,0 +1,666 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Intake openings, identity verification, and setting expectations",
+      "scenarios": [
+        {
+          "title": "Open the intake and confirm identity in a busy ED triage bay",
+          "situation": "You greet an adult patient and spouse at the triage desk during a rush hour. You must quickly establish rapport, confirm full name and date of birth, and explain what will happen next.",
+          "targetPhrases": [
+            "Hi, I’m [Name], one of the nurses on triage today.",
+            "Can you tell me your full name and date of birth, please?",
+            "Let me make sure I pronounced your name correctly: [repeat name].",
+            "Here’s what will happen in the next few minutes.",
+            "I’ll ask a few quick questions to keep you safe.",
+            "If I speak too fast, please tell me and I’ll slow down."
+          ],
+          "successLooksLike": "Nurse opens professionally, verifies two identifiers without error, and sets a clear 2–3 step expectation for the intake flow."
+        },
+        {
+          "title": "Interpreter or communication accommodation setup",
+          "situation": "The patient’s daughter requests help because her father is hard of hearing. You need to arrange a communication aid and confirm understanding.",
+          "targetPhrases": [
+            "Do you prefer written notes, an interpreter, or a video relay?",
+            "I will bring the device now so we can communicate clearly.",
+            "I’ll check back to make sure this works well for you.",
+            "Please let me know if you need me to repeat or rephrase."
+          ],
+          "successLooksLike": "Nurse offers appropriate accommodations and confirms that the patient can follow along before proceeding."
+        },
+        {
+          "title": "Privacy check and who can stay",
+          "situation": "Two family members want to stay during intake. You must confirm the patient’s preference and privacy boundaries.",
+          "targetPhrases": [
+            "Who would you like to stay with you while we talk?",
+            "We’ll discuss personal health information now.",
+            "If you prefer, we can speak privately.",
+            "I’ll share updates only with the person you choose."
+          ],
+          "successLooksLike": "Nurse obtains patient preference and politely enforces privacy boundaries."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "Chief complaint and symptom exploration with plain language",
+      "scenarios": [
+        {
+          "title": "Elicit the chief complaint efficiently",
+          "situation": "You have five minutes to understand why the patient came in and how urgent it is.",
+          "targetPhrases": [
+            "What brought you in today?",
+            "When did this start? Has it gotten better, worse, or the same?",
+            "On a scale of 0 to 10, how would you rate your pain right now?",
+            "What makes it better or worse?"
+          ],
+          "successLooksLike": "Nurse captures chief complaint, onset, severity, and modifiers concisely without medical jargon."
+        },
+        {
+          "title": "Clarify red flags and rule-out questions",
+          "situation": "Patient reports chest discomfort. You must ask targeted safety questions before vitals.",
+          "targetPhrases": [
+            "Is the pain crushing, tight, or sharp?",
+            "Do you feel short of breath, sweaty, or nauseated?",
+            "Does the pain spread to your arm, jaw, or back?",
+            "Have you had this before?"
+          ],
+          "successLooksLike": "Nurse asks appropriate screening questions and flags urgency for rapid triage."
+        },
+        {
+          "title": "Teach-back to confirm understanding",
+          "situation": "After summarizing what you heard, you ensure alignment before moving on.",
+          "targetPhrases": [
+            "Let me repeat what I heard to make sure I got it right.",
+            "In your own words, what is your main concern today?",
+            "Did I miss anything important?",
+            "We’ll take your vitals next and update you on timing."
+          ],
+          "successLooksLike": "Nurse uses teach-back to confirm shared understanding and next steps."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "Medical history, medications, and allergy verification",
+      "scenarios": [
+        {
+          "title": "Allergy verification with specific reactions",
+          "situation": "Patient says they are allergic to penicillin. You must clarify reaction and severity.",
+          "targetPhrases": [
+            "What happens when you take penicillin?",
+            "Is it a rash, swelling, trouble breathing, or something else?",
+            "When did this last happen?",
+            "I’ll add that to your chart to keep you safe."
+          ],
+          "successLooksLike": "Nurse documents substance and reaction accurately and communicates safety intent."
+        },
+        {
+          "title": "Medication reconciliation including over-the-counter and herbal",
+          "situation": "Patient brings a bag of medicines. You need to list name, dose, frequency, and last dose taken.",
+          "targetPhrases": [
+            "Let’s go through your medicines one by one.",
+            "What is the dose and how often do you take it?",
+            "When was your last dose?",
+            "Do you take any vitamins, herbs, or over-the-counter medicines?"
+          ],
+          "successLooksLike": "Nurse captures complete med list with last dose and includes non-prescription items."
+        },
+        {
+          "title": "Past history essentials for triage",
+          "situation": "You need key history items relevant to today’s visit without going off track.",
+          "targetPhrases": [
+            "Any major surgeries or hospital stays?",
+            "Any heart, lung, or diabetes issues?",
+            "Are you pregnant or could you be?",
+            "I’ll focus on what matters for today’s visit."
+          ],
+          "successLooksLike": "Nurse efficiently gathers high-yield history tied to presenting complaint."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Administrative intake, consent, and privacy in plain language",
+      "scenarios": [
+        {
+          "title": "ID and insurance confirmation without jargon",
+          "situation": "You must verify insurance coverage and explain any forms while keeping clinical flow moving.",
+          "targetPhrases": [
+            "May I verify your address and insurance on file?",
+            "This form allows us to treat you and bill your insurance.",
+            "Please sign here to show you understand and agree.",
+            "I can answer any questions before you sign."
+          ],
+          "successLooksLike": "Nurse verifies admin details and explains forms clearly and politely."
+        },
+        {
+          "title": "HIPAA-friendly update boundaries",
+          "situation": "A friend asks for details about the patient’s condition. You must protect privacy.",
+          "targetPhrases": [
+            "I want to protect [Name]’s privacy.",
+            "I can share general information, but not details without permission.",
+            "Let me check who is listed as the contact person.",
+            "With [Name]’s okay, I can update you."
+          ],
+          "successLooksLike": "Nurse maintains privacy while offering appropriate alternatives."
+        },
+        {
+          "title": "Documenting consent conversation",
+          "situation": "After explaining a routine procedure, you document patient understanding and consent.",
+          "targetPhrases": [
+            "We discussed what will happen, benefits, and possible risks in simple terms.",
+            "The patient had a chance to ask questions.",
+            "The patient agreed to proceed.",
+            "I documented consent in the chart."
+          ],
+          "successLooksLike": "Nurse records a clear, compliant note of the consent discussion."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "theme": "Vitals, triage priority, and explaining wait times",
+      "scenarios": [
+        {
+          "title": "Explain vitals and purpose",
+          "situation": "A nervous patient resists having vitals taken. You need to reassure and proceed.",
+          "targetPhrases": [
+            "I’ll check your temperature, blood pressure, pulse, and oxygen level.",
+            "This helps us see how your body is doing right now.",
+            "It takes just a minute and doesn’t hurt."
+          ],
+          "successLooksLike": "Nurse reassures patient and completes vitals smoothly."
+        },
+        {
+          "title": "Set expectations for triage and queueing",
+          "situation": "Lobby is full and waits are long. You must explain how triage works and expected timing.",
+          "targetPhrases": [
+            "We see the sickest patients first, not just in arrival order.",
+            "Your safety is our priority; I’ll keep you updated.",
+            "Right now the estimated wait is about [X] minutes.",
+            "Please tell me right away if your symptoms change."
+          ],
+          "successLooksLike": "Nurse explains triage fairness and gives a realistic time window."
+        },
+        {
+          "title": "Escalate based on vitals or symptoms",
+          "situation": "You notice abnormal vitals. You must communicate urgency to the team and family calmly.",
+          "targetPhrases": [
+            "I’m going to alert the provider now because of your numbers.",
+            "We’ll move you to a room for closer monitoring.",
+            "I’ll update your family as soon as we settle you."
+          ],
+          "successLooksLike": "Nurse communicates urgency without causing panic and initiates escalation steps."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "theme": "Special populations and caregivers: pediatric and geriatric intakes",
+      "scenarios": [
+        {
+          "title": "Pediatric intake with caregiver present",
+          "situation": "You intake a 5-year-old with fever and a worried parent. You must address both child and caregiver.",
+          "targetPhrases": [
+            "Hi [Child’s Name], I’m going to check your temperature.",
+            "To the parent: What was the highest temperature you saw at home?",
+            "Any medicines given today and what time?",
+            "I’ll explain everything we do before we do it."
+          ],
+          "successLooksLike": "Nurse uses child-friendly language and collects accurate history from caregiver."
+        },
+        {
+          "title": "Geriatric intake with possible confusion",
+          "situation": "An older adult seems disoriented. You must assess safely and involve the family contact.",
+          "targetPhrases": [
+            "I’ll ask short questions one at a time.",
+            "Do you have a health care proxy or someone we can update?",
+            "I want to make sure you’re safe—have you fallen recently?",
+            "With your permission, I’ll update your [relationship]."
+          ],
+          "successLooksLike": "Nurse adapts communication and confirms appropriate contact for updates."
+        },
+        {
+          "title": "Mobility, fall risk, and assistive devices",
+          "situation": "Patient uses a cane and is unsteady. You need to document mobility and plan for safety.",
+          "targetPhrases": [
+            "Do you use any devices like a cane, walker, or oxygen?",
+            "Have you fallen in the last 3 months?",
+            "I’ll help you stand and move safely.",
+            "I’ll add fall precautions to your chart."
+          ],
+          "successLooksLike": "Nurse identifies fall risk and implements basic precautions."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "theme": "Explaining tests and procedures before they happen",
+      "scenarios": [
+        {
+          "title": "Prepare patient for lab work",
+          "situation": "You must explain what the blood tests are for and how long results may take.",
+          "targetPhrases": [
+            "We’ll draw a small sample of blood from your arm.",
+            "These tests check things like infection and electrolytes.",
+            "Results usually take about [X] minutes.",
+            "I’ll update you as soon as we have them."
+          ],
+          "successLooksLike": "Nurse explains purpose, process, and timing in plain language."
+        },
+        {
+          "title": "Imaging prep with simple instructions",
+          "situation": "Patient is going for an X-ray/CT. You must explain removal of metal items and positioning.",
+          "targetPhrases": [
+            "Please remove metal items like jewelry or belts.",
+            "You’ll need to lie still for a few minutes.",
+            "If you feel uncomfortable, tell the tech right away.",
+            "We’ll bring you back here after the test."
+          ],
+          "successLooksLike": "Nurse delivers clear, actionable prep steps and reassures patient."
+        },
+        {
+          "title": "NPO/fasting clarification",
+          "situation": "Pre-procedure fasting is required. You must ensure the patient understands what is and isn’t allowed.",
+          "targetPhrases": [
+            "Nothing to eat or drink means no food, gum, or water.",
+            "You can take essential medicines with a small sip if the doctor says it’s okay.",
+            "Fasting helps keep you safe during the procedure."
+          ],
+          "successLooksLike": "Nurse communicates NPO instructions clearly and confirms understanding."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "theme": "Managing delays and proactive family updates",
+      "scenarios": [
+        {
+          "title": "Update family about delays and new ETA",
+          "situation": "A test is delayed by 90 minutes. Family is anxious. You must provide a calm update and revised plan.",
+          "targetPhrases": [
+            "Thank you for your patience; I have an update.",
+            "The test is delayed about 90 minutes due to high volume.",
+            "Here’s what we can do in the meantime.",
+            "I’ll check back with you by [time]."
+          ],
+          "successLooksLike": "Nurse acknowledges feelings, states reason, offers options, and gives a time-bound follow-up."
+        },
+        {
+          "title": "Waiting room rounds: quick touchpoints",
+          "situation": "You perform quick rounds to prevent frustration. You must deliver 30–60 second updates.",
+          "targetPhrases": [
+            "I wanted to check in with you.",
+            "No new results yet, but you are still in the queue.",
+            "Please let me know if anything changes.",
+            "I’ll return in about [X] minutes."
+          ],
+          "successLooksLike": "Nurse reduces uncertainty with concise, regular updates."
+        },
+        {
+          "title": "Escalate concerns to charge nurse",
+          "situation": "Family reports worsening symptoms during a delay. You must escalate and keep them informed.",
+          "targetPhrases": [
+            "Thank you for telling me right away.",
+            "I’m notifying the charge nurse now.",
+            "We’re moving you up due to the change in symptoms.",
+            "I’ll stay with you until we’re set."
+          ],
+          "successLooksLike": "Nurse appropriately escalates and communicates rationale to family."
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "theme": "Handoffs and concise documentation of intake",
+      "scenarios": [
+        {
+          "title": "SBAR handoff to provider after intake",
+          "situation": "You summarize a new arrival to the PA/MD using SBAR.",
+          "targetPhrases": [
+            "Situation: [Name], [age], here for [chief complaint].",
+            "Background: key history and meds.",
+            "Assessment: vitals and main findings.",
+            "Recommendation: next steps needed now."
+          ],
+          "successLooksLike": "Nurse delivers a 30–60 second SBAR with only relevant details."
+        },
+        {
+          "title": "Charting a clear intake note",
+          "situation": "You write a concise note that another nurse can act on without clarification.",
+          "targetPhrases": [
+            "Chief complaint in patient’s words: \"…\"",
+            "Allergies with reactions: …",
+            "Meds with last dose: …",
+            "Plan and patient education: …"
+          ],
+          "successLooksLike": "Nurse produces a structured note that meets unit standards and is easy to follow."
+        },
+        {
+          "title": "Correcting documentation errors",
+          "situation": "You notice a mistake in the chart. You must correct it properly.",
+          "targetPhrases": [
+            "I’m adding a late entry to correct…",
+            "Entered in error—see corrected note.",
+            "Maintaining accurate records keeps you safe."
+          ],
+          "successLooksLike": "Nurse amends documentation following policy and explains why accuracy matters."
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "theme": "In-person family updates after triage or tests",
+      "scenarios": [
+        {
+          "title": "Post-triage status update",
+          "situation": "You inform family about room placement and initial plan.",
+          "targetPhrases": [
+            "Thank you for waiting. Here’s where we are now.",
+            "[Name] is moving to Room [#] for closer monitoring.",
+            "Next, the provider will examine them within about [X] minutes.",
+            "I’ll stay your point of contact for updates."
+          ],
+          "successLooksLike": "Nurse gives clear status, next steps, and timeframe with a single point of contact."
+        },
+        {
+          "title": "Explaining what has been ruled out or still pending",
+          "situation": "Family asks, \"What do you know so far?\" You must avoid speculation and be clear.",
+          "targetPhrases": [
+            "So far, we have ruled out [X].",
+            "We are still waiting on [tests/results].",
+            "I can’t speak to diagnosis, but I can share the plan and timing.",
+            "I’ll update you as soon as results come in."
+          ],
+          "successLooksLike": "Nurse communicates boundaries while keeping the family informed."
+        },
+        {
+          "title": "Setting visiting expectations and boundaries",
+          "situation": "Multiple relatives want to enter at once. You must set limits kindly.",
+          "targetPhrases": [
+            "For safety, only two visitors at a time.",
+            "Let’s rotate so everyone gets a chance.",
+            "Please keep phones on silent and the walkway clear.",
+            "Thank you for helping us care for [Name]."
+          ],
+          "successLooksLike": "Nurse enforces visiting rules respectfully and consistently."
+        }
+      ]
+    },
+    {
+      "n": 11,
+      "theme": "Phone updates: identity verification, voicemails, and callbacks",
+      "scenarios": [
+        {
+          "title": "Verify identity before sharing information",
+          "situation": "You call the listed contact to provide an update and must confirm identity before sharing.",
+          "targetPhrases": [
+            "Before I share an update, can you confirm your full name and relationship to [Name]?",
+            "Please verify [DOB/address] for privacy.",
+            "Thank you. Here’s the update…"
+          ],
+          "successLooksLike": "Nurse verifies identity per policy before providing any details."
+        },
+        {
+          "title": "Professional voicemail that prompts action",
+          "situation": "You must leave a HIPAA-safe voicemail that leads to a timely callback.",
+          "targetPhrases": [
+            "Hello, this is Nurse [Name] from [Unit].",
+            "This is a non-urgent update for [First Name only].",
+            "Please call us back at [number] and reference [case/unit].",
+            "We’re available until [time]."
+          ],
+          "successLooksLike": "Nurse leaves a clear, privacy-safe message with callback details."
+        },
+        {
+          "title": "Handling a worried caller with empathy and structure",
+          "situation": "A family member is very anxious on the phone. You must calm them and share what you can.",
+          "targetPhrases": [
+            "I hear that you’re worried, and that’s understandable.",
+            "Here’s what I can share right now…",
+            "Next steps are… and the expected timing is…",
+            "I’ll call you by [time] with an update or sooner if anything changes."
+          ],
+          "successLooksLike": "Nurse acknowledges emotion, shares allowed info, and commits to a time-bound follow-up."
+        }
+      ]
+    },
+    {
+      "n": 12,
+      "theme": "Sharing difficult updates within nursing scope",
+      "scenarios": [
+        {
+          "title": "Minor complication or setback",
+          "situation": "A routine IV failed and needs to be restarted. Family is frustrated. You must explain and reset expectations.",
+          "targetPhrases": [
+            "I want to be transparent about what happened.",
+            "The IV stopped working; we need to place a new one.",
+            "This can happen, and we’ll minimize discomfort.",
+            "We expect this to take about [X] minutes."
+          ],
+          "successLooksLike": "Nurse explains clearly, accepts responsibility, and outlines the fix and timeline."
+        },
+        {
+          "title": "Delays due to abnormal labs",
+          "situation": "Labs show an issue requiring more tests. You must update without diagnosing.",
+          "targetPhrases": [
+            "Some results need a closer look, so we’re ordering additional tests.",
+            "The provider will explain the details.",
+            "Right now, here’s what we’re doing to keep [Name] safe…"
+          ],
+          "successLooksLike": "Nurse shares implications and next steps without overstepping scope."
+        },
+        {
+          "title": "When to pause and involve the provider",
+          "situation": "Family asks for prognosis. You must recognize scope limits and bring in the provider.",
+          "targetPhrases": [
+            "That’s an important question for the provider to answer.",
+            "Let me bring them in so you get the full picture.",
+            "I’ll stay with you while we talk together."
+          ],
+          "successLooksLike": "Nurse redirects appropriately and facilitates a warm handoff."
+        }
+      ]
+    },
+    {
+      "n": 13,
+      "theme": "Working with interpreters and multi-party updates",
+      "scenarios": [
+        {
+          "title": "On-demand interpreter for an in-person update",
+          "situation": "Family prefers another language. You must set up a professional interpreter and run a brief update.",
+          "targetPhrases": [
+            "I’ll bring a certified interpreter to avoid misunderstandings.",
+            "Please speak in short phrases and pause for interpretation.",
+            "I’ll confirm understanding with teach-back."
+          ],
+          "successLooksLike": "Nurse uses interpreter effectively and confirms comprehension."
+        },
+        {
+          "title": "Three-way phone update with remote family member",
+          "situation": "You conference in an out-of-state relative for a status update.",
+          "targetPhrases": [
+            "I’m adding [Name] to the call now.",
+            "Let’s confirm who is authorized to receive updates.",
+            "I’ll summarize next steps for everyone before we end."
+          ],
+          "successLooksLike": "Nurse manages turn-taking, privacy, and a shared summary of next steps."
+        },
+        {
+          "title": "Documenting interpreter use",
+          "situation": "After the conversation, you must document interpreter details.",
+          "targetPhrases": [
+            "Interpreter ID/Name and language: …",
+            "Mode: in-person/video/phone.",
+            "Patient/family teach-back confirmed.",
+            "Note entered at [time]."
+          ],
+          "successLooksLike": "Nurse completes compliant documentation of interpreter involvement."
+        }
+      ]
+    },
+    {
+      "n": 14,
+      "theme": "De-escalation and service recovery for families",
+      "scenarios": [
+        {
+          "title": "Family upset after being transferred multiple times",
+          "situation": "A relative says they’ve been transferred three times and no one has answers. You must de-escalate and take ownership of the next step.",
+          "targetPhrases": [
+            "I’m sorry you’ve had to repeat yourselves; that’s frustrating.",
+            "I will own your update from here.",
+            "In the next 10 minutes, I will get you an answer or a timeline.",
+            "Here’s my name and the unit phone number."
+          ],
+          "successLooksLike": "Nurse validates feelings, takes ownership, and sets a concrete follow-up commitment."
+        },
+        {
+          "title": "Setting boundaries with aggressive tone",
+          "situation": "A family member raises their voice at the desk. You must keep everyone safe and de-escalate.",
+          "targetPhrases": [
+            "I want to help, and I need a calm tone to do that.",
+            "Let’s step aside to talk privately.",
+            "If you prefer, I can bring the charge nurse now.",
+            "Here’s what I can do for you right away…"
+          ],
+          "successLooksLike": "Nurse maintains safety, resets tone, and offers options."
+        },
+        {
+          "title": "Service recovery after a missed update",
+          "situation": "A promised callback was delayed. You must apologize and reset trust.",
+          "targetPhrases": [
+            "I apologize for the delay in getting back to you.",
+            "Here’s the information you were waiting for.",
+            "This is how I’ll prevent this from happening again.",
+            "Thank you for your patience."
+          ],
+          "successLooksLike": "Nurse delivers a sincere apology, provides the missing info, and states a prevention step."
+        }
+      ]
+    },
+    {
+      "n": 15,
+      "theme": "Sensitive topics and end-of-life boundaries for nurses",
+      "scenarios": [
+        {
+          "title": "Visitor limits and quiet hours near end-of-life",
+          "situation": "Patient is near end-of-life. You must balance compassion with unit policy.",
+          "targetPhrases": [
+            "We want to support your time together.",
+            "For safety, we can allow [X] visitors at a time; we’ll help rotate.",
+            "Please let us know cultural or spiritual needs so we can support them."
+          ],
+          "successLooksLike": "Nurse shows compassion while applying policy and inviting support services."
+        },
+        {
+          "title": "Involving chaplain or social work",
+          "situation": "Family needs additional support. You must offer and arrange services.",
+          "targetPhrases": [
+            "Would you like me to call the chaplain or social worker?",
+            "They can help with resources and support.",
+            "I can stay with you until they arrive."
+          ],
+          "successLooksLike": "Nurse offers appropriate resources and follows through promptly."
+        },
+        {
+          "title": "What nurses can and cannot say about prognosis",
+          "situation": "Family asks, “How long do we have?” You must respond within scope and connect them to the provider.",
+          "targetPhrases": [
+            "I understand why you’re asking.",
+            "That’s a question the provider needs to answer.",
+            "Let me bring them now so you get accurate information.",
+            "I’ll remain here with you."
+          ],
+          "successLooksLike": "Nurse stays within scope and ensures a warm provider handoff."
+        }
+      ]
+    },
+    {
+      "n": 16,
+      "theme": "Capstone simulations: full intake to family update",
+      "scenarios": [
+        {
+          "title": "End-to-end intake under time pressure",
+          "situation": "Simulated ED arrival: complete identity check, chief complaint, vitals, safety screens, and SBAR handoff in under 8 minutes.",
+          "targetPhrases": [
+            "Opening and identifiers completed.",
+            "Chief complaint summarized in patient’s words.",
+            "Allergies and meds with last dose captured.",
+            "SBAR delivered with clear recommendation."
+          ],
+          "successLooksLike": "Nurse completes a safe, complete intake within time and communicates next steps to team."
+        },
+        {
+          "title": "Proactive family update during a delay",
+          "situation": "Test backlog causes a 60-minute delay. Provide an in-person or phone update with a firm check-back time.",
+          "targetPhrases": [
+            "Reason for delay explained in plain language.",
+            "Specific ETA and check-back time given.",
+            "Options offered for comfort and questions invited."
+          ],
+          "successLooksLike": "Nurse reduces anxiety with a clear, time-bound update and options."
+        },
+        {
+          "title": "Documentation audit and improvement",
+          "situation": "You review your chart for accuracy, clarity, and policy compliance, then rewrite one section for improvement.",
+          "targetPhrases": [
+            "Identify one unclear or missing element.",
+            "Revise with concrete, plain-language phrasing.",
+            "Record interpreter or consent details if applicable.",
+            "Finalize with date/time stamp and signature."
+          ],
+          "successLooksLike": "Nurse demonstrates measurable improvement in clarity and compliance of documentation."
+        }
+      ]
+    },
+    {
+      "n": 0,
+      "theme": "Optional: Skill refresh or buffer week (use if holidays/staffing impact)",
+      "scenarios": [
+        {
+          "title": "Targeted review based on QA findings",
+          "situation": "Focus drills on the two weakest skills identified mid-program (e.g., teach-back, voicemail scripting).",
+          "targetPhrases": [
+            "We’ll practice the exact lines that caused confusion.",
+            "Repeat, refine, and record for self-review.",
+            "Apply the checklist to reach consistency."
+          ],
+          "successLooksLike": "Team closes specific gaps with repeated, high-yield practice."
+        },
+        {
+          "title": "Peer coaching circles",
+          "situation": "Small groups swap scripts and role-play tricky updates, giving structured feedback.",
+          "targetPhrases": [
+            "One thing that worked was…",
+            "One suggestion for clarity is…",
+            "Let’s try that line again with simpler words."
+          ],
+          "successLooksLike": "Peers deliver actionable feedback and visible improvement within the session."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 2,
+    "minutesPerSession": 60
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Nurses complete a safe, complete intake without missing critical items and without confusing the patient or family.",
+      "measurableProxy": "In simulation, 90% complete a standardized intake in under 8 minutes, correctly capturing identifiers, chief complaint, allergies with reactions, meds with last dose, and vitals; zero privacy breaches."
+    },
+    {
+      "plainLanguage": "Families feel informed and less anxious because updates are clear, time-bound, and empathetic.",
+      "measurableProxy": "In role-plays, 90% deliver an update that includes reason, next step, ETA, and a promised check-back; include at least two empathy statements; teach-back used in 80% of cases."
+    },
+    {
+      "plainLanguage": "Documentation is clear enough that any covering nurse can act without follow-up questions.",
+      "measurableProxy": "Chart audit shows a 25% reduction in omissions or unclear notes on a 10-point rubric; interpreter/consent documentation present in 95% of applicable cases."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome to the 16-week English program for nurses focused on patient intake and family updates. We’ll practice real conversations you handle every shift: opening the intake, confirming identity, getting the story in plain language, setting expectations, giving proactive updates (in person and by phone), de-escalating tough moments, and documenting clearly. Expect two 60-minute sessions per week with short, repeated role-plays and feedback you can use on your next shift. Your voice matters—let’s make every intake safer and every update calmer.",
+    "ko": "환영합니다. 본 과정은 간호사를 위한 16주 영어 프로그램으로, 환자 접수와 보호자 안내에 초점을 둡니다. 매 근무 때 마주하는 실제 대화를 연습합니다: 접수 시작 인사, 본인 확인, 쉬운 영어로 증상 파악, 기대치 설정, 선제적 안내(대면 및 전화), 어려운 상황 완화, 그리고 명확한 기록까지. 주 2회 60분 수업으로 진행되며, 짧고 반복적인 역할극과 바로 써먹을 수 있는 피드백을 제공합니다. 여러분의 목소리가 중요합니다—더 안전한 접수와 더 차분한 안내를 함께 만들어 갑시다."
+  }
+}

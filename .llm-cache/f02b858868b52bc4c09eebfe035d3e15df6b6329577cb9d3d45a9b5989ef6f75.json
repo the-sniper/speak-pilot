@@ -1,0 +1,499 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "First 60 seconds: greet, verify, clarify reason for contact",
+      "scenarios": [
+        {
+          "title": "Open a call after a long wait",
+          "situation": "Inbound customer waited 12+ minutes and sounds impatient.",
+          "targetPhrases": [
+            "Thank you for waiting—I know your time is valuable.",
+            "My name is [Name]. I’ll be your point of contact today.",
+            "I can help with that.",
+            "If we get disconnected, I’ll call you back at [number].",
+            "Before we start, may I confirm your full name and email?"
+          ],
+          "successLooksLike": "Agent acknowledges the wait, sets ownership, confirms a callback number, and moves forward without sounding defensive."
+        },
+        {
+          "title": "Verify identity without collecting sensitive data",
+          "situation": "Customer offers to read their card number or password to speed things up.",
+          "targetPhrases": [
+            "For your security, I can’t take full card numbers or passwords.",
+            "Let’s verify with your order ID and billing ZIP/postal code.",
+            "Please don’t read your password aloud.",
+            "Once I confirm your account, we’ll continue."
+          ],
+          "successLooksLike": "Agent protects privacy, redirects to safe verification, and keeps momentum without awkward silence."
+        },
+        {
+          "title": "Clarify the issue in one sentence",
+          "situation": "Customer explains the problem in a long, emotional story.",
+          "targetPhrases": [
+            "So I understand you’re seeing [error/issue] when you [action].",
+            "Let me repeat that back to make sure I’ve got it right.",
+            "Is that correct?",
+            "Is there anything else we should cover before we start?"
+          ],
+          "successLooksLike": "Agent paraphrases the request accurately and confirms scope before troubleshooting."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "Probing and diagnosis: get the full picture fast",
+      "scenarios": [
+        {
+          "title": "Use funnel questions to isolate the cause",
+          "situation": "Customer’s description is vague and jumps between topics.",
+          "targetPhrases": [
+            "When did this first start happening?",
+            "What changed right before this began?",
+            "Does it happen every time or only sometimes?",
+            "What result did you expect to see?"
+          ],
+          "successLooksLike": "Agent asks targeted questions that narrow the issue without interrogating the customer."
+        },
+        {
+          "title": "Reproduce the issue together",
+          "situation": "Customer can’t remember the exact steps to the error.",
+          "targetPhrases": [
+            "Let’s walk through that together, step by step.",
+            "Please tell me what you click or tap as you do it.",
+            "I’ll pause so you can try it now.",
+            "What do you see on your screen right now?"
+          ],
+          "successLooksLike": "Agent co-drives the reproduction and captures the exact step that triggers the problem."
+        },
+        {
+          "title": "Read errors precisely",
+          "situation": "Customer summarizes errors loosely (e.g., “It says it’s broken”).",
+          "targetPhrases": [
+            "Could you read the exact message, word for word?",
+            "I’ll read that back: it says, “[error text].”",
+            "Thank you—that detail helps me look it up.",
+            "That code points to [area]. Let’s try this."
+          ],
+          "successLooksLike": "Agent captures exact wording/codes and links them to next troubleshooting steps."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "De-escalation: own the problem and lower the temperature",
+      "scenarios": [
+        {
+          "title": "Calm a customer transferred three times",
+          "situation": "Customer starts the call angry about previous transfers and repeats their story fast.",
+          "targetPhrases": [
+            "I can see how frustrating that must be.",
+            "I’ll own this and stay with you until we have a plan.",
+            "You won’t need to repeat everything—I’ve taken notes.",
+            "Let’s fix this together."
+          ],
+          "successLooksLike": "Agent shows empathy, takes ownership, signals note-taking, and redirects to action."
+        },
+        {
+          "title": "Interrupt respectfully to regain control",
+          "situation": "Customer is venting and talking over the agent.",
+          "targetPhrases": [
+            "I want to help—may I jump in for a moment?",
+            "Here’s what I can do right now.",
+            "Let’s tackle this one piece at a time.",
+            "I’ll update you every few minutes."
+          ],
+          "successLooksLike": "Agent uses courteous interruption to move from venting to solution without escalating."
+        },
+        {
+          "title": "Reset expectations and offer options",
+          "situation": "Root cause needs specialist review; immediate fix unlikely.",
+          "targetPhrases": [
+            "I don’t want to overpromise. Here are two options…",
+            "Fastest path: I escalate now; thorough path: we collect more logs.",
+            "I’ll give you a clear timeline and next update time.",
+            "What works best for you?"
+          ],
+          "successLooksLike": "Agent sets realistic timelines and gives the customer a choice of next steps."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Guided troubleshooting: clear, chunked instructions",
+      "scenarios": [
+        {
+          "title": "Give step-by-step navigation across devices",
+          "situation": "Customer uses a different OS/device than the agent.",
+          "targetPhrases": [
+            "On your screen, look for the Settings icon—it looks like a gear.",
+            "Tap or click ‘Network’.",
+            "You should see ‘Status’—tell me what it says.",
+            "I’ll wait while you do that—no rush."
+          ],
+          "successLooksLike": "Agent uses concrete visuals, chunks steps, and pauses appropriately."
+        },
+        {
+          "title": "Confirm actions and outcomes",
+          "situation": "Customer is quiet; agent isn’t sure if steps were completed.",
+          "targetPhrases": [
+            "What do you see now?",
+            "Did the button change color or show a check mark?",
+            "If nothing changed, let me know—we’ll try plan B.",
+            "I’ll stay with you until we see the result."
+          ],
+          "successLooksLike": "Agent checks progress without sounding doubtful and pivots when steps fail."
+        },
+        {
+          "title": "Bridge delays with useful talk",
+          "situation": "A tool is loading or logs are collecting for 1–2 minutes.",
+          "targetPhrases": [
+            "While that loads, here’s what we’ll do next.",
+            "This usually takes about a minute—thanks for your patience.",
+            "I’m checking your case notes in the background.",
+            "I’ll let you know as soon as it’s ready."
+          ],
+          "successLooksLike": "Agent fills silence with value, not small talk, and keeps control of the call flow."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "theme": "Outages and known issues: be honest, useful, and calm",
+      "scenarios": [
+        {
+          "title": "Deliver a tough status update without an ETA",
+          "situation": "Service is down regionally; no confirmed timeline to fix.",
+          "targetPhrases": [
+            "We’re currently experiencing an outage affecting [area/feature].",
+            "There isn’t a confirmed ETA yet.",
+            "Here’s a safe workaround you can use now.",
+            "I’ll notify you by [time/channel] with the next update."
+          ],
+          "successLooksLike": "Agent names the issue plainly, avoids guessing, and gives an immediate workaround plus a follow-up time."
+        },
+        {
+          "title": "Guide customers to self-serve status",
+          "situation": "High volume day; customers asking for updates repeatedly.",
+          "targetPhrases": [
+            "You can subscribe to live updates here: [status page].",
+            "If you don’t see your issue listed, let me know.",
+            "Updates post every 30 minutes during incidents.",
+            "I’ll also keep this case open until it’s resolved."
+          ],
+          "successLooksLike": "Agent promotes the status page and sets expectations for cadence of updates."
+        },
+        {
+          "title": "Handle repeat callers gracefully",
+          "situation": "Same customer calls back multiple times during an incident.",
+          "targetPhrases": [
+            "I’m tracking your case under ID [number].",
+            "No new update since [time]; next one is at [time].",
+            "The workaround is still the fastest path today.",
+            "I’ll add your impact notes to the incident."
+          ],
+          "successLooksLike": "Agent welcomes the call, references the case, and avoids frustration while staying consistent."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "theme": "Policy, guarantees, and compliance in plain English",
+      "scenarios": [
+        {
+          "title": "Explain refunds/returns without jargon",
+          "situation": "Customer requests a refund beyond the stated window.",
+          "targetPhrases": [
+            "Here’s what our policy allows today.",
+            "What I can do right now is [option].",
+            "If we go beyond that, I’ll need approval—shall I request it?",
+            "I’ll email the steps so you have it in writing."
+          ],
+          "successLooksLike": "Agent states policy clearly, offers the best immediate option, and documents next steps."
+        },
+        {
+          "title": "RMA and warranty replacements",
+          "situation": "Device is defective; customer needs a replacement.",
+          "targetPhrases": [
+            "I’ll create an RMA for you now.",
+            "You’ll receive a prepaid label by email.",
+            "Once the item scans at the carrier, the replacement ships.",
+            "Your case ID for tracking is [number]."
+          ],
+          "successLooksLike": "Agent explains the RMA flow in sequence and confirms how the customer tracks progress."
+        },
+        {
+          "title": "Protect payment and personal data",
+          "situation": "Customer insists on reading their full card number to speed payment.",
+          "targetPhrases": [
+            "For your security, I can’t accept full card details on this line.",
+            "Please use the secure payment link I’m sending now.",
+            "I’ll stay with you while you complete it.",
+            "Let me know once you see the confirmation."
+          ],
+          "successLooksLike": "Agent enforces PCI/privacy rules and provides a safe alternative without losing rapport."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "theme": "Warm handoffs, escalations, and callbacks",
+      "scenarios": [
+        {
+          "title": "Warm transfer to Tier 2",
+          "situation": "Issue requires a specialist; customer fears repeating details again.",
+          "targetPhrases": [
+            "I’ll brief my colleague before I bring you over.",
+            "You won’t need to repeat everything.",
+            "I’ll stay on the line through the introduction.",
+            "Here’s your case ID so we stay synced."
+          ],
+          "successLooksLike": "Agent summarizes the case to the specialist and stays on to ensure continuity."
+        },
+        {
+          "title": "Schedule and confirm a callback",
+          "situation": "Customer can’t stay on the line during investigation.",
+          "targetPhrases": [
+            "What’s the best number and time window to reach you?",
+            "I’ll book a callback for [time zone/time].",
+            "If we miss you, I’ll leave a detailed voicemail and email.",
+            "You can reply to confirm or reschedule."
+          ],
+          "successLooksLike": "Agent secures reliable contact details and sets clear expectations for the callback."
+        },
+        {
+          "title": "Write clear internal notes for the next agent",
+          "situation": "Case changes hands across shifts.",
+          "targetPhrases": [
+            "Summary: [one-line problem statement].",
+            "Steps tried: [bulleted attempts + results].",
+            "Pending actions: [owner] by [date/time].",
+            "Customer priority/impact: [notes]."
+          ],
+          "successLooksLike": "Agent leaves concise, structured notes that let the next agent start fast without rework."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "theme": "Chat and email that customers actually read",
+      "scenarios": [
+        {
+          "title": "Convert a call to a clear recap email",
+          "situation": "Customer asks for instructions in writing after a call.",
+          "targetPhrases": [
+            "As discussed, here are the steps to resolve this:",
+            "1) [Step]. 2) [Step]. 3) [Step].",
+            "If this doesn’t resolve it, reply to this email or call us at [number].",
+            "Your reference number is [ID]."
+          ],
+          "successLooksLike": "Agent sends a short, skimmable recap with numbered steps and a clear next action."
+        },
+        {
+          "title": "Personalize a macro without breaking it",
+          "situation": "Agent uses a template but needs to sound human.",
+          "targetPhrases": [
+            "I’ve tailored the steps to your setup: [detail].",
+            "The standard process is below in case you need it.",
+            "Please start with the three steps at the top.",
+            "I’m here if anything is unclear."
+          ],
+          "successLooksLike": "Agent keeps the macro intact, adds relevant personalization, and highlights the most important steps."
+        },
+        {
+          "title": "Structure a helpful chat response",
+          "situation": "Live chat with multiple questions at once.",
+          "targetPhrases": [
+            "I’ll answer in order: 1)… 2)… 3)…",
+            "Here’s a quick link for that: [URL].",
+            "Does that solve questions 1 and 2?",
+            "If not, we can hop on a quick call."
+          ],
+          "successLooksLike": "Agent breaks up answers, uses links sparingly, and checks for resolution before moving on."
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "theme": "Be easy to understand across accents, numbers, and dates",
+      "scenarios": [
+        {
+          "title": "Ask for repeats without blame",
+          "situation": "Line quality is poor or accent is unfamiliar.",
+          "targetPhrases": [
+            "Could you say that again a little more slowly, please?",
+            "I’ll repeat it back to confirm I’ve got it right.",
+            "If the line is unclear, I can call you right back.",
+            "Thank you for bearing with the connection."
+          ],
+          "successLooksLike": "Agent requests clarity politely and confirms understanding without blaming the customer."
+        },
+        {
+          "title": "Spell names and emails clearly",
+          "situation": "Long or uncommon names and email addresses on the account.",
+          "targetPhrases": [
+            "That’s J as in Juliet, A as in Alpha, N as in November…",
+            "Let me read that back: [spelled email].",
+            "Dots and dashes matter—did I place them correctly?",
+            "I’ll also email you to confirm we have it right."
+          ],
+          "successLooksLike": "Agent uses a clear spelling alphabet and double-checks punctuation to avoid errors."
+        },
+        {
+          "title": "State numbers, currency, and dates unambiguously",
+          "situation": "Different date formats and large numbers cause confusion.",
+          "targetPhrases": [
+            "To confirm, that’s January 6, 2026—01/06/2026 in month/day format.",
+            "The total is one hundred twenty-five dollars and fifty cents.",
+            "That order number is one-six-five-two-zero.",
+            "I’ll paste it here so you can see it too."
+          ],
+          "successLooksLike": "Agent prevents miscommunication by stating formats and reading numbers in chunks."
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "theme": "Use the knowledge base and screen share safely",
+      "scenarios": [
+        {
+          "title": "Quote the KB and adapt to the customer",
+          "situation": "KB article exists but customer’s setup is slightly different.",
+          "targetPhrases": [
+            "According to our guide, the standard steps are…",
+            "For your setup, we’ll adjust step 2 to [detail].",
+            "If that doesn’t work, we’ll try the alternate path here.",
+            "I’ll update the case with what worked for you."
+          ],
+          "successLooksLike": "Agent cites the KB, adapts appropriately, and documents the variation."
+        },
+        {
+          "title": "Ask consent for screen share",
+          "situation": "Agent proposes a screen share to speed troubleshooting.",
+          "targetPhrases": [
+            "Do I have your permission to start a screen share?",
+            "You can end it at any time.",
+            "Please close anything private before we begin.",
+            "I can only see, not control, unless you allow it."
+          ],
+          "successLooksLike": "Agent clearly explains consent, control limits, and privacy before starting a share."
+        },
+        {
+          "title": "Describe on-screen changes out loud",
+          "situation": "Screen share with a customer who is quiet or nervous.",
+          "targetPhrases": [
+            "You should now see a prompt in the top-right corner.",
+            "I’ll highlight the Settings tab in yellow.",
+            "If you don’t see that, tell me what is on your screen.",
+            "We’re halfway there—nice work."
+          ],
+          "successLooksLike": "Agent narrates visual changes and keeps the customer comfortable and engaged."
+        }
+      ]
+    },
+    {
+      "n": 11,
+      "theme": "Bugs, feature requests, and realistic timelines",
+      "scenarios": [
+        {
+          "title": "Explain a bug without blaming",
+          "situation": "Confirmed defect impacts the customer’s workflow.",
+          "targetPhrases": [
+            "You’ve found a confirmed bug—thank you for reporting it.",
+            "Our engineering team is working on it now.",
+            "I don’t have a release date yet; I’ll update you by [timeframe].",
+            "Here’s the workaround until it’s fixed."
+          ],
+          "successLooksLike": "Agent acknowledges the bug, avoids blame, and commits to updates with a workaround."
+        },
+        {
+          "title": "Log a clear feature request",
+          "situation": "Customer asks for something the product doesn’t do.",
+          "targetPhrases": [
+            "That’s not available today, but I’ll file a request.",
+            "I’ll include your use case and impact so it’s prioritized.",
+            "Your tracking ID for this request is [number].",
+            "We’ll email you if it’s added to the roadmap."
+          ],
+          "successLooksLike": "Agent captures the request with impact and gives the customer a tracking path."
+        },
+        {
+          "title": "Decline unsupported use cases politely",
+          "situation": "Customer pushes for a workaround that violates policy.",
+          "targetPhrases": [
+            "I can’t recommend that approach because it risks data loss.",
+            "Here’s a supported alternative that achieves the goal safely.",
+            "If that doesn’t meet your needs, I can escalate for review.",
+            "I want to make sure your data stays safe."
+          ],
+          "successLooksLike": "Agent protects the customer and the company by steering to supported paths."
+        }
+      ]
+    },
+    {
+      "n": 12,
+      "theme": "Close the loop: confirm resolution, document, and follow up",
+      "scenarios": [
+        {
+          "title": "Confirm resolution and next steps",
+          "situation": "Issue appears resolved on the call.",
+          "targetPhrases": [
+            "Does this fully resolve the issue we discussed?",
+            "Before we end, is there anything else I can help with today?",
+            "I’ll keep the case open for 24 hours in case it returns.",
+            "You’ll get an email summary right after this call."
+          ],
+          "successLooksLike": "Agent confirms closure confidently and leaves a safety net for reopens."
+        },
+        {
+          "title": "Ask for CSAT the right way",
+          "situation": "Company sends an automatic survey after interactions.",
+          "targetPhrases": [
+            "You may receive a short survey about this interaction.",
+            "Your feedback helps us improve and recognize our team.",
+            "If I earned it, I’d appreciate your honest rating today.",
+            "Either way, thank you for your time."
+          ],
+          "successLooksLike": "Agent requests feedback respectfully without scripting the answer."
+        },
+        {
+          "title": "Write a clean wrap-up note",
+          "situation": "After-call work needs to be fast and clear.",
+          "targetPhrases": [
+            "Outcome: [resolved/unresolved + summary].",
+            "Customer confirmed resolution at [time].",
+            "Next step/owner/date: [detail].",
+            "Links: [KB/incident/case IDs]."
+          ],
+          "successLooksLike": "Agent documents outcomes and next steps clearly to reduce rework and reopens."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 5,
+    "minutesPerSession": 10
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Agents defuse upset customers and keep calls under control.",
+      "measurableProxy": "Quality Assurance de-escalation items average 85%+ and complaint escalations drop 20% by week 12."
+    },
+    {
+      "plainLanguage": "Agents guide customers through multi-step troubleshooting without confusion.",
+      "measurableProxy": "First-contact resolution increases by 5% and repeat-contact rate for the same issue drops 15% by week 12."
+    },
+    {
+      "plainLanguage": "Agents set clear expectations on outages, follow-ups, and timelines.",
+      "measurableProxy": "Cases with a documented next-update time reach 95% and missed-callback rate falls below 3%."
+    },
+    {
+      "plainLanguage": "Agents send concise, actionable summaries in writing.",
+      "measurableProxy": "Email/chat QA scores average 90%+ and case reopen rate after written instructions falls 15%."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome to your 10‑minute‑a‑day English program for Customer Support. Over the next 12 weeks, you’ll practice real support moments: greeting after long waits, verifying identity safely, de‑escalating tough calls, guiding step‑by‑step troubleshooting, handling outages, writing clear follow‑ups, and closing cases cleanly. Each session is short, practical, and built for busy queues. Show up daily, use the target phrases out loud, and apply one skill on your next contact. We’ll measure progress with QA, CSAT, and fewer reopens. Let’s make every interaction easier—for you and your customers.",
+    "ko": "고객 지원 담당자를 위한 ‘하루 10분’ 영어 프로그램에 오신 것을 환영합니다. 앞으로 12주 동안 실제 상황을 연습합니다: 긴 대기 후 인사하기, 안전한 본인 확인, 어려운 통화 진정시키기, 단계별 안내, 장애 공지와 후속 조치, 명확한 이메일/채팅 작성, 깔끔한 마무리까지. 각 세션은 짧고 실용적이며 바쁜 상담 환경에 맞춰 설계되었습니다. 매일 참여하고, 제시된 핵심 표현을 소리 내어 말해 보고, 바로 다음 고객 응대에 한 가지씩 적용하세요. 성과는 QA, CSAT, 재오픈 감소로 확인합니다. 여러분과 고객 모두에게 더 쉬운 응대를 만들어 봅시다."
+  }
+}

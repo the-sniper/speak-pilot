@@ -1,0 +1,542 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Set the shared working language and collaboration norms",
+      "scenarios": [
+        {
+          "title": "Agree on the integration standup ground rules",
+          "situation": "Kick off the merged team's daily standup across KR/JP time zones and tools.",
+          "targetPhrases": [
+            "To avoid confusion, let's…",
+            "Can we agree on… (cadence/length/tools)",
+            "From next week, we'll…",
+            "Does anyone have concerns about…",
+            "Let's capture this in the working agreement."
+          ],
+          "successLooksLike": "We end with a 1-page working agreement (time, channel, length, roles) everyone understands and follows the next day."
+        },
+        {
+          "title": "Write a purpose-driven meeting agenda",
+          "situation": "Schedule a cross-functional planning session with PM, Eng, Ops from both companies.",
+          "targetPhrases": [
+            "Objective:",
+            "By the end of this meeting we will…",
+            "Timebox to…",
+            "Owner/Decision maker:",
+            "Parking lot (for off-topic items)"
+          ],
+          "successLooksLike": "Invites include a clear objective, timebox, decision maker, and attendees come prepared; meeting finishes on time with decisions recorded."
+        },
+        {
+          "title": "Clarify acronyms and terminology politely",
+          "situation": "Two tools and vocabularies collide; avoid misunderstandings.",
+          "targetPhrases": [
+            "Just to confirm, when you say X, do you mean…?",
+            "Could we align on terminology for…?",
+            "I'll avoid jargon and say…",
+            "Let me rephrase…",
+            "Let's document this term in the glossary."
+          ],
+          "successLooksLike": "Misunderstandings are surfaced and resolved quickly; a shared glossary is started and linked in the channel."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "Crisp status, clear asks, and reliable handoffs",
+      "scenarios": [
+        {
+          "title": "Deliver a 60–90 second status update",
+          "situation": "Daily standup across KR/JP with execs occasionally listening in.",
+          "targetPhrases": [
+            "Since last update I…",
+            "Today I will…",
+            "I'm blocked by…",
+            "ETA is…",
+            "Request: …"
+          ],
+          "successLooksLike": "Updates are under 90 seconds, include progress, next step, blocker, and a specific request; blockers are resolved faster."
+        },
+        {
+          "title": "Write a timezone handoff note",
+          "situation": "Pass work between JST and KST without meetings.",
+          "targetPhrases": [
+            "Context:",
+            "Current status:",
+            "Next step before 09:00 JST/KST:",
+            "Owner:",
+            "Risks/Watchouts:"
+          ],
+          "successLooksLike": "Receiving teammate can continue work without pinging for basics; errors drop and cycle time improves."
+        },
+        {
+          "title": "Ask for help and set expectations",
+          "situation": "You need another team to pick up a task with a clear deadline.",
+          "targetPhrases": [
+            "Could you take this by EOD KST/JST?",
+            "If not, who is the right owner?",
+            "What do you need from me to proceed?",
+            "I'll follow up by…",
+            "Priority vs urgency — this is …"
+          ],
+          "successLooksLike": "Requests get accepted or redirected within the day, with clear owners and deadlines recorded."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "Merge roadmaps and make work executable",
+      "scenarios": [
+        {
+          "title": "Prioritize and merge two backlogs",
+          "situation": "Combine overlapping features and conflicting priorities.",
+          "targetPhrases": [
+            "Must-have vs nice-to-have",
+            "Impact vs effort",
+            "I propose we drop/merge…",
+            "Any strong objections?",
+            "Decision: …"
+          ],
+          "successLooksLike": "Top 10 items are agreed with rationale and captured; duplicate work is removed."
+        },
+        {
+          "title": "Write a Jira ticket with strong acceptance criteria",
+          "situation": "Ensure another squad can build/test without meetings.",
+          "targetPhrases": [
+            "As a [role], I want…",
+            "Given/When/Then",
+            "Out of scope:",
+            "Definition of Done:",
+            "Dependencies:"
+          ],
+          "successLooksLike": "A peer can implement and test using only the ticket; few clarification pings."
+        },
+        {
+          "title": "Define RACI for a workstream",
+          "situation": "Ambiguity over who decides and who informs.",
+          "targetPhrases": [
+            "Responsible / Accountable / Consulted / Informed",
+            "Single-threaded owner",
+            "Decision authority",
+            "Escalation path",
+            "Review cadence"
+          ],
+          "successLooksLike": "Names are assigned to R/A/C/I; decisions speed up and escalations follow the agreed path."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Requirements clarity and dependency/risk management",
+      "scenarios": [
+        {
+          "title": "Clarify an ambiguous requirement",
+          "situation": "PM request is unclear to Eng/Ops.",
+          "targetPhrases": [
+            "The user problem is…",
+            "Success looks like…",
+            "Assumptions:",
+            "Open questions:",
+            "Let's prototype and validate."
+          ],
+          "successLooksLike": "Team agrees on the user problem and success metrics; unknowns are tracked with owners."
+        },
+        {
+          "title": "Propose and agree an API contract change",
+          "situation": "Two services must integrate without breaking clients.",
+          "targetPhrases": [
+            "Breaking vs non-breaking change",
+            "Versioning strategy",
+            "Deprecation timeline",
+            "Backward compatibility",
+            "Contract test"
+          ],
+          "successLooksLike": "A versioned plan and timeline are accepted; change is documented and shared to all consumers."
+        },
+        {
+          "title": "Raise a dependency risk early",
+          "situation": "Another team’s delay threatens your milestone.",
+          "targetPhrases": [
+            "Earliest/Latest start date",
+            "Critical path",
+            "If–then risk statement",
+            "Mitigation/Contingency",
+            "Owner and due date"
+          ],
+          "successLooksLike": "Risk is logged with owners and dates; leadership understands impact and options."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "theme": "Architecture choices and data migration",
+      "scenarios": [
+        {
+          "title": "Run a joint architecture review",
+          "situation": "Choose an approach that balances both systems’ strengths.",
+          "targetPhrases": [
+            "Trade-offs are…",
+            "Latency vs consistency",
+            "Single source of truth",
+            "Decouple via queue",
+            "Let's document an ADR"
+          ],
+          "successLooksLike": "Decision and rationale are clear; follow-up actions and owners are recorded in an ADR."
+        },
+        {
+          "title": "Plan a safe data migration",
+          "situation": "Unify databases with minimal downtime.",
+          "targetPhrases": [
+            "Cutover window",
+            "Rollback plan",
+            "Dry run",
+            "Data validation checks",
+            "Parallel run"
+          ],
+          "successLooksLike": "A migration plan exists with timings, validation steps, and rollback; stakeholders sign off."
+        },
+        {
+          "title": "Write a concise decision memo (ADR)",
+          "situation": "Summarize context, options, decision, and consequences.",
+          "targetPhrases": [
+            "Context / Decision / Consequences",
+            "Options considered",
+            "We choose X because…",
+            "Risks and mitigations",
+            "Next steps / Owners"
+          ],
+          "successLooksLike": "Leaders skim once and understand; no follow-up meeting needed to clarify the decision."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "theme": "Quality, testing, and release alignment",
+      "scenarios": [
+        {
+          "title": "Align on QA definitions",
+          "situation": "Two teams use different DoR/DoD and severity scales.",
+          "targetPhrases": [
+            "Definition of Ready/Done",
+            "Test coverage target",
+            "Acceptance test",
+            "Non-functional requirements",
+            "Bug severity/priority"
+          ],
+          "successLooksLike": "Shared DoR/DoD and severity definitions are adopted and referenced in tickets."
+        },
+        {
+          "title": "Create a unified release plan",
+          "situation": "Coordinate releases across services and regions.",
+          "targetPhrases": [
+            "Release train",
+            "Feature freeze",
+            "Change window",
+            "Smoke test",
+            "Rollback criteria"
+          ],
+          "successLooksLike": "Release calendar is agreed; changes land predictably with fewer hotfixes."
+        },
+        {
+          "title": "Run a UAT go/no-go meeting",
+          "situation": "Decide if the release is ready.",
+          "targetPhrases": [
+            "Entry/Exit criteria",
+            "Open defects count",
+            "Sign-off",
+            "Go/No-go decision",
+            "Fallback plan"
+          ],
+          "successLooksLike": "A clear go/no-go decision is made in the meeting with sign-offs and next steps."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "theme": "Incident response and learning culture",
+      "scenarios": [
+        {
+          "title": "Escalate and staff an incident fast",
+          "situation": "Production issue impacts customers during integration.",
+          "targetPhrases": [
+            "Sev-1 / Sev-2",
+            "Impact scope",
+            "Page on-call via…",
+            "Bridge is open at…",
+            "Need an IC and a comms lead"
+          ],
+          "successLooksLike": "Within minutes, roles are assigned, bridge is active, and impact/next steps are posted in the channel."
+        },
+        {
+          "title": "Write a clean incident timeline",
+          "situation": "Document events for stakeholders and learning.",
+          "targetPhrases": [
+            "At hh:mm JST/KST…",
+            "Detected by…",
+            "User impact:",
+            "Action taken:",
+            "Status: monitoring/resolved"
+          ],
+          "successLooksLike": "A single timeline replaces scattered chats; leadership can brief customers with confidence."
+        },
+        {
+          "title": "Lead a blameless postmortem",
+          "situation": "Turn an outage into improvements without finger-pointing.",
+          "targetPhrases": [
+            "What went well / poorly",
+            "5 Whys",
+            "Systemic fix",
+            "Action items with owners",
+            "Prevent repeat"
+          ],
+          "successLooksLike": "We leave with 3–5 systemic actions, owners, and dates; no personal blame in notes."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "theme": "Customer and executive communications",
+      "scenarios": [
+        {
+          "title": "Draft a customer-facing change notice",
+          "situation": "Notify enterprise customers about product changes.",
+          "targetPhrases": [
+            "Plain language summary",
+            "What is changing/when",
+            "Impact to you",
+            "No action required / Required actions",
+            "Support contact"
+          ],
+          "successLooksLike": "Email is clear, jargon-free, and approved by legal/support on first pass."
+        },
+        {
+          "title": "De-escalate a transferred customer",
+          "situation": "A frustrated customer has been routed multiple times.",
+          "targetPhrases": [
+            "I understand you've repeated this already.",
+            "I'll own this from here.",
+            "Here's what will happen in the next 15 minutes…",
+            "Thank you for your patience.",
+            "Let me summarize to confirm…"
+          ],
+          "successLooksLike": "Customer calms down, gets a clear next step and timeline, and stays on the line to resolution."
+        },
+        {
+          "title": "Write an executive weekly update",
+          "situation": "Brief KR/JP leadership on progress and risks.",
+          "targetPhrases": [
+            "Highlights",
+            "Risks and asks",
+            "Green/Yellow/Red",
+            "Next week focus",
+            "Decision needed"
+          ],
+          "successLooksLike": "Leaders can skim one paragraph and know status, risks, and what you need from them."
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "theme": "Vendors, security, and compliance in a merger",
+      "scenarios": [
+        {
+          "title": "Answer audit and security questions",
+          "situation": "Respond to ISO/ISMS/SOC evidence requests.",
+          "targetPhrases": [
+            "Evidence available in…",
+            "We comply via…",
+            "Scope includes/excludes…",
+            "Control owner:",
+            "Remediation plan"
+          ],
+          "successLooksLike": "Auditors get precise answers with links; fewer back-and-forth emails."
+        },
+        {
+          "title": "Negotiate vendor consolidation",
+          "situation": "Choose one tool and plan migration.",
+          "targetPhrases": [
+            "Total cost of ownership",
+            "Migration path",
+            "Contract end date/renewal",
+            "Non-functional requirements",
+            "Pilot and evaluate"
+          ],
+          "successLooksLike": "A shortlist, pilot plan, and timeline are agreed; costs and risks are visible."
+        },
+        {
+          "title": "Handle cross-border data privacy",
+          "situation": "KR/JP data rules differ; align practices.",
+          "targetPhrases": [
+            "Data residency",
+            "PII handling",
+            "Cross-border transfer",
+            "Retention policy",
+            "DPA / Standard Contractual Clauses"
+          ],
+          "successLooksLike": "A compliant approach is documented and approved by legal and security."
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "theme": "Metrics, SLAs, and decision visibility",
+      "scenarios": [
+        {
+          "title": "Align on KPIs and OKRs",
+          "situation": "Create shared goals that drive the integration.",
+          "targetPhrases": [
+            "North-star metric",
+            "Leading vs lagging",
+            "Target and baseline",
+            "Confidence level",
+            "Owner and cadence"
+          ],
+          "successLooksLike": "A small set of KPIs/OKRs is published with owners and review cadence."
+        },
+        {
+          "title": "Negotiate SLAs across teams",
+          "situation": "Set realistic uptime and response targets.",
+          "targetPhrases": [
+            "Uptime target",
+            "Response/Resolution time",
+            "Exclusions",
+            "Service credits",
+            "Measurement method"
+          ],
+          "successLooksLike": "SLA terms are agreed and documented; monitoring aligns to targets."
+        },
+        {
+          "title": "Write a dashboard requirement brief",
+          "situation": "Specify what leaders need to see to make decisions.",
+          "targetPhrases": [
+            "Single pane of glass",
+            "Dimensions/filters",
+            "Alert threshold",
+            "Data refresh rate",
+            "Audience and decisions"
+          ],
+          "successLooksLike": "BI can build without follow-ups; the dashboard supports weekly decisions."
+        }
+      ]
+    },
+    {
+      "n": 11,
+      "theme": "Go-live war room communication",
+      "scenarios": [
+        {
+          "title": "Run the war room run-of-show",
+          "situation": "Coordinate roles, cadence, and updates during cutover.",
+          "targetPhrases": [
+            "Agenda and roles",
+            "Communication channel",
+            "Decision log",
+            "Cutline for scope",
+            "End-of-day summary"
+          ],
+          "successLooksLike": "Everyone knows their role; updates and decisions are posted on schedule."
+        },
+        {
+          "title": "Make real-time decisions under pressure",
+          "situation": "Timeboxed calls during incidents or cutover.",
+          "targetPhrases": [
+            "Propose / Second / Decide",
+            "Timebox to 5 minutes",
+            "Risks if we wait…",
+            "Owner + deadline",
+            "Confirm in writing"
+          ],
+          "successLooksLike": "Decisions are made quickly, recorded, and owned; no circular debate."
+        },
+        {
+          "title": "Triage issues fast and fairly",
+          "situation": "Sort new issues and assign to the right squads.",
+          "targetPhrases": [
+            "Repro steps",
+            "Severity vs priority",
+            "Workaround available",
+            "Assign to squad",
+            "Expected ETA"
+          ],
+          "successLooksLike": "Issues are categorized and assigned within minutes; ETAs are communicated."
+        }
+      ]
+    },
+    {
+      "n": 12,
+      "theme": "Retrospective, handover, and sustaining ways of working",
+      "scenarios": [
+        {
+          "title": "Run a cross-team retrospective",
+          "situation": "Close the integration phase and capture learnings.",
+          "targetPhrases": [
+            "Start / Stop / Continue",
+            "Top 3 insights",
+            "No blame, focus on process",
+            "Owner + due date",
+            "Check-in date"
+          ],
+          "successLooksLike": "We leave with 5 prioritized improvements and owners; sentiment is positive and forward-looking."
+        },
+        {
+          "title": "Handover to business-as-usual",
+          "situation": "Transition responsibilities to steady-state teams.",
+          "targetPhrases": [
+            "Runbook ready",
+            "Support matrix",
+            "Contact ladder",
+            "Known issues list",
+            "Exit criteria"
+          ],
+          "successLooksLike": "Handover is accepted without gaps; on-call and ownership are unambiguous."
+        },
+        {
+          "title": "Write the closure email and next steps",
+          "situation": "Announce outcomes and what's next to all stakeholders.",
+          "targetPhrases": [
+            "Thank you and results",
+            "What changes stick",
+            "Open items and owners",
+            "Next review date",
+            "How to escalate post-integration"
+          ],
+          "successLooksLike": "Stakeholders understand outcomes and who owns what; no confusion after the announcement."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 2,
+    "minutesPerSession": 75
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Team members give a focused 60–90 second update that states progress, next step, blocker, and a specific ask.",
+      "measurableProxy": "In a timed role-play, participants include all 4 elements and finish under 90 seconds in 2 of 3 rounds."
+    },
+    {
+      "plainLanguage": "Cross-timezone handoffs are clear enough that the next person can proceed without a call.",
+      "measurableProxy": "In a writing task, 80% of peers can start work using only the note; rubric score ≥4/5 on context, next step, owner, due time."
+    },
+    {
+      "plainLanguage": "Tickets include acceptance criteria and definitions so another team can build and test without clarification.",
+      "measurableProxy": "Given a scenario, learners produce a ticket with Given/When/Then, dependencies, and DoD; 4 of 5 checklist items met."
+    },
+    {
+      "plainLanguage": "People can run a 15-minute decision meeting to a clear decision with owners and deadlines.",
+      "measurableProxy": "In a facilitation role-play, the objective, timebox, options, decision, and owners are all stated; 4 of 5 elements present."
+    },
+    {
+      "plainLanguage": "During an incident, messages are concise, factual, and assign actions immediately.",
+      "measurableProxy": "In a drill, the initial announcement includes severity, impact, ask, and channel within 2 minutes; 3 of 4 elements present."
+    },
+    {
+      "plainLanguage": "Leaders receive one-paragraph weekly updates that are clear, jargon-free, and highlight risks and asks.",
+      "measurableProxy": "Written update scores ≥4/5 on clarity, brevity, jargon removal, explicit risks, and explicit asks on a rubric."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome! Two strong teams from Korea and Japan are becoming one. Our shared working language will be English so we can move fast together. Over the next 12 weeks we’ll practice exactly what you need for a smooth merger: running crisp standups, writing handoffs and Jira tickets, aligning roadmaps and SLAs, resolving dependencies, handling incidents, and communicating clearly with customers and executives. Expect two 75‑minute live sessions per week plus short applied tasks using your real materials (tickets, emails, updates). This is a safe room: we value clarity over perfect grammar, and we’ll build simple phrases you can use immediately. Let’s respect both cultures, be direct and kind, and make decisions visible. Success means you can run a meeting, write a handoff, and get to a decision without switching languages. Let’s get started.",
+    "ko": "환영합니다! 한국과 일본의 두 강한 팀이 하나로 합쳐집니다. 우리 팀의 공용 업무 언어는 English(영어)입니다. 앞으로 12주 동안 실제 통합에 꼭 필요한 상황을 집중적으로 연습합니다: 간결한 스탠드업 진행, 시간대 간 핸드오프와 Jira 티켓 작성, 로드맵·SLA 정렬, 의존성 조정, 인시던트 대응, 그리고 고객·경영진과의 명확한 커뮤니케이션 등입니다. 주 2회 75분 라이브 세션과 짧은 실습 과제가 있으며, 실제 자료(티켓, 이메일, 주간 업데이트)를 사용합니다. 이 공간은 안전한 학습 환경입니다. 완벽한 문법보다 ‘명확한 전달’을 우선하며, 바로 쓸 수 있는 간단한 표현을 함께 만듭니다. 서로의 문화를 존중하고, 직설적이되 친절하게 소통하며, 결정 사항을 모두가 볼 수 있게 기록하겠습니다. 목표는 회의를 주도하고, 핸드오프를 쓰고, 언어 전환 없이 결정을 이끌어낼 수 있게 되는 것입니다. 지금 시작합시다!"
+  }
+}

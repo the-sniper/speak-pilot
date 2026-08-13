@@ -1,0 +1,194 @@
+[
+  {
+    "learnerId": "learner-0001",
+    "band": "C1",
+    "rationale": "Accuracy scores cluster 8–10 with an average around 8.8 across sessions; consistent advanced pronunciation control.",
+    "evidenceUtteranceIds": [
+      "000010011"
+    ]
+  },
+  {
+    "learnerId": "learner-0053",
+    "band": "B2",
+    "rationale": "Accuracy mostly 7–9 with an average about 8.1; solid upper‑intermediate consistency.",
+    "evidenceUtteranceIds": [
+      "000530003"
+    ]
+  },
+  {
+    "learnerId": "learner-0112",
+    "band": "B1",
+    "rationale": "Mixed performance (4–9) but average around 7.5; steady intermediate level.",
+    "evidenceUtteranceIds": [
+      "001120010"
+    ]
+  },
+  {
+    "learnerId": "learner-0131",
+    "band": "C1",
+    "rationale": "Consistently high accuracy (mostly 8–9); average about 8.6, placing at the advanced threshold.",
+    "evidenceUtteranceIds": [
+      "001310020"
+    ]
+  },
+  {
+    "learnerId": "learner-0482",
+    "band": "C1",
+    "rationale": "Sustained high accuracy 8–10 with average ~8.8; advanced control.",
+    "evidenceUtteranceIds": [
+      "004820005"
+    ]
+  },
+  {
+    "learnerId": "learner-0594",
+    "band": "B1",
+    "rationale": "Variable with some lows (down to 3) but average near 7.0; lower‑intermediate overall.",
+    "evidenceUtteranceIds": [
+      "005940019"
+    ]
+  },
+  {
+    "learnerId": "learner-0736",
+    "band": "A2",
+    "rationale": "Frequent 5–7 accuracies; average about 6.1 indicates pre‑intermediate.",
+    "evidenceUtteranceIds": [
+      "007360004"
+    ]
+  },
+  {
+    "learnerId": "learner-1228",
+    "band": "B1",
+    "rationale": "Range 3–8 with more 7–8; average ~7.1, consistent intermediate.",
+    "evidenceUtteranceIds": [
+      "012280016"
+    ]
+  },
+  {
+    "learnerId": "learner-1404",
+    "band": "A1",
+    "rationale": "Multiple very low accuracy results (3–6); average around 4.7 indicates novice level.",
+    "evidenceUtteranceIds": [
+      "014040005"
+    ]
+  },
+  {
+    "learnerId": "learner-1419",
+    "band": "A2",
+    "rationale": "Mixed results (3–9) but average ~6.9; pre‑intermediate.",
+    "evidenceUtteranceIds": [
+      "014190006"
+    ]
+  },
+  {
+    "learnerId": "learner-1422",
+    "band": "A2",
+    "rationale": "Wide spread (3–9) with average ~5.9; pre‑intermediate overall.",
+    "evidenceUtteranceIds": [
+      "014220001"
+    ]
+  },
+  {
+    "learnerId": "learner-1435",
+    "band": "B1",
+    "rationale": "Mostly 7–9 with average ~7.8; intermediate.",
+    "evidenceUtteranceIds": [
+      "014350004"
+    ]
+  },
+  {
+    "learnerId": "learner-1447",
+    "band": "B2",
+    "rationale": "Stable 8–9 accuracy; average about 8.5 fits upper‑intermediate.",
+    "evidenceUtteranceIds": [
+      "014470007"
+    ]
+  },
+  {
+    "learnerId": "learner-1502",
+    "band": "B1",
+    "rationale": "Spiky (3 to 8) but average ~7.0; intermediate.",
+    "evidenceUtteranceIds": [
+      "015020001"
+    ]
+  },
+  {
+    "learnerId": "learner-1503",
+    "band": "B1",
+    "rationale": "Some dips (to 3) but many 7–10; average about 7.4; intermediate.",
+    "evidenceUtteranceIds": [
+      "015030001"
+    ]
+  },
+  {
+    "learnerId": "learner-2014",
+    "band": "B1",
+    "rationale": "Mostly 7–9 with one 4; average ~7.7; intermediate.",
+    "evidenceUtteranceIds": [
+      "020140004"
+    ]
+  },
+  {
+    "learnerId": "learner-2030",
+    "band": "B1",
+    "rationale": "Across 10 sessions, mostly 7–8 with one 4; average ~7.3; intermediate.",
+    "evidenceUtteranceIds": [
+      "020300005"
+    ]
+  },
+  {
+    "learnerId": "learner-5017",
+    "band": "B1",
+    "rationale": "Good overall (8–9) with one dip (3); average ~7.7; intermediate.",
+    "evidenceUtteranceIds": [
+      "050170001"
+    ]
+  },
+  {
+    "learnerId": "learner-5418",
+    "band": "C1",
+    "rationale": "Highly consistent 8–9 accuracy; average around 8.7; advanced.",
+    "evidenceUtteranceIds": [
+      "054180014"
+    ]
+  },
+  {
+    "learnerId": "learner-6504",
+    "band": "B2",
+    "rationale": "Generally 8–9 with average about 8.4; upper‑intermediate.",
+    "evidenceUtteranceIds": [
+      "065040005"
+    ]
+  },
+  {
+    "learnerId": "learner-6902",
+    "band": "A1",
+    "rationale": "Several very low accuracy scores (3–4); average around 5.1; novice/basic.",
+    "evidenceUtteranceIds": [
+      "069020006"
+    ]
+  },
+  {
+    "learnerId": "learner-8057",
+    "band": "B2",
+    "rationale": "Mostly 8s with average ~8.0; lower end of upper‑intermediate.",
+    "evidenceUtteranceIds": [
+      "080570004"
+    ]
+  },
+  {
+    "learnerId": "learner-8063",
+    "band": "C1",
+    "rationale": "Strong, consistent 8–9 accuracy; average ~8.7; advanced.",
+    "evidenceUtteranceIds": [
+      "080630011"
+    ]
+  },
+  {
+    "learnerId": "learner-9553",
+    "band": "B2",
+    "rationale": "Consistent 8–9 accuracy; average ~8.5; upper‑intermediate.",
+    "evidenceUtteranceIds": [
+      "095530005"
+    ]
+  }
+]

@@ -1,3 +1,4 @@
+import { unwrapArrayTransportResponse, wrapArraySchemaForTransport } from "../transport"
 import type { Provider, ProviderCall } from "./types"
 
 // $ per 1M tokens, verified against Anthropic's published pricing. Claude
@@ -45,6 +46,13 @@ export const anthropicProvider: Provider = {
       throw new Error("LLM_API_KEY is not set — cannot call the Anthropic provider. Use LLM_PROVIDER=mock or REPLAY=1.")
     }
 
+    // Anthropic's tool `input_schema` must describe a JSON object — see
+    // src/lib/llm/transport.ts for why groundedPlacementsSchema (array-
+    // rooted) needs wrapping here and nowhere else. Not yet exercised by a
+    // real Anthropic sweep, but the same wire constraint applies, so this
+    // closes the identical bug found (and fixed) in providers/openai.ts.
+    const { schema: inputSchema, wrapped } = wrapArraySchemaForTransport(jsonSchema)
+
     const res = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: {
@@ -61,7 +69,7 @@ export const anthropicProvider: Provider = {
           {
             name: toolName,
             description: `Return output conforming exactly to the ${toolName} schema.`,
-            input_schema: jsonSchema,
+            input_schema: inputSchema,
             strict: true,
           },
         ],
@@ -78,8 +86,9 @@ export const anthropicProvider: Provider = {
     const toolUse = (body?.content ?? []).find((b: { type?: string }) => b.type === "tool_use")
     if (!toolUse) throw new Error("Anthropic response contained no tool_use block")
 
+    const raw = unwrapArrayTransportResponse(toolUse.input as unknown, wrapped)
     const usage = body?.usage ?? {}
     const cost = costFor(model, usage.input_tokens ?? 0, usage.output_tokens ?? 0)
-    return { raw: toolUse.input as unknown, cost }
+    return { raw, cost }
   },
 }

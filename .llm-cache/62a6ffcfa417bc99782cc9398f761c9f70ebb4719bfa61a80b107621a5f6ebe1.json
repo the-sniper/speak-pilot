@@ -1,0 +1,318 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Own the standup structure and timebox",
+      "scenarios": [
+        {
+          "title": "Kick off and frame the sprint goal",
+          "situation": "You open the standup, remind the team of the sprint goal, and set expectations for concise updates.",
+          "targetPhrases": [
+            "Quick recap: our sprint goal is…",
+            "Please keep updates to 60 seconds: yesterday, today, blockers.",
+            "If it’s a deep dive, we’ll park it and follow up after."
+          ],
+          "successLooksLike": "Facilitator starts on time, states the sprint goal, and clearly sets the format and timebox so everyone understands how to give updates."
+        },
+        {
+          "title": "Guide concise updates",
+          "situation": "A teammate starts to give an unstructured update. You steer them to the standard format.",
+          "targetPhrases": [
+            "Yesterday I… Today I… Blockers…",
+            "Could you share the blocker and the next step?",
+            "What’s the owner and by when?"
+          ],
+          "successLooksLike": "Updates follow the expected format and stay focused on outcomes and blockers rather than details."
+        },
+        {
+          "title": "Timebox without shutting people down",
+          "situation": "A senior engineer goes into solution details mid-standup. You keep momentum respectfully.",
+          "targetPhrases": [
+            "I’m going to park this for after standup.",
+            "Let’s timebox that to 1 minute, then take it offline.",
+            "Noted. We’ll create a follow-up thread right after this."
+          ],
+          "successLooksLike": "Deep dives are deferred, the person feels heard, and the standup stays within 15 minutes."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "Make blockers and next actions crystal clear",
+      "scenarios": [
+        {
+          "title": "Turn vague status into a clear outcome",
+          "situation": "A teammate says “I worked on the API.” You push for a concrete outcome and next step.",
+          "targetPhrases": [
+            "What was the outcome? merged, in review, or pending?",
+            "What’s the next action and who owns it?",
+            "Is anything blocking you today?"
+          ],
+          "successLooksLike": "Team members state outcomes (“PR merged”), owners, and deadlines. Vague language is converted into actionable next steps."
+        },
+        {
+          "title": "Surface true blockers vs. nice-to-haves",
+          "situation": "A teammate mentions a preference as if it’s a blocker. You clarify impact and urgency.",
+          "targetPhrases": [
+            "Is this blocking delivery or just a preference?",
+            "What’s the impact if we don’t resolve it today?",
+            "Can we proceed with a workaround?"
+          ],
+          "successLooksLike": "Actual blockers are identified with impact and owners; non-blockers don’t consume meeting time."
+        },
+        {
+          "title": "Assign and confirm follow-ups",
+          "situation": "A dependency is discovered between two tasks. You create a clear follow-up plan.",
+          "targetPhrases": [
+            "After standup, A and B will sync for 10 minutes.",
+            "Owner: A. Due: today 3 pm.",
+            "I’ll post the summary and action items in the channel."
+          ],
+          "successLooksLike": "Follow-ups have a named owner, deadline, and a place where the summary will be posted."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "Handle dependencies and live incidents without derailing",
+      "scenarios": [
+        {
+          "title": "Cross-team dependency pops up",
+          "situation": "Backend is waiting on DevOps. You escalate just enough to unblock.",
+          "targetPhrases": [
+            "Who on DevOps can unblock this today?",
+            "Let’s tag X in the channel now.",
+            "If not resolved by noon, we’ll replan today’s tasks."
+          ],
+          "successLooksLike": "A clear unblock path is created in-standup and tracked; the meeting stays on track."
+        },
+        {
+          "title": "Triage a production issue called out during updates",
+          "situation": "Someone flags a prod error. You acknowledge and contain the deep dive.",
+          "targetPhrases": [
+            "Acknowledged. We’ll form a 2-person swarm after this.",
+            "Non-involved folks, continue with planned work.",
+            "We’ll share a 3-line update in 30 minutes."
+          ],
+          "successLooksLike": "The incident is acknowledged with a small tiger team and a promised update time, while the rest of the team proceeds."
+        },
+        {
+          "title": "Negotiate scope to protect the sprint goal",
+          "situation": "A dependency threatens the sprint commitment. You propose trade-offs.",
+          "targetPhrases": [
+            "Risk to sprint goal: high/medium/low.",
+            "Proposal: de-scope X or shift Y to next sprint.",
+            "Thumbs-up to proceed, or propose an alternative."
+          ],
+          "successLooksLike": "The team agrees on a pragmatic adjustment that protects the sprint goal when risk appears."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Run smooth remote/hybrid standups",
+      "scenarios": [
+        {
+          "title": "Facilitate with poor audio/lag",
+          "situation": "Two teammates have unstable connections. You keep flow using chat and reactions.",
+          "targetPhrases": [
+            "If audio drops, post your update in chat: yesterday/today/blockers.",
+            "Please react with a check when done.",
+            "You’re on mute; we’ll circle back to you after N."
+          ],
+          "successLooksLike": "Everyone gives an update despite tech issues; the facilitator uses chat, reactions, and structured turn-taking."
+        },
+        {
+          "title": "Async updates for absentees",
+          "situation": "Two members can’t join live. You gather and integrate their updates.",
+          "targetPhrases": [
+            "If you’re async, post before 9:45 in the standup thread.",
+            "I’ll read out key blockers from async notes.",
+            "Unresolved async blockers: owner and next step are…"
+          ],
+          "successLooksLike": "Async updates are requested in advance, read out concisely, and any blockers get an owner and next step."
+        },
+        {
+          "title": "Handle late joiners without restarting",
+          "situation": "A teammate joins 7 minutes late and asks for context. You keep pace and include them.",
+          "targetPhrases": [
+            "Welcome. We’re on N. We’ll catch you after for context.",
+            "Please post a quick update in chat now.",
+            "We’ll add your blocker to the parking lot."
+          ],
+          "successLooksLike": "Late joiners are acknowledged and integrated without derailing the sequence or exceeding time."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "theme": "Manage tough dynamics and keep it respectful",
+      "scenarios": [
+        {
+          "title": "De-escalate when someone dominates",
+          "situation": "One engineer is speaking over others. You re-balance the room.",
+          "targetPhrases": [
+            "Let’s hear from folks we haven’t heard from yet.",
+            "One at a time, please. I’ll call on people in order.",
+            "I appreciate the passion; let’s continue this after standup."
+          ],
+          "successLooksLike": "Everyone gets airtime; the dominant speaker feels respected but yields the floor."
+        },
+        {
+          "title": "Push back on priority churn",
+          "situation": "A stakeholder questions today’s priorities mid-standup. You acknowledge but protect focus.",
+          "targetPhrases": [
+            "Noted. For today we’re sticking to the sprint plan.",
+            "We can revisit priorities in backlog refinement.",
+            "I’ll schedule a 15-minute follow-up with you."
+          ],
+          "successLooksLike": "Priorities are not re-hashed in standup; the stakeholder feels heard and a follow-up is scheduled."
+        },
+        {
+          "title": "Resolve cross-talk and side threads",
+          "situation": "Two teammates start a side debate. You regain control quickly.",
+          "targetPhrases": [
+            "I’m parking this topic so we stay within 15 minutes.",
+            "I’ll capture it in the thread and tag owners.",
+            "Back to updates—next is…"
+          ],
+          "successLooksLike": "Side conversations stop within seconds; the meeting returns to the agenda."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "theme": "Include product and leadership effectively",
+      "scenarios": [
+        {
+          "title": "Product manager joins for blockers",
+          "situation": "PM attends to help unblock. You invite targeted input without creating a backlog meeting.",
+          "targetPhrases": [
+            "We have two items needing PM input only.",
+            "On item A: needed decision is… yes/no by noon.",
+            "Thanks—rest we’ll handle in refinement."
+          ],
+          "successLooksLike": "PM provides just-in-time decisions on a few items; standup pace is maintained."
+        },
+        {
+          "title": "Executive drop-in",
+          "situation": "A director joins unexpectedly. You keep updates crisp and promise a summary.",
+          "targetPhrases": [
+            "For context, we’re on track with… Risks are…",
+            "We’ll share a 3-bullet summary after this.",
+            "Happy to set a separate deep dive if needed."
+          ],
+          "successLooksLike": "The team stays concise under leadership presence; no derail; a follow-up summary is promised."
+        },
+        {
+          "title": "Coordinate with support or SRE on hot issues",
+          "situation": "Support reports customer impact. You route it appropriately without losing the room.",
+          "targetPhrases": [
+            "Thank you. A and B will sync with Support after this.",
+            " ETA for first update is 20 minutes.",
+            "Everyone else, proceed with planned work."
+          ],
+          "successLooksLike": "Customer-impacting issues are triaged with owners and timelines, and the rest of the team stays focused."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "theme": "Be data-driven and outcome-focused",
+      "scenarios": [
+        {
+          "title": "Tie updates to sprint goal and burndown",
+          "situation": "You connect daily progress to remaining scope and call out risk early.",
+          "targetPhrases": [
+            "We have X points remaining; velocity suggests…",
+            "We’re trending behind; mitigation is…",
+            "We’re green/amber/red on the sprint goal."
+          ],
+          "successLooksLike": "Updates reference goal and simple metrics; risks are flagged with a specific mitigation plan."
+        },
+        {
+          "title": "Replan today based on latest info",
+          "situation": "A blocker changes today’s priorities. You propose a clear plan for the day.",
+          "targetPhrases": [
+            "Proposed plan for today: A, B, C.",
+            "Owners: X/Y/Z. Checkpoint at 3 pm.",
+            "Any objections or better ideas?"
+          ],
+          "successLooksLike": "Team agrees on a focused daily plan with named owners and a mid-day checkpoint."
+        },
+        {
+          "title": "Close with crisp action recap",
+          "situation": "You end with a 30-second summary and next steps in-channel.",
+          "targetPhrases": [
+            "Actions today: 1) … owner … by …",
+            "I’ll post this in the standup thread now.",
+            "If I missed anything, please reply in thread."
+          ],
+          "successLooksLike": "Everyone leaves knowing who does what by when; the summary is posted promptly."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "theme": "Run it end-to-end and hand off facilitation",
+      "scenarios": [
+        {
+          "title": "Facilitate a flawless mock standup",
+          "situation": "You run a realistic 10–15 minute standup for the team, handling curveballs.",
+          "targetPhrases": [
+            "Kicking off—goal is… timebox is 15 minutes.",
+            "Parking lot items so far: …",
+            "We’re done at time—thanks everyone."
+          ],
+          "successLooksLike": "The facilitator keeps to time, manages interruptions, parks deep dives, and lands with a clear recap."
+        },
+        {
+          "title": "Write the perfect standup summary",
+          "situation": "After the meeting, you post a concise summary with actions and owners.",
+          "targetPhrases": [
+            "Summary: status, risks, actions.",
+            "Actions: owner → deadline.",
+            "Link to incident/follow-up thread: …"
+          ],
+          "successLooksLike": "A two-to-five bullet summary is posted within 5 minutes, with unambiguous actions and links."
+        },
+        {
+          "title": "Rotate and coach the next facilitator",
+          "situation": "You hand off facilitation to a teammate and provide supportive coaching.",
+          "targetPhrases": [
+            "Handing facilitation to … tomorrow.",
+            "Here’s the checklist we’ve been using.",
+            "I’ll back you up on timeboxing and parking lot."
+          ],
+          "successLooksLike": "Another teammate successfully facilitates using your checklist; knowledge is shared and sustained."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 2,
+    "minutesPerSession": 60
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Standups finish in 15 minutes or less while covering every person’s update, blockers, and clear next actions.",
+      "measurableProxy": "In three consecutive mock standups, 90% of speakers finish within 60 seconds and the meeting ends in ≤15 minutes."
+    },
+    {
+      "plainLanguage": "Facilitators consistently turn vague updates into concrete outcomes, owners, and deadlines.",
+      "measurableProxy": "In observed sessions, at least 80% of updates include outcome (“merged/in review”), named owner, and a by-when date."
+    },
+    {
+      "plainLanguage": "Real blockers are identified quickly and assigned to the right people without derailing the meeting.",
+      "measurableProxy": "For each blocker raised, an owner and next step are recorded within the same standup in ≥90% of cases."
+    },
+    {
+      "plainLanguage": "Follow-up summaries are posted promptly so the team and stakeholders stay aligned.",
+      "measurableProxy": "A 3–5 bullet summary with actions and owners is posted in the team channel within 5 minutes after standup in ≥4 of 5 sessions."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome! Over the next 8 weeks, we’ll train you to confidently facilitate daily Scrum standups in English. Expect fast, practical drills that focus on: timeboxing to 15 minutes, surfacing and assigning blockers, keeping deep dives out of the meeting, running remote/hybrid standups smoothly, and posting crisp action summaries. We’ll meet twice a week for 60 minutes. Bring real examples from your sprint, and be ready to practice leading updates, redirecting tangents, and closing with clear next steps. By the end, you’ll be able to run standups that are concise, respectful, and outcome-driven.",
+    "ko": "환영합니다! 앞으로 8주 동안 여러분이 영어로 데일리 스크럼 스탠드업을 자신 있게 진행할 수 있도록 훈련합니다. 15분 시간 관리, 문제(blocker) 식별과 담당자 지정, 깊은 논의는 회의 밖으로 넘기기, 원격/하이브리드 환경에서의 원활한 진행, 그리고 간결한 액션 요약 게시에 초점을 맞춘 빠르고 실용적인 연습을 합니다. 주 2회 60분씩 진행됩니다. 현재 스프린트의 실제 사례를 가져오시고, 업데이트를 이끄는 연습, 탈선 정리, 명확한 다음 단계로 마무리하는 연습을 할 준비를 해주세요. 프로그램이 끝날 때쯤이면 짧고 존중하며 결과 중심의 스탠드업을 운영할 수 있게 됩니다."
+  }
+}

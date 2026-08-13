@@ -57,6 +57,49 @@ describe("callWithSchema", () => {
   })
 })
 
+// Regression, found by Task 15's real OpenAI sweep: brief 9 failed with
+// "fetch failed" (a network error thrown INSIDE provider.call(), before it
+// ever returns {raw, cost}) and that sweep's agent_runs had ZERO ok=false
+// rows despite the genuine failure — the exception skipped both runSink call
+// sites in the retry loop entirely, so the failure log the Evals tab renders
+// was blind to transport errors, and the sweep script's own printed claim
+// ("Every attempt (success and failure) was written to agent_runs") was
+// false for exactly this case.
+describe("callWithSchema — transport errors (provider.call() throwing) are logged and retried like any other failure", () => {
+  it("logs an ok=false row with the transport error's message when provider.call() throws, then retries and can still succeed", async () => {
+    let call = 0
+    __setProviderForTest({
+      name: "fake",
+      call: async () => {
+        call++
+        if (call === 1) throw new Error("fetch failed")
+        return { raw: { n: 1 }, cost: 0.01 }
+      },
+    })
+    const runs: any[] = []; __setRunSinkForTest(r => runs.push(r))
+    const out = await callWithSchema({ prompt: "p", system: "s", schema: S, toolName: "t", kind: "test" })
+
+    expect(out.data).toEqual({ n: 1 })
+    expect(runs).toHaveLength(2)
+    expect(runs[0].ok).toBe(false)
+    expect(runs[0].error).toBe("fetch failed")
+    expect(runs[0].output).toBeNull()   // no response body exists to show
+    expect(runs[0].cost).toBeNull()     // no call completed, so cost is unknown, never $0
+    expect(runs[1].ok).toBe(true)
+  })
+
+  it("logs an ok=false row on EVERY attempt and still throws when every attempt is a transport error", async () => {
+    __setProviderForTest({ name: "fake", call: async () => { throw new Error("connection reset") } })
+    const runs: any[] = []; __setRunSinkForTest(r => runs.push(r))
+    await expect(
+      callWithSchema({ prompt: "p", system: "s", schema: S, toolName: "t", kind: "test" })
+    ).rejects.toThrow(/connection reset/)
+    expect(runs).toHaveLength(2)          // one row per attempt (1 + default maxRetries)
+    expect(runs.every(r => !r.ok)).toBe(true)
+    expect(runs.every(r => r.error === "connection reset")).toBe(true)
+  })
+})
+
 // Code review fix round 1, Finding 1 (Critical): readCache only throws
 // CacheMissInReplayError when the cache FILE IS ABSENT. A file that exists but
 // no longer validates against the current schema (e.g. a later task tightens

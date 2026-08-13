@@ -1,0 +1,339 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Structured shift handovers: clarity, numbers, risks",
+      "scenarios": [
+        {
+          "title": "Kickoff handover: open with status, priorities, watch-outs",
+          "situation": "You start the handover to the incoming supervisor at the whiteboard with the WMS dashboard open.",
+          "targetPhrases": [
+            "Quick handover: previous shift achieved X, missed Y.",
+            "Open items and owners are...",
+            "Watch-outs for the next four hours are...",
+            "By priority: 1) ..., 2) ...",
+            "Any blockers before we start?"
+          ],
+          "successLooksLike": "Delivers a 2–3 minute, structured handover covering status, priorities, risks, and asks; incoming supervisor can repeat back the top three points."
+        },
+        {
+          "title": "Live dock status with clear numbers",
+          "situation": "During handover, you summarize inbound/outbound dock status, ETAs, and backlog.",
+          "targetPhrases": [
+            "Inbound: 5 trucks; next ETA 14:20.",
+            "Outbound: 3 doors active; two loads waiting.",
+            "Dock 3 is down for maintenance until 16:00.",
+            "Backlog is roughly 120 pallets.",
+            "Allocated headcount: 8 pickers, 3 loaders."
+          ],
+          "successLooksLike": "States numbers, time windows, and constraints without ambiguity; listener can sketch the board correctly."
+        },
+        {
+          "title": "Equipment and system readiness check",
+          "situation": "You confirm RF, forklifts, and WMS tasks are ready for the next shift.",
+          "targetPhrases": [
+            "RF scanners are signed out and batteries at 80%+.",
+            "Forklift 12 is tagged out; 8 units available.",
+            "Putaway and replenishment tasks are queued.",
+            "No WMS outages reported.",
+            "Call me if the queue spikes above X."
+          ],
+          "successLooksLike": "Covers equipment status and critical system notes; assigns an owner for any gaps."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "Daily safety toolbox talks: brief, clear, actionable",
+      "scenarios": [
+        {
+          "title": "PPE and heat-stress reminder",
+          "situation": "You deliver a morning safety talk during a hot week.",
+          "targetPhrases": [
+            "Mandatory PPE today: hard hats, high-vis, gloves.",
+            "Hydration break every 60 minutes—don’t wait until you’re thirsty.",
+            "If you feel dizzy, report to me immediately.",
+            "We will spot-check compliance."
+          ],
+          "successLooksLike": "Briefing is under 90 seconds, names the hazard and the prevention steps, and ends with a confirmation question."
+        },
+        {
+          "title": "Forklift–pedestrian separation",
+          "situation": "You remind the mixed crew before a busy inbound window.",
+          "targetPhrases": [
+            "Use the blue light path and sound the horn at intersections.",
+            "No phones in walkways—eyes up.",
+            "Pedestrians: stay inside the marked lanes; drivers: 8 km/h max."
+          ],
+          "successLooksLike": "States three clear rules using command language; crew can repeat back the rules."
+        },
+        {
+          "title": "Near-miss and reporting",
+          "situation": "You reference a near-miss from yesterday and require reporting.",
+          "targetPhrases": [
+            "We had a near-miss at Dock 5 yesterday—no injury, but a warning.",
+            "Root cause was line-of-sight blocked by stacked pallets.",
+            "Prevention: keep lanes clear; report obstructions.",
+            "Log any near-miss in the system and tell your lead."
+          ],
+          "successLooksLike": "Names what happened, the likely cause, and the prevention; ends with a direct ask to report and a show-of-hands acknowledgment."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "Incident response and escalation language",
+      "scenarios": [
+        {
+          "title": "Spill response during handover",
+          "situation": "You discover an oil spill near charging stations as you begin the shift handover.",
+          "targetPhrases": [
+            "Stop work in this area now.",
+            "Isolate the area and place cones.",
+            "Use the absorbent kit; do not step in.",
+            "Notify EHS and maintenance; I’ll file the ticket."
+          ],
+          "successLooksLike": "Uses calm, direct commands; secures the area and names the next two actions and owners."
+        },
+        {
+          "title": "Minor injury protocol",
+          "situation": "An associate has a minor cut; you direct the response and documentation.",
+          "targetPhrases": [
+            "First aid now; then incident report.",
+            "We need a brief witness statement.",
+            "After treatment, we’ll do a return-to-work check.",
+            "I will log this in the system within 30 minutes."
+          ],
+          "successLooksLike": "Prioritizes safety and documentation; assigns tasks and timelines clearly."
+        },
+        {
+          "title": "Equipment fault escalation",
+          "situation": "A forklift displays an error right before loading.",
+          "targetPhrases": [
+            "Tag out the unit—do not use.",
+            "Open a maintenance ticket; what’s the ETA?",
+            "Workaround: reassign to Unit 8.",
+            "Safety first—no exceptions."
+          ],
+          "successLooksLike": "States stop-work, creates a ticket, gives a workaround, and confirms understanding."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Reprioritization under pressure: late trucks, surges, weather",
+      "scenarios": [
+        {
+          "title": "Late inbound surge replan",
+          "situation": "Three late trucks arrive together; you must reassign and extend shift.",
+          "targetPhrases": [
+            "Reassign two pickers to receiving now.",
+            "Hold non-urgent tasks until 18:00.",
+            "Overtime is approved for up to one hour—confirm who can stay.",
+            "Update carriers with the new dock order."
+          ],
+          "successLooksLike": "States new priorities and timeboxes; confirms headcount and communicates externally."
+        },
+        {
+          "title": "Cross-docking pivot",
+          "situation": "To protect an urgent outbound, you switch strategy to cross-dock.",
+          "targetPhrases": [
+            "Bypass putaway; stage in Lane B.",
+            "Cross-dock to outbound Door 7 only.",
+            "Verify labels and lot numbers before move.",
+            "I need a status update every 15 minutes."
+          ],
+          "successLooksLike": "Explains the pivot, quality checks, and cadence for updates; team can repeat the steps."
+        },
+        {
+          "title": "Weather disruption plan",
+          "situation": "A typhoon warning affects afternoon operations.",
+          "targetPhrases": [
+            "Secure pallets and shrink-wrap now.",
+            "Suspend outdoor operations at 15:00.",
+            "Stagger breaks to avoid congestion.",
+            "Safety briefing at 14:45—everyone attends."
+          ],
+          "successLooksLike": "Calls out deadlines and safety-first changes; logs the plan in the handover notes."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "theme": "Quality and inventory accuracy in handovers",
+      "scenarios": [
+        {
+          "title": "Damage and quarantine briefing",
+          "situation": "You brief the incoming shift about damaged goods and quarantine rules.",
+          "targetPhrases": [
+            "Move damaged cartons to the quarantine zone.",
+            "Hold for QA inspection before any movement.",
+            "Take photo evidence and attach to the ticket.",
+            "Notify QA if count changes."
+          ],
+          "successLooksLike": "States location, rule, evidence, and notification flow; zero movement without QA."
+        },
+        {
+          "title": "Cycle count discrepancy at change of shift",
+          "situation": "A 37-unit variance is discovered right before handover.",
+          "targetPhrases": [
+            "Variance is 37 units on SKU A.",
+            "Recount with a second person; adjustments on hold.",
+            "Check recent moves and pick history.",
+            "Escalate to me if still off by more than 5."
+          ],
+          "successLooksLike": "Gives a clear recount plan, data checks, and an escalation threshold."
+        },
+        {
+          "title": "Packaging and labeling compliance",
+          "situation": "You catch unreadable barcodes on inbound cases.",
+          "targetPhrases": [
+            "Barcode unreadable—relable before putaway.",
+            "Match batch/lot and expiry to ASN.",
+            "Reject criteria: smudged label or mismatch—stop and call me."
+          ],
+          "successLooksLike": "States pass/fail rules and stop-the-line triggers; team can apply consistently."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "theme": "External interactions: drivers, gatehouse, carrier safety",
+      "scenarios": [
+        {
+          "title": "De-escalate a driver queued over two hours",
+          "situation": "A frustrated driver confronts you at the dock office about delays.",
+          "targetPhrases": [
+            "I understand your delay and frustration.",
+            "Current wait time is about 45 minutes from now.",
+            "Next steps: Door 4, then unload in order.",
+            "I can offer a priority lane if you secure the seal check now. Thank you for your patience."
+          ],
+          "successLooksLike": "Keeps tone professional, states facts and next steps, offers one concrete relief, and confirms understanding."
+        },
+        {
+          "title": "Gatehouse English check-in",
+          "situation": "You step in to help the guard check in a non-Japanese-speaking driver.",
+          "targetPhrases": [
+            "Do you have an appointment number?",
+            "Please show the bill of lading—seal intact?",
+            "Your dock assignment is Door 6.",
+            "Park and wait; we will call you in 10 minutes."
+          ],
+          "successLooksLike": "Completes check-in without confusion; driver repeats back dock and wait instructions."
+        },
+        {
+          "title": "Carrier safety compliance reminder",
+          "situation": "You notice a driver not using wheel chocks at the dock.",
+          "targetPhrases": [
+            "Engine off and key out, please.",
+            "Chocks in place before we open the doors.",
+            "High-vis vest is required in this area.",
+            "Thank you—safety first."
+          ],
+          "successLooksLike": "Corrects behavior immediately and respectfully; observes compliance before proceeding."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "theme": "Audits, 5S, and safety walkthrough language",
+      "scenarios": [
+        {
+          "title": "Pre-audit crew briefing",
+          "situation": "An external auditor arrives after lunch; you brief the team.",
+          "targetPhrases": [
+            "Today’s audit focus is on forklift charging and PPE.",
+            "If asked, answer briefly and honestly—no guessing.",
+            "Have documents ready; follow the escort policy.",
+            "Direct questions to me if unsure."
+          ],
+          "successLooksLike": "Sets expectations (do’s/don’ts), names the focus areas, and assigns a point of contact."
+        },
+        {
+          "title": "5S spot-check handover",
+          "situation": "You hand off open 5S actions to the next shift.",
+          "targetPhrases": [
+            "Sort and set in order: clear the red-tag shelf by 17:00.",
+            "Shadow boards must be full—report any missing tools.",
+            "Take before/after photos and upload to the board."
+          ],
+          "successLooksLike": "Transfers ownership with deadlines and evidence requirements; next shift can execute without rework."
+        },
+        {
+          "title": "LOTO reminder before maintenance",
+          "situation": "Maintenance will service a conveyor during the next shift.",
+          "targetPhrases": [
+            "Lockout/tagout is mandatory—authorized personnel only.",
+            "Perform a try-out test and verify zero energy.",
+            "No one removes a lock except the owner.",
+            "I will brief the area leads at 16:45."
+          ],
+          "successLooksLike": "States the non-negotiables and verification steps; reduces risk of accidental startup."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "theme": "Reporting up and cross-site coordination",
+      "scenarios": [
+        {
+          "title": "KPI verbal update on a regional call",
+          "situation": "You explain slippage on on-time departure and your recovery plan.",
+          "targetPhrases": [
+            "On-time departure dropped to 88% due to late inbound.",
+            "Root cause: carrier delay and dock downtime at Door 3.",
+            "Recovery plan: add a floater and pre-stage high runners.",
+            "Risk: labor shortage after 22:00; ask: temp support."
+          ],
+          "successLooksLike": "Gives a concise, data-backed update with root cause, plan, risks, and a clear ask."
+        },
+        {
+          "title": "Draft a shift summary email",
+          "situation": "You send the end-of-shift report to managers and the next supervisor.",
+          "targetPhrases": [
+            "Headline: what changed this shift.",
+            "Status by area: inbound, outbound, inventory.",
+            "Risks and watch-outs for next shift are...",
+            "Attachments: photo evidence and KPI screenshot.",
+            "Next shift focus: top three items."
+          ],
+          "successLooksLike": "Produces a 6–8 sentence, well-structured email that recipients can act on without follow-up."
+        },
+        {
+          "title": "Post-incident brief with action items",
+          "situation": "After a near-miss, you lead a 10-minute stand-up to agree actions.",
+          "targetPhrases": [
+            "Timeline: what happened when.",
+            "Immediate cause versus root cause.",
+            "Corrective actions with owner and due date.",
+            "Follow-up check on [date]—I will own it."
+          ],
+          "successLooksLike": "Aligns on facts and assigns actions with names and dates; team repeats back owners and deadlines."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 2,
+    "minutesPerSession": 60
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Supervisors can run a complete 3-minute shift handover that covers what happened, what’s next, risks, and clear asks—without switching to Japanese.",
+      "measurableProxy": "In a live simulation, 80% of learners complete a 3-minute handover hitting 5 of 6 rubric points with no more than two coach prompts."
+    },
+    {
+      "plainLanguage": "Supervisors deliver a concise, confident safety briefing that gets the crew’s attention and confirms understanding.",
+      "measurableProxy": "During a 60–90 second briefing, learners use at least 3 command phrases, name one hazard and one prevention step, and elicit a verbal check-back from 2 crew members."
+    },
+    {
+      "plainLanguage": "Supervisors can de-escalate delays and coordinate changes under pressure while keeping operations safe.",
+      "measurableProxy": "In scenario role-plays, learners state a new priority and timeline, reassign roles, and confirm compliance in under 2 minutes, with 90% checklist completion."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome, Osaka Warehouse Supervisors! Over the next 8 weeks, we’ll sharpen your English for two high-impact moments: safety briefings and shift handovers. Expect practical, role-play-heavy sessions using your real workflows, incidents, and metrics. Bring a recent shift report or safety note to each session. By the end, you’ll deliver concise briefings, run smooth handovers, and report up with confidence.",
+    "ko": "오사카 창고 감독자 여러분, 환영합니다! 앞으로 8주 동안 우리는 안전 브리핑과 교대 인수인계에 꼭 필요한 영어에 집중합니다. 실제 업무 흐름, 사고 사례, 지표를 바탕으로 실습형 롤플레이 중심으로 진행됩니다. 매 회차마다 최근 교대 보고서나 안전 메모를 지참해 주세요. 과정이 끝나면 간결한 브리핑을 하고, 매끄럽게 인수인계를 진행하며, 상부 보고도 자신 있게 하실 수 있습니다."
+  }
+}

@@ -164,7 +164,15 @@ async function main(): Promise<void> {
 
   console.log("")
   console.log(`Done: ${succeeded} succeeded, ${failed} failed, of ${EVAL_BRIEFS.length} briefs.`)
-  console.log(`Every attempt (success and failure) was written to agent_runs, tagged with sweep_id=${sweepId}.`)
+  // This claim was FALSE until adapter.ts's transport-error handling was
+  // fixed (Task 15, found by this exact sweep hitting a real "fetch failed"
+  // on brief 9): a network error thrown inside provider.call() used to skip
+  // both of callWithSchema's runSink call sites entirely, so a genuine
+  // failure could occur with zero trace in agent_runs. adapter.ts now wraps
+  // provider.call() in its own try/catch and logs an ok=false row (error set
+  // to the transport error's message, output null) before retrying or
+  // rethrowing — see the doc comment in callWithSchema for the full story.
+  console.log(`Every attempt (success and failure, including transport errors) was written to agent_runs, tagged with sweep_id=${sweepId}.`)
   console.log("See /evals for the scored summary — it reads only the most recent sweep.")
 }
 

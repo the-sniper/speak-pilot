@@ -1,0 +1,148 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Write it once, get it accepted: clear, compliant emails",
+      "scenarios": [
+        {
+          "title": "Answering an external auditor’s PBC request in one pass",
+          "situation": "You receive a ‘Provided By Client’ (PBC) request and must respond within 24 hours with complete, properly scoped evidence and ownership details.",
+          "targetPhrases": [
+            "Thanks for your request dated [date].",
+            "Attached are the requested documents: [list].",
+            "For audit trail, I’m including [name] as the document owner.",
+            "This covers period [start–end]; please confirm scope.",
+            "If anything is missing, I’ll send it by [time].",
+            "Version [v#] aligns with the approved policy on [date].",
+            "Per our controls, evidence is stored at [location]."
+          ],
+          "successLooksLike": "One email that fully answers the ask with the right files, scope, owner, and storage location. The auditor does not need a follow‑up."
+        },
+        {
+          "title": "Reporting a suspected phishing email via the right channel",
+          "situation": "You spot a suspicious message and must notify Security with the required details without creating noise or risk.",
+          "targetPhrases": [
+            "I received a suspicious email from [sender] at [time].",
+            "I have not clicked links or opened attachments.",
+            "Forwarding full headers via the approved channel now.",
+            "Please confirm if a ticket is required; I can open it.",
+            "Should I notify [team/distribution list], or will you?",
+            "Marking the original as ‘Reported’ and deleting per guidance.",
+            "Let me know if any containment steps are needed."
+          ],
+          "successLooksLike": "Security receives a concise, actionable report with headers and timeline; no speculation; no extra back‑and‑forth."
+        },
+        {
+          "title": "Executive status email with risk, impact, and next steps",
+          "situation": "You must brief a VP in 4–6 sentences so they know status, risks, and what (if anything) they need to decide.",
+          "targetPhrases": [
+            "Current status: Green/Amber/Red.",
+            "Key risk is [risk] with [impact].",
+            "Decision needed by [date] from [owner].",
+            "Next steps: [1–2 bullets] with owners.",
+            "No action required from you at this time.",
+            "We are on track/off track by [metric]."
+          ],
+          "successLooksLike": "A short, scannable message with color, risk, ask, and next steps. The VP knows exactly what to do or not do."
+        },
+        {
+          "title": "Requesting a policy exception with clear mitigations",
+          "situation": "You need a temporary exception to a policy and must show scope, duration, risk, and mitigations so approvers can say yes/no quickly.",
+          "targetPhrases": [
+            "I’m requesting a temporary exception to [policy] for [reason].",
+            "Mitigations in place: [list].",
+            "Duration: [start–end], with review on [date].",
+            "Risks acknowledged by [stakeholder].",
+            "If approved, we will [monitor/report].",
+            "If not approved, impact is [impact]."
+          ],
+          "successLooksLike": "A concise request with scope, timeline, mitigations, and impact. Approvers can decide without clarifying questions."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "Say it live, close the loop: handoffs, vendors, and incidents",
+      "scenarios": [
+        {
+          "title": "De‑escalating an access request that’s been bounced three times",
+          "situation": "A colleague is frustrated after multiple redirects for a system access approval. You need to own the handoff and finish it.",
+          "targetPhrases": [
+            "I see you’ve been redirected a few times—thanks for your patience.",
+            "To resolve this now, I will own the handoff.",
+            "The approver for this access is [name/team].",
+            "I’m opening ticket #[number] and copying you.",
+            "Expected timeline is [time]; I’ll update by [time].",
+            "If delayed, I’ll escalate to [manager] and propose a workaround."
+          ],
+          "successLooksLike": "The colleague feels heard, a single ticket with owner and timeline exists, and no further chasing is needed."
+        },
+        {
+          "title": "Vendor security questionnaire: clarifying scope and alternatives",
+          "situation": "On a live call, a vendor asks about controls your product does or does not meet. You must clarify scope and provide acceptable evidence or alternatives.",
+          "targetPhrases": [
+            "To confirm, your question refers to control [ID]/area.",
+            "Our standard is [framework], implemented via [process].",
+            "Evidence available: [document/log], redacted if needed.",
+            "Out of scope for this product is [area].",
+            "We cannot share [X]; alternative is [attestation/summary call].",
+            "Does this meet your ‘adequate’ requirement?"
+          ],
+          "successLooksLike": "Scope is clear, evidence or acceptable alternatives are provided, and the vendor accepts without escalation."
+        },
+        {
+          "title": "Incident bridge update in 45–60 seconds",
+          "situation": "During a live incident, you must give a crisp update with facts, ownership, and ETA, then hand back to the lead.",
+          "targetPhrases": [
+            "Current impact: [users/systems], start time [time].",
+            "Root cause unknown/suspected [x]; investigating.",
+            "My action item: [task], ETA [time].",
+            "Risks if we proceed/do nothing: [risk].",
+            "Next update at [time] or sooner if status changes.",
+            "Requesting approval to [rollback/pause]."
+          ],
+          "successLooksLike": "A 30–60 second update that includes impact, status, your action/ETA, risk, and next update time. The lead has what they need."
+        },
+        {
+          "title": "Acknowledging a legal hold and coordinating team actions",
+          "situation": "Legal issues a hold. You must confirm obligations, assign a contact, and document steps without over‑sharing.",
+          "targetPhrases": [
+            "I acknowledge receipt of the legal hold dated [date].",
+            "We will suspend deletion/auto‑archiving for [systems].",
+            "Please confirm the data custodians and timeframe.",
+            "We will document steps taken in [tracker].",
+            "Point of contact for our team is [name].",
+            "Let us know if any training is required."
+          ],
+          "successLooksLike": "Legal receives clear acknowledgment, a team POC, and a documentation plan, reducing risk and questions. "
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 2,
+    "minutesPerSession": 30
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "People send clear, compliant emails and updates that don’t require follow‑up.",
+      "measurableProxy": "In simulations, 90% of messages meet a 5‑point checklist (scope, owner, dates, evidence, next step) with zero rework."
+    },
+    {
+      "plainLanguage": "Meetings run faster because updates are short and complete.",
+      "measurableProxy": "Bridge‑call role‑plays hit 45–60 seconds with all 5 required data points in 2 consecutive runs."
+    },
+    {
+      "plainLanguage": "Auditors and security reviewers accept our first response.",
+      "measurableProxy": "In mock audits, 85% of first responses are marked ‘complete’ by peers without clarifying questions."
+    },
+    {
+      "plainLanguage": "Colleagues stop ping‑ponging issues.",
+      "measurableProxy": "In access‑handoff role‑plays, learners create a single ticket with owner and timeline in under 3 minutes."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome to our fast, compliance‑focused English tune‑up. You already communicate well; this two‑week program standardizes the words and templates we use for audits, security, and leadership updates so work moves faster with less risk. Two 30‑minute sessions per week, high‑impact practice only. Bring one recent status email and one real request you sent to an auditor or Security—we’ll tighten them together.",
+    "ko": "빠르고 컴플라이언스 중심의 영어 점검 과정에 오신 것을 환영합니다. 여러분은 이미 충분히 잘 소통하고 있습니다. 이번 2주 프로그램은 감사, 보안, 경영진 보고에 사용하는 표현과 템플릿을 표준화하여 업무를 더 빠르게, 더 적은 리스크로 진행하도록 돕습니다. 주 2회, 회당 30분의 집중 실습으로 진행됩니다. 최근 상태 보고 이메일 1개와 감사/보안팀에 보낸 실제 요청 1개를 가져오세요. 함께 더 간결하고 명확하게 다듬겠습니다."
+  }
+}

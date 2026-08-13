@@ -1,0 +1,513 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "US-style openings, tone, and trust-building",
+      "scenarios": [
+        {
+          "title": "Opening after a long hold",
+          "situation": "Customer waited over six minutes on hold and sounds impatient.",
+          "targetPhrases": [
+            "Thanks for waiting—I know your time is valuable.",
+            "This is [Name] with [Company]. How can I help today?",
+            "You’re in the right place.",
+            "First, may I quickly verify your full name and email?",
+            "I’ll take care of this for you."
+          ],
+          "successLooksLike": "Agent acknowledges the wait in the first 10 seconds, delivers a branded greeting with their name, verifies two data points, and moves into the issue in under 30 seconds with a calm, friendly tone."
+        },
+        {
+          "title": "Third transfer recovery",
+          "situation": "Customer has been transferred twice and expects to repeat the story again.",
+          "targetPhrases": [
+            "I’m sorry you’ve had to repeat yourself.",
+            "I’ll own this from here.",
+            "Let me summarize to make sure I’ve got it right…",
+            "I won’t transfer you again without staying on the line.",
+            "Here’s what I can do right now."
+          ],
+          "successLooksLike": "Agent apologizes once, summarizes accurately in under 20 seconds, sets clear next steps, and reduces agitation without blaming other teams."
+        },
+        {
+          "title": "Hold and reconnect etiquette",
+          "situation": "Agent needs time to research and must place the customer on hold, with a plan if disconnected.",
+          "targetPhrases": [
+            "Mind if I place you on a brief hold for about two minutes?",
+            "If we get disconnected, I’ll call you back at [number].",
+            "Thanks for hanging in there.",
+            "I’m back—thanks for your patience."
+          ],
+          "successLooksLike": "Agent asks permission with a time estimate, confirms callback number, returns within the estimate, and thanks the customer before resuming troubleshooting."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "Empathy that de-escalates without giving away the store",
+      "scenarios": [
+        {
+          "title": "Billing surprise: $49.99 charge",
+          "situation": "Customer reports an unexpected charge and is frustrated.",
+          "targetPhrases": [
+            "I can see why that’s frustrating.",
+            "Let me pull up the charge and fix this.",
+            "Here’s what likely happened…",
+            "I’ll make this right.",
+            "Would a refund or account credit work better for you?"
+          ],
+          "successLooksLike": "Agent validates once, explains in plain language, offers two concrete remedies, confirms preference, and documents the resolution."
+        },
+        {
+          "title": "Wrong item—twice",
+          "situation": "Customer received the wrong product two times and is losing patience.",
+          "targetPhrases": [
+            "You shouldn’t have to deal with this.",
+            "I’ll personally track this replacement.",
+            "I’m expediting shipping at no extra cost.",
+            "I’ll email the label while we’re on the line.",
+            "You’ll get an update by [time]."
+          ],
+          "successLooksLike": "Agent takes ownership, upgrades shipping, provides a time-bound update, and sends the label before ending the call."
+        },
+        {
+          "title": "Supervisor request—stabilize first",
+          "situation": "Customer demands a supervisor immediately.",
+          "targetPhrases": [
+            "I can get a supervisor, and I’m also empowered to help.",
+            "Here’s what I can do right now while I bring them in.",
+            "Does that plan work for you?",
+            "I’ll stay with you on the line."
+          ],
+          "successLooksLike": "Agent acknowledges the request, proposes an immediate step within their authority, gains agreement, and performs a warm introduction if escalation proceeds."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "Call control and setting an agenda without sounding rigid",
+      "scenarios": [
+        {
+          "title": "Runaway story, focused fix",
+          "situation": "Customer gives a long backstory that risks derailing the call.",
+          "targetPhrases": [
+            "Got it—let me make sure we solve this fast.",
+            "Here’s what we’ll tackle first…",
+            "I’ll take notes as we go.",
+            "Does that sound good?"
+          ],
+          "successLooksLike": "Agent respectfully redirects, sets a two-step agenda, confirms buy-in, and keeps the customer talking to facts needed to solve the issue."
+        },
+        {
+          "title": "Multi-issue triage",
+          "situation": "Customer brings three issues at once with limited time.",
+          "targetPhrases": [
+            "Let’s prioritize the most urgent issue.",
+            "We’ll handle A now, then B if time allows.",
+            "If we run short, I’ll set a follow-up.",
+            "I want to respect your time."
+          ],
+          "successLooksLike": "Agent identifies priority, sequences items, and either resolves two or schedules a follow-up with clear ownership."
+        },
+        {
+          "title": "Polite, purposeful interruption",
+          "situation": "Agent must interrupt to avoid wasted time.",
+          "targetPhrases": [
+            "Sorry to jump in—I want to fix this quickly.",
+            "One quick question so I don’t waste your time…",
+            "Thanks—please go on."
+          ],
+          "successLooksLike": "Agent interrupts once with purpose, asks a precise question, and returns floor control smoothly."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Plain-English troubleshooting and probing",
+      "scenarios": [
+        {
+          "title": "Login failure with step-by-step guidance",
+          "situation": "Customer cannot sign in; unclear error message.",
+          "targetPhrases": [
+            "What happens when you try to sign in?",
+            "Let’s try this step by step together.",
+            "Please click Settings in the top right.",
+            "Tell me exactly what you see now.",
+            "I’ll stay with you while it loads."
+          ],
+          "successLooksLike": "Agent uses short, concrete directions, confirms each step, and avoids jargon while capturing the exact error text."
+        },
+        {
+          "title": "When the customer says, “I already tried that”",
+          "situation": "Customer rejects standard steps as repeats.",
+          "targetPhrases": [
+            "Thanks for trying that—let’s build on it.",
+            "Sometimes a small detail makes the difference.",
+            "Here’s a different angle we can try.",
+            "If it doesn’t work, we have a plan B."
+          ],
+          "successLooksLike": "Agent validates prior effort, reframes the step, proposes an alternate, and maintains momentum without arguing."
+        },
+        {
+          "title": "Two-factor/OTP issues",
+          "situation": "Customer is not receiving or cannot read a one-time code.",
+          "targetPhrases": [
+            "I’m sending a 6-digit code to your phone ending in ___.",
+            "Please read it back one number at a time.",
+            "If it doesn’t arrive, we’ll try email instead.",
+            "I’ll wait on the line."
+          ],
+          "successLooksLike": "Agent confirms destination, elicits slow, accurate read-back, and offers an immediate fallback channel."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "theme": "Policies, refunds, and alternatives that feel helpful",
+      "scenarios": [
+        {
+          "title": "Outside 30-day return window",
+          "situation": "Customer requests a refund past the stated policy.",
+          "targetPhrases": [
+            "I want to help within our policy.",
+            "Here are the options I can offer today.",
+            "I can approve an exception this one time.",
+            "Would store credit get you what you need?"
+          ],
+          "successLooksLike": "Agent states constraints once, offers at least two options, and secures agreement on the preferred path."
+        },
+        {
+          "title": "Fee waiver request",
+          "situation": "Customer asks to waive a restocking or late fee.",
+          "targetPhrases": [
+            "Given the circumstances, I can waive the fee.",
+            "I’ll document this so you’re covered.",
+            "You’ll see it on your account within 24 hours.",
+            "Anything else I can help with today?"
+          ],
+          "successLooksLike": "Agent grants or denies with rationale, documents clearly, sets a timebound expectation, and closes cleanly."
+        },
+        {
+          "title": "Saying no without burning goodwill",
+          "situation": "Requested action is not allowed.",
+          "targetPhrases": [
+            "I wish I could do that.",
+            "Here’s what I can do right now.",
+            "Let’s figure out the next best step.",
+            "I want to keep this easy for you."
+          ],
+          "successLooksLike": "Agent declines once with empathy, pivots to alternatives, and keeps the customer engaged."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "theme": "Escalations, warm transfers, and rock-solid follow-through",
+      "scenarios": [
+        {
+          "title": "Warm transfer to Tier 2",
+          "situation": "Issue requires a specialist; customer dreads repeating the story.",
+          "targetPhrases": [
+            "I’m bringing in a specialist.",
+            "Here’s a quick summary so you don’t repeat yourself.",
+            "I’m staying on the line until you’re connected.",
+            "Is it okay if I listen in?"
+          ],
+          "successLooksLike": "Agent summarizes accurately in under 20 seconds, performs a warm handoff, and ensures ownership transfers clearly."
+        },
+        {
+          "title": "Owning a callback",
+          "situation": "System outage prevents immediate fix; callback required.",
+          "targetPhrases": [
+            "I’ll call you by [time] your local time.",
+            "If you don’t hear from me, here’s my direct line.",
+            "I’ll send a quick recap email after this call.",
+            "I appreciate your patience."
+          ],
+          "successLooksLike": "Agent commits to a precise time window, provides a backstop contact, sends a recap, and follows through on time."
+        },
+        {
+          "title": "Notes that travel",
+          "situation": "Case may move between teams; notes must be actionable.",
+          "targetPhrases": [
+            "I’ve added detailed notes to your case.",
+            "Any agent can pick this up without you repeating.",
+            "Your case number is ____.",
+            "I summarized the steps we tried."
+          ],
+          "successLooksLike": "Agent writes clear, structured notes with actions and results so the next agent can continue seamlessly."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "theme": "Handling anger, profanity, and threats to cancel",
+      "scenarios": [
+        {
+          "title": "Setting a respectful boundary",
+          "situation": "Customer uses profanity repeatedly.",
+          "targetPhrases": [
+            "I want to help, and I can’t continue if the language stays this way.",
+            "Let’s keep this respectful so I can solve this.",
+            "I’m on your side."
+          ],
+          "successLooksLike": "Agent sets a boundary once, redirects to solutioning, and de-escalates without escalating tone."
+        },
+        {
+          "title": "Save the account",
+          "situation": "Customer threatens to cancel immediately.",
+          "targetPhrases": [
+            "I hear you. If we fix X today, would you stay?",
+            "Let me make this easy.",
+            "Here’s a solution I can offer now.",
+            "Does that work for you?"
+          ],
+          "successLooksLike": "Agent identifies the root issue, proposes a concrete fix, and asks a clear save question."
+        },
+        {
+          "title": "“This is false advertising”",
+          "situation": "Customer claims misleading marketing.",
+          "targetPhrases": [
+            "I can see how it came across that way.",
+            "Let me walk you through what’s included.",
+            "If it still misses the mark, we’ll make it right.",
+            "Thanks for giving me a chance to fix this."
+          ],
+          "successLooksLike": "Agent acknowledges perception, clarifies features in plain language, and offers a remedy or path forward."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "theme": "US-style email and live chat that customers actually read",
+      "scenarios": [
+        {
+          "title": "Follow-up email with next steps",
+          "situation": "After-call recap required with actions and timelines.",
+          "targetPhrases": [
+            "Subject: Quick recap and next steps",
+            "As promised, here’s what we did today…",
+            "Action needed from you:",
+            "You’re all set—no action needed.",
+            "Best regards, [Name], [Team]"
+          ],
+          "successLooksLike": "Email has a clear subject, bullet points, bolded actions, dates in US format, and a friendly sign-off."
+        },
+        {
+          "title": "Live chat pacing and tone",
+          "situation": "Customer engages via chat; expects fast, short messages.",
+          "targetPhrases": [
+            "Hi, I’m [Name]. I’ll be your point of contact.",
+            "I’m reviewing your message now.",
+            "Thanks for your patience—still with me?",
+            "Glad we got this sorted. Anything else I can help with today?"
+          ],
+          "successLooksLike": "Agent sends short, timely messages, checks presence after pauses, and closes with an offer to help further."
+        },
+        {
+          "title": "Social DM to secure channel",
+          "situation": "Customer shares account info over social; must move to a private channel.",
+          "targetPhrases": [
+            "For your privacy, let’s move to a secure channel.",
+            "Here’s a link to verify your account.",
+            "I’ll stay with you through the process.",
+            "Once verified, I’ll pick this up right away."
+          ],
+          "successLooksLike": "Agent moves the conversation securely without losing momentum and confirms next steps."
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "theme": "Outages, no-ETA updates, and proactive communication",
+      "scenarios": [
+        {
+          "title": "System-wide outage—no ETA",
+          "situation": "Services are down for many customers; no exact timeline.",
+          "targetPhrases": [
+            "We’re experiencing a wider outage.",
+            "Here’s what that means for you.",
+            "You don’t need to call back—I’ll own the update.",
+            "I’ll text you as soon as service is restored."
+          ],
+          "successLooksLike": "Agent explains impact, avoids false promises, sets a one-way update, and reduces repeat contacts."
+        },
+        {
+          "title": "Proactive VIP update",
+          "situation": "High-value customer affected; call them before they call you.",
+          "targetPhrases": [
+            "Just keeping you in the loop.",
+            "We’re on track for [timeframe].",
+            "Here’s a safe workaround for now.",
+            "I’ll follow up at [time]."
+          ],
+          "successLooksLike": "Agent delivers a concise, proactive update with a workaround and a scheduled follow-up."
+        },
+        {
+          "title": "Accountability without legal risk",
+          "situation": "Customer demands an apology and accountability.",
+          "targetPhrases": [
+            "We fell short today.",
+            "No excuses—here’s what we’re doing about it.",
+            "Your experience matters to us.",
+            "Thanks for sticking with us."
+          ],
+          "successLooksLike": "Agent offers a sincere apology, names corrective actions, and maintains a professional tone."
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "theme": "Soft sales in support: saves, cross-sells, and framing value",
+      "scenarios": [
+        {
+          "title": "Cancelation save by plan match",
+          "situation": "Customer wants to cancel due to cost or mismatch.",
+          "targetPhrases": [
+            "What’s making you consider canceling?",
+            "If we could reduce your bill by X, would you stay?",
+            "Based on your usage, this plan fits better.",
+            "I’ll switch you over with no downtime."
+          ],
+          "successLooksLike": "Agent uncovers the why, offers a targeted alternative, confirms the save, and executes the change."
+        },
+        {
+          "title": "Cross-sell during troubleshooting",
+          "situation": "Agent spots a product that prevents future issues.",
+          "targetPhrases": [
+            "While we’re here, one thing that can prevent this is…",
+            "No pressure—just so you know.",
+            "Would you like me to add that for you?",
+            "Totally fine to skip—your call."
+          ],
+          "successLooksLike": "Agent asks permission, frames value briefly, and accepts yes/no without pressure."
+        },
+        {
+          "title": "Framing value in US terms",
+          "situation": "Customer questions price or benefit.",
+          "targetPhrases": [
+            "Here’s what you gain today…",
+            "This saves you about X hours a month.",
+            "Most customers like you choose…",
+            "You’re good to go."
+          ],
+          "successLooksLike": "Agent states outcomes, quantifies impact, uses social proof, and closes confidently."
+        }
+      ]
+    },
+    {
+      "n": 11,
+      "theme": "Sounding clear and natural to US ears: pronunciation and numbers",
+      "scenarios": [
+        {
+          "title": "Service phrases with US rhythm",
+          "situation": "Agents practice intonation, stress, and linking on high-use phrases.",
+          "targetPhrases": [
+            "How can I help today?",
+            "Let me take care of that for you.",
+            "You’re all set.",
+            "Here’s what we’ll do.",
+            "Does that work for you?",
+            "Thanks for your patience."
+          ],
+          "successLooksLike": "Agent uses natural US stress and intonation, clear /v/ vs /b/, -ed endings, and smooth linking on core phrases."
+        },
+        {
+          "title": "Spelling names, emails, and addresses",
+          "situation": "Capturing customer identity details accurately over the phone.",
+          "targetPhrases": [
+            "That’s J as in Juliet, A as in Alpha…",
+            "Could you spell that for me, letter by letter?",
+            "Let me read that back to confirm.",
+            "Apartment or suite—just to double-check."
+          ],
+          "successLooksLike": "Agent uses a clear spelling alphabet, confirms back accurately, and avoids mishearing common letters and numbers."
+        },
+        {
+          "title": "Numbers, prices, dates, and times (US format)",
+          "situation": "Quoting prices, dates, times, and order numbers accurately.",
+          "targetPhrases": [
+            "That’s forty-nine ninety-nine.",
+            "The fifteenth of May, twenty twenty-six.",
+            "Two-thirty p.m. Pacific.",
+            "Zero vs. “oh” for clarity.",
+            "I’ll send it today, not tomorrow."
+          ],
+          "successLooksLike": "Agent speaks numbers and times clearly, confirms time zones, and avoids ambiguity that leads to rework."
+        }
+      ]
+    },
+    {
+      "n": 12,
+      "theme": "Capstone: end-to-end simulations and QA calibration",
+      "scenarios": [
+        {
+          "title": "Three-part call with transfer and callback",
+          "situation": "Login problem needs Tier 2; warm transfer fails; agent promises and delivers a callback.",
+          "targetPhrases": [
+            "Let me summarize where we are…",
+            "Here’s the plan so you’re not left hanging.",
+            "I’m calling you back now as promised.",
+            "Thanks for sticking with me—we got it done."
+          ],
+          "successLooksLike": "Agent owns the case end-to-end, delivers a warm transfer, recovers from failure with an on-time callback, and confirms resolution."
+        },
+        {
+          "title": "Review rescue call",
+          "situation": "Customer left a negative public review; agent calls to resolve and request an update.",
+          "targetPhrases": [
+            "I saw your review and wanted to reach out personally.",
+            "I’m sorry we dropped the ball.",
+            "I’ve fixed X and here’s a goodwill gesture.",
+            "Would you be open to updating your review?"
+          ],
+          "successLooksLike": "Agent acknowledges publicly stated pain, resolves the core issue, and asks for an update without pressure."
+        },
+        {
+          "title": "Team QA calibration and peer coaching",
+          "situation": "Agents listen to recordings, align on what “good” sounds like, and coach each other’s phrasing.",
+          "targetPhrases": [
+            "Let’s align on what good sounds like.",
+            "Here’s how I’d phrase that more clearly.",
+            "I appreciate the feedback—here’s my takeaway.",
+            "I’ll try that on my next call."
+          ],
+          "successLooksLike": "Agents use coaching language, capture action items, and align with the QA rubric for consistency."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 2,
+    "minutesPerSession": 75
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Agents open and close calls in a consistent, friendly US customer-service style.",
+      "measurableProxy": "QA scorecards show 90%+ compliance with branded greeting, empathy on first contact, verification of two data points, and clear closing on 3 consecutive weeks."
+    },
+    {
+      "plainLanguage": "Escalated customers calm down and stay with us because agents use empathy and clear next steps.",
+      "measurableProxy": "Supervisor escalations per 100 calls drop by 20% and CSAT on escalated calls improves by 0.3 points by week 8."
+    },
+    {
+      "plainLanguage": "Instructions and probing are clear enough that customers don’t get lost or ask for repeats.",
+      "measurableProxy": "First Contact Resolution increases by 10% and average handle time decreases by 5% without an uptick in repeat contacts by week 10."
+    },
+    {
+      "plainLanguage": "Transfers and callbacks feel seamless and reliable to customers.",
+      "measurableProxy": "95% of escalations include a warm transfer with a summary in case notes; 95% of callbacks happen within the promised window."
+    },
+    {
+      "plainLanguage": "Emails and chats are concise, friendly, and easy to act on for US customers.",
+      "measurableProxy": "Email/chat QA scores average 90%+ and grammar/spelling error rate is under 2 per 100 messages in weeks 9–12."
+    },
+    {
+      "plainLanguage": "Agents are easy to understand on the phone, especially with numbers, names, and addresses.",
+      "measurableProxy": "In mock calls, repeat-back requests for names/numbers average under 1 per call; customer audits report 90%+ intelligibility by week 11."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome to your 12-week Customer Support communication sprint. Our goal: help you sound natural and confident to US customers—clear words, friendly tone, and the right phrases at the right time. We’ll drill real call scenarios: long holds, multiple transfers, billing surprises, tough escalations, warm handoffs, and follow-ups that stick. Expect lots of speaking practice, feedback on tone and pronunciation, and quick wins you can use the same day. You’ll learn US-style openings and closings, empathy that calms, plain-English troubleshooting, polished emails and chats, and number/date clarity. Bring your toughest calls—we’ll turn them into playbooks. Let’s get you sounding crisp, warm, and “You’re all set.”",
+    "ko": "12주 고객지원 커뮤니케이션 스프린트에 오신 것을 환영합니다. 목표: 미국 고객에게 자연스럽고 자신감 있게 들리도록 돕는 것입니다—명확한 발음, 친근한 톤, 그리고 상황에 딱 맞는 표현. 실제 콜 상황으로 훈련합니다: 긴 대기 후 연결, 여러 번의 부서 이동, 결제 문제, 어려운 에스컬레이션, 매끄러운 연결(웜 트랜스퍼), 그리고 확실한 후속 조치. 말하기 연습과 톤/발음 피드백이 많고, 그날 바로 써먹을 수 있는 실전 표현을 익힙니다. 미국식 오프닝/클로징, 고객을 진정시키는 공감 표현, 쉬운 영어로 문제 해결, 깔끔한 이메일/채팅, 숫자·날짜를 정확히 전달하는 법을 배우게 됩니다. 가장 어려웠던 콜을 가져오세요—바로 우리 팀의 플레이북이 됩니다. 따뜻하면서도 또렷한 \"You’re all set.\" 톤으로 함께 만들어 갑시다."
+  }
+}

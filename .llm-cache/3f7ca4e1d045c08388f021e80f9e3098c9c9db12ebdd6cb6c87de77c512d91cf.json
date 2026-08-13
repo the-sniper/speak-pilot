@@ -1,0 +1,346 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Report Day and Clubhouse Intake",
+      "scenarios": [
+        {
+          "title": "Check-in with Clubhouse Manager after Early Arrival",
+          "situation": "Player arrives before sunrise on report day, needs to check in, confirm roster status (40-man vs. NRI), get badge, and find locker in a bilingual clubhouse.",
+          "targetPhrases": [
+            "I'm reporting to big league camp. / Me presento al campamento grande.",
+            "What's your roster status? / ¿Estás en el roster de 40 o eres invitado (NRI)?",
+            "Your locker is in row B, number 18. / Tu casillero está en la fila B, número 18.",
+            "Who’s your interpreter? / ¿Quién es tu intérprete?",
+            "Let me repeat that back to confirm. / Te lo repito para confirmar."
+          ],
+          "successLooksLike": "Greets staff appropriately, states purpose, confirms roster status and locker location using a closed-loop confirmation, and departs with badge—no extra escort needed."
+        },
+        {
+          "title": "Uniform Sizing and Equipment Requests",
+          "situation": "Equipment manager needs chest/waist/hat sizes, glove relace request, and bat label details—Spanish and English spoken interchangeably.",
+          "targetPhrases": [
+            "I need your sizes: jersey, pants, hat. / Necesito tus tallas: jersey, pants, gorra.",
+            "Do you prefer tapered or baggy pants? / ¿Prefieres pantalón ajustado o suelto?",
+            "Can you relace my glove today? / ¿Puedes cambiarle las agujetas a mi guante hoy?",
+            "Nameplate spelling check. / Confirmación de deletreo para el nombre en el jersey.",
+            "When do you need it by? / ¿Para cuándo lo necesitas?"
+          ],
+          "successLooksLike": "Captures sizes accurately, confirms deadlines and nameplate spelling, submits a complete request card without manager follow-up."
+        },
+        {
+          "title": "Reading the Whiteboard when Bus Times Change Twice",
+          "situation": "Morning bus time is updated twice; player must verify the final time and spread the word to a mixed-language group.",
+          "targetPhrases": [
+            "Final bus is at 8:45; confirm you heard me. / El último autobús es a las 8:45; confirma que me escuchaste.",
+            "It changed from 8:15 to 8:30 to 8:45. / Cambió de 8:15 a 8:30 a 8:45.",
+            "I'll post it on the board and in the chat. / Lo pongo en el pizarrón y en el chat.",
+            "Say it back to me. / Repítemelo, por favor."
+          ],
+          "successLooksLike": "Announces the final time clearly in both languages, collects verbal check-backs from at least two teammates, and updates the board/chat correctly."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "Medical Intake and Training Room Communication",
+      "scenarios": [
+        {
+          "title": "Reporting Shoulder Tightness after Live BP",
+          "situation": "Pitcher needs to describe location, severity, and triggers to an athletic trainer, with a bilingual teammate assisting as needed.",
+          "targetPhrases": [
+            "It hurts when I lift above shoulder height. / Duele cuando levanto por encima del hombro.",
+            "Pins and needles or sharp pain? / ¿Hormigueo o dolor punzante?",
+            "Rate it 0–10. / Califícalo del 0 al 10.",
+            "Let’s ice now and re-assess after lunch. / Apliquemos hielo ahora y re-evaluamos después del almuerzo.",
+            "No self-massage tools today. / Hoy no uses herramientas de auto-masaje."
+          ],
+          "successLooksLike": "Accurately communicates pain location and severity, agrees to a clear plan, and repeats back restrictions to confirm understanding."
+        },
+        {
+          "title": "MRI/Imaging Scheduling and Fasting Rules",
+          "situation": "Staff schedules an MRI; player must understand arrival time, no-metal policy, and fasting instructions, then prepare transport.",
+          "targetPhrases": [
+            "Your check-in is at 6:30 a.m. / Tu registro es a las 6:30 a.m.",
+            "No food or drink after midnight. / Nada de comer ni beber después de medianoche.",
+            "Remove jewelry and metal. / Quita joyas y metal.",
+            "Team van leaves at 5:45. / La camioneta del equipo sale a las 5:45.",
+            "Text me ‘CONFIRMED’. / Mándame ‘CONFIRMADO’ por texto."
+          ],
+          "successLooksLike": "Restates time windows and restrictions in own words, packs appropriately, and sends confirmation message without prompts."
+        },
+        {
+          "title": "Explaining a Daily Treatment Plan",
+          "situation": "Trainer explains mobility, soft-tissue, and activation sequence to a Spanish-speaking player; bilingual staff member relays it precisely.",
+          "targetPhrases": [
+            "Three rounds: mobility, soft tissue, activation. / Tres rondas: movilidad, tejido blando, activación.",
+            "Stop if numbness spreads. / Para si se te corre el entumecimiento.",
+            "We’ll re-test range of motion. / Reprobaremos el rango de movimiento.",
+            "I’ll demo once; then you do it. / Yo demuestro una vez; luego tú lo haces."
+          ],
+          "successLooksLike": "Interpreter relays instructions step-by-step without adding opinions; player can execute first round with minimal correction."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "On-Field Drills, Calls, and Safety",
+      "scenarios": [
+        {
+          "title": "Bunt Defense Rotation Mid-Drill",
+          "situation": "Coach changes rotation during a rapid station; players must switch roles cleanly across languages.",
+          "targetPhrases": [
+            "Switch with me on this rep. / Cámbiate conmigo en esta repetición.",
+            "Crash hard; I’ll cover third. / Entra fuerte; yo cubro tercera.",
+            "Next group on my whistle. / Siguiente grupo a mi silbatazo.",
+            "Got it? Say it back. / ¿Listo? Repítelo."
+          ],
+          "successLooksLike": "Players restate the new rotation, execute the next rep without traffic or missed coverages."
+        },
+        {
+          "title": "Outfield Communication on Tweener Fly Ball",
+          "situation": "Mixed-language outfield must avoid collision and make the play during live BP.",
+          "targetPhrases": [
+            "Mine! Yours! Take it! / ¡Mía! ¡Tuya! ¡Llévala!",
+            "Ball, wall, wind! / ¡Pelota, pared, viento!",
+            "I’m cutting behind. / Yo corto por detrás.",
+            "Loud and early. / Fuerte y temprano."
+          ],
+          "successLooksLike": "Clear, early calls prevent hesitation; play is made cleanly with no near-collision."
+        },
+        {
+          "title": "PFP: Double-Play Feeds and Footwork",
+          "situation": "Pitchers practice feeds to second and home; coach gives concise bilingual cues.",
+          "targetPhrases": [
+            "Inside lane/outside lane. / Carril interno/externo.",
+            "Set your feet; don’t rush. / Coloca los pies; no te apures.",
+            "Glove side; chest high. / Lado del guante; a la altura del pecho.",
+            "Reset and go again. / Reinicia y otra vez."
+          ],
+          "successLooksLike": "Pitchers call out the target, deliver repeatable feeds, and correct one footwork error using the cue words."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Game Planning, Video, and Meeting Language",
+      "scenarios": [
+        {
+          "title": "Hitting Plan vs. Sinkerballer",
+          "situation": "Pre-game hitters’ meeting: discuss approach (zones, takes, swing decisions) and share it with a teammate in the other language.",
+          "targetPhrases": [
+            "Hunt up; spit on down. / Busca arriba; deja pasar abajo.",
+            "Middle-away only until two strikes. / Solo medio-afuera hasta dos strikes.",
+            "What's your take sign? / ¿Cuál es tu seña de tomar?",
+            "What's the one-liner? / ¿Cuál es el mensaje clave?"
+          ],
+          "successLooksLike": "States a simple, translatable plan and confirms teammate can paraphrase it back accurately."
+        },
+        {
+          "title": "Pitch Sequencing and Execution Feedback",
+          "situation": "Coach reviews glove-side fastball command and slider shape; bilingual catcher relays notes to pitcher.",
+          "targetPhrases": [
+            "Glove-side miss; aim off-plate. / Fallas al lado del guante; apunta fuera de la zona.",
+            "Start it at the hip. / Iníciala a la altura de la cadera.",
+            "Tunnel with the heater. / Enmascara con la recta.",
+            "Show me your grip. / Enséñame tu agarre."
+          ],
+          "successLooksLike": "Catcher delivers concise, accurate relay; pitcher adjusts target and demonstrates improved misses next pen."
+        },
+        {
+          "title": "Clarifying Jargon in Video Review",
+          "situation": "Player doesn’t understand a term (“vertical approach angle”, “tunnel”); asks for rephrasing without derailing the meeting.",
+          "targetPhrases": [
+            "Can you say that in simpler terms? / ¿Puedes decirlo más simple?",
+            "So the takeaway is… / Entonces, lo clave es…",
+            "One example, please. / Un ejemplo, por favor.",
+            "I’ll try it next round. / Lo pruebo en la próxima ronda."
+          ],
+          "successLooksLike": "Asks a precise clarification, summarizes takeaway in plain words, and sets a next action."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "theme": "Game Day Operations and Last-Minute Changes",
+      "scenarios": [
+        {
+          "title": "Weather Delay and Bus Reassignment",
+          "situation": "Thunderstorms force a staggered departure; clubhouse attendant needs to reroute two groups and verify headcount.",
+          "targetPhrases": [
+            "Group A at 12:10; Group B at 12:40. / Grupo A a las 12:10; Grupo B a las 12:40.",
+            "Reply ‘A’ or ‘B’. / Responde ‘A’ o ‘B’.",
+            "Roll call now. / Pasamos lista ahora.",
+            "If you miss, Uber and receipt. / Si te lo pierdes, Uber y recibo."
+          ],
+          "successLooksLike": "Communicates groups and times in both languages, gets written acknowledgments, and departs with full headcount."
+        },
+        {
+          "title": "Late Lineup Scratch and Treatment Redirect",
+          "situation": "Player is scratched 30 minutes before first pitch; staff must inform him, trainer, and media relations clearly and calmly.",
+          "targetPhrases": [
+            "You’re scratched—go to treatment now. / Estás fuera del lineup—ve a tratamiento ahora.",
+            "Media later; training first. / Prensa después; primero el ‘training’.",
+            "I’ll walk you there. / Te acompaño.",
+            "We’ll update the board. / Actualizamos el pizarrón."
+          ],
+          "successLooksLike": "Delivers message without drama, confirms player starts treatment within five minutes, and updates lineup board accurately."
+        },
+        {
+          "title": "Equipment Fix Under Time Pressure",
+          "situation": "Catcher’s strap breaks during warmups; needs immediate help from a clubbie.",
+          "targetPhrases": [
+            "Strap popped—need a quick fix. / Se rompió la correa—necesito arreglo rápido.",
+            "Backup set where? / ¿Dónde está el repuesto?",
+            "Two minutes tops. / Máximo dos minutos.",
+            "Thank you—back to the field. / Gracias—regreso al campo."
+          ],
+          "successLooksLike": "Secures fix or backup within two minutes and returns to field without missing the next warmup block."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "theme": "Nutrition, Supplements, and Strength & Conditioning",
+      "scenarios": [
+        {
+          "title": "Ordering Fuel with Allergies and Preferences",
+          "situation": "Player requests pregame meal with gluten/dairy restrictions and portion control from kitchen staff.",
+          "targetPhrases": [
+            "No dairy, gluten-free please. / Sin lácteos, sin gluten por favor.",
+            "Grilled, not fried. / A la plancha, no frito.",
+            "Half portion of rice. / Media porción de arroz.",
+            "Any nuts in this? / ¿Esto tiene nueces?"
+          ],
+          "successLooksLike": "Places a clear order, confirms allergens, and receives correct plate the first time."
+        },
+        {
+          "title": "Adjusting the Lift after Soreness",
+          "situation": "Strength coach modifies program based on RPE and soreness map; athlete must echo back the changes.",
+          "targetPhrases": [
+            "RPE seven today. / Esfuerzo percibido siete hoy.",
+            "Drop the load; keep the pattern. / Baja el peso; mantén el patrón.",
+            "Swap squats for split squats. / Cambia sentadillas por zancadas.",
+            "No max effort throws. / Sin lanzamientos al máximo."
+          ],
+          "successLooksLike": "Athlete restates substitutions and load changes, logs them, and executes without coaching reminders."
+        },
+        {
+          "title": "Supplements Compliance and NSF Check",
+          "situation": "Athlete asks about a new supplement; staff explains only NSF-certified products allowed and logs distribution.",
+          "targetPhrases": [
+            "NSF-certified only. / Solo certificados por NSF.",
+            "Bring the label. / Trae la etiqueta.",
+            "We’ll log the batch number. / Registramos el número de lote.",
+            "When in doubt, don’t take it. / En duda, no lo tomes."
+          ],
+          "successLooksLike": "Athlete verifies certification, provides label, and signs log—no unapproved use."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "theme": "Media, Social, and De-escalation",
+      "scenarios": [
+        {
+          "title": "Postgame Scrum after a Costly Error",
+          "situation": "Player addresses media calmly, uses team-approved lines, and avoids blaming others; interpreter coordinates pacing.",
+          "targetPhrases": [
+            "I own that play. / Me hago responsable de esa jugada.",
+            "We’ll clean it up tomorrow. / Lo corregiremos mañana.",
+            "Not commenting on injuries. / Sin comentarios sobre lesiones.",
+            "One question at a time. / Una pregunta a la vez."
+          ],
+          "successLooksLike": "Delivers three concise answers aligned with club messaging; no inflammatory quotes captured."
+        },
+        {
+          "title": "Correcting a Misquote without Escalation",
+          "situation": "A blogger posts a misleading quote; player or PR rep requests a correction privately and professionally.",
+          "targetPhrases": [
+            "That’s out of context—please update. / Está fuera de contexto—por favor actualiza.",
+            "Here’s the full quote. / Aquí está la cita completa.",
+            "Appreciate the quick correction. / Aprecio la corrección rápida.",
+            "No further comment. / Sin más comentarios."
+          ],
+          "successLooksLike": "Sends a clear correction request with evidence, obtains an update, and avoids a public spat."
+        },
+        {
+          "title": "Social Media Boundaries and DMs",
+          "situation": "Player receives an off-record DM asking about clubhouse matters; declines appropriately.",
+          "targetPhrases": [
+            "I don’t discuss team matters privately. / No hablo de asuntos del equipo en privado.",
+            "Please contact PR. / Por favor contacta a prensa del equipo.",
+            "I’ll leave this unanswered. / Dejaré esto sin respuesta.",
+            "Thanks for understanding. / Gracias por entender."
+          ],
+          "successLooksLike": "Declines politely, redirects to PR, and refrains from further engagement."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "theme": "Travel, Assignments, and Roster Moves",
+      "scenarios": [
+        {
+          "title": "Explaining an Option to AAA with Respect",
+          "situation": "Coach and player discuss an option to Triple-A; message must be clear, respectful, and allow questions.",
+          "targetPhrases": [
+            "You’ve been optioned to Triple-A. / Te han enviado a Triple A.",
+            "Report time is 2 p.m. tomorrow. / Te presentas mañana a las 2 p.m.",
+            "This is about reps, not punishment. / Es por más repeticiones, no es castigo.",
+            "Questions for me now? / ¿Preguntas para mí ahora?"
+          ],
+          "successLooksLike": "Coach delivers the message plainly; player paraphrases next steps and leaves with dignity and clarity."
+        },
+        {
+          "title": "Travel Office: Flights, Per Diem, and Receipts",
+          "situation": "Travel coordinator issues flight changes, per diem pickup, and baggage rules to a mixed-language group.",
+          "targetPhrases": [
+            "Pick up per diem at window B. / Recoge el viático en la ventanilla B.",
+            "Carry-on only for this leg. / Solo equipaje de mano en este tramo.",
+            "Send receipts by Sunday. / Envía los recibos para el domingo.",
+            "Reply ‘RECEIVED’. / Responde ‘RECIBIDO’."
+          ],
+          "successLooksLike": "Group acknowledges instructions in writing; zero missed pickups or overweight bags at check-in."
+        },
+        {
+          "title": "Visa and Immigration Questions before Assignment",
+          "situation": "International player checks visa status and asks about travel letters for re-entry.",
+          "targetPhrases": [
+            "Do I need a travel letter? / ¿Necesito una carta de viaje?",
+            "Passport valid through… / Pasaporte válido hasta…",
+            "HR will email forms. / RR. HH. enviará los formularios.",
+            "Tell me if anything changes. / Avísame si algo cambia."
+          ],
+          "successLooksLike": "Player verifies document checklist and timelines, and confirms the contact for follow-up."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 2,
+    "minutesPerSession": 45
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Players, coaches, and staff handle check-in, medical, drill changes, and daily schedule updates without needing a translator for routine tasks.",
+      "measurableProxy": "In role-plays covering intake, treatment, and whiteboard changes, 80% complete the flow with zero critical misunderstandings and correct closed-loop confirmations."
+    },
+    {
+      "plainLanguage": "Bilingual team members accurately relay short, high-stakes messages (injury, lineup changes, travel) between English and Spanish without adding or omitting details.",
+      "measurableProxy": "In triad interpreter drills, 90% reproduce key points within 10% of original length and include at least two explicit check-backs per relay."
+    },
+    {
+      "plainLanguage": "On-field communication prevents collisions and execution errors during mixed-language drills and live BP.",
+      "measurableProxy": "In simulated reps, near-collision incidents drop to zero and players use standardized call words on 90% of contested balls."
+    },
+    {
+      "plainLanguage": "Media and PR interactions remain calm and on-message after mistakes or roster moves.",
+      "measurableProxy": "In mock scrums, 90% of participants deliver three concise answers aligned with club talking points and avoid prohibited topics."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome to our Spring Training Clubhouse Language Program. Over the next 8 weeks, we’ll sharpen English–Spanish communication for real clubhouse moments: check-in, training room, on-field drills, game-day changes, nutrition/S&C, media, and travel/roster moves. Sessions are short, practical, and role-play heavy. Bring a notebook or phone for phrases, and expect paired practice across languages. Safety first: we use closed-loop confirmations (say it back) for anything time-sensitive or medical. Let’s keep the clubhouse moving and everyone on the same page.",
+    "ko": "스프링 트레이닝 클럽하우스 언어 프로그램에 오신 것을 환영합니다. 앞으로 8주 동안 체크인, 트레이닝룸, 현장 드릴, 경기 당일 변경, 영양/체력, 미디어 대응, 이동/로스터 관련 상황에서 영어–스페인어 소통 능력을 실전 중심으로 강화합니다. 수업은 짧고 실용적이며 롤플레이 위주입니다. 표현을 기록할 노트나 휴대폰을 지참해 주세요. 시간·안전이 중요한 내용은 반드시 되묻기(확인 반복)를 사용합니다. 모두가 같은 정보를 공유하고 클럽하우스가 원활히 운영되도록 함께 힘써요."
+  }
+}

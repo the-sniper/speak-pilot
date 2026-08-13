@@ -1,0 +1,194 @@
+[
+  {
+    "learnerId": "learner-0001",
+    "band": "C1",
+    "rationale": "Accuracy is predominantly 9–10 with only rare dips (e.g., multiple 10/9/9 and 9/10/10 lines), indicating a proxy average above 8.6.",
+    "evidenceUtteranceIds": [
+      "000010053"
+    ]
+  },
+  {
+    "learnerId": "learner-0053",
+    "band": "B2",
+    "rationale": "Accuracy mostly 7–9 with several 9s; overall pattern points to a low-8s proxy average.",
+    "evidenceUtteranceIds": [
+      "000530037"
+    ]
+  },
+  {
+    "learnerId": "learner-0112",
+    "band": "B1",
+    "rationale": "Mixed performance with some 4–5 accuracy outliers but frequent 8–9s; overall sits around high-7s.",
+    "evidenceUtteranceIds": [
+      "001120010"
+    ]
+  },
+  {
+    "learnerId": "learner-0131",
+    "band": "B2",
+    "rationale": "Accuracy consistently 8–9 across sessions; strong but not clearly above the 8.6 proxy threshold overall.",
+    "evidenceUtteranceIds": [
+      "001310061"
+    ]
+  },
+  {
+    "learnerId": "learner-0482",
+    "band": "C1",
+    "rationale": "Accuracy frequently 9–10 with occasional 8s; clear proxy average near ~8.8–9.0.",
+    "evidenceUtteranceIds": [
+      "004820045"
+    ]
+  },
+  {
+    "learnerId": "learner-0594",
+    "band": "B1",
+    "rationale": "Accuracy commonly 7–8 with a notable low outlier (3), netting around a 7.0 proxy average.",
+    "evidenceUtteranceIds": [
+      "005940019"
+    ]
+  },
+  {
+    "learnerId": "learner-0736",
+    "band": "A2",
+    "rationale": "Accuracy mostly 5–7 with several lows; overall proxy average around low-6s.",
+    "evidenceUtteranceIds": [
+      "007360004"
+    ]
+  },
+  {
+    "learnerId": "learner-1228",
+    "band": "B1",
+    "rationale": "Despite an early 3, most accuracy scores are 7–8, yielding a low-7s proxy average.",
+    "evidenceUtteranceIds": [
+      "012280016"
+    ]
+  },
+  {
+    "learnerId": "learner-1404",
+    "band": "A1",
+    "rationale": "Frequent very low scores and several near-zero lines bring the proxy accuracy average below 5.5.",
+    "evidenceUtteranceIds": [
+      "014040005"
+    ]
+  },
+  {
+    "learnerId": "learner-1419",
+    "band": "A2",
+    "rationale": "Accuracy ranges 3–9 but centers around 6–7; proxy average ~6.9 fits A2.",
+    "evidenceUtteranceIds": [
+      "014190006"
+    ]
+  },
+  {
+    "learnerId": "learner-1422",
+    "band": "A2",
+    "rationale": "Accuracy fluctuates 3–9 with many 5–7 results; proxy average about 5.9.",
+    "evidenceUtteranceIds": [
+      "014220001"
+    ]
+  },
+  {
+    "learnerId": "learner-1435",
+    "band": "B1",
+    "rationale": "Accuracy mainly 7–9 with a 6; proxy average ~7.8.",
+    "evidenceUtteranceIds": [
+      "014350004"
+    ]
+  },
+  {
+    "learnerId": "learner-1447",
+    "band": "B2",
+    "rationale": "Accuracy predominantly 8–9; proxy average mid-8s.",
+    "evidenceUtteranceIds": [
+      "014470017"
+    ]
+  },
+  {
+    "learnerId": "learner-1502",
+    "band": "B1",
+    "rationale": "Mix of 3–8 accuracy with most scores 7–8; proxy average ~7.0.",
+    "evidenceUtteranceIds": [
+      "015020001"
+    ]
+  },
+  {
+    "learnerId": "learner-1503",
+    "band": "B1",
+    "rationale": "Accuracy spans 3–10 but clusters around 7–8; proxy average mid-7s.",
+    "evidenceUtteranceIds": [
+      "015030001"
+    ]
+  },
+  {
+    "learnerId": "learner-2014",
+    "band": "B1",
+    "rationale": "Mostly 7–9 accuracy with one 4; proxy average mid-to-high 7s.",
+    "evidenceUtteranceIds": [
+      "020140014"
+    ]
+  },
+  {
+    "learnerId": "learner-2030",
+    "band": "B1",
+    "rationale": "Across 10 sessions, accuracy mostly 7–8 with one 4; proxy average ~7.3.",
+    "evidenceUtteranceIds": [
+      "020300005"
+    ]
+  },
+  {
+    "learnerId": "learner-5017",
+    "band": "B1",
+    "rationale": "Several 8–9 accuracies but a 3 drags the proxy average to mid-7s.",
+    "evidenceUtteranceIds": [
+      "050170001"
+    ]
+  },
+  {
+    "learnerId": "learner-5418",
+    "band": "C1",
+    "rationale": "Accuracy consistently 8–9 with many 9s; proxy average around 8.7.",
+    "evidenceUtteranceIds": [
+      "054180014"
+    ]
+  },
+  {
+    "learnerId": "learner-6504",
+    "band": "B2",
+    "rationale": "Accuracy largely 8–9 with a 10; proxy average around 8.4.",
+    "evidenceUtteranceIds": [
+      "065040077"
+    ]
+  },
+  {
+    "learnerId": "learner-6902",
+    "band": "A1",
+    "rationale": "Multiple very low accuracies (3–4) outweigh a few higher ones; proxy average ~5.1.",
+    "evidenceUtteranceIds": [
+      "069020006"
+    ]
+  },
+  {
+    "learnerId": "learner-8057",
+    "band": "B2",
+    "rationale": "Accuracy steady at 7–8 with one 9; proxy average around 8.0, aligning with B2 boundary.",
+    "evidenceUtteranceIds": [
+      "080570004"
+    ]
+  },
+  {
+    "learnerId": "learner-8063",
+    "band": "C1",
+    "rationale": "Accuracy heavily 9s with a few 8s; proxy average ~8.7.",
+    "evidenceUtteranceIds": [
+      "080630038"
+    ]
+  },
+  {
+    "learnerId": "learner-9553",
+    "band": "B2",
+    "rationale": "Accuracy mostly 8–9; proxy average ~8.5.",
+    "evidenceUtteranceIds": [
+      "095530028"
+    ]
+  }
+]

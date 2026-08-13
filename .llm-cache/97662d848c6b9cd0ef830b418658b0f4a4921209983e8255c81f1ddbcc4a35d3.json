@@ -1,0 +1,288 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Prospecting that gets responses",
+      "scenarios": [
+        {
+          "title": "Cold email to a Director using a warm reference",
+          "situation": "You’re emailing a Director who was referred by a mutual contact. You need to be brief, relevant, and secure a 15‑minute intro call.",
+          "targetPhrases": [
+            "Quick note via [mutual contact]",
+            "Based on what you’re driving in [initiative]",
+            "In 1 sentence, we help [role] do [result]",
+            "Would a 15‑minute chat next week be worth it?",
+            "Does Tue 10:00 or Wed 14:00 work?",
+            "Happy to send a one‑pager if easier"
+          ],
+          "successLooksLike": "Email is under 120 words, personalized with the referral, one clear ask with two time options, and a soft close that gets at least one positive reply in testing."
+        },
+        {
+          "title": "Cold call opener with a gatekeeper and pass to the decision maker",
+          "situation": "You reach an assistant first, then the decision maker picks up for a brief window. You must earn permission, show value fast, and propose a next step.",
+          "targetPhrases": [
+            "Did I catch you at a bad time?",
+            "In 30 seconds, I’ll share why I’m calling",
+            "Teams like yours use us to [business result]",
+            "Does this fall under your scope, or someone else’s?",
+            "If useful, can we pencil 15 minutes [date/time]?",
+            "Totally fine if now’s not ideal—what’s better?"
+          ],
+          "successLooksLike": "Rep gains permission, delivers a 20–30 second value statement, confirms relevance, and secures a calendar hold or a clear referral without sounding pushy."
+        },
+        {
+          "title": "LinkedIn voice note follow‑up after no reply",
+          "situation": "After two unanswered emails, you send a 45‑60 second LinkedIn voice note to re‑engage.",
+          "targetPhrases": [
+            "Following up on my note about [pain]",
+            "Noticed [trigger] at your team",
+            "Curious if this is on your radar this quarter",
+            "Happy to send a 90‑second demo clip",
+            "If not you, who owns this today?"
+          ],
+          "successLooksLike": "Voice note is under 60 seconds, references a trigger, states one benefit, and asks one specific question that elicits a response or referral."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "Structured discovery and qualification",
+      "scenarios": [
+        {
+          "title": "Discovery call with economic and technical buyers",
+          "situation": "You open a discovery call with both the budget owner and a technical lead, set an agenda, ask layered questions, and align on impact.",
+          "targetPhrases": [
+            "Agenda for today is… does that work?",
+            "What prompted you to look at this now?",
+            "When you say [term], do you mean [A] or [B]?",
+            "What happens today if nothing changes?",
+            "Who else needs to weigh in before a decision?",
+            "Let me recap what I heard… did I miss anything?"
+          ],
+          "successLooksLike": "Rep sets agenda, asks at least five clear questions, uncovers business impact and timeline, and ends with a recap and agreed next step."
+        },
+        {
+          "title": "Clarifying vague requirements without sounding blunt",
+          "situation": "The prospect uses broad terms like ‘scale’ and ‘automation.’ You need to clarify specifics politely.",
+          "targetPhrases": [
+            "To make sure I understand…",
+            "Could you walk me through a recent example?",
+            "How are you handling this today?",
+            "What would ‘good’ look like in 90 days?",
+            "Are we prioritizing speed, cost, or control?"
+          ],
+          "successLooksLike": "Rep replaces vague terms with concrete definitions and examples, captures at least two measurable success criteria, and confirms alignment."
+        },
+        {
+          "title": "Post‑call summary email with next steps",
+          "situation": "After discovery, you send a concise summary that confirms pains, stakeholders, and dates.",
+          "targetPhrases": [
+            "As discussed, you mentioned…",
+            "We agreed the next step is… by [date]",
+            "Stakeholders: [names/roles]",
+            "Please correct me if I missed anything",
+            "Attaching a one‑pager and 2‑minute demo"
+          ],
+          "successLooksLike": "Email lists 3–5 bullets, includes date‑driven next step, names stakeholders, and gets written confirmation within 24–48 hours."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "Demos that tell a business story",
+      "scenarios": [
+        {
+          "title": "Remote demo during screen‑share lag",
+          "situation": "Your screen share freezes mid‑demo. You must stay calm, narrate, and keep momentum.",
+          "targetPhrases": [
+            "Let me pause sharing while I narrate",
+            "I’ll drop a screenshot in chat",
+            "Shall we switch cameras off to help bandwidth?",
+            "Here’s the outcome you’d see on your side",
+            "We can reschedule a deep dive if needed"
+          ],
+          "successLooksLike": "Rep maintains control, narrates clearly, offers alternatives, and keeps the meeting on track without losing credibility."
+        },
+        {
+          "title": "Tie features to metrics the buyer cares about",
+          "situation": "You need to connect a feature to the buyer’s KPIs using their language.",
+          "targetPhrases": [
+            "This means you can… which reduces [metric] by…",
+            "Compared to your current process…",
+            "For [buyer role], the impact is…",
+            "Here’s a quick example with your data",
+            "Shall we quantify this together?"
+          ],
+          "successLooksLike": "Each feature is linked to a stated pain and metric; the buyer acknowledges relevance and agrees to a quantified follow‑up."
+        },
+        {
+          "title": "Timeboxing and parking‑lot management",
+          "situation": "Multiple questions risk derailing the demo. You must protect time and set a follow‑up.",
+          "targetPhrases": [
+            "We have 10 minutes left—shall we prioritize X or Y?",
+            "Let’s park that and return at the end",
+            "I’ll capture that for a follow‑up session",
+            "If we can decide on next steps today…"
+          ],
+          "successLooksLike": "Rep redirects at least two off‑track questions, covers priority items, and secures a follow‑up slot when needed."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Handling objections and competing vendors",
+      "scenarios": [
+        {
+          "title": "‘We already use Competitor X’",
+          "situation": "A prospect is invested in a competitor. You need to differentiate without bashing.",
+          "targetPhrases": [
+            "Many teams using X come to us for…",
+            "The trade‑off with X is… while we…",
+            "Would it help to map this side‑by‑side?",
+            "If we can’t beat X on [dimension], we’ll say so",
+            "How would you evaluate success fairly?"
+          ],
+          "successLooksLike": "Rep acknowledges the competitor, positions 2–3 clear differentiators tied to the buyer’s criteria, and proposes a fair evaluation plan."
+        },
+        {
+          "title": "‘Price is too high’ and budget pushback",
+          "situation": "A prospect challenges your pricing. You must reframe value and explore options.",
+          "targetPhrases": [
+            "Let’s look at total cost of ownership",
+            "Teams see ROI within [timeframe] by…",
+            "If we phase rollout, your spend is…",
+            "What budget cycle are we working with?",
+            "If we include [concession], can we sign by [date]?"
+          ],
+          "successLooksLike": "Rep quantifies value, explores scope/timing levers, and ties any concession to a clear closing commitment."
+        },
+        {
+          "title": "Security and procurement blockers",
+          "situation": "Security or procurement stalls momentum. You need to align process and move forward.",
+          "targetPhrases": [
+            "Happy to loop in our security lead",
+            "Here’s our SOC 2 and DPA summary",
+            "What’s the approval path and typical timing?",
+            "Can we run these in parallel with evaluation?",
+            "I’ll send a checklist right after this"
+          ],
+          "successLooksLike": "Rep identifies approvers, confirms timeline, shares required documents, and agrees on parallel workstreams to avoid delays."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "theme": "Negotiation, closing, and clean paperwork",
+      "scenarios": [
+        {
+          "title": "Live negotiation on terms with legal/procurement",
+          "situation": "You negotiate key terms on a call and must propose workable language.",
+          "targetPhrases": [
+            "Mutual indemnification",
+            "Limitation of liability",
+            "Auto‑renewal with a 30‑day notice period",
+            "Non‑cancellable vs. termination for convenience",
+            "Can we agree in principle and route redlines?"
+          ],
+          "successLooksLike": "Rep uses clear, professional language, proposes acceptable alternatives, and documents agreements live to reduce back‑and‑forth."
+        },
+        {
+          "title": "Commit call to secure a verbal yes and date",
+          "situation": "You aim to confirm decision, owners, and signature date.",
+          "targetPhrases": [
+            "On a scale of 1–10, how ready are we to proceed?",
+            "What would prevent signing by [date]?",
+            "If we do X, will you do Y?",
+            "Let’s draft a mutual action plan today",
+            "Can we pencil the signing for [date/time]?"
+          ],
+          "successLooksLike": "Rep surfaces final risks, secures a verbal commitment and target signature date, and co‑creates a short mutual action plan."
+        },
+        {
+          "title": "Redlines summary email after contract review",
+          "situation": "You send a clear summary of changes and next actions.",
+          "targetPhrases": [
+            "Per our conversation, we propose…",
+            "Acceptable alternative is…",
+            "Open items awaiting your approval:",
+            "If aligned, we’ll update DocuSign by [date]",
+            "Thank you for the quick turnaround"
+          ],
+          "successLooksLike": "Email lists accepted, proposed, and open items; assigns owners and dates; and shortens the legal cycle."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "theme": "Executive communication and handoffs for the offsite",
+      "scenarios": [
+        {
+          "title": "Two‑minute executive pitch at the offsite",
+          "situation": "You deliver a concise pitch to senior leaders and partners at the offsite networking session.",
+          "targetPhrases": [
+            "In one sentence: we help…",
+            "The three reasons teams choose us are…",
+            "For you, this means…",
+            "The ask today is…",
+            "Happy to intro you to a customer reference"
+          ],
+          "successLooksLike": "Pitch is under two minutes, tailored to the audience, includes a clear ask, and earns at least one qualified follow‑up."
+        },
+        {
+          "title": "De‑escalating a prospect who’s been transferred three times",
+          "situation": "A frustrated prospect reaches you after multiple transfers. You must calm, own the issue, and advance a solution.",
+          "targetPhrases": [
+            "I can hear your frustration—thanks for staying with me",
+            "I’ll own this and stay with you until it’s resolved",
+            "Here’s what I can do in the next 10 minutes",
+            "I’ll update you by [time] even if there’s no change",
+            "Does that plan work for you?"
+          ],
+          "successLooksLike": "Rep acknowledges emotions, states ownership, provides a concrete near‑term plan, and confirms agreement—tone stays calm and respectful."
+        },
+        {
+          "title": "Clean handoff to Customer Success after close",
+          "situation": "You introduce the CSM, confirm goals, and schedule kickoff.",
+          "targetPhrases": [
+            "Introducing [name], your Customer Success Manager",
+            "Here’s the 30‑60‑90 success plan",
+            "Kickoff on [date/time]; agenda:",
+            "We’ll both be on the call to ensure continuity",
+            "Please share stakeholders and calendar invites"
+          ],
+          "successLooksLike": "Rep delivers a warm intro, aligns on goals, schedules kickoff with a clear agenda, and ensures no details are lost in the transition."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 3,
+    "minutesPerSession": 45
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Reps run a structured discovery, ask clear questions, and finish with confirmed next steps and owners.",
+      "measurableProxy": "80% of observed discovery role‑plays score 4/5 or higher on the team rubric (agenda, 5+ questions, recap, next step)."
+    },
+    {
+      "plainLanguage": "Cold outreach and follow‑ups are concise, relevant, and get replies.",
+      "measurableProxy": "Average positive reply rate on tested templates improves by 20% vs. last month; 90% of emails under 120 words with one clear ask."
+    },
+    {
+      "plainLanguage": "Demos link features to buyer pains and metrics, and stay on track under pressure.",
+      "measurableProxy": "In mock demos, reps articulate a metric‑tied benefit for 3 features and manage time within ±5 minutes in 4/5 sessions."
+    },
+    {
+      "plainLanguage": "Objections and pricing pushback are handled calmly and tied to a closing plan.",
+      "measurableProxy": "In objection drills, reps surface the real concern and propose a next step in under 90 seconds in 4/5 attempts."
+    },
+    {
+      "plainLanguage": "Deals close cleanly with clear agreements and minimal rework.",
+      "measurableProxy": "Redline cycles reduced by 25% on average; 90% of handoff emails include owners, dates, and a kickoff agenda."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Team, over the next six weeks we’ll sharpen the English you use in real AE moments: prospecting that gets replies, crisp discovery, demos that land, objection handling, and clean closes—plus a tight executive pitch for the Q3 offsite. Expect three focused 45‑minute sessions per week with live role‑plays, call/email labs, and feedback you can apply the same day. Bring your real accounts and questions. By the offsite, you’ll be ready to tell a clear story, handle tough questions, and move deals forward with confidence.",
+    "ko": "팀 여러분, 앞으로 6주 동안 실제 영업 상황에서 사용하는 영어를 집중적으로 다듬습니다. 반응을 이끌어내는 발굴(프로스펙팅), 명확한 디스커버리, 임팩트 있는 데모, 이의 제기 대응, 깔끔한 클로징, 그리고 Q3 오프사이트를 위한 간결한 임원 대상 피치까지 다룹니다. 주 3회 45분 집중 세션으로 진행되며, 라이브 롤플레이, 통화/이메일 실습, 즉시 적용 가능한 피드백이 제공됩니다. 실제 계정과 질문을 가져오세요. 오프사이트까지 명확한 스토리를 전하고, 까다로운 질문에 대응하며, 자신 있게 딜을 전진시키는 준비를 마치게 될 것입니다."
+  }
+}

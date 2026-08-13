@@ -1,0 +1,242 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Board-first narrative and confident opening",
+      "scenarios": [
+        {
+          "title": "Open the board presentation with the outcome and route map",
+          "situation": "You have a 25-minute slot with the US board. In the first 60–90 seconds you must signal the outcome, what decision is needed, and how you will use time.",
+          "targetPhrases": [
+            "In one sentence: [top-line outcome].",
+            "The decision we need today is [X].",
+            "We’ll cover three points, then Q&A.",
+            "Time check: 18 minutes for the deck, 7 for questions.",
+            "If we run long, I’ll jump to the ask."
+          ],
+          "successLooksLike": "A crisp, calm open: one-sentence outcome, explicit decision request, clear agenda and timing, steady pace (no rushing), and eye contact before moving to slide 1."
+        },
+        {
+          "title": "State the ask and options with a clear recommendation",
+          "situation": "You need approval for a $12M investment. The board wants options and trade-offs before approving.",
+          "targetPhrases": [
+            "Our ask is approval of [$X] to achieve [result].",
+            "We evaluated three options; we recommend [Option B] because [reason].",
+            "If approved, we will [next step] by [date].",
+            "If declined, the impact is [risk/foregone value].",
+            "The trade-off is [A] vs [B]."
+          ],
+          "successLooksLike": "States the ask once, shows 2–3 options with a reasoned recommendation, and names concrete next steps and consequences without hedging or jargon."
+        },
+        {
+          "title": "Preempt likely concerns and show risk controls",
+          "situation": "You anticipate pushback on data quality and execution risk. You need to demonstrate controls proactively.",
+          "targetPhrases": [
+            "The risk you may be thinking about is [X].",
+            "Mitigation: [action/owner/date].",
+            "What would change my view is [leading indicator].",
+            "We’ve put guardrails in place: [threshold/trigger].",
+            "We will monitor monthly and report variances."
+          ],
+          "successLooksLike": "Surfaces 1–2 top risks before being asked, names specific mitigations and triggers, and links them to decision-making without sounding defensive."
+        },
+        {
+          "title": "Set your voice and pace under nerves",
+          "situation": "You feel adrenaline at the start. You need a steady first 30 seconds and deliberate pauses.",
+          "targetPhrases": [
+            "I’ll start with the outcome, then the path.",
+            "Let me pause for a moment to underscore this.",
+            "If I move too fast, please flag me.",
+            "Before we dive in, one framing point."
+          ],
+          "successLooksLike": "Breathes, slows to 120–160 wpm, delivers the first 2–3 sentences cleanly, and uses at least one purposeful pause before advancing."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "Tough Q&A, interruptions, and clarifying without defensiveness",
+      "scenarios": [
+        {
+          "title": "Handle a skeptical ROI challenge",
+          "situation": "A director questions your ROI assumptions and implies the model is optimistic.",
+          "targetPhrases": [
+            "Great question—here’s the evidence behind that.",
+            "To be precise, [what we know] vs [what we assume].",
+            "Sensitivity shows a range of [X–Y].",
+            "The short answer is [Z]; details on slide [12].",
+            "If the assumption moves by [n%], impact is [result]."
+          ],
+          "successLooksLike": "Answers in under 45 seconds, references evidence clearly, distinguishes facts from assumptions, and offers a concise path to detail without rambling."
+        },
+        {
+          "title": "Respond when the Chair interrupts and changes order",
+          "situation": "Mid-explanation, the Chair cuts in: “Skip to the bottom line on churn.” You must pivot without losing control.",
+          "targetPhrases": [
+            "Happy to go there now.",
+            "Two-sentence answer now; details on slide 9.",
+            "I’ll finish this point in 30 seconds, then address churn.",
+            "The short answer: [X]; drivers are [A/B]."
+          ],
+          "successLooksLike": "Acknowledges the interruption, delivers a concise direct answer, negotiates sequence when needed, and resumes structure smoothly."
+        },
+        {
+          "title": "Correct a misinterpretation without friction",
+          "situation": "A director states that gross margin fell, but your data shows it rose excluding one-offs.",
+          "targetPhrases": [
+            "To clarify, I may not have been clear.",
+            "You’re right about [X]; where it differs is [Y].",
+            "The number on this slide excludes one-time items.",
+            "Said simply: underlying margin rose [n pp]."
+          ],
+          "successLooksLike": "Validates the concern, corrects the record with one clear sentence and a visual reference, and avoids defensive tone or blame."
+        },
+        {
+          "title": "Say “I don’t know” with credibility and a plan",
+          "situation": "You’re asked for a metric you don’t have on hand during Q&A.",
+          "targetPhrases": [
+            "I don’t have that number at my fingertips.",
+            "Based on pattern, I expect [range]; I’ll confirm.",
+            "We’ll follow up by [EOD Friday] with the exact figure.",
+            "We can run that sensitivity and share the impact."
+          ],
+          "successLooksLike": "States the gap plainly, provides a bounded estimate if appropriate, commits to a specific follow-up owner and time, and moves on without apology spirals."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "Financials, trade-offs, and pushing back respectfully",
+      "scenarios": [
+        {
+          "title": "Walk the board through unit economics fast",
+          "situation": "You must explain unit economics on one slide for a new product in under two minutes.",
+          "targetPhrases": [
+            "Top line vs bottom line: [numbers].",
+            "Gross margin improved by [n pp].",
+            "Run-rate is [value]; variance vs plan is [n%].",
+            "YoY vs QoQ tells a different story: [insight].",
+            "Guidance remains [range] pending [trigger]."
+          ],
+          "successLooksLike": "Prioritizes 3 numbers that matter, ties them to trend and plan, and names one trigger that could change guidance."
+        },
+        {
+          "title": "Defend a forecast and assumptions under stress",
+          "situation": "A director challenges your volume forecast and wants to know the confidence level.",
+          "targetPhrases": [
+            "Base/low/high cases are [X/Y/Z].",
+            "Key assumption: [conversion=4%].",
+            "Leading indicator we track is [metric].",
+            "We stress-tested with [method] and saw [result].",
+            "Confidence is [moderate/high] because [evidence]."
+          ],
+          "successLooksLike": "States scenarios with ranges, highlights 1–2 critical assumptions, cites a leading indicator and test performed, then gives a confidence statement."
+        },
+        {
+          "title": "Push back on an unrealistic timeline or scope",
+          "situation": "A director asks you to deliver in half the time with no extra resources.",
+          "targetPhrases": [
+            "To meet Q3, we would need [resources/change].",
+            "The trade-off is [speed] vs [quality/risk].",
+            "We can do A or B, not both at that level.",
+            "A prudent path is a phased approach: [phase/owner/date].",
+            "If the constraint is fixed, here’s the impact."
+          ],
+          "successLooksLike": "Names constraints and trade-offs clearly, proposes a phased plan with owners and dates, and maintains a respectful, non-defensive tone."
+        },
+        {
+          "title": "Address cost control without undermining strategy",
+          "situation": "Board requests a 10% cost reduction; you must protect critical capabilities.",
+          "targetPhrases": [
+            "Non-negotiables are [capability].",
+            "One-time vs ongoing savings: [split].",
+            "Deferrable spend is [items] with [impact].",
+            "Efficiency without eroding capability looks like [example].",
+            "We’ll track savings via [metric/owner]."
+          ],
+          "successLooksLike": "Identifies sacred capabilities, offers specific savings levers, quantifies impact, and sets an owner/metric for tracking."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Executive presence, time control, decisive close, and follow-up",
+      "scenarios": [
+        {
+          "title": "Regain time and land the decision",
+          "situation": "You are 7 minutes behind. You must cut content, go straight to the decision, and protect Q&A.",
+          "targetPhrases": [
+            "Given time, I’ll go straight to the decision.",
+            "We’ll park slides 9–12 for the appendix.",
+            "The one takeaway is [X].",
+            "We’re on track for Q&A in [n] minutes.",
+            "Is the board comfortable moving to a vote on [ask]?."
+          ],
+          "successLooksLike": "Drops non-essentials, states the takeaway and ask clearly, signals time control, and prompts for the decision respectfully."
+        },
+        {
+          "title": "Negotiate next steps and secure a motion",
+          "situation": "The room is split. You need a concrete motion, owners, and dates.",
+          "targetPhrases": [
+            "Proposed motion: approve/deny/defer [item].",
+            "Decision needed today is [X]; criteria are [Y].",
+            "Success looks like [metric] by [date].",
+            "Owner and date: [Name] by [Date].",
+            "If deferred, we’ll return with [evidence] on [date]."
+          ],
+          "successLooksLike": "Frames a specific motion, aligns on criteria and success, assigns owners/dates, and documents deferals with a return plan."
+        },
+        {
+          "title": "De-escalate after a tense exchange",
+          "situation": "Following sharp criticism, you need to reduce heat and re-center on shared goals.",
+          "targetPhrases": [
+            "Let me step back for a moment.",
+            "I hear the concern around [X].",
+            "Our common ground is [goal].",
+            "Here’s what we can commit to now: [actions].",
+            "We can continue the detail offline with [owner]."
+          ],
+          "successLooksLike": "Acknowledges emotion without blame, restates shared goals, offers immediate actions, and moves contentious details offline."
+        },
+        {
+          "title": "Send a crisp post-meeting follow-up to the board",
+          "situation": "Within 24 hours you must confirm decisions, open actions, and attach requested materials.",
+          "targetPhrases": [
+            "Thank you for the discussion.",
+            "As requested, attached are [docs].",
+            "Decisions: [1–3 bullets].",
+            "Open actions with owners/dates: [list].",
+            "We will report back by [date] on [items]."
+          ],
+          "successLooksLike": "One-screen email that thanks, lists decisions, assigns owners/dates, attaches materials, and sets a clear return date. No fluff."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 2,
+    "minutesPerSession": 90
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "They open with a clear outcome and the decision they want, and they finish on time.",
+      "measurableProxy": "In a 15-minute mock (10 min deck + 5 min Q&A), the opener includes a one-sentence outcome in the first 30 seconds and an explicit ask; total time ≤ 15:00."
+    },
+    {
+      "plainLanguage": "They handle tough board questions concisely and with evidence, without rambling or becoming defensive.",
+      "measurableProxy": "For 3 challenged questions, each answer ≤ 45 seconds, includes one evidence reference and one bridge phrase, with 0 factual errors and a specific follow-up time if data is missing."
+    },
+    {
+      "plainLanguage": "They speak with executive presence: steady pace, few fillers, effective pauses.",
+      "measurableProxy": "Words per minute between 120–160; ≤ 3 filler words per minute; at least two purposeful pauses per minute in the opener; peer raters agree on the main takeaway (≥ 80% alignment)."
+    },
+    {
+      "plainLanguage": "Their close secures a motion or a clear next step, and the follow-up email is action-oriented.",
+      "measurableProxy": "In simulation, presenter prompts for a motion and captures owners/dates; within 24 hours, sends a one-screen summary email listing decisions and actions, scored ≥ 8/10 by coaches on clarity."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome, senior managers. Over four weeks we will build a board-ready narrative, practice high-pressure Q&A, and rehearse until you can deliver with calm, clarity, and control. Expect two 90-minute live sessions per week, targeted drills, and a final mock board. We will work to US board norms: brevity, a clear ask and options, transparent risks, and numbers that tie to decisions. Psychological safety is core—mistakes are data. By the end, you will have a tight deck, a confident opener, and battle-tested answers.",
+    "ko": "환영합니다. 4주 동안 이사회 발표용 스토리라인을 만들고, 고난도 Q&A를 훈련하며, 침착함·명료함·시간 관리로 전달할 수 있을 때까지 반복 연습합니다. 주 2회 90분 실습 세션, 맞춤형 드릴, 마지막 주 모의 이사회가 포함됩니다. 미국 이사회 기준(간결함, 명확한 요청과 선택지, 리스크의 투명성, 의사결정과 직접 연결되는 숫자)에 맞춰 훈련합니다. 심리적 안전을 최우선으로 하며, 실수는 학습 데이터입니다. 프로그램 종료 시에는 탄탄한 자료, 자신감 있는 오프닝, 검증된 답변을 갖추게 됩니다."
+  }
+}

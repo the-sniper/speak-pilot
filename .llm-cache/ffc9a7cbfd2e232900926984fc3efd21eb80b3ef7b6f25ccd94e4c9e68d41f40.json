@@ -1,0 +1,357 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Start strong: introductions, access, and expectations",
+      "scenarios": [
+        {
+          "title": "Introduce yourself in a cross‑functional team meeting",
+          "situation": "You’re asked to introduce yourself on your first team call with people from multiple functions.",
+          "targetPhrases": [
+            "I’m [Name], joining as [Role] on the [Team].",
+            "I’ll be focused on [area/outcome], and my background is in [brief].",
+            "In my first month I’m aiming to [goal], and I’ll need [support/resources].",
+            "If you work on [related area], I’d love to connect.",
+            "Thanks for having me—excited to contribute."
+          ],
+          "successLooksLike": "A clear 20–30 second intro that connects your role to team goals and invites collaboration."
+        },
+        {
+          "title": "Ask for system access when you’re blocked",
+          "situation": "On day 2 you discover you can’t access a critical tool. You need to request access via chat or ticket.",
+          "targetPhrases": [
+            "I’m onboarding this week and I don’t yet have access to [system].",
+            "Could you grant [role/permission] by [date]?",
+            "Here’s my username/email: [info].",
+            "This is blocking [task]; is there a workaround meanwhile?",
+            "Happy to provide manager approval if needed."
+          ],
+          "successLooksLike": "A concise request with context, urgency, and required details that speeds up provisioning."
+        },
+        {
+          "title": "Schedule and confirm your onboarding 1:1",
+          "situation": "You need to set up your first 1:1 with your manager and share an agenda.",
+          "targetPhrases": [
+            "Could we schedule a 30‑minute 1:1 this week to cover onboarding?",
+            "Proposed agenda: goals, first‑30‑days plan, key stakeholders, questions.",
+            "I’m available [times]; does [option] work for you?",
+            "I’ll send a calendar invite with the agenda and doc link."
+          ],
+          "successLooksLike": "A confirmed calendar event with a clear agenda and pre‑read that respects your manager’s time."
+        },
+        {
+          "title": "Confirm understanding of a new task",
+          "situation": "After a quick verbal handoff, you summarize the task to ensure alignment.",
+          "targetPhrases": [
+            "To confirm my understanding: deliver [output] by [date] for [stakeholder].",
+            "Success looks like [criteria]; did I miss anything?",
+            "Risks/dependencies: [list]. I’ll share an update by [timeframe]."
+          ],
+          "successLooksLike": "A short summary that gets a ‘Yes, that’s right’ response and sets next update timing."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "Write like a pro: email and chat basics",
+      "scenarios": [
+        {
+          "title": "Post an effective intro in the company channel",
+          "situation": "You write a short Slack/Teams intro in a public channel.",
+          "targetPhrases": [
+            "Hi all—I’m [Name], joining [Team] as [Role].",
+            "I’ll be working on [focus] and partnering with [teams].",
+            "Looking forward to learning from you; open to quick intros this week.",
+            "Find me at [time zone/hours]."
+          ],
+          "successLooksLike": "A friendly, scannable post with purpose, focus, and availability that prompts welcomes."
+        },
+        {
+          "title": "Send a calendar invite with purpose and agenda",
+          "situation": "You send an invite for a sync with a clear why and what.",
+          "targetPhrases": [
+            "Purpose: align on [topic] to decide [outcome].",
+            "Agenda: 1) context 2) options 3) next steps.",
+            "Pre‑work: please review [doc/link].",
+            "We’ll end with owners and dates."
+          ],
+          "successLooksLike": "An invite that tells attendees why to attend, what to prepare, and what will be decided."
+        },
+        {
+          "title": "Summarize and confirm in writing after a meeting",
+          "situation": "You post a crisp recap in chat/email to close the loop.",
+          "targetPhrases": [
+            "Here’s a quick recap: Decision—[X]. Actions—[A by owner/date].",
+            "Did I capture this correctly? Anything to adjust?",
+            "I’ll track this in [doc/board] and update by [time]."
+          ],
+          "successLooksLike": "A recap that lists decisions and owners, and receives no corrections or only minor ones."
+        },
+        {
+          "title": "Politely nudge on an unanswered request",
+          "situation": "A dependency owner hasn’t replied. You follow up without sounding pushy.",
+          "targetPhrases": [
+            "Just checking in on the request below for [item].",
+            "This is blocking [task]; could you share an ETA or redirect me?",
+            "If easier, happy to jump on a 10‑minute call today/tomorrow."
+          ],
+          "successLooksLike": "A professional nudge that gets a concrete response or redirect within 24 hours."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "Meetings that matter: updates, questions, and actions",
+      "scenarios": [
+        {
+          "title": "Give a 30–60 second standup update",
+          "situation": "In daily standup, you share what you did, are doing, and blockers.",
+          "targetPhrases": [
+            "Yesterday I [result]. Today I’ll [task] toward [goal].",
+            "I’m blocked by [issue]; I’ll sync with [owner] after this.",
+            "No blockers—on track for [milestone/date]."
+          ],
+          "successLooksLike": "A time‑boxed update with a result, next step, and clear blocker or on‑track signal."
+        },
+        {
+          "title": "Ask smart questions in a project kickoff you just joined",
+          "situation": "You joined mid‑planning and need context fast.",
+          "targetPhrases": [
+            "What does success look like from the stakeholders’ view?",
+            "Could you point me to the latest PRD/brief/spec?",
+            "What’s the timeline and who owns which decisions?",
+            "Are there known risks or constraints I should be aware of?"
+          ],
+          "successLooksLike": "Three targeted questions that unlock context without derailing the meeting."
+        },
+        {
+          "title": "Capture actions and read them back",
+          "situation": "You take notes and confirm owners and dates before the meeting ends.",
+          "targetPhrases": [
+            "Before we close, here are the actions: [A—Owner—Date].",
+            "Can each owner confirm the due date works?",
+            "I’ll post these in [doc/channel] right after."
+          ],
+          "successLooksLike": "A read‑back that gets verbal confirmation and prevents post‑meeting confusion."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Cross‑functional handoffs and alignment",
+      "scenarios": [
+        {
+          "title": "Join mid‑stream and request context and docs",
+          "situation": "You’re added to a project late and need to get up to speed without slowing others down.",
+          "targetPhrases": [
+            "I’m catching up on [project]; could you share the latest [doc/board]?",
+            "I’ll read through by [time] and follow up with focused questions.",
+            "Anything outdated I should ignore?"
+          ],
+          "successLooksLike": "A low‑friction ask that gets you current materials and sets expectations on follow‑up."
+        },
+        {
+          "title": "Align on deliverables, owners, and dates",
+          "situation": "You facilitate a quick alignment after confusion about who does what.",
+          "targetPhrases": [
+            "Let’s confirm deliverables, owners, and dates to avoid gaps.",
+            "Proposal: [Item]—[Owner]—[Date]. Any objections?",
+            "I’ll document this RACI‑lite and share today."
+          ],
+          "successLooksLike": "Clear agreement on who owns what by when, documented and shared the same day."
+        },
+        {
+          "title": "Raise a risk and propose next steps",
+          "situation": "You spot a dependency risk and need to surface it early.",
+          "targetPhrases": [
+            "Flagging a risk: [risk] may impact [outcome/date].",
+            "Options: 1) [mitigation] 2) [workaround] 3) [scope]. I recommend [X] because [reason].",
+            "Decision needed by [date] to stay on track."
+          ],
+          "successLooksLike": "A calm, solution‑oriented risk note that leads to an explicit decision."
+        },
+        {
+          "title": "Escalate politely when a dependency slips",
+          "situation": "A partner team misses a date and your delivery is at risk.",
+          "targetPhrases": [
+            "Highlighting impact: the slip on [item] pushes [milestone] by [x days].",
+            "Requesting help: can we get a new ETA or a temporary alternative?",
+            "Looping in [manager/lead] for visibility—thank you for partnering on this."
+          ],
+          "successLooksLike": "An escalation that preserves relationships and produces a revised plan within 48 hours."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "theme": "Manager communication and feedback",
+      "scenarios": [
+        {
+          "title": "Run a focused 1:1 with your manager",
+          "situation": "You own the agenda for a 1:1 to align on goals and support needed.",
+          "targetPhrases": [
+            "Agenda: goals, progress, risks, asks.",
+            "Top goals this month: [list] with measures of success [metrics].",
+            "Asks: I need [resource/decision] by [date] to stay on track."
+          ],
+          "successLooksLike": "A 1:1 that ends with agreed priorities, risks, and specific manager support."
+        },
+        {
+          "title": "Ask for and respond to feedback",
+          "situation": "You request actionable feedback on recent work and confirm how you’ll apply it.",
+          "targetPhrases": [
+            "What’s one thing to keep doing and one to improve on my [task/output]?",
+            "If I changed [X], would that meet expectations?",
+            "Thanks—here’s what I’ll do differently next time: [plan]."
+          ],
+          "successLooksLike": "You receive one keep/one improve and state a concrete change you’ll make."
+        },
+        {
+          "title": "Send a weekly written update",
+          "situation": "You email or post a brief weekly update to your manager and stakeholders.",
+          "targetPhrases": [
+            "Highlights: [wins]. Risks: [items] with owners/dates. Next: [top 3].",
+            "On track/at risk/off track: [traffic lights] with notes.",
+            "Requests: [decisions/resources] needed by [date]."
+          ],
+          "successLooksLike": "A one‑screen update that stakeholders read without follow‑up questions."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "theme": "Representing your team on stakeholder or customer calls",
+      "scenarios": [
+        {
+          "title": "Open a call and set expectations",
+          "situation": "You join a call with an internal or external stakeholder and need to set purpose and flow.",
+          "targetPhrases": [
+            "Thanks for joining—purpose today is [goal]. We’ll cover [agenda] in [time].",
+            "I’ll take notes and share a recap after the call.",
+            "If we run short on time, we’ll park items for follow‑up."
+          ],
+          "successLooksLike": "A confident opening that frames outcomes, time, and follow‑ups."
+        },
+        {
+          "title": "Handle questions you can’t answer yet",
+          "situation": "A stakeholder asks something you’re not ready to answer.",
+          "targetPhrases": [
+            "I don’t have that data handy; may I follow up by [date/time]?",
+            "To make sure I get you the right answer, is [paraphrase] the question?",
+            "Who’s the best contact on your side for [area] in case we need details?"
+          ],
+          "successLooksLike": "You maintain credibility by clarifying, committing to a follow‑up, and capturing owners/dates."
+        },
+        {
+          "title": "Write a post‑call recap email",
+          "situation": "You send a concise recap with decisions and actions to all participants.",
+          "targetPhrases": [
+            "Thanks for the discussion—here are decisions and next steps.",
+            "Decisions: [list]. Actions: [Owner—Date].",
+            "Please reply if anything needs correction; otherwise we’ll proceed."
+          ],
+          "successLooksLike": "A recap that earns quick confirmations and no surprises later."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "theme": "Propose solutions and influence without authority",
+      "scenarios": [
+        {
+          "title": "Present two options with trade‑offs",
+          "situation": "You need to recommend a path while showing you’ve considered alternatives.",
+          "targetPhrases": [
+            "We’re choosing between Option A and B.",
+            "A: [benefit] / [cost]. B: [benefit] / [cost].",
+            "I recommend [option] because [evidence/impact].",
+            "If we pick [option], next steps are [plan]."
+          ],
+          "successLooksLike": "A balanced recommendation that leads to a clear decision or request for one more data point."
+        },
+        {
+          "title": "Build alignment in a lively Slack thread",
+          "situation": "Colleagues disagree in a thread; you steer toward a decision.",
+          "targetPhrases": [
+            "Summarizing where we agree: [points]. Open questions: [list].",
+            "Proposed decision criteria: [metrics/principles].",
+            "Suggesting a quick huddle to decide—10 minutes today at [time]?"
+          ],
+          "successLooksLike": "A thread that moves from opinions to criteria and a decision path within the day."
+        },
+        {
+          "title": "Request a decision and close the loop",
+          "situation": "You formalize the ask and document the outcome.",
+          "targetPhrases": [
+            "Decision needed: [topic] by [date] to protect [impact].",
+            "Approvers/consulted/informed: [names].",
+            "Outcome: [decision]. Tracking in [doc/link]."
+          ],
+          "successLooksLike": "A documented decision with owners and dates that stakeholders can find later."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "theme": "Demo, Q&A, and retrospective",
+      "scenarios": [
+        {
+          "title": "Deliver a 5‑minute demo or learning share‑out",
+          "situation": "You present what you built/learned in your first weeks to your team.",
+          "targetPhrases": [
+            "Objective: show [what] and get feedback on [area].",
+            "In this demo you’ll see [3 points]—then Q&A.",
+            "Success metric: [metric]; here’s where we are and what’s next."
+          ],
+          "successLooksLike": "A tight, audience‑aware demo that clearly shows value and next steps within 5 minutes."
+        },
+        {
+          "title": "Handle Q&A with confidence",
+          "situation": "You respond to clarifying, skeptical, and supportive questions.",
+          "targetPhrases": [
+            "Great question—here’s the short answer: [point], and detail if helpful.",
+            "If skeptical: I hear the concern about [X]; data shows [Y]; we can mitigate by [Z].",
+            "If supportive: Thank you—here’s how you can help: [ask]."
+          ],
+          "successLooksLike": "Concise answers that acknowledge the intent and move the conversation forward."
+        },
+        {
+          "title": "Contribute to a retrospective",
+          "situation": "You share insights in a team retro on what helped or hindered onboarding.",
+          "targetPhrases": [
+            "What went well: [item] because [impact].",
+            "What to improve: [item] and a concrete change is [proposal].",
+            "I can own/assist [action] by [date]."
+          ],
+          "successLooksLike": "Specific, action‑oriented feedback with at least one item you’ll own after the session."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 2,
+    "minutesPerSession": 60
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "New hires give clear, concise updates and ask at least one focused follow‑up question in meetings each week.",
+      "measurableProxy": "By week 4, 80% deliver a 30–60s standup update without prompts; by week 6, 75% are observed asking a clarifying question in two separate meetings."
+    },
+    {
+      "plainLanguage": "Managers say new hires proactively clarify tasks and raise blockers early, reducing rework.",
+      "measurableProxy": "Week‑6 pulse survey: 75% of managers agree/strongly agree; issue tracker shows blockers flagged ≥48 hours before due dates on 70% of items."
+    },
+    {
+      "plainLanguage": "New hires write short, well‑structured messages that drive decisions and actions.",
+      "measurableProxy": "By week 5, 90% score ‘meets’ on a writing rubric (purpose, ask, owner/date) across two samples (email + chat)."
+    },
+    {
+      "plainLanguage": "Each new hire can lead a brief share‑out and handle Q&A professionally.",
+      "measurableProxy": "By week 8, 100% deliver a 5‑minute demo/learners’ share‑out with a Q&A segment; peer rubric average ≥4/5 on clarity and handling questions."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome to the Business English Onboarding Sprint! Over the next 8 weeks, we’ll focus on high‑impact skills you’ll use immediately: introducing yourself with credibility, clarifying tasks, writing crisp emails and chats, running focused meetings, aligning across teams, and delivering a short demo with confident Q&A. Expect two 60‑minute sessions per week with practical scenarios, templates you can copy, and fast feedback. Bring real tasks from your job—we’ll turn them into wins you can ship the same day.",
+    "ko": "비즈니스 영어 온보딩 스프린트에 오신 것을 환영합니다! 앞으로 8주 동안 바로 현업에서 쓰이는 핵심 역량에 집중합니다: 신뢰감 있는 자기소개, 업무 내용 확인, 간단명료한 이메일·채팅 작성, 집중도 높은 미팅 운영, 조직 간 정렬, 그리고 자신감 있는 Q&A가 포함된 5분 데모 발표입니다. 주 2회 60분 세션으로 진행되며, 실전 시나리오와 바로 활용 가능한 템플릿, 빠른 피드백을 제공합니다. 실제 업무 과제를 가져오세요—그대로 당일에 성과로 연결하겠습니다."
+  }
+}

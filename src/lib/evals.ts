@@ -71,13 +71,35 @@ export function schemaConformance(
   }
 }
 
-/** p50 / p95 latency in ms, from `agent_runs.latency_ms`. */
+/**
+ * p50 / p95 latency in ms, from `agent_runs.latency_ms`.
+ *
+ * Callers MUST pass only live (non-cache-hit) rows. A cache hit is served
+ * from `.llm-cache/` with zero network involved — `callWithSchema` (adapter.ts)
+ * hardcodes `latencyMs: 0` for that path — so a cache-hit row mixed into this
+ * calculation isn't "fast," it's absent data pulling the percentile toward
+ * zero. Re-running `scripts/run-evals.ts` after an earlier partial sweep is
+ * exactly the case that produces this mix: briefs already fetched once serve
+ * instantly from cache on the next run, briefs not yet fetched make a real,
+ * slow call. Pooling the two would silently understate real latency in the
+ * Evals tab and the README. This function stays a pure percentile calculator
+ * over whatever rows it's given (kept simple and unit-testable, same as
+ * schemaConformance) — the live/cache-hit split is loadEvalsSummary's job,
+ * since only it has cacheHit on hand before calling this.
+ */
 export function latencyPercentiles(runs: AgentRun[]): { p50: number; p95: number } {
   const values = runs.map(r => r.latencyMs).sort((a, b) => a - b)
   if (values.length === 0) return { p50: 0, p95: 0 }
   const pick = (p: number) => values[Math.min(values.length - 1, Math.floor(p * (values.length - 1)))]
   return { p50: pick(0.5), p95: pick(0.95) }
 }
+
+// Below this sample count, a p50/p95 over live calls is too few points to
+// call a percentile with a straight face — the Evals tab and the README must
+// say so rather than presenting a confident-looking number over a handful of
+// samples. Picked as "enough for p95 to mean something more than a single
+// data point" rather than derived from any statistical test.
+export const MIN_LIVE_LATENCY_SAMPLES = 5
 
 /**
  * Fraction of paired (judge, human) scores that agree exactly. This is the
@@ -156,6 +178,16 @@ export type SweepProvenance = {
   isMock: boolean
 }
 
+// How many of the sweep's agent_runs rows were served from .llm-cache/
+// (cacheHit=true — no network call, latencyMs hardcoded to 0) versus a real
+// live provider call. Re-running scripts/run-evals.ts after an earlier
+// partial run produces exactly this mix: already-fetched briefs replay
+// instantly from cache, not-yet-fetched briefs make a real call. The page
+// and the README must disclose this split — a reader can't otherwise tell
+// whether "20 briefs covered" means 20 real calls or a handful of real calls
+// plus a lot of free replays.
+export type CallBreakdown = { total: number; live: number; cached: number }
+
 export type EvalsSummary = {
   sweep: SweepProvenance | null
   sweepRunCount: number
@@ -163,7 +195,8 @@ export type EvalsSummary = {
   totalBriefs: number
   schemaConformance: ReturnType<typeof schemaConformance>
   placementAccuracy: ReturnType<typeof placementAccuracy>
-  latency: ReturnType<typeof latencyPercentiles>
+  callBreakdown: CallBreakdown
+  latency: ReturnType<typeof latencyPercentiles> & { liveSampleCount: number; meaningful: boolean }
   cost: CostSummary
   scenarioRelevance: {
     judgeScores: { briefLabel: string; score: number }[]
@@ -173,8 +206,26 @@ export type EvalsSummary = {
     agreement: number | null
   }
   failureLog: FailureLogEntry[]
+  incompleteBriefs: IncompleteBrief[]
   adversarial: AdversarialBriefOutcome[]
 }
+
+// A brief that has SOME rows in this sweep but never completed the full
+// cohort -> placement -> curriculum chain. Exists because of a real gap
+// found by Task 15's actual OpenAI sweep: brief 9 failed with a transport
+// error ("fetch failed") inside the curriculum call, and — before
+// adapter.ts's transport-error handling was fixed (see callWithSchema's doc
+// comment) — that kind of failure skipped agent_runs entirely, so it shows
+// up nowhere in `failureLog` (which only ever sees ok=false ROWS, and none
+// were written). A brief with cohort+placement rows but no curriculum row
+// would otherwise read as fully successful — briefsCovered/totalBriefs and
+// an empty failureLog both look clean. This check is generic (any brief
+// missing one of the three required kinds, for any reason, on any sweep —
+// past or future) rather than hardcoded to brief 9, so it keeps catching
+// this even now that new transport failures DO write a row.
+export type IncompleteBrief = { label: string; presentKinds: string[]; missingKinds: string[] }
+
+const REQUIRED_GENERATION_KINDS = ["cohort", "placement", "curriculum"] as const
 
 function isPlacementOutputRow(v: unknown): v is { learnerId: string; band: string } {
   return (
@@ -208,7 +259,8 @@ function emptyEvalsSummary(): EvalsSummary {
     totalBriefs: EVAL_BRIEFS.length,
     schemaConformance: schemaConformance([]),
     placementAccuracy: placementAccuracy([]),
-    latency: latencyPercentiles([]),
+    callBreakdown: { total: 0, live: 0, cached: 0 },
+    latency: { ...latencyPercentiles([]), liveSampleCount: 0, meaningful: false },
     cost: costSummary([]),
     scenarioRelevance: {
       judgeScores: [],
@@ -218,6 +270,7 @@ function emptyEvalsSummary(): EvalsSummary {
       agreement: null,
     },
     failureLog: [],
+    incompleteBriefs: [],
     adversarial: EVAL_BRIEFS
       .filter((b: EvalBrief) => b.category === "adversarial")
       .map(b => ({
@@ -289,7 +342,25 @@ export async function loadEvalsSummary(): Promise<EvalsSummary> {
   const isMock = sweep.isMock
 
   const conformance = schemaConformance(sweepRuns)
-  const latency = latencyPercentiles(sweepRuns)
+
+  // Live vs. cache-served split — see latencyPercentiles' doc comment and
+  // CallBreakdown's for why this can't be skipped: re-running the sweep
+  // script after an earlier partial run mixes free, instant cache replays
+  // (briefs already fetched) with real, slow calls (briefs not yet fetched)
+  // in the same sweep_id. Pooling them into one latency figure would
+  // silently understate real latency.
+  const liveRuns = sweepRuns.filter(r => !r.cacheHit)
+  const cachedRuns = sweepRuns.filter(r => r.cacheHit)
+  const callBreakdown: CallBreakdown = {
+    total: sweepRuns.length,
+    live: liveRuns.length,
+    cached: cachedRuns.length,
+  }
+  const latency = {
+    ...latencyPercentiles(liveRuns),
+    liveSampleCount: liveRuns.length,
+    meaningful: liveRuns.length >= MIN_LIVE_LATENCY_SAMPLES,
+  }
   const cost = costSummary(sweepRuns)
 
   // Placement accuracy: every learnerId cited in a successful placement-kind
@@ -362,6 +433,23 @@ export async function loadEvalsSummary(): Promise<EvalsSummary> {
       return { label: b.label, text: b.text, ranSuccessfully, note: adversarialNote(isMock, ranSuccessfully) }
     })
 
+  // See IncompleteBrief's doc comment: a brief with SOME rows but missing one
+  // of the three required generation kinds never shows up in `failureLog`
+  // (empty if the missing step failed via a transport error, on a sweep run
+  // before adapter.ts logged those) or as an obvious gap in briefsCovered —
+  // this is the check that surfaces it anyway, generically, not just for the
+  // specific brief that happened to trigger it.
+  const briefLabelsInSweep = [...new Set(sweepRuns.map(r => r.briefLabel).filter((x): x is string => x !== null))]
+  const incompleteBriefs: IncompleteBrief[] = briefLabelsInSweep
+    .map(label => {
+      const kindsPresent = new Set(sweepRuns.filter(r => r.briefLabel === label && r.ok).map(r => r.kind))
+      const presentKinds = REQUIRED_GENERATION_KINDS.filter(k => kindsPresent.has(k))
+      const missingKinds = REQUIRED_GENERATION_KINDS.filter(k => !kindsPresent.has(k))
+      return { label, presentKinds, missingKinds }
+    })
+    .filter(b => b.missingKinds.length > 0)
+    .sort((a, b) => Number(a.label) - Number(b.label))
+
   return {
     sweep,
     sweepRunCount: sweepRuns.length,
@@ -369,6 +457,7 @@ export async function loadEvalsSummary(): Promise<EvalsSummary> {
     totalBriefs: EVAL_BRIEFS.length,
     schemaConformance: conformance,
     placementAccuracy: placement,
+    callBreakdown,
     latency,
     cost,
     scenarioRelevance: {
@@ -379,6 +468,7 @@ export async function loadEvalsSummary(): Promise<EvalsSummary> {
       agreement,
     },
     failureLog,
+    incompleteBriefs,
     adversarial,
   }
 }

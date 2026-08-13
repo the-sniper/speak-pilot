@@ -1,0 +1,464 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Setting the overnight tone and verifying identity fast",
+      "scenarios": [
+        {
+          "title": "2 a.m. password reset chat with a locked-out user",
+          "situation": "A user on a deadline opens a chat after multiple failed logins. You must calm them, verify identity, and get them back in quickly.",
+          "targetPhrases": [
+            "Thanks for reaching us overnight—I’ve got you now and I’ll stay with you.",
+            "Let me summarize to be sure I’ve got this right: …",
+            "Before I proceed, I need to verify your account to keep it secure.",
+            "Could you confirm the last 4 digits of your phone and the billing zip?",
+            "I can get you a temporary access link in the next 2 minutes."
+          ],
+          "successLooksLike": "Agent reduces stress, verifies identity using approved data points, and restores access or sets a time-bound next step within 5 minutes."
+        },
+        {
+          "title": "“Are you even open?” skeptical caller",
+          "situation": "A caller doubts overnight coverage and expects slow help.",
+          "targetPhrases": [
+            "We’re 24/7—night shift is fully staffed for critical issues.",
+            "I’ll be your single point of contact until we resolve this.",
+            "Here’s what I can do for you in the next 5 minutes: …"
+          ],
+          "successLooksLike": "Agent establishes credibility, outlines an immediate plan, and gains agreement to proceed."
+        },
+        {
+          "title": "Quick identity check with an impatient customer",
+          "situation": "Customer resists verification because they’re tired and frustrated.",
+          "targetPhrases": [
+            "I hear you—it’s late. To protect your account, I have to verify just two items.",
+            "These are the quickest options we have right now: …",
+            "Once verified, I’ll move fast and keep you updated every 2 minutes."
+          ],
+          "successLooksLike": "Agent maintains empathy while enforcing security policy and moves the case forward without escalation."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "De‑escalation after multiple transfers and long holds",
+      "scenarios": [
+        {
+          "title": "Taking ownership after three transfers",
+          "situation": "You inherit a call from someone who has repeated their story three times.",
+          "targetPhrases": [
+            "I can see you’ve been transferred a few times—thank you for sticking with us.",
+            "I’m taking ownership and will stay with you to the finish.",
+            "Let me recap what I heard and confirm what success looks like for you tonight."
+          ],
+          "successLooksLike": "Agent de‑escalates, confirms the goal in the customer’s words, and prevents further transfers."
+        },
+        {
+          "title": "Offer callback versus hold during low staffing",
+          "situation": "Queues are long and you can’t stay on the line for a deep troubleshoot right now.",
+          "targetPhrases": [
+            "I can keep you on hold for about 8 minutes, or I can give you a priority callback in 15—what works better?",
+            "If we do a callback, I’ll send you a confirmation text now.",
+            "Either way, I’ll own this until it’s closed."
+          ],
+          "successLooksLike": "Agent offers clear, bounded options and gets consent for a callback without losing trust."
+        },
+        {
+          "title": "Reset expectations without a supervisor on site",
+          "situation": "Customer demands a supervisor who isn’t available overnight.",
+          "targetPhrases": [
+            "Our overnight lead is handling an incident and not live on calls.",
+            "Here’s what I can authorize right now, and what I can queue for review at 8 a.m.",
+            "I’ll document your request and ensure it’s first in the morning review."
+          ],
+          "successLooksLike": "Agent sets realistic boundaries, provides an immediate path, and books a concrete follow‑up time."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "Security and compliance on night calls and chats",
+      "scenarios": [
+        {
+          "title": "Declining full card details in chat",
+          "situation": "A customer tries to send full payment info via chat.",
+          "targetPhrases": [
+            "For your security, please don’t share your full card number here.",
+            "I’ll send a secure payment link to complete this safely.",
+            "Once you’ve used the link, reply ‘done’ and I’ll confirm."
+          ],
+          "successLooksLike": "Agent blocks insecure data sharing and moves the customer to an approved secure flow."
+        },
+        {
+          "title": "Redacting PII in tickets",
+          "situation": "You need to log the case but the customer already shared PII.",
+          "targetPhrases": [
+            "I’m redacting sensitive details in your case notes now.",
+            "I’ve saved only the last 4 digits and the timestamp per policy.",
+            "Your data is protected; here’s your case ID: …"
+          ],
+          "successLooksLike": "Ticket contains only compliant details and a clear audit trail."
+        },
+        {
+          "title": "Identity verification with limited data",
+          "situation": "The customer can’t access email and phone but needs urgent help.",
+          "targetPhrases": [
+            "Let’s use alternative verification: last invoice amount and service address.",
+            "If that’s not available, I can place a secure outbound call to the registered number.",
+            "I’ll pause here while you check—take your time."
+          ],
+          "successLooksLike": "Agent applies approved fallback verification steps and documents them precisely."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Overnight incident and outage communications",
+      "scenarios": [
+        {
+          "title": "Explaining a partial outage and next updates",
+          "situation": "Multiple users report errors; status page shows a partial outage.",
+          "targetPhrases": [
+            "We’re tracking a partial outage affecting logins for some users.",
+            "Next update is in 15 minutes—I’ll keep you posted even if there’s no change.",
+            "In the meantime, here’s a safe workaround: …"
+          ],
+          "successLooksLike": "Agent gives scope, impact, workaround, and a time‑boxed update cadence."
+        },
+        {
+          "title": "Using the status page script without sounding scripted",
+          "situation": "You must align with official wording but still sound human.",
+          "targetPhrases": [
+            "Here’s the official update in plain terms: …",
+            "This matches the status page so you get consistent info.",
+            "If anything changes sooner than the posted window, I’ll reach out immediately."
+          ],
+          "successLooksLike": "Agent aligns to official language while personalizing tone and next steps."
+        },
+        {
+          "title": "Maintenance window overrun at night",
+          "situation": "Planned maintenance is running long and customers are waking up to issues.",
+          "targetPhrases": [
+            "Maintenance extended by 30 minutes; I know that’s disruptive.",
+            "Your first available action is at HH:MM your time.",
+            "If it exceeds that, I’ll apply a courtesy credit review first thing in the morning."
+          ],
+          "successLooksLike": "Agent acknowledges impact, provides local‑time clarity, and sets a fair make‑good path."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "theme": "Triage and escalation to the on‑call engineer",
+      "scenarios": [
+        {
+          "title": "Gathering actionable details fast",
+          "situation": "You need to collect repro steps and logs before paging on‑call.",
+          "targetPhrases": [
+            "Before I page engineering, I need 3 items: exact error, last success time, steps to reproduce.",
+            "Please copy‑paste the full error text or a screenshot.",
+            "I’ll attach this and escalate with priority right away."
+          ],
+          "successLooksLike": "Agent captures all required fields and avoids a back‑and‑forth with on‑call."
+        },
+        {
+          "title": "Writing a crisp escalation note",
+          "situation": "You’re creating a Sev‑2 escalation during the night shift.",
+          "targetPhrases": [
+            "Customer impact: scope/users/regions affected.",
+            "Repro steps: … | Logs/timestamps: … | Workaround tried: …",
+            "Ask: investigation + ETA; customer waiting on line? yes/no."
+          ],
+          "successLooksLike": "Escalation has complete context, clear ask, and correct severity."
+        },
+        {
+          "title": "Holding the customer while waiting on‑call",
+          "situation": "On‑call has 20 minutes ETA; you need to keep the customer informed.",
+          "targetPhrases": [
+            "Engineering ETA is 20 minutes; I’ll check in every 5.",
+            "You don’t have to wait on the line—I can call back within 2 minutes of the update.",
+            "Meanwhile, here’s what we can safely try: …"
+          ],
+          "successLooksLike": "Agent keeps control of the conversation, reduces anxiety, and prevents unnecessary hold time."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "theme": "Multichannel load: chat, email, and voicemail overnight",
+      "scenarios": [
+        {
+          "title": "Juggling two chats and one urgent email",
+          "situation": "You must set expectations and keep all channels warm.",
+          "targetPhrases": [
+            "I’m here and actively working—expect a reply every 2 minutes.",
+            "If I go silent, it’s because I’m testing on my side—I’ll update you shortly.",
+            "For anything lengthy, I’ll switch to email and summarize here."
+          ],
+          "successLooksLike": "Agent paces responses and uses cross‑channel summaries without dropping any thread."
+        },
+        {
+          "title": "Turning a voicemail into a ticket and email follow‑up",
+          "situation": "Customer leaves a detailed voicemail at 1 a.m.",
+          "targetPhrases": [
+            "I’ve created ticket #… from your voicemail and summarized the issue.",
+            "Reply to this email to keep the thread in one place.",
+            "If you prefer a call, I can ring you back at HH:MM your time."
+          ],
+          "successLooksLike": "Agent captures voicemail accurately and initiates a clear, trackable conversation."
+        },
+        {
+          "title": "Personalizing a macro reply",
+          "situation": "You must use a template but tailor it to the user’s context.",
+          "targetPhrases": [
+            "I’m adapting the recommended steps to your setup: …",
+            "Based on your logs at HH:MM, start from step 3.",
+            "If that doesn’t work, I have a faster alternative ready."
+          ],
+          "successLooksLike": "Template is customized to the customer’s environment and feels human."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "theme": "Workarounds and temporary fixes that stick",
+      "scenarios": [
+        {
+          "title": "Guiding a workaround step‑by‑step on voice",
+          "situation": "Customer needs to stay productive until a fix ships.",
+          "targetPhrases": [
+            "Let’s take it one step at a time—I’ll wait while you try it.",
+            "If you hit an error, read it to me verbatim.",
+            "Once it works, I’ll email the steps so you can repeat them later."
+          ],
+          "successLooksLike": "Agent delivers a working workaround and sends a clean summary email."
+        },
+        {
+          "title": "Setting a clear check‑back time",
+          "situation": "A fix is pending; you need to promise an update and keep it.",
+          "targetPhrases": [
+            "I’ll check status at HH:MM and update you by HH:MM, even if there’s no change.",
+            "If I’m off shift, my handoff note will include your case as priority #1.",
+            "You won’t need to repeat yourself in the morning."
+          ],
+          "successLooksLike": "Customer receives proactive updates on schedule and doesn’t need to chase support."
+        },
+        {
+          "title": "Documenting the workaround for the team",
+          "situation": "Your workaround isn’t in the KB yet.",
+          "targetPhrases": [
+            "I’m drafting a KB note: environment, steps, and caveats.",
+            "I’ll flag it for peer review with screenshots.",
+            "Until it’s published, I’ve linked it in the handoff."
+          ],
+          "successLooksLike": "Workaround is documented clearly and discoverable for the next agent."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "theme": "Refunds, credits, and policy explanations at night",
+      "scenarios": [
+        {
+          "title": "Downtime refund request",
+          "situation": "Customer demands a full refund for a one‑hour outage.",
+          "targetPhrases": [
+            "I understand the impact on your work—let’s review what I can authorize now.",
+            "Our policy offers a service credit for confirmed downtime of …",
+            "I’ll submit this for you tonight and confirm by email."
+          ],
+          "successLooksLike": "Agent applies policy accurately, communicates compassionately, and initiates the credit process."
+        },
+        {
+          "title": "Explaining SLA credits without jargon",
+          "situation": "Customer is unfamiliar with SLAs and wants plain language.",
+          "targetPhrases": [
+            "In simple terms, you get X hours of credit off your next bill.",
+            "This doesn’t expire and applies automatically.",
+            "Here’s how you’ll see it on your invoice."
+          ],
+          "successLooksLike": "Customer understands the remedy and agrees to next steps."
+        },
+        {
+          "title": "Saying no with alternatives",
+          "situation": "Customer asks for something not allowed (e.g., cash refund on annual plan).",
+          "targetPhrases": [
+            "I can’t approve that tonight, and here’s why: …",
+            "What I can do now is …",
+            "If you’d like, I can schedule a manager review at HH:MM tomorrow."
+          ],
+          "successLooksLike": "Agent declines firmly but fairly and keeps the relationship positive."
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "theme": "Handling abusive or fatigued customers professionally",
+      "scenarios": [
+        {
+          "title": "Setting boundaries on profanity",
+          "situation": "Caller uses profanity repeatedly.",
+          "targetPhrases": [
+            "I want to help, and I need us to keep language respectful.",
+            "If the language continues, I’ll have to end the call and follow up by email.",
+            "Let’s focus on getting this fixed now."
+          ],
+          "successLooksLike": "Agent sets a clear boundary, de‑escalates, or ends the call per policy and documents it."
+        },
+        {
+          "title": "Refusing an unreasonable demand",
+          "situation": "Customer insists on a fix that would violate policy or security.",
+          "targetPhrases": [
+            "I can’t proceed with that—it isn’t safe for your account.",
+            "Here’s the safe alternative we can do right now.",
+            "I’ll document your preference for review in the morning."
+          ],
+          "successLooksLike": "Agent protects the company and the customer while offering a viable path."
+        },
+        {
+          "title": "Supervisor unavailable—commit to a path",
+          "situation": "No supervisor is reachable; the customer wants immediate exception.",
+          "targetPhrases": [
+            "I don’t have authority to grant that tonight.",
+            "Here are two options I can execute now.",
+            "I’ll attach your request to the morning queue with priority."
+          ],
+          "successLooksLike": "Agent holds the line, offers options, and preserves trust."
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "theme": "Time zones, scheduling, and written confirmations",
+      "scenarios": [
+        {
+          "title": "Scheduling a callback across time zones",
+          "situation": "You need to book a callback for a user in a different region.",
+          "targetPhrases": [
+            "To confirm, that’s Tuesday 2:00 a.m. your time in Chicago (CDT), which is midnight here (PDT).",
+            "I’ll send a calendar invite and SMS confirmation now.",
+            "If anything changes, reply STOP to reschedule instantly."
+          ],
+          "successLooksLike": "Time is confirmed in both zones and written; no missed connections."
+        },
+        {
+          "title": "Avoiding ‘tonight’ vs ‘tomorrow morning’ confusion",
+          "situation": "You’re setting expectations near midnight.",
+          "targetPhrases": [
+            "I’ll update you by 01:30 your local time (early Wednesday).",
+            "I’ll repeat that in the email subject so it’s clear.",
+            "Here’s the timestamp I’m using: …"
+          ],
+          "successLooksLike": "Agent uses explicit dates/times and eliminates ambiguity."
+        },
+        {
+          "title": "Confirming maintenance in customer local time",
+          "situation": "Customer asks, “When will I be able to use it again where I am?”",
+          "targetPhrases": [
+            "Your local window ends at HH:MM on DAY.",
+            "If it ends early, I’ll notify you immediately by SMS and email.",
+            "You won’t need to check back—we’ll push the update to you."
+          ],
+          "successLooksLike": "Customer has precise local-time expectations and proactive notifications set."
+        }
+      ]
+    },
+    {
+      "n": 11,
+      "theme": "Knowledge base mastery and better macros",
+      "scenarios": [
+        {
+          "title": "Adapting KB steps to a unique setup",
+          "situation": "KB article covers Windows, customer is on macOS with M1.",
+          "targetPhrases": [
+            "The KB covers Windows; here’s the macOS equivalent for your setup.",
+            "I’ll note the differences so others can follow this too.",
+            "Let’s test and I’ll capture screenshots for the article."
+          ],
+          "successLooksLike": "Agent guides a successful variation and captures it for future use."
+        },
+        {
+          "title": "Spotting and fixing outdated docs",
+          "situation": "Article references an old UI; customers keep getting stuck.",
+          "targetPhrases": [
+            "This article is out of date at Step 4; I’m proposing an edit.",
+            "Here’s the corrected wording and new screenshot.",
+            "I’ve tagged it for urgent review due to overnight volume."
+          ],
+          "successLooksLike": "Agent submits a clear, ready-to-publish update with evidence."
+        },
+        {
+          "title": "Writing a smarter macro",
+          "situation": "Macro is too generic and causes back‑and‑forth.",
+          "targetPhrases": [
+            "I’m adding placeholders for product, version, and timestamp to reduce follow‑ups.",
+            "Here’s the personalized version for your case: …",
+            "I’ll suggest this as the new default macro for similar issues."
+          ],
+          "successLooksLike": "Macro reduces repeat questions and increases first‑reply resolution in tests."
+        }
+      ]
+    },
+    {
+      "n": 12,
+      "theme": "Handoffs, summaries, and self‑QA for night shift excellence",
+      "scenarios": [
+        {
+          "title": "Writing a perfect shift handoff note",
+          "situation": "You’re ending your shift with open cases that need day‑team action.",
+          "targetPhrases": [
+            "Handoff summary: customer goal, current status, next step due at HH:MM, blockers.",
+            "Do not call before HH:MM local time; preferred channel is email.",
+            "If no update by HH:MM, escalate to Team Lead."
+          ],
+          "successLooksLike": "Day team can act without pinging night shift; no information is missing."
+        },
+        {
+          "title": "Self‑recorded de‑escalation roleplay",
+          "situation": "You record a 2‑minute response to an angry customer scenario and self‑score it.",
+          "targetPhrases": [
+            "Opening: ownership + empathy + summary within 30 seconds.",
+            "Middle: options + time‑boxed plan.",
+            "Close: confirm agreement + send written recap."
+          ],
+          "successLooksLike": "Recording hits structure and tone targets and meets rubric score threshold."
+        },
+        {
+          "title": "Final incident update email",
+          "situation": "You send a wrap‑up email after resolution overnight.",
+          "targetPhrases": [
+            "Here’s what happened (root cause) in plain language: …",
+            "What we did overnight: … | What to expect next: …",
+            "We appreciate your patience—reply to this email if anything regresses."
+          ],
+          "successLooksLike": "Email is concise, accurate, non‑jargony, and closes the loop with clear next steps."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 3,
+    "minutesPerSession": 30
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Night agents turn difficult, after‑hours conversations into calm, time‑boxed plans customers agree to.",
+      "measurableProxy": "In simulated calls/chats, 80% include apology/ownership + summary + clear next step and timestamp within 90 seconds; cohort QA scores average ≥85%."
+    },
+    {
+      "plainLanguage": "Escalations sent to on‑call are complete so engineers can act without calling back for basics.",
+      "measurableProxy": "95% of escalations include user, impact, scope, repro steps, logs, timestamps, workaround tried, and severity; clarification requests from on‑call <10%."
+    },
+    {
+      "plainLanguage": "Overnight handoff notes let the day team continue without re‑asking customers for information.",
+      "measurableProxy": "Morning audits find 90% of handoffs meet the checklist; day‑team follow‑up pings per shift average <1."
+    },
+    {
+      "plainLanguage": "Agents follow security rules every time, even under pressure.",
+      "measurableProxy": "Zero PII violations in monthly audits; 100% completion of required identity verification steps in roleplays."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome, Night Support Team! This 12‑week, night‑shift‑friendly program is 100% async—no live sessions needed. Each week you’ll get three short, 30‑minute tasks you can do during your shift: realistic scenarios, targeted phrases to practice, and quick self‑checks. Themes focus on what matters overnight: de‑escalating transferred callers, secure identity checks, clear outage updates, crisp escalations to on‑call, solid handoffs, and written confirmations across time zones. How to succeed: complete the weekly tasks, record at least one 2‑minute roleplay when prompted, and use the provided checklists (de‑escalation, escalation, handoff, and security). We’ll measure progress with QA rubrics, scenario sims, and morning handoff audits—built for night‑shift realities. You’ve got this—we’re here to make overnight support calm, clear, and effective.",
+    "ko": "야간 지원팀 여러분 환영합니다! 본 과정은 12주 동안 진행되며, 전부 비동기 방식이라 라이브 세션이 전혀 필요하지 않습니다. 매주 근무 중에 30분짜리 과제 3개를 수행하면 됩니다: 실제 같은 시나리오, 목표 표현 연습, 그리고 빠른 셀프 체크. 주제는 야간 업무에 꼭 필요한 내용에 집중합니다: 여러 번 연결된 고객의 감정 완화, 안전한 본인 확인, 장애 공지와 업데이트, 온콜 엔지니어에게 정확한 에스컬레이션, 견고한 인수인계, 그리고 시간대가 다른 고객과의 명확한 일정 확인 등입니다. 성공 비결: 매주 과제를 완료하고, 안내되는 시점에 2분짜리 롤플레이 녹음을 1개 이상 제출하며, 제공되는 체크리스트(감정 완화, 에스컬레이션, 인수인계, 보안)를 활용하세요. 진행 상황은 QA 루브릭, 시나리오 시뮬레이션, 그리고 아침 인수인계 점검으로 확인합니다. 야간 근무에 꼭 맞춘 프로그램으로, 밤 시간대 지원을 더 차분하고 명확하며 효과적으로 만들겠습니다."
+  }
+}

@@ -1,0 +1,258 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Crisp discovery and qualification that earns next steps",
+      "scenarios": [
+        {
+          "title": "Open a rushed discovery with a late‑joining VP",
+          "situation": "30‑minute first call; the VP joins 5 minutes late and wants to know 'what this is about.' You need to reset expectations and earn time for discovery.",
+          "targetPhrases": [
+            "Thanks for making the time—shall we still aim to wrap at [time]?",
+            "To make this useful, here’s the plan: [agenda]. Does that work?",
+            "Before I jump in, what prompted you to take this call now?",
+            "By the end, let’s confirm if this is worth a deeper dive and who else should join."
+          ],
+          "successLooksLike": "Rep sets agenda in the first 60 seconds, confirms remaining time, aligns on an outcome, and transitions into discovery without sounding scripted."
+        },
+        {
+          "title": "Probe for pain, impact, and timing without interrogating",
+          "situation": "You must understand the current workflow, problems, business impact, and decision timeline in under 15 minutes.",
+          "targetPhrases": [
+            "Could you walk me through how you handle this today, end to end?",
+            "What happens when this goes wrong? How does it show up in your numbers?",
+            "Who else is involved when this comes up?",
+            "If nothing changed in 90 days, what would that mean for the team?"
+          ],
+          "successLooksLike": "Rep asks at least three open questions, mirrors and summarizes, and uncovers pain, impact, stakeholders, and timing."
+        },
+        {
+          "title": "Politely disqualify and exit with goodwill",
+          "situation": "The prospect’s needs don’t fit your ICP or timing. Preserve the relationship and leave the door open.",
+          "targetPhrases": [
+            "Based on what you’ve shared, we may not be the best fit right now.",
+            "Here are two options I can recommend instead…",
+            "Would it be helpful if I pointed you to a resource/vendor that fits today?",
+            "Can I check back in after [trigger/date] to see if things have changed?"
+          ],
+          "successLooksLike": "Rep states misfit clearly, offers a helpful next step, gains permission to reconnect later, and ends the call on goodwill."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "Objection handling and value framing under pressure",
+      "scenarios": [
+        {
+          "title": "Handle 'No budget until next fiscal year' without ending the call",
+          "situation": "Mid‑call the prospect says there’s no budget until next year. Keep momentum and explore options.",
+          "targetPhrases": [
+            "Makes sense—budget is tight for everyone right now.",
+            "Out of curiosity, where does this problem land on your priority list?",
+            "If the ROI were clear and near‑term, would there be a path to a pilot?",
+            "We can explore a scoped pilot tied to [metric] so you can justify budget later."
+          ],
+          "successLooksLike": "Rep acknowledges, probes context with one question, reframes value, and secures either a pilot discussion or a scheduled revisit."
+        },
+        {
+          "title": "Respond to 'We’re with Competitor X and happy'",
+          "situation": "Prospect says they already use a competitor and are satisfied. You need to earn a comparative evaluation.",
+          "targetPhrases": [
+            "Totally hear you—many customers used X before moving to us.",
+            "Where does X work well for you, and where does it fall short?",
+            "If we could improve [priority] by [percent], would that be worth a look?",
+            "I can share a side‑by‑side based on your priorities rather than features."
+          ],
+          "successLooksLike": "Rep cushions, asks for specifics, contrasts on buyer’s stated priorities without bashing, and secures agreement for a side‑by‑side or time‑boxed trial."
+        },
+        {
+          "title": "Address security and legal concerns early",
+          "situation": "Security due diligence threatens to slow the cycle. You must acknowledge requirements and move the process forward.",
+          "targetPhrases": [
+            "We’re SOC 2 Type II and GDPR compliant; happy to share documentation.",
+            "Can I loop in our security lead for a 20‑minute review?",
+            "Which specific controls matter most to your team?",
+            "Here’s our standard DPA—do you anticipate any custom terms?"
+          ],
+          "successLooksLike": "Rep names relevant certifications, clarifies must‑haves, schedules a security review, and records owners/dates in the mutual action plan."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "Demos that tell a business story, not a feature tour",
+      "scenarios": [
+        {
+          "title": "Tailor a demo to an end user vs. an executive",
+          "situation": "Mixed‑audience demo with users and a VP. You must adjust depth and focus on outcomes.",
+          "targetPhrases": [
+            "For you, I’ll focus on outcomes and decisions rather than screens.",
+            "Let me show this in the context of the workflow you described.",
+            "Does this address the issue you raised about [pain]?",
+            "Before we move on, is this solving the right problem for your team?"
+          ],
+          "successLooksLike": "Rep adapts depth by role, ties each capability to a stated outcome, and checks alignment every 5 minutes."
+        },
+        {
+          "title": "Handle a curveball feature request you can’t show",
+          "situation": "A stakeholder asks for a feature you don’t have or can’t demo.",
+          "targetPhrases": [
+            "We don’t have that live today; here’s how teams solve it now.",
+            "May I show the nearest workflow and share our roadmap note?",
+            "If that’s a must‑have, let’s mark it in the mutual plan so we don’t miss it."
+          ],
+          "successLooksLike": "Rep says no without overpromising, offers a workaround/roadmap context, and maintains credibility."
+        },
+        {
+          "title": "Close the demo with a clear next step and MAP",
+          "situation": "You need stakeholder alignment and a concrete path to decision post‑demo.",
+          "targetPhrases": [
+            "Here are the steps I captured for a decision: [steps].",
+            "Who else needs to weigh in, and what do they care about?",
+            "Can we target [date] for a go/no‑go? I’ll send a one‑page MAP after this."
+          ],
+          "successLooksLike": "Rep recaps decisions, co‑creates a MAP with dates/owners, and secures a calendar hold for the next milestone."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Multithreading and executive communication",
+      "scenarios": [
+        {
+          "title": "Ask for an intro to the economic buyer",
+          "situation": "Champion is engaged, but the buyer is absent. You need an intro without breaking trust.",
+          "targetPhrases": [
+            "Usually, decisions like this involve [role]; how do you prefer we bring them in?",
+            "Would you be open to a short three‑way email? I can draft a note you can forward.",
+            "The reason to include them now is [business reason], not to add meetings."
+          ],
+          "successLooksLike": "Rep normalizes multithreading, requests an intro with a clear reason, and secures it via a forwardable email."
+        },
+        {
+          "title": "Write a crisp executive summary email after a meeting",
+          "situation": "You must send a concise summary that a VP will actually read and act on.",
+          "targetPhrases": [
+            "Subject: Summary + next steps for [initiative]",
+            "In one line: [business outcome].",
+            "Business impact: [bullet]. Risks/Asks: [bullet].",
+            "Next steps + owners + dates: [list]."
+          ],
+          "successLooksLike": "Rep sends a sub‑150‑word summary with a one‑line outcome, two concise bullets on impact/risks, and dated next steps."
+        },
+        {
+          "title": "Internal handoff to Solutions Engineer without losing momentum",
+          "situation": "You’re bringing in an SE. Keep control and set expectations.",
+          "targetPhrases": [
+            "I’ll bring [SE name] to validate fit and go deeper.",
+            "To make best use of time, we’ll cover [agenda] and confirm [decision].",
+            "Could you send sample data by [date] so we can tailor the session?"
+          ],
+          "successLooksLike": "Rep frames the SE meeting’s value, sets a clear agenda, and secures pre‑work commitments."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "theme": "Pricing conversations and principled negotiation",
+      "scenarios": [
+        {
+          "title": "Propose pricing and anchor on value",
+          "situation": "You need to state price confidently and tie it to outcomes.",
+          "targetPhrases": [
+            "Based on your volume, the investment is [price] for [package].",
+            "This ties to [measurable outcome]; happy to walk through the math.",
+            "If we bundle [A+B], we can extend [X%] savings without cutting scope."
+          ],
+          "successLooksLike": "Rep states price clearly, anchors to a business case, checks understanding, and invites questions."
+        },
+        {
+          "title": "Trade, don’t cave",
+          "situation": "Prospect asks for a discount. You must trade for value, not concede.",
+          "targetPhrases": [
+            "If we can extend Q3 terms, can you commit to [date/term/seats]?",
+            "We can consider that in exchange for a 24‑month term or a case study.",
+            "I’d need [reference/timeline/volume] to unlock that level."
+          ],
+          "successLooksLike": "Rep offers a conditional trade tied to a concrete give, avoids unconditional discounts, and updates the MAP."
+        },
+        {
+          "title": "Handle procurement redlines without derailing",
+          "situation": "Legal sends heavy edits. Keep momentum and protect terms.",
+          "targetPhrases": [
+            "Thanks for the redlines—can we review the material points live?",
+            "Which clauses are must‑haves versus preferences?",
+            "Here’s our standard; where is there flexibility on your side?",
+            "Let’s capture decisions and owners in the MAP."
+          ],
+          "successLooksLike": "Rep identifies 2–3 material clauses, secures a live review, and agrees on owners/dates for resolution."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "theme": "Closing, renewal, and de‑escalation at executive level",
+      "scenarios": [
+        {
+          "title": "Revive a stalled deal after ghosting",
+          "situation": "Prospect has gone quiet after a good demo. You want a decision or a clean close.",
+          "targetPhrases": [
+            "Quick nudge—should we close the loop for now or is this still active?",
+            "Did priorities shift on your side?",
+            "If it’s a no, that’s okay—mind sharing why so I don’t chase you?",
+            "Would a 2‑week pilot with clear success criteria help?"
+          ],
+          "successLooksLike": "Rep resets with permission, surfaces the reason for the stall, proposes a right‑sized next step, or cleanly closes out."
+        },
+        {
+          "title": "De‑escalate a prospect transferred three times",
+          "situation": "A frustrated prospect has been passed between teams. You are the first AE to take ownership.",
+          "targetPhrases": [
+            "You’re right to be frustrated—thank you for sticking with me.",
+            "I will own this from here and be your single point of contact.",
+            "In the next 10 minutes I’ll do [action], and by EOD I’ll send [plan].",
+            "May I confirm your top two issues so we get this right?"
+          ],
+          "successLooksLike": "Rep acknowledges emotion, takes ownership, confirms top issues, and gives specific immediate actions and timelines."
+        },
+        {
+          "title": "Run a QBR that uncovers expansion signals",
+          "situation": "Post‑sale, you lead a quarterly review to retain and expand.",
+          "targetPhrases": [
+            "Looking back, you’ve achieved [result]; thank you for the partnership.",
+            "Where do you still see friction in [process]?",
+            "Other teams like yours often expand first into [area].",
+            "Shall we scope a 2‑week test with [team] and define success up front?"
+          ],
+          "successLooksLike": "Rep quantifies outcomes, asks expansion questions, and proposes a small test with dates/owners to validate value."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 2,
+    "minutesPerSession": 60
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Reps can run a focused discovery that ends with a clear next step.",
+      "measurableProxy": "In role plays, 80% open with an agenda, ask 5+ probing questions, summarize back, and secure a next step within 20 minutes."
+    },
+    {
+      "plainLanguage": "Reps handle common objections without losing control of the call.",
+      "measurableProxy": "In simulations, 80% use cushion + question + value framing and secure either a concrete next step or a polite close within 3 minutes for budget/timing/competitor/security objections."
+    },
+    {
+      "plainLanguage": "Reps deliver demos that tie features to business outcomes and keep stakeholders engaged.",
+      "measurableProxy": "In demo labs, reps check for alignment at least every 5 minutes and tie features to stated pain at least 3 times per demo."
+    },
+    {
+      "plainLanguage": "Reps propose pricing confidently and trade for value instead of discounting by default.",
+      "measurableProxy": "In negotiation labs, 75% state price with a value anchor, propose at least one conditional trade, and avoid unconditional discounts."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Team, ahead of the Q3 offsite we’ll run a 6‑week, role‑specific English program for Account Executives. Expect 2 x 60‑minute sessions per week. We’ll focus on discovery, objections, demos, multithreading with executives, pricing/negotiation, and closing/de‑escalation. Bring real deals—each session includes short drills, realistic role‑plays, and targeted feedback. By the end, you’ll have tighter talk tracks, clearer emails, and the language to move deals forward with confidence.",
+    "ko": "팀 여러분, Q3 오프사이트를 앞두고 6주간 영업 담당(AE)을 위한 역할 맞춤형 영어 프로그램을 진행합니다. 주 2회, 회당 60분 수업입니다. 다룰 주제는 다음과 같습니다: 디스커버리, 이의 제기 대응, 데모 진행, 여러 이해관계자와의 동시 공략(멀티스레딩), 가격/협상, 클로징과 진정(디에스컬레이션). 실제 진행 중인 딜을 가져오세요—각 세션은 짧은 드릴, 현실적인 롤플레이, 맞춤 피드백으로 구성됩니다. 프로그램이 끝나면 더 탄탄한 톡트랙, 더 명확한 이메일, 그리고 거래를 자신 있게 전진시키는 표현을 갖추게 될 것입니다."
+  }
+}

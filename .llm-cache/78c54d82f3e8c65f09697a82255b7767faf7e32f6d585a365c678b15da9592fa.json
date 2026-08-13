@@ -1,0 +1,501 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Open, Own, Verify: Tier 1 call/chat foundations",
+      "scenarios": [
+        {
+          "title": "Opening a support interaction and verifying identity (KBA)",
+          "situation": "A customer asks for a password reset on chat. You must greet, take ownership, and complete knowledge-based authentication before proceeding.",
+          "targetPhrases": [
+            "Thanks for contacting Support—my name is ___. I can help with that.",
+            "Before we start, I’ll need to verify your account for security.",
+            "May I confirm your full name and company on the account?",
+            "For security, I’ll send a one-time link to your email ending in ___—is that correct?",
+            "Once verified, we’ll reset your password together.",
+            "I’ll stay with you while you complete the steps."
+          ],
+          "successLooksLike": "Agent opens with a clear greeting, states ownership, completes KBA correctly on the first try, and transitions smoothly to next steps without sounding scripted."
+        },
+        {
+          "title": "Setting expectations and asking to place on hold",
+          "situation": "The fix requires time (e.g., locating the right article, running a check). You need to set expectations and ask permission to place the customer on hold.",
+          "targetPhrases": [
+            "To set expectations, this will take about 2–3 minutes.",
+            "Is it okay if I place you on a brief hold while I check?",
+            "I’ll check back in every minute so you’re not left waiting.",
+            "Thanks for your patience—I’m still working on it.",
+            "I’m back—here’s what I found."
+          ],
+          "successLooksLike": "Agent states a clear time estimate, asks permission for hold, provides timed updates, and returns with a concise summary of progress."
+        },
+        {
+          "title": "Confirming understanding and summarizing next steps",
+          "situation": "You’ve gathered the customer’s issue. Before troubleshooting, confirm you understood and align on the plan.",
+          "targetPhrases": [
+            "Let me make sure I got this right: ___",
+            "So far you’ve tried ___ and saw ___, correct?",
+            "Here’s the plan: first we’ll ___, then we’ll ___",
+            "If that doesn’t work, I’ll escalate to ___ and follow up by ___.",
+            "Does that match what you need today?"
+          ],
+          "successLooksLike": "Agent mirrors the issue accurately, gets explicit agreement, and outlines a clear, stepwise plan with a fallback path. "
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "De-escalation after multiple transfers",
+      "scenarios": [
+        {
+          "title": "Customer has been transferred three times and is upset",
+          "situation": "The caller starts frustrated: they’ve repeated their story and been bounced around.",
+          "targetPhrases": [
+            "I’m sorry you’ve had to repeat this—I’ll take ownership and get this moving.",
+            "You shouldn’t have to explain this again. I’m taking notes so you won’t need to repeat it.",
+            "Let’s fix this together. First, I’ll ___",
+            "If we need another team, I’ll stay on the line and brief them for you.",
+            "Thank you for sticking with me."
+          ],
+          "successLooksLike": "Agent acknowledges frustration without being defensive, takes ownership, reduces interruptions, and lowers the customer’s emotional temperature within two minutes."
+        },
+        {
+          "title": "Managing interruptions and crosstalk",
+          "situation": "The customer talks over the agent. You must acknowledge and regain structure.",
+          "targetPhrases": [
+            "You’re right, and I want to help—may I share a quick step that should save us time?",
+            "I’ll be brief—then I’ll listen to the rest.",
+            "I hear you. One detail I need is ___ so I can fix this faster.",
+            "I’ll pause here—go ahead."
+          ],
+          "successLooksLike": "Agent uses respectful interruption and signposting to regain control, while the customer feels heard and agrees to a structured approach."
+        },
+        {
+          "title": "Resetting tone mid-call",
+          "situation": "Midway through the call, the customer’s tone spikes again after a minor setback.",
+          "targetPhrases": [
+            "I can see why that’s frustrating. Here’s what we can do next.",
+            "We’re close. Let’s try ___—it should take less than a minute.",
+            "If this doesn’t resolve it, I’ll escalate with a clear summary so you don’t have to.",
+            "Thanks for bearing with me."
+          ],
+          "successLooksLike": "Agent acknowledges emotion, reframes progress, and presents a next step without sounding dismissive or defensive."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "MFA and password reset flows",
+      "scenarios": [
+        {
+          "title": "One-time code not arriving",
+          "situation": "Customer isn’t receiving the 6‑digit MFA code by email/SMS.",
+          "targetPhrases": [
+            "Let’s confirm the contact ending in ___ is correct.",
+            "Please check spam/junk and search for our domain.",
+            "I’ve re-sent the code—codes expire in 10 minutes.",
+            "If it still doesn’t arrive, we can switch to backup codes/authenticator.",
+            "For security, please don’t share your full password—only the code."
+          ],
+          "successLooksLike": "Agent verifies contact info, communicates expiry and alternatives, and resolves without compromising security."
+        },
+        {
+          "title": "Authenticator app codes not working (time drift)",
+          "situation": "Customer reports invalid codes from an authenticator app.",
+          "targetPhrases": [
+            "Authenticator codes can fail if device time is off.",
+            "Please enable automatic time sync on your phone, then try again.",
+            "If that fails, we can reset MFA after verification.",
+            "I’ll stay with you while you try it."
+          ],
+          "successLooksLike": "Agent explains the cause in plain language, guides to fix time sync, and confirms successful login or safe reset."
+        },
+        {
+          "title": "Account locked after too many attempts",
+          "situation": "Customer locked out due to failed logins.",
+          "targetPhrases": [
+            "I see multiple failed attempts—your account is temporarily locked for security.",
+            "The lock clears in ___ minutes, or I can start a verified reset now.",
+            "I’ll send a reset link—please open it in an incognito/private window.",
+            "Once you’re back in, we can update your recovery options."
+          ],
+          "successLooksLike": "Agent communicates policy clearly, offers a compliant workaround, and verifies the customer regains access. "
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Login and access troubleshooting",
+      "scenarios": [
+        {
+          "title": "Login loop or 404 after sign-in",
+          "situation": "Customer logs in but is redirected or gets 404.",
+          "targetPhrases": [
+            "Let’s rule out browser issues—please clear cache/cookies for our site.",
+            "Could you try a different browser or a private window?",
+            "Do you see any error code? A screenshot (no sensitive data) helps.",
+            "If this persists, I’ll capture details and escalate."
+          ],
+          "successLooksLike": "Agent sequences quick wins (cache/incognito/alt browser), captures evidence, and documents error codes precisely."
+        },
+        {
+          "title": "Network/VPN/firewall blocking access",
+          "situation": "Corporate network blocks login or key pages.",
+          "targetPhrases": [
+            "Are you on a VPN or corporate network?",
+            "Please try disconnecting VPN or using a mobile hotspot as a test.",
+            "If that works, I can share allowlist domains/ports for IT.",
+            "I’ll email the network requirements after our call."
+          ],
+          "successLooksLike": "Agent isolates the network as the variable, proves it with a test, and provides clear allowlist guidance for IT."
+        },
+        {
+          "title": "Mobile vs. desktop discrepancy",
+          "situation": "Feature works on mobile but not desktop (or vice versa).",
+          "targetPhrases": [
+            "Let’s compare versions—what app/browser version are you on?",
+            "Does the same issue happen in another device/profile?",
+            "I’ll document steps to reproduce so our team can investigate."
+          ],
+          "successLooksLike": "Agent narrows scope, gathers environment details, and prepares a clean reproduction summary."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "theme": "Billing and subscription triage (Tier 1 scope)",
+      "scenarios": [
+        {
+          "title": "Unexpected charge dispute",
+          "situation": "Customer reports an unknown charge on their statement.",
+          "targetPhrases": [
+            "I understand seeing an unexpected charge is worrying—let’s review it together.",
+            "May I verify the last four digits of the card and billing email?",
+            "I can send an invoice copy now and check for duplicate subscriptions.",
+            "If needed, I’ll file a billing review and follow up by ___."
+          ],
+          "successLooksLike": "Agent expresses empathy, verifies safely, provides an invoice, and initiates the correct billing review path without promising outcomes."
+        },
+        {
+          "title": "Invoice copy and tax info update",
+          "situation": "Customer needs past invoices and to add a tax ID/VAT.",
+          "targetPhrases": [
+            "I can email past invoices to the verified address.",
+            "To add a tax ID, go to Billing > Settings > Tax details.",
+            "I’ll stay while you update it and confirm the change."
+          ],
+          "successLooksLike": "Agent delivers documents promptly and guides the customer to self-serve updates, confirming completion."
+        },
+        {
+          "title": "Payment failed / card declined",
+          "situation": "Auto-renewal failed due to card issue.",
+          "targetPhrases": [
+            "Your renewal failed on ___ due to a card decline.",
+            "Please update the card at ___ or use a different method.",
+            "Once updated, charges retry within ___ hours—I’ll monitor and confirm.",
+            "If it fails again, I’ll escalate to Billing Ops."
+          ],
+          "successLooksLike": "Agent states the reason, gives a simple fix, sets a follow-up commitment, and avoids overpromising timelines."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "theme": "Gathering diagnostics and clean reproduction steps",
+      "scenarios": [
+        {
+          "title": "Capturing steps to reproduce",
+          "situation": "Customer gives a vague description. You need clear steps.",
+          "targetPhrases": [
+            "Could you walk me through what you clicked, step by step?",
+            "After you click ___, what happens next?",
+            "When did you first notice this—around what time and timezone?",
+            "I’ll read back the steps to confirm I captured them correctly."
+          ],
+          "successLooksLike": "Agent elicits a numbered, unambiguous set of steps with timestamps and confirms accuracy by read-back."
+        },
+        {
+          "title": "Collecting safe screenshots/logs",
+          "situation": "You need evidence without exposing sensitive data.",
+          "targetPhrases": [
+            "A redacted screenshot would help—please exclude personal data.",
+            "You can attach files by clicking ___",
+            "If logs are needed, I’ll share a secure upload link.",
+            "Here’s exactly what to include: time, user, page, error text."
+          ],
+          "successLooksLike": "Agent requests only necessary artifacts, provides a safe upload path, and ensures data minimization."
+        },
+        {
+          "title": "Versioning and environment details",
+          "situation": "Issue may be version-specific.",
+          "targetPhrases": [
+            "Which app/browser version and OS are you using?",
+            "Are any extensions or blockers enabled?",
+            "Does the issue occur on another profile/device?",
+            "I’ll add these details to the ticket for engineering."
+          ],
+          "successLooksLike": "Agent gathers full environment metadata and notes cross-environment results clearly."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "theme": "Incident/outage communications",
+      "scenarios": [
+        {
+          "title": "Major outage with no clear ETA",
+          "situation": "Customer can’t access the service during a P1 incident.",
+          "targetPhrases": [
+            "We’re currently experiencing a widespread issue affecting ___",
+            "Our engineering team is actively working on it; I don’t have an exact time yet.",
+            "I’ll subscribe you to status updates here: ___",
+            "In the meantime, a possible workaround is ___",
+            "I’ll follow up by ___ even if the status hasn’t changed."
+          ],
+          "successLooksLike": "Agent avoids guessing ETAs, shares the status link, offers any viable workaround, and commits to a proactive update."
+        },
+        {
+          "title": "Partial degradation affecting a feature",
+          "situation": "Only a subset of users/features is affected.",
+          "targetPhrases": [
+            "This appears to impact ___ specifically.",
+            "The team is mitigating; function X should still work.",
+            "If this blocks you, I can offer ___ as a temporary path.",
+            "I’ll track your case under incident ___."
+          ],
+          "successLooksLike": "Agent identifies scope, provides alternative paths, and links the case to the incident for comms."
+        },
+        {
+          "title": "Closing the loop after resolution",
+          "situation": "Incident resolved; you must notify the customer with clear confirmation.",
+          "targetPhrases": [
+            "The issue has been resolved as of ___",
+            "Please try your workflow now; I’ll stay while you confirm.",
+            "Here’s what changed and how to prevent reoccurrence, if applicable.",
+            "Thank you for your patience today."
+          ],
+          "successLooksLike": "Agent confirms restoration, validates with the user, and communicates any preventive guidance succinctly."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "theme": "Live chat excellence and multitasking",
+      "scenarios": [
+        {
+          "title": "Handling two concurrent chats",
+          "situation": "You’re juggling two chats; one goes silent.",
+          "targetPhrases": [
+            "Thanks for waiting—are you still with me?",
+            "I’m working on your case now; next update in 60 seconds.",
+            "If I don’t hear back in 2 minutes, I’ll park this chat and email you a summary.",
+            "Appreciate your patience between messages."
+          ],
+          "successLooksLike": "Agent timeboxes responses, keeps both customers informed, and defines a graceful parking policy for silent chats."
+        },
+        {
+          "title": "Turning a rant into a structured problem",
+          "situation": "Customer sends a long, emotional paragraph.",
+          "targetPhrases": [
+            "I can see this has been frustrating—here’s what I captured: 1) ___, 2) ___",
+            "Let’s tackle one piece at a time—starting with ___",
+            "If I missed anything, please add it here."
+          ],
+          "successLooksLike": "Agent acknowledges emotion, extracts bullet points, and proposes a sequenced plan without sounding dismissive."
+        },
+        {
+          "title": "Using macros without sounding robotic",
+          "situation": "You need to use saved replies but keep a human tone.",
+          "targetPhrases": [
+            "I’ll personalize this for your case: ___",
+            "Here’s a quick step-by-step I prepared for you.",
+            "Let me know if any step doesn’t match what you see."
+          ],
+          "successLooksLike": "Agent adapts macros with case specifics and invites correction to ensure fit."
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "theme": "Email and ticket writing that customers read",
+      "scenarios": [
+        {
+          "title": "After-call summary email",
+          "situation": "Send a clear summary with steps, timelines, and next actions.",
+          "targetPhrases": [
+            "Subject: Summary of our call about ___",
+            "Here’s what we did today: ___",
+            "Next steps: I will ___ by ___; You will ___ by ___",
+            "If this resolves it, please reply “Resolved”; otherwise, reply with ___"
+          ],
+          "successLooksLike": "Agent sends a concise, scannable email within 15 minutes, with bullets, owners, and dates."
+        },
+        {
+          "title": "Explaining complex fixes with clarity",
+          "situation": "Write instructions for a non-technical customer.",
+          "targetPhrases": [
+            "This should take about ___ minutes.",
+            "You’ll do 3 short parts: 1) ___, 2) ___, 3) ___",
+            "If a step fails, stop and tell me exactly what you saw.",
+            "Screenshots: please include the full window and timestamp."
+          ],
+          "successLooksLike": "Agent breaks complexity into simple chunks, sets expectations, and prevents confusion with stop points."
+        },
+        {
+          "title": "Polite closure and CSAT nudge",
+          "situation": "Issue resolved; invite feedback without pressure.",
+          "targetPhrases": [
+            "Glad we could get this working.",
+            "I’ll close this for now, but you can reply to reopen anytime.",
+            "A brief survey may follow—your feedback helps me and the team.",
+            "Have a great day, and thanks for choosing us."
+          ],
+          "successLooksLike": "Agent closes warmly, keeps the door open, and prompts CSAT appropriately."
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "theme": "Escalation and warm handoffs to Tier 2",
+      "scenarios": [
+        {
+          "title": "Live warm transfer with context",
+          "situation": "You must bring Tier 2 on a live call and avoid the customer repeating themselves.",
+          "targetPhrases": [
+            "I’ll bring a specialist on the line and brief them so you don’t have to repeat this.",
+            "[To T2] Summary: user ___, environment ___, steps tried ___, results ___",
+            "We’ll stay on together for the first few minutes.",
+            "If you get disconnected, I’ll call you right back."
+          ],
+          "successLooksLike": "Agent gives a crisp, complete briefing, confirms ownership, and ensures continuity through and after the transfer."
+        },
+        {
+          "title": "Creating an engineering-ready ticket",
+          "situation": "Asynchronous escalation requires perfect notes.",
+          "targetPhrases": [
+            "Issue summary: ___",
+            "Steps to reproduce (numbered): ___",
+            "Expected vs. actual result: ___",
+            "Evidence attached: screenshot/logs/timezone",
+            "Customer impact/severity: ___",
+            "Next update to customer by ___"
+          ],
+          "successLooksLike": "Agent writes a ticket that gets accepted without bounce-backs and includes all required fields and artifacts."
+        },
+        {
+          "title": "Declining immediate escalation (SLA explanation)",
+          "situation": "Customer demands a manager/engineer now; policy requires standard SLA.",
+          "targetPhrases": [
+            "I want to get this solved for you. Right now, the fastest path is ___",
+            "Our specialist team responds within ___; I’ll monitor your case and update you by ___",
+            "If anything changes, I’ll move you up and let you know immediately."
+          ],
+          "successLooksLike": "Agent holds the line on policy respectfully, offers the best available path, and makes a concrete follow-up commitment."
+        }
+      ]
+    },
+    {
+      "n": 11,
+      "theme": "Policy boundaries, privacy, and saying no with options",
+      "scenarios": [
+        {
+          "title": "Unsupported version or browser",
+          "situation": "Customer uses an unsupported setup and insists it should work.",
+          "targetPhrases": [
+            "I wish I had a different answer. Our supported versions are ___",
+            "What I can do is help you update now or suggest a tested alternative.",
+            "If you prefer to stay on your version, here are known limitations."
+          ],
+          "successLooksLike": "Agent communicates boundaries clearly, offers workable alternatives, and avoids blame."
+        },
+        {
+          "title": "Refund request outside policy",
+          "situation": "Customer asks for a refund beyond the allowed window.",
+          "targetPhrases": [
+            "I understand why you’re asking. Our policy allows refunds within ___",
+            "What I can do today is ___ (credit/discount/extension)",
+            "If you’d like, I can submit a goodwill request and follow up by ___"
+          ],
+          "successLooksLike": "Agent states policy plainly, offers an appropriate alternative, and documents any exception request."
+        },
+        {
+          "title": "Refusing to share data with an unverified caller",
+          "situation": "A caller asks for account details but fails verification.",
+          "targetPhrases": [
+            "For your privacy, I can’t share account details without verification.",
+            "Here’s how we can verify securely: ___",
+            "Alternatively, I can share general information that doesn’t touch your account.",
+            "Once verified, I’ll be happy to go into detail."
+          ],
+          "successLooksLike": "Agent protects customer data, offers safe paths to proceed, and maintains rapport despite refusal."
+        }
+      ]
+    },
+    {
+      "n": 12,
+      "theme": "Capstone: end-to-end Tier 1 cases",
+      "scenarios": [
+        {
+          "title": "From de-escalation to access restore during an incident",
+          "situation": "Customer is locked out, angry after two transfers, and there’s a partial outage impacting login. You must de-escalate, verify identity, attempt MFA fixes, communicate the incident, provide a workaround, and set a follow-up.",
+          "targetPhrases": [
+            "I’m taking ownership so you won’t have to repeat this again.",
+            "Let’s verify your account so I can help securely.",
+            "I’ll try an MFA reset and send a code—please check spam/junk.",
+            "There’s a known incident affecting logins; no exact ETA yet.",
+            "Workaround: use ___ for now; I’ll follow up by ___ with an update."
+          ],
+          "successLooksLike": "Agent runs the full Tier 1 playbook smoothly: calms the customer, verifies, attempts fixes, communicates the incident with no overpromising, offers a workaround, and commits to a time-bound update."
+        },
+        {
+          "title": "Escalation with gold-standard notes and closure",
+          "situation": "Issue requires Tier 2. You must write a perfect ticket, set expectations, and close the loop post-resolution.",
+          "targetPhrases": [
+            "I’m escalating with all the details so this moves quickly.",
+            "Here’s your case number and what to expect by ___",
+            "After Tier 2 resolves it, I’ll confirm and share any prevention tips.",
+            "Thanks for working through this with me."
+          ],
+          "successLooksLike": "Agent produces an accepted-first-time escalation, manages expectations professionally, and sends a clear wrap-up message."
+        },
+        {
+          "title": "Post-incident follow-up and CSAT",
+          "situation": "After resolution, you must confirm functionality, summarize what changed, and invite feedback.",
+          "targetPhrases": [
+            "The service has been stable since ___—can you confirm it works on your side?",
+            "Here’s a quick summary of what changed and how to avoid a repeat.",
+            "If everything looks good, I’ll go ahead and close the ticket.",
+            "You may receive a short survey—thanks in advance for any feedback."
+          ],
+          "successLooksLike": "Agent validates restoration with the user, communicates clearly, and requests feedback appropriately to drive CSAT. "
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 2,
+    "minutesPerSession": 60
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Reps calm upset customers quickly, take ownership, and keep calls on track without supervisor help.",
+      "measurableProxy": "QA de-escalation score averages 85%+; escalations to supervisor drop 20%; sentiment turns positive within 2 minutes on 70%+ of flagged calls."
+    },
+    {
+      "plainLanguage": "Reps verify identity correctly and follow security steps every time.",
+      "measurableProxy": "KBA/MFA compliance audit passes 95%+; zero critical PII violations in monthly audits."
+    },
+    {
+      "plainLanguage": "Reps collect clean reproduction steps and evidence so Tier 2 can act without back-and-forth.",
+      "measurableProxy": "Tier 2 bounce-backs for missing info fall below 10%; mean time to resolution for escalated tickets improves by 15%."
+    },
+    {
+      "plainLanguage": "Reps set accurate expectations and follow through on updates.",
+      "measurableProxy": "Re-contact for the same issue within 24 hours decreases 20%; SLA on promised callbacks/updates met 95%+."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome to the Tier 1 Customer Support English program. Over the next 12 weeks, we’ll practice the exact conversations you handle every day: opening and verifying accounts, de-escalating tough calls after multiple transfers, guiding MFA/password resets, troubleshooting access issues, writing clear tickets and emails, and doing warm handoffs to Tier 2. Sessions are fast, practical, and focused on phrases you can use on your very next shift. Let’s build confidence, clarity, and consistency—together.",
+    "ko": "Tier 1 고객 지원 영어 프로그램에 오신 것을 환영합니다. 앞으로 12주 동안 실제 현장에서 바로 쓰는 대화만 연습합니다: 오프닝과 본인 확인, 여러 차례 이관 뒤 감정이 격한 고객 응대, MFA/비밀번호 재설정 안내, 접근 문제 트러블슈팅, 깔끔한 티켓/이메일 작성, 그리고 Tier 2로의 원활한 핸드오프까지. 세션은 빠르고 실용적이며, 바로 다음 근무에 쓸 수 있는 표현에 집중합니다. 자신감, 명확함, 일관성을 함께 키워봅시다."
+  }
+}

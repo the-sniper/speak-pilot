@@ -1,0 +1,363 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Start strong: introductions, context-gathering, and access",
+      "scenarios": [
+        {
+          "title": "30-second cross-functional self-intro in a kickoff meeting",
+          "situation": "You’ve just joined and must introduce yourself to sales, CS, and operations in a team kickoff.",
+          "targetPhrases": [
+            "I support [team/function] by…",
+            "My priorities this quarter are…",
+            "If you need X, the best way to reach me is…",
+            "I can help unblock…",
+            "I’ll share office hours on…"
+          ],
+          "successLooksLike": "Delivers a concise, confident intro that states role, how to engage them, and immediate priorities without filler."
+        },
+        {
+          "title": "Clarify context before touching a Salesforce/Zendesk case",
+          "situation": "You’re asked to jump into a live customer case; you need history, SLA, and owner before acting.",
+          "targetPhrases": [
+            "What’s the latest case note and next promised action?",
+            "Who currently owns the case and the SLA?",
+            "Has the customer tried…?",
+            "To avoid double-work, I propose I handle…",
+            "Please confirm by EOD."
+          ],
+          "successLooksLike": "Asks for essential history and ownership, proposes a division of work, and confirms next steps with a clear time bound."
+        },
+        {
+          "title": "Request system access and data with minimal back-and-forth",
+          "situation": "You need permissions to tools (SFDC, Jira, Confluence) to start work.",
+          "targetPhrases": [
+            "I need [role/permission] to complete [task].",
+            "Manager approver is…; Security ticket is…",
+            "Access can be time-bound to…",
+            "If not possible, a workaround is…",
+            "Please confirm when granted."
+          ],
+          "successLooksLike": "Sends a precise, approver-ready request that includes purpose, scope, and fallback to avoid delays."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "Own the intake: triage, clarify, and commit",
+      "scenarios": [
+        {
+          "title": "Triage an AE’s custom quote request",
+          "situation": "An Account Executive pings you for a custom quote needed by tomorrow.",
+          "targetPhrases": [
+            "What problem are we solving with this quote?",
+            "Decision-maker and deadline are…?",
+            "Must-haves vs. nice-to-haves are…",
+            "I can commit to [time]; if not, here’s Plan B.",
+            "I’ll confirm in Salesforce under…"
+          ],
+          "successLooksLike": "Clarifies business need and constraints, sets a realistic deadline or alternative, and documents in the system of record."
+        },
+        {
+          "title": "Turn an ambiguous Jira into clear acceptance criteria",
+          "situation": "You receive a vague Jira ticket from CS about a minor product bug.",
+          "targetPhrases": [
+            "Success looks like…",
+            "Given/When/Then:…",
+            "Blocking dependencies are…",
+            "Priority vs. impact is…",
+            "I’ll update the ticket with repro steps."
+          ],
+          "successLooksLike": "Converts vague ask into testable acceptance criteria with priority and repro steps captured in Jira."
+        },
+        {
+          "title": "Summarize a case and hand off cleanly to Engineering",
+          "situation": "You must pass a customer issue to Engineering without losing signal.",
+          "targetPhrases": [
+            "Context: customer, environment, impact…",
+            "Repro steps and evidence:…",
+            "Workaround in place:…",
+            "Requested by/Owner/SLA:…",
+            "Next decision point is…"
+          ],
+          "successLooksLike": "Packages a concise, evidence-based summary with owner, SLA, and next decision clearly stated."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "Write to customers: de-escalate, request info, and reset expectations",
+      "scenarios": [
+        {
+          "title": "De-escalate a customer transferred three times",
+          "situation": "A frustrated customer has been bounced between teams and is threatening to churn.",
+          "targetPhrases": [
+            "I understand you’ve had to repeat this—thank you for your patience.",
+            "I will own this from here and keep you updated by…",
+            "Here’s what I can do in the next 24 hours:…",
+            "If we miss that, I’ll escalate to…",
+            "Does that plan work for you?"
+          ],
+          "successLooksLike": "Acknowledges frustration, takes ownership, proposes a concrete plan with time-bound updates, and confirms alignment."
+        },
+        {
+          "title": "Request logs/screenshots without sounding robotic",
+          "situation": "You need specific artifacts to reproduce a customer issue.",
+          "targetPhrases": [
+            "To fix this faster, could you share…",
+            "Here’s a 30-second guide:…",
+            "You can redact sensitive info like…",
+            "Once received, I’ll reply by…",
+            "Thank you for helping us speed this up."
+          ],
+          "successLooksLike": "Politely explains why the request matters, provides simple instructions, addresses privacy, and sets a response time."
+        },
+        {
+          "title": "Inform a customer about SLA risk and set a new ETA",
+          "situation": "You will miss the original commitment and must reset expectations.",
+          "targetPhrases": [
+            "I want to flag a risk to the original ETA of…",
+            "The reason is…(no excuses, just facts).",
+            "New ETA:… and what will happen by then:…",
+            "I’ll provide interim updates at…",
+            "If critical, options are…"
+          ],
+          "successLooksLike": "Owns the miss early, states cause and new timeline, provides interim plan and alternatives to reduce impact."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Speak up live: stand-ups, discovery support, and renewal risk calls",
+      "scenarios": [
+        {
+          "title": "Run a crisp 5-minute cross-functional stand-up update",
+          "situation": "You need to update Sales, CS, and Ops on blockers and progress.",
+          "targetPhrases": [
+            "Yesterday I did… Today I will… Blockers are…",
+            "I need help from [team] on… by…",
+            "No update on X; next check-in is…",
+            "Risks and mitigations:…"
+          ],
+          "successLooksLike": "Delivers a structured update with asks, timelines, and risks in under five minutes without rambling."
+        },
+        {
+          "title": "Support an AE on a discovery call",
+          "situation": "Join a discovery to capture requirements and confirm feasibility.",
+          "targetPhrases": [
+            "Before we start, agenda is…",
+            "To confirm, success for you looks like…",
+            "From our side, constraints are…",
+            "Next steps and owners:… by…"
+          ],
+          "successLooksLike": "Clarifies outcomes, elicits constraints, and ends with a firm owner-and-deadline list captured in notes."
+        },
+        {
+          "title": "Coordinate a renewal risk call with a CSM and customer",
+          "situation": "Usage has dropped; you must align on a save plan.",
+          "targetPhrases": [
+            "We’ve noticed… impact to your goals is…",
+            "Top 1–2 drivers appear to be…",
+            "We propose: action, owner, date…",
+            "Let’s confirm checkpoints on…"
+          ],
+          "successLooksLike": "States data-driven risk, proposes a short plan with owners and dates, and confirms checkpoints with the customer."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "theme": "Make process visible: SOPs, Confluence, and changelogs",
+      "scenarios": [
+        {
+          "title": "Draft a one-page SOP for a recurring task",
+          "situation": "You need to document how to process credit requests end-to-end.",
+          "targetPhrases": [
+            "Purpose and scope:…",
+            "Who does what, when:…",
+            "Happy path / exceptions:…",
+            "Quality checks and SLAs:…",
+            "Link to templates:…"
+          ],
+          "successLooksLike": "Produces a concise SOP with scope, roles, steps, exceptions, and SLA that a peer can follow without questions."
+        },
+        {
+          "title": "Update a Confluence page after a process change",
+          "situation": "Pricing approval steps changed; pages must be updated and announced.",
+          "targetPhrases": [
+            "Change summary: from X to Y because…",
+            "Effective date and impacted teams:…",
+            "What you need to do now:…",
+            "Where to ask questions:…"
+          ],
+          "successLooksLike": "Publishes a clear change note, updates artifacts, and communicates the call-to-action to affected teams."
+        },
+        {
+          "title": "Write a tight case summary for leadership",
+          "situation": "Leaders need a 5-sentence summary of a major incident for the weekly review.",
+          "targetPhrases": [
+            "In one line:…",
+            "Impact: customers/users/time…",
+            "Root cause:…",
+            "Fix/mitigation:…",
+            "Prevention next steps: owner/date…"
+          ],
+          "successLooksLike": "Delivers an executive-ready summary that fits in a Slack thread or slide without losing key facts."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "theme": "Data and prioritization: explain, push back, and resolve",
+      "scenarios": [
+        {
+          "title": "Explain a dashboard trend to non-technical stakeholders",
+          "situation": "Volume spiked; you must explain what changed and what it means.",
+          "targetPhrases": [
+            "The trend shows… because…",
+            "What matters is… not…",
+            "If this continues, impact will be…",
+            "We recommend… by…"
+          ],
+          "successLooksLike": "Translates data into business meaning, avoids jargon, and recommends a practical action with a timeline."
+        },
+        {
+          "title": "Push back on a low-priority request using a framework",
+          "situation": "A sales request conflicts with higher-impact work.",
+          "targetPhrases": [
+            "Given priorities A, B, C, I propose…",
+            "Cost vs. impact:…",
+            "Earliest I can start is… unless we deprioritize…",
+            "I’ll revisit this on…"
+          ],
+          "successLooksLike": "Uses a clear prioritization logic, offers an alternative or timeline, and keeps relationships intact."
+        },
+        {
+          "title": "Resolve an invoice discrepancy with Finance",
+          "situation": "A customer disputes charges; you must reconcile with Finance and respond.",
+          "targetPhrases": [
+            "The variance is… compared to…",
+            "Source of truth is…",
+            "Proposed adjustment/credit is…",
+            "Customer communication will say…",
+            "Approval needed from…"
+          ],
+          "successLooksLike": "Pins down the variance, aligns with Finance on the adjustment, and drafts a customer-safe response."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "theme": "Sales-support and CS handoffs that actually stick",
+      "scenarios": [
+        {
+          "title": "Write a customer-ready email after a quote change",
+          "situation": "Legal required a term change; you must update the quote and explain it plainly.",
+          "targetPhrases": [
+            "What changed and why:…",
+            "How this affects price/timeline:…",
+            "Your options are…",
+            "If you approve by…, we can…",
+            "Happy to walk through live."
+          ],
+          "successLooksLike": "Explains change in plain English, presents options, and calls for a decision with a clear deadline."
+        },
+        {
+          "title": "Draft an executive summary after a demo",
+          "situation": "Post-demo, you need to send a 5-bullet summary with next steps.",
+          "targetPhrases": [
+            "Your goals we heard:…",
+            "What resonated:…",
+            "Open risks:…",
+            "Next steps/owners/dates:…",
+            "Materials attached:…"
+          ],
+          "successLooksLike": "Sends a crisp summary that mirrors the customer’s words, highlights risks, and locks in owners and dates."
+        },
+        {
+          "title": "Hand off an upsell lead from Support to Sales",
+          "situation": "You spotted expansion potential in a support conversation.",
+          "targetPhrases": [
+            "Signal observed:…",
+            "Business impact could be…",
+            "Warm intro to AE:…",
+            "Customer’s timeline/budget is…",
+            "Tracking in CRM under…"
+          ],
+          "successLooksLike": "Captures signal, warms the intro, includes timing/budget, and logs it correctly so Sales can act."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "theme": "Capstone: lead, reset, and report like a pro",
+      "scenarios": [
+        {
+          "title": "Facilitate a cross-functional incident debrief",
+          "situation": "After a Sev-2 incident, you lead a 20-minute debrief to align on fixes.",
+          "targetPhrases": [
+            "Goal of this debrief is…",
+            "Timeline recap:…",
+            "What went well/poorly:…",
+            "Decisions and owners:… by…",
+            "Follow-up review on…"
+          ],
+          "successLooksLike": "Keeps the meeting focused, documents decisions and owners, and gets agreement on follow-ups."
+        },
+        {
+          "title": "Negotiate a deadline and reset expectations",
+          "situation": "Competing priorities force a slip; you must renegotiate without damaging trust.",
+          "targetPhrases": [
+            "I can hit X by Y; the trade-off is…",
+            "Risk if we don’t adjust is…",
+            "Option 1/2 with impacts:…",
+            "Let’s confirm the new plan by…"
+          ],
+          "successLooksLike": "States constraints and trade-offs, offers options, and secures agreement on a revised plan in writing."
+        },
+        {
+          "title": "Write a weekly business update to leadership",
+          "situation": "You send a Friday note covering progress, risks, and asks.",
+          "targetPhrases": [
+            "Green/yellow/red on key workstreams:…",
+            "Highlights and customer impact:…",
+            "Top risks and mitigations:…",
+            "Asks for leadership:…",
+            "Next week’s focus:…"
+          ],
+          "successLooksLike": "Sends a skimmable, decision-ready update that prompts timely leadership support where needed."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 2,
+    "minutesPerSession": 60
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "New hires give clear, timely updates that reduce manager follow-up.",
+      "measurableProxy": "Manager observation checklist: 80%+ of updates include owner, deadline, and next step by week 4."
+    },
+    {
+      "plainLanguage": "Customers and internal stakeholders understand what will happen next and when.",
+      "measurableProxy": "Role-play CSAT (peers/managers) averages ≥4.5/5 on clarity and time-bounds by week 6."
+    },
+    {
+      "plainLanguage": "Work is captured correctly in the system of record (Salesforce/Jira/Confluence).",
+      "measurableProxy": "90% of sampled tickets/docs meet a formatting checklist (context, owner, SLA, next decision) by week 8."
+    },
+    {
+      "plainLanguage": "Escalations are handled calmly with concrete plans.",
+      "measurableProxy": "In simulations, learners produce a de-escalation email within 15 minutes that contains apology, ownership, plan, and ETA."
+    },
+    {
+      "plainLanguage": "Priorities are negotiated professionally without drama.",
+      "measurableProxy": "In mock pushback scenarios, learners articulate a priority framework and offer an alternative timeline in under 2 minutes."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome to Business English for Cross-Functional New Hires. Over the next 8 weeks, we’ll practice the exact conversations you’ll have in business operations, sales support, and customer success—live updates, clean handoffs, de-escalation, and executive-ready writing. Cadence: 2 sessions/week, 60 minutes. Bring real tickets, emails, or Slack messages to each session. By the end, you’ll reliably set clear expectations, document decisions, and move work forward across teams.",
+    "ko": "크로스 펑셔널 신입을 위한 비즈니스 영어 과정에 오신 것을 환영합니다. 앞으로 8주 동안 운영, 영업 지원, 고객 성공에서 실제로 마주하는 대화—라이브 업데이트, 깔끔한 핸드오프, 이슈 진정, 임원용 요약 작성—를 집중적으로 연습합니다. 진행: 주 2회, 회당 60분. 매 세션에 실제 티켓, 이메일, 또는 슬랙 메시지를 가져오세요. 수료 시에는 명확한 기대치를 설정하고, 결정을 문서화하며, 팀 간 업무를 확실히 추진할 수 있게 됩니다."
+  }
+}

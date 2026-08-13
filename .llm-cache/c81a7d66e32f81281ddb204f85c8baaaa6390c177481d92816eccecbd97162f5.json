@@ -1,0 +1,259 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Lead with the bottom line: Executive presence for a US board",
+      "scenarios": [
+        {
+          "title": "Open the board presentation in 60 seconds (BLUF)",
+          "situation": "You have 15 minutes on the agenda. Directors skimmed the deck. You must open a quarterly update and make the decision request crystal clear in your first minute.",
+          "targetPhrases": [
+            "Bottom line up front is...",
+            "We’re asking the board to...",
+            "In one sentence:",
+            "The decision needed today is...",
+            "What this means for the company is...",
+            "We’ll use the next 10 minutes to cover..."
+          ],
+          "successLooksLike": "Opens with a one‑sentence bottom line and states the decision/ask within 20 seconds; sets a simple agenda; no reading from slides."
+        },
+        {
+          "title": "Make a busy chart board-ready",
+          "situation": "You must talk through a dense revenue and margin chart while screen sharing in a hybrid meeting.",
+          "targetPhrases": [
+            "This chart shows trend, driver, and impact:",
+            "The key driver here is...",
+            "As a result, we saw...",
+            "The takeaway is...",
+            "What we need from the board is...",
+            "We’ll follow with details in the appendix."
+          ],
+          "successLooksLike": "Explains trend, driver, and impact in under 60 seconds; limits to 3 key points; lands a clear implication or ask."
+        },
+        {
+          "title": "State the stakes and the ask without hedging",
+          "situation": "You are proposing a $5M budget shift. Two directors are known to challenge soft language.",
+          "targetPhrases": [
+            "We recommend [option] because...",
+            "The risk if we don’t act is...",
+            "We considered and ruled out...",
+            "We are accountable for...",
+            "We propose to commit to..."
+          ],
+          "successLooksLike": "States the recommendation and rationale in plain language; names risks and commitments; no vague fillers like \"hopefully\" or \"kind of.\""
+        },
+        {
+          "title": "Manage nerves and reset smoothly",
+          "situation": "Halfway through the opener, you lose your place. You need to pause, recover, and continue with confidence.",
+          "targetPhrases": [
+            "Let me pause and restate the bottom line:",
+            "Give me a moment to pull up the exact number.",
+            "To recap where we are:",
+            "I’ll keep this tight and move to the decision."
+          ],
+          "successLooksLike": "Uses a short reset phrase; regains structure; keeps the audience with them without apologizing excessively."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "Financial storytelling and defending numbers",
+      "scenarios": [
+        {
+          "title": "Walk directors through variance to plan",
+          "situation": "The Compensation Committee chair asks why gross margin missed plan by 180 bps.",
+          "targetPhrases": [
+            "Versus plan, we are at... driven by...",
+            "Two drivers: mix and input costs.",
+            "The controllable piece is...",
+            "We’ve already done X; next we will..."
+          ],
+          "successLooksLike": "States the variance in one sentence; names top 1–2 drivers; separates controllable vs. uncontrollable; outlines next steps."
+        },
+        {
+          "title": "Explain risk and mitigation like an operator",
+          "situation": "You must brief the board on a supplier risk that could delay a product launch by six weeks.",
+          "targetPhrases": [
+            "The risk is... with a likelihood of... and impact of...",
+            "Mitigation in place is...",
+            "If triggered, our contingency is...",
+            "We’re asking approval for..."
+          ],
+          "successLooksLike": "Quantifies likelihood and impact; names current mitigation and contingency; ties to a clear approval or no-ask update."
+        },
+        {
+          "title": "Deliver a one‑slide executive summary",
+          "situation": "You have one slide to summarize results, drivers, outlook, and the decision needed.",
+          "targetPhrases": [
+            "Results:",
+            "Drivers:",
+            "Outlook: base / downside / upside",
+            "Decision needed today:",
+            "If approved, we will... by [date]."
+          ],
+          "successLooksLike": "Covers results, drivers, outlook, and decision in under 3 minutes; finishes with a time‑bound commitment."
+        },
+        {
+          "title": "Hold your ground on a number under pressure",
+          "situation": "A director challenges your CAC figure and implies the team is sandbagging.",
+          "targetPhrases": [
+            "Short answer: [number]. Longer answer: [assumption].",
+            "Here’s the source and time frame for that number.",
+            "We’re validating X; we’ll follow up by [date].",
+            "Respectfully, the driver is... not..."
+          ],
+          "successLooksLike": "Leads with the headline number; cites source and assumptions; commits to a follow‑up if needed without becoming defensive."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "Tough Q&A: interruptions, pushback, and bridging",
+      "scenarios": [
+        {
+          "title": "Handle a hard interruption without losing control",
+          "situation": "A director cuts in: \"Cut to the chase—what do you want from us?\"",
+          "targetPhrases": [
+            "Happy to go straight to the ask:",
+            "May I finish this one point, then I’ll answer directly.",
+            "Here’s the decision we’re asking for today:"
+          ],
+          "successLooksLike": "Acknowledges the interruption; answers the ask directly; returns to structure without sounding irritated."
+        },
+        {
+          "title": "Answer a hostile or skeptical question",
+          "situation": "\"Why should we believe this turnaround plan when last quarter slipped?\"",
+          "targetPhrases": [
+            "You’re right to ask that.",
+            "What’s different now is...",
+            "Evidence we can point to is...",
+            "Here’s what we’re committing to by [date]."
+          ],
+          "successLooksLike": "Acknowledges concern; contrasts old vs. new with evidence; ends with a concrete commitment."
+        },
+        {
+          "title": "Say \"I don’t know\" without losing credibility",
+          "situation": "You’re asked for a metric you don’t have on hand during the live meeting.",
+          "targetPhrases": [
+            "I don’t have that exact figure now.",
+            "What I can say is...",
+            "We’ll confirm and send by [date/time].",
+            "Does that address the core of your question?"
+          ],
+          "successLooksLike": "States the limit plainly; offers a relevant partial; sets a clear follow‑up; checks for satisfaction."
+        },
+        {
+          "title": "Bridge back to your message under cross‑examination",
+          "situation": "Q&A drifts into an operational rabbit hole unrelated to the decision.",
+          "targetPhrases": [
+            "Let me answer in two parts: brief context, then the decision impact.",
+            "Stepping back: the implication for today’s decision is...",
+            "We can deep‑dive offline; for now, the key is..."
+          ],
+          "successLooksLike": "Answers briefly, then bridges to the decision and ask; keeps the room focused on outcomes."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Rehearsal week: US boardroom norms, timing, and capstone",
+      "scenarios": [
+        {
+          "title": "Optimize for US boardroom etiquette and timing",
+          "situation": "You’re first on a tightly timed agenda with a strict chair and fast‑paced directors.",
+          "targetPhrases": [
+            "We’ll keep this tight.",
+            "Time check: we have 3 minutes for the decision.",
+            "We’ll park that and circle back offline.",
+            "Appreciate the candid feedback."
+          ],
+          "successLooksLike": "Signals time awareness; stays concise; parks non‑critical topics diplomatically."
+        },
+        {
+          "title": "Dry‑run full deck: 10‑minute update + 5‑minute Q&A",
+          "situation": "Simulated board meeting with cross‑functional directors; you must land the ask and defend it.",
+          "targetPhrases": [
+            "Opening BLUF:",
+            "Decision needed today:",
+            "Key risks and mitigations are...",
+            "In closing, next steps are... by [date]."
+          ],
+          "successLooksLike": "Delivers within time; lands a clear ask; handles at least three questions using headlining and bridging; ends with next steps and owners."
+        },
+        {
+          "title": "Escalate or defer with credibility",
+          "situation": "A director requests an off‑agenda deep dive that would derail timing.",
+          "targetPhrases": [
+            "Given time, we propose to defer that to the Audit Committee on [date].",
+            "We can provide a memo by [date].",
+            "For today’s decision, what matters is..."
+          ],
+          "successLooksLike": "Defers respectfully; offers a concrete follow‑up path; refocuses on today’s decision."
+        },
+        {
+          "title": "Close strong and lock commitments",
+          "situation": "You need to finish the discussion by restating decisions, owners, and timelines.",
+          "targetPhrases": [
+            "To recap decisions made:",
+            "Owners and dates are:",
+            "We will circulate minutes and materials by [date].",
+            "Thank you for your guidance today."
+          ],
+          "successLooksLike": "Restates decisions and owners clearly; confirms timelines; thanks the board without filler or new information."
+        }
+      ]
+    },
+    {
+      "n": 0,
+      "theme": "Optional micro‑drills (self‑study between sessions)",
+      "scenarios": [
+        {
+          "title": "One‑breath summaries",
+          "situation": "Practice summarizing any slide in one breath.",
+          "targetPhrases": [
+            "In one sentence:",
+            "Net impact is...",
+            "Therefore, we ask..."
+          ],
+          "successLooksLike": "Delivers a crisp one‑sentence summary that lands an implication or ask."
+        },
+        {
+          "title": "Pace and clarity tuning",
+          "situation": "Record a 90‑second talk‑through and tune speed and pauses.",
+          "targetPhrases": [
+            "Pause here.",
+            "Key point is...",
+            "Let me emphasize..."
+          ],
+          "successLooksLike": "Keeps 130–160 wpm with clean pauses before key points; avoids filler sounds."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 3,
+    "minutesPerSession": 90
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Leaders open with the bottom line and a clear ask, not background.",
+      "measurableProxy": "In a 5‑minute mock, first sentence states the decision/ask; 5 of 6 participants meet this twice in weeks 3–4."
+    },
+    {
+      "plainLanguage": "Leaders defend numbers under pressure without freezing or rambling.",
+      "measurableProxy": "In a 5‑question Q&A, participants lead with a headline and source in 4/5 questions; under 2 filler clusters (>2 seconds) per mock."
+    },
+    {
+      "plainLanguage": "Speaking is clear, paced for senior listeners, and easy to follow.",
+      "measurableProxy": "Average speaking rate 130–160 wpm with <3% unintelligible words; two coaches rate intelligibility ≥4/5 in week‑4 capstone."
+    },
+    {
+      "plainLanguage": "Slide explanations are concise and decisive, ending with an implication or ask.",
+      "measurableProxy": "Explains a busy chart in ≤60 seconds covering trend, driver, impact, and explicit ask in week‑4 capstone."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome! Over the next 4 weeks, we’ll get you board‑ready: leading with the bottom line, defending numbers under pressure, and handling tough Q&A without losing control. Expect fast, practical drills, small‑group coaching, and realistic simulations of a US boardroom. By the end, you’ll deliver a crisp executive summary, land a clear decision request, and close with commitments—calmly and confidently.",
+    "ko": "환영합니다! 앞으로 4주 동안 여러분은 이사회 발표에 최적화된 역량을 갖추게 됩니다. 핵심을 먼저 말하고(BLUF), 숫자를 압박 속에서도 방어하며, 까다로운 질의응답에서도 흐름을 잃지 않는 연습을 합니다. 빠르고 실전적인 드릴, 소그룹 코칭, 미국 이사회 환경을 그대로 재현한 시뮬레이션이 진행됩니다. 프로그램이 끝날 때쯤에는 간결한 경영 요약을 제시하고, 명확한 의사결정을 요청하며, 구체적인 커밋으로 마무리하는 발표를 침착하고 자신 있게 수행하게 될 것입니다."
+  }
+}

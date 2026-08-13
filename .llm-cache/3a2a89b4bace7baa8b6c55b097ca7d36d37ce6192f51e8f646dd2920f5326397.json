@@ -1,0 +1,502 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Foundations: brand tone, openings, verification, and setting expectations",
+      "scenarios": [
+        {
+          "title": "Phone greeting and security verification",
+          "situation": "You answer a Tier 1 support call from a new customer. You must greet, verify identity, state purpose, and set expectations before troubleshooting.",
+          "targetPhrases": [
+            "Thanks for calling [Company] Support, this is [Name].",
+            "I’ll be glad to help with that.",
+            "Before we begin, may I verify your full name and the email on the account?",
+            "For security, could you confirm the last four digits of [identifier]?",
+            "I want to set expectations: this should take about 5–7 minutes.",
+            "If we get disconnected, I’ll call you back at [number]."
+          ],
+          "successLooksLike": "Greeting is warm and on-brand, identity is verified correctly, and the customer understands what will happen next and how long it will take."
+        },
+        {
+          "title": "Opening a live chat and setting expectations",
+          "situation": "A customer joins chat with a short complaint: “It’s not working.” You need to set tone, gather basics, and signal timing while you check the account.",
+          "targetPhrases": [
+            "Hi [Name]! Thanks for reaching out via chat.",
+            "I’m pulling up your account now—this may take about two minutes.",
+            "May I ask a couple of quick questions to get this resolved faster?",
+            "I’ll keep you posted every minute or so while I investigate.",
+            "If we’re disconnected, I’ll follow up by email at [email]."
+          ],
+          "successLooksLike": "Agent acknowledges the issue, explains next steps and timing, and asks targeted questions without sounding robotic."
+        },
+        {
+          "title": "First‑response email that sets tone and next steps",
+          "situation": "You receive a vague email about an issue. You must reply with empathy, confirm details, and request the minimal information to proceed.",
+          "targetPhrases": [
+            "Thanks for contacting [Company] Support.",
+            "I understand how frustrating [issue] can be.",
+            "Here’s what I’ll do next and what I need from you:",
+            "Please confirm [data point] so I can proceed.",
+            "I’ll keep this case open for 3 business days awaiting your reply."
+          ],
+          "successLooksLike": "Email is concise, empathetic, and requests only essential info while outlining clear next steps and timelines."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "Diagnosing efficiently: clarifying questions, summarizing, and controlling the flow",
+      "scenarios": [
+        {
+          "title": "From vague complaint to clear problem statement",
+          "situation": "Caller says, “It just stopped working.” You must use funnel questions to define scope and urgency.",
+          "targetPhrases": [
+            "Just to make sure I’m on the same page, here’s what I’m hearing:",
+            "When did this start, and what changed right before it?",
+            "Let’s tackle one thing at a time—let’s start with [X].",
+            "On your screen, do you see [Y] or [Z]?",
+            "How is this impacting your work right now?"
+          ],
+          "successLooksLike": "Agent narrows down the issue to a specific, reproducible problem with clear impact and priority."
+        },
+        {
+          "title": "Summarizing and confirming before troubleshooting",
+          "situation": "After 3–4 minutes of back-and-forth, you need to pause, summarize, and confirm accuracy.",
+          "targetPhrases": [
+            "Let me recap to be sure we’re aligned:",
+            "Did I get that right, or did I miss anything?",
+            "If that’s correct, here’s the plan for the next few minutes.",
+            "I’ll handle the steps on my side while you try [step] on your side."
+          ],
+          "successLooksLike": "Accurate summary reduces rework; both parties agree on the plan before actions are taken."
+        },
+        {
+          "title": "Managing multi-issue conversations",
+          "situation": "Customer brings up multiple issues at once in chat. You must prioritize and park non-urgent items.",
+          "targetPhrases": [
+            "I can help with both. To resolve this faster, let’s start with [priority item].",
+            "I’ll note the second request so we don’t lose it.",
+            "Once we finish [item 1], we’ll move to [item 2]. Sound good?",
+            "Thanks for your patience—this helps us solve both thoroughly."
+          ],
+          "successLooksLike": "Agent sequences issues effectively and keeps the customer focused without dismissing secondary concerns."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "theme": "Account access: password resets, lockouts, and 2FA hiccups",
+      "scenarios": [
+        {
+          "title": "Guiding a secure password reset",
+          "situation": "User can’t log in and requests a reset. You must walk them through self-service securely.",
+          "targetPhrases": [
+            "Please click “Forgot password” on the sign‑in page.",
+            "I’m sending a one‑time code to [channel].",
+            "When you receive it, enter it here and choose a new password.",
+            "I’ll stay with you while you complete the steps.",
+            "For security, your new password should be at least [X] characters with [requirements]."
+          ],
+          "successLooksLike": "Reset completed on the first attempt; user regains access and understands password rules."
+        },
+        {
+          "title": "2FA not arriving",
+          "situation": "User isn’t receiving the authentication code. You must troubleshoot common blockers and offer alternatives within policy.",
+          "targetPhrases": [
+            "Let’s check spam/junk and verify the phone/email on file.",
+            "Sometimes a time sync issue causes this—please check your device time is automatic.",
+            "If needed, I can resend the code or switch to a backup method on file.",
+            "For your security, I can’t disable 2FA, but I can submit a verification request."
+          ],
+          "successLooksLike": "Agent identifies and resolves common blockers or initiates the correct verification process without breaking policy."
+        },
+        {
+          "title": "Temporary unlock after too many attempts",
+          "situation": "Account locked due to failed attempts. You must verify identity and unlock per procedure.",
+          "targetPhrases": [
+            "I see multiple failed sign‑ins—let’s get you back in.",
+            "I’ll need to verify a few details before I can unlock the account.",
+            "I’m unlocking now; please try signing in again in about two minutes.",
+            "If this happens again, here are tips to avoid a lockout: [tips]."
+          ],
+          "successLooksLike": "Unlock follows policy with complete verification; customer successfully signs in and understands prevention tips."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "theme": "Incident and outage communications: acknowledging, guiding, and setting ETAs",
+      "scenarios": [
+        {
+          "title": "Acknowledging a known incident and reducing repeat contacts",
+          "situation": "There is a posted incident affecting logins. Customers call repeatedly. You must acknowledge, set expectations, and deflect to status updates.",
+          "targetPhrases": [
+            "We’re currently experiencing an incident affecting [area].",
+            "Our team is investigating under incident #[ID].",
+            "Current ETA for mitigation is [timeframe]; I’ll share a workaround if available.",
+            "You can subscribe to updates at [status page URL]."
+          ],
+          "successLooksLike": "Customer feels informed and knows where to get updates; unnecessary follow‑ups decrease."
+        },
+        {
+          "title": "Offering safe workarounds",
+          "situation": "Feature X is down. You must offer an approved workaround and document impact.",
+          "targetPhrases": [
+            "As a temporary workaround, you can [workaround].",
+            "This won’t affect your data or security.",
+            "I’ll add your case to the incident for impact tracking.",
+            "Once resolved, normal behavior will return without extra steps."
+          ],
+          "successLooksLike": "Workaround communicated clearly and safely; case is linked to incident with accurate impact notes."
+        },
+        {
+          "title": "Communicating delays and next steps",
+          "situation": "Engineering needs more time. You must communicate a revised ETA and maintain trust.",
+          "targetPhrases": [
+            "Thanks for your patience—our revised ETA is [timeframe].",
+            "I own this case and will update you by [time/date], even if there’s no change.",
+            "If the new timing creates a hard stop for you, let’s discuss options.",
+            "Here’s what’s happening behind the scenes in plain language: [brief]."
+          ],
+          "successLooksLike": "Customer accepts the revised plan and remains informed without needing to chase for updates."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "theme": "De‑escalation: taking ownership after multiple transfers",
+      "scenarios": [
+        {
+          "title": "Caller transferred three times and repeating their story",
+          "situation": "A frustrated customer was transferred multiple times. You must de‑escalate, take ownership, and prevent further transfers.",
+          "targetPhrases": [
+            "You shouldn’t have had to repeat this so many times—thank you for sticking with us.",
+            "I’m taking ownership and will stay with you until we have a solution or a clear next step.",
+            "Here’s my direct case number and callback plan if we’re disconnected: [details].",
+            "First, let me summarize what you’ve told me to ensure I’ve got it right."
+          ],
+          "successLooksLike": "Customer calms down, agrees to continue, and does not need to retell their story again."
+        },
+        {
+          "title": "Contradictory information from previous agents",
+          "situation": "Customer was told two different things. You must clarify policy, apologize, and provide a single path forward.",
+          "targetPhrases": [
+            "I’m sorry for the conflicting information—that’s on us.",
+            "Here’s the correct policy in plain language: [policy].",
+            "What I can do for you today is [option A] or [option B].",
+            "I’ll update the case notes so everyone is aligned."
+          ],
+          "successLooksLike": "Clear, consistent guidance replaces confusion; the next action is agreed and documented."
+        },
+        {
+          "title": "Billing error and anger",
+          "situation": "Customer is angry about an unexpected charge. You must empathize, investigate, and provide resolution or escalation path.",
+          "targetPhrases": [
+            "I can see why that would be upsetting—let’s fix this.",
+            "I’m reviewing your invoices and usage now; this will take about two minutes.",
+            "Within our policy, what I can do today is [credit/adjustment/clarification].",
+            "If an exception is needed, I’ll submit it and confirm the timeline."
+          ],
+          "successLooksLike": "Customer feels heard; a fair resolution or clear escalation is provided without defensiveness."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "theme": "Core troubleshooting: decision trees, error messages, and repro steps",
+      "scenarios": [
+        {
+          "title": "Walking a non‑technical user through steps",
+          "situation": "Customer struggles to follow steps. You must simplify language and pace.",
+          "targetPhrases": [
+            "On the top right, do you see a gear icon? Please click that.",
+            "I’ll go step by step and won’t rush—tell me when you’re ready for the next step.",
+            "If something looks different on your screen, please tell me exactly what you see.",
+            "Let’s try one change at a time so we know what works."
+          ],
+          "successLooksLike": "Steps are completed successfully without overwhelming the customer; no skipped instructions."
+        },
+        {
+          "title": "Capturing high‑quality repro steps and evidence",
+          "situation": "Issue is intermittent. You must capture repro, screenshots, logs, and timestamps for Tier 2.",
+          "targetPhrases": [
+            "What exactly did you click right before the error?",
+            "Could you share a timestamp and a screenshot of the full screen, including the URL?",
+            "I’m attaching logs and repro steps to your case for our specialists.",
+            "If it happens again, here’s how to capture the details quickly: [guide]."
+          ],
+          "successLooksLike": "Complete, clear repro and artifacts are captured, reducing back‑and‑forth with Tier 2."
+        },
+        {
+          "title": "Safe basic fixes",
+          "situation": "You must guide through common safe fixes without causing data loss.",
+          "targetPhrases": [
+            "Let’s rule out the basics: cache/cookies, different browser, private window.",
+            "Please save your work first to avoid losing changes.",
+            "Try signing out and back in—tell me if the error changes.",
+            "I’ll note exactly what we tried for future reference."
+          ],
+          "successLooksLike": "Appropriate basic fixes attempted and documented; risk to customer data is minimized."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "theme": "High‑impact support emails: clarity, structure, and tone",
+      "scenarios": [
+        {
+          "title": "Follow‑up email with clear steps and screenshots",
+          "situation": "After a call, you must send a concise follow‑up with numbered steps and visuals.",
+          "targetPhrases": [
+            "Per our call today, here’s a quick recap and the next steps:",
+            "1) [Step]. 2) [Step]. 3) [Step].",
+            "I’ve attached screenshots showing each step.",
+            "If the issue persists, please reply to this email and we’ll pick it up right away."
+          ],
+          "successLooksLike": "Email is skimmable, numbered, and accurate; customer can self‑serve without another call."
+        },
+        {
+          "title": "Apology without blame or oversharing",
+          "situation": "You must acknowledge inconvenience without speculating on root cause.",
+          "targetPhrases": [
+            "I’m sorry for the inconvenience this has caused.",
+            "We’re actively working on it and will update you as soon as we have news.",
+            "Here’s what you can do in the meantime: [workaround].",
+            "Thank you for your patience while we resolve this."
+          ],
+          "successLooksLike": "Apology is sincere, concise, and paired with actions; no defensiveness or technical oversharing."
+        },
+        {
+          "title": "Closing the loop and confirming resolution",
+          "situation": "Issue appears resolved. You must confirm and provide preventive tips.",
+          "targetPhrases": [
+            "It looks resolved on our side—are you all set now?",
+            "Here are tips to prevent this from happening again: [tips].",
+            "I’ll keep the case open for 48 hours in case you need to reopen.",
+            "Thanks for choosing [Company]; we’re here if anything else comes up."
+          ],
+          "successLooksLike": "Resolution is confirmed, preventive guidance is offered, and the case is cleanly closed."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "theme": "Live chat mastery: multitasking, cadence, and natural canned responses",
+      "scenarios": [
+        {
+          "title": "Managing two chats without dropping the ball",
+          "situation": "You handle two concurrent chats. You must signal delays and keep both customers engaged.",
+          "targetPhrases": [
+            "Thanks for waiting—I’m still with you.",
+            "I’ll need about 2–3 minutes to run a test; I’ll update you as soon as it finishes.",
+            "If you prefer, I can email the results instead of keeping you on chat.",
+            "I appreciate your patience while I work on this."
+          ],
+          "successLooksLike": "Both chats receive timely check‑ins; no one is left hanging and both issues progress."
+        },
+        {
+          "title": "Personalizing canned responses",
+          "situation": "Use macros without sounding robotic.",
+          "targetPhrases": [
+            "I’m tailoring the steps to your setup: [detail].",
+            "Here’s a quick guide I customized for you: [link].",
+            "Let me know if anything looks different on your screen."
+          ],
+          "successLooksLike": "Canned text is edited with context; customer feels the response is personalized."
+        },
+        {
+          "title": "Handling sudden silence",
+          "situation": "Customer stops responding. You must check in and plan follow‑up.",
+          "targetPhrases": [
+            "Are you still with me? No rush—just checking in.",
+            "If I don’t hear back in two minutes, I’ll send the steps by email.",
+            "You can return to this chat anytime using case #[number]."
+          ],
+          "successLooksLike": "Clear, polite nudges and a fallback plan prevent dead chats and ensure continuity."
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "theme": "Explaining policies clearly: refunds, warranties, SLAs, and alternatives",
+      "scenarios": [
+        {
+          "title": "Saying no with empathy and options",
+          "situation": "Customer requests a full refund outside policy. You must decline politely and offer alternatives.",
+          "targetPhrases": [
+            "I wish I could approve that outright. Within our policy, here’s what I can do today: [option].",
+            "Here’s why the policy exists, in plain language: [brief reason].",
+            "If you’d like me to request an exception, here’s what that process and timeline look like."
+          ],
+          "successLooksLike": "Customer understands the decision and leaves with a reasonable next step or alternative value."
+        },
+        {
+          "title": "Explaining SLAs and setting realistic timelines",
+          "situation": "A customer expects instant fixes. You must explain response and resolution targets.",
+          "targetPhrases": [
+            "Our standard response time for this type of request is [timeframe].",
+            "I’ll update you by [time] even if there’s no change.",
+            "If your deadline is sooner, here are options we can try: [options]."
+          ],
+          "successLooksLike": "Customer accepts realistic timelines and chooses an option aligned with urgency."
+        },
+        {
+          "title": "Partial credits and goodwill gestures",
+          "situation": "You’re authorized to issue limited credits. You must position it positively and set expectations.",
+          "targetPhrases": [
+            "I’ve applied a [credit/extension] to your account—this will appear on your next invoice.",
+            "This doesn’t affect your service; it’s simply a courtesy for the inconvenience.",
+            "I’ve noted your account so you won’t need to re‑explain this next time."
+          ],
+          "successLooksLike": "Credit is issued accurately, explained simply, and documented to prevent repeats."
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "theme": "Handoffs that don’t feel like handoffs: Tier 2, warm transfers, and great case notes",
+      "scenarios": [
+        {
+          "title": "Creating a Tier 2‑ready ticket",
+          "situation": "Issue requires specialist review. You must write clear notes with repro, scope, impact, and artifacts.",
+          "targetPhrases": [
+            "Summary: [one‑line problem statement].",
+            "Repro steps: 1) 2) 3).",
+            "Scope/impact: [who/how many/how severe].",
+            "Artifacts attached: logs, screenshots, timestamps.",
+            "Customer expectation set: [what/when]."
+          ],
+          "successLooksLike": "Tier 2 can start immediately with no back‑and‑forth; customer knows what will happen next and when."
+        },
+        {
+          "title": "Warm transfer on the phone",
+          "situation": "You bring in a specialist live without abandoning the customer.",
+          "targetPhrases": [
+            "I’m bringing in our specialist now and will stay on the line.",
+            "[Specialist], here’s [Name], case #[ID]. Quick summary: [summary].",
+            "Before I drop, is there anything else you need from me or the customer?"
+          ],
+          "successLooksLike": "Seamless transition; no re‑explaining; customer feels supported throughout."
+        },
+        {
+          "title": "Scheduling a callback and keeping ownership",
+          "situation": "Specialist can’t join now. You must schedule a callback and keep case ownership.",
+          "targetPhrases": [
+            "Our specialist is available at [time window]. What works for you?",
+            "I’ll stay your point of contact and confirm once it’s booked.",
+            "If anything changes, I’ll inform you ahead of time."
+          ],
+          "successLooksLike": "Callback is scheduled with clear ownership and expectations; no missed connections."
+        }
+      ]
+    },
+    {
+      "n": 11,
+      "theme": "Closures that drive CSAT: confirming resolution and enabling self‑service",
+      "scenarios": [
+        {
+          "title": "Confirming resolution and inviting survey",
+          "situation": "Issue fixed. You must confirm success and invite CSAT without pressure.",
+          "targetPhrases": [
+            "Are we all set on this issue today?",
+            "You may receive a short survey—your feedback helps us improve.",
+            "I appreciate you working through this with me today."
+          ],
+          "successLooksLike": "Customer confirms resolution; survey invite feels natural and not scripted."
+        },
+        {
+          "title": "Proactive education to prevent repeats",
+          "situation": "You can prevent recurrence by teaching a quick best practice.",
+          "targetPhrases": [
+            "Before we wrap up, here’s a 30‑second tip that can save you time next time: [tip].",
+            "I’ll include this in your recap email with a quick link.",
+            "Is there anything else I can help with today?"
+          ],
+          "successLooksLike": "Customer learns a relevant tip; fewer repeat contacts for the same issue."
+        },
+        {
+          "title": "Deflecting to high‑quality self‑service",
+          "situation": "Issue is simple and well‑documented. You must guide to a help article without sounding dismissive.",
+          "targetPhrases": [
+            "This is a great fit for our step‑by‑step guide here: [link].",
+            "I’m happy to stay while you try the steps, or you can follow them later—whatever you prefer.",
+            "If anything isn’t clear, reply to this case and I’ll jump back in."
+          ],
+          "successLooksLike": "Customer accepts self‑service confidently; deflection is successful without hurting satisfaction."
+        }
+      ]
+    },
+    {
+      "n": 12,
+      "theme": "Quality calibration and metrics rehearsal: FCR, AHT, CSAT, and note quality",
+      "scenarios": [
+        {
+          "title": "Mock calls measured against QA rubric",
+          "situation": "Run simulated calls scored on greeting, verification, probing, solution, and close.",
+          "targetPhrases": [
+            "Opening, verification, and purpose set within the first minute.",
+            "Probing with clear summaries before actions.",
+            "Next steps and ownership stated clearly.",
+            "Close with survey invite and recap."
+          ],
+          "successLooksLike": "Agents consistently hit key behaviors that map to higher QA scores and CSAT."
+        },
+        {
+          "title": "Ticket note peer‑review",
+          "situation": "Review each other’s notes for clarity, completeness, and handoff readiness.",
+          "targetPhrases": [
+            "Problem statement is one line and specific.",
+            "Repro steps and artifacts are complete.",
+            "Customer impact and expectations are documented.",
+            "Next owner and next action are crystal clear."
+          ],
+          "successLooksLike": "Notes are concise and complete; Tier 2 acceptance rate increases, rework decreases."
+        },
+        {
+          "title": "Personal metrics planning",
+          "situation": "Each agent sets a realistic improvement goal tied to one metric and one behavior.",
+          "targetPhrases": [
+            "My target is to improve [metric] by [X]% by week [Y].",
+            "The behavior I’ll practice is [behavior].",
+            "I’ll measure it using [report/QA sample] weekly."
+          ],
+          "successLooksLike": "Each learner leaves with a concrete, trackable improvement plan tied to daily behaviors."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 2,
+    "minutesPerSession": 60
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Agents consistently open, verify identity, and set expectations within the first minute on phone, email, and chat.",
+      "measurableProxy": "QA rubric: 90%+ on Opening & Verification items across 5 consecutive scored interactions."
+    },
+    {
+      "plainLanguage": "Customers don’t have to repeat themselves, even after transfers; agents take ownership and keep the customer informed.",
+      "measurableProxy": "Repeat‑story complaints in QA comments drop to near zero; warm transfer adherence at 95%+ on scored calls."
+    },
+    {
+      "plainLanguage": "Tier 1 resolves the most common issues on first contact without needing Tier 2.",
+      "measurableProxy": "First Contact Resolution (FCR) on top 5 Tier‑1 issues ≥ 65% for the cohort by week 12."
+    },
+    {
+      "plainLanguage": "Support emails and chats are clear, concise, and on brand, with minimal grammar or tone issues.",
+      "measurableProxy": "Email/chat QA writing score ≥ 85%; grammar/tone errors ≤ 1 per 10 messages in random samples."
+    },
+    {
+      "plainLanguage": "Escalations include complete notes so specialists can start immediately.",
+      "measurableProxy": "Tier 2 “ready to work” acceptance on first pass ≥ 90%; bounce‑backs for missing info ≤ 10%."
+    },
+    {
+      "plainLanguage": "Customer satisfaction improves without increasing handle time beyond targets.",
+      "measurableProxy": "CSAT +0.3 points over baseline by week 12 while AHT remains within team target ±5%."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome to our 12‑week Customer Support Tier 1 communication program. We’ll meet twice a week for 60 minutes. You’ll practice real phone, email, and chat scenarios: greeting and verification, clarifying questions, account access, incident updates, de‑escalation after multiple transfers, troubleshooting, clear writing, policy explanations, clean handoffs to Tier 2, and strong closures that drive CSAT. Expect hands‑on role‑plays, targeted phrases you can use the same day, and fast feedback tied to your QA rubric. Bring recent tickets or call examples—we’ll adapt activities to your queues. By the end, you’ll handle common cases confidently, reduce repeat contacts, and write notes that make specialists love your handoffs. Let’s get started!",
+    "ko": "12주간의 고객지원 1차(Tier 1) 커뮤니케이션 프로그램에 오신 것을 환영합니다. 우리는 주 2회, 회당 60분 동안 진행합니다. 전화·이메일·채팅 상황에서 바로 쓰이는 실전 스킬을 연습합니다: 인사 및 본인확인, 문제 명확화 질문, 계정 접속 지원, 장애 공지와 ETA 안내, 여러 번 연결된 고객의 감정 완화, 기본 트러블슈팅, 명확한 글쓰기, 정책 설명, Tier 2로의 깔끔한 인계, 높은 만족도로 마무리하기 등입니다. 역할극과 즉시 활용 가능한 표현, QA 기준에 맞춘 피드백이 제공됩니다. 최근 처리한 티켓이나 통화 예시를 가져오시면 실제 업무에 맞게 활동을 맞춤화합니다. 프로그램이 끝날 때쯤이면 흔한 이슈를 자신 있게 해결하고, 재문의율을 낮추며, 전문가가 좋아하는 인계 노트를 작성할 수 있게 됩니다. 함께 시작해 봅시다!"
+  }
+}

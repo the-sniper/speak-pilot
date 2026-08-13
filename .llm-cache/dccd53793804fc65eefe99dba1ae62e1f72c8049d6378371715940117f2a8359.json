@@ -1,0 +1,115 @@
+{
+  "weeks": [
+    {
+      "n": 1,
+      "theme": "Do-it-right compliance: policy acknowledgments, phishing, and data handling",
+      "scenarios": [
+        {
+          "title": "Confirming Code of Conduct acknowledgment before the deadline",
+          "situation": "A system glitch prevents your acknowledgment from showing as complete. You need to email HR/Compliance to confirm you read the policy, note the due date, attach proof, and request confirmation that your record is updated.",
+          "targetPhrases": [
+            "Per the 2026 Code of Conduct",
+            "I acknowledge I have read and will comply",
+            "Please confirm my completion is recorded",
+            "Before the [date] deadline",
+            "For your reference, see attached screenshot",
+            "If additional steps are needed, please let me know"
+          ],
+          "successLooksLike": "A 4–5 sentence email with a clear subject line that states the policy name and due date, confirms acknowledgment, includes evidence (screenshot or LMS ID), and politely asks for written confirmation—no back-and-forth needed."
+        },
+        {
+          "title": "Reporting a suspected phishing email to IT Security",
+          "situation": "You receive a password-reset email from an odd domain. You must report it through the approved channel without clicking anything and alert your team lead.",
+          "targetPhrases": [
+            "I’m reporting a suspected phishing email",
+            "I have not clicked any links or opened attachments",
+            "Submitted via the Phish Alert button",
+            "The sender domain does not match our company domain",
+            "Please advise if we should notify the team",
+            "Quarantined/deleted per guidance"
+          ],
+          "successLooksLike": "A short report sent via the approved tool plus a confirmation email/Slack message to Security with the indicators of compromise (odd domain, urgent tone, mismatched URL) and explicit statement you did not interact with the message."
+        },
+        {
+          "title": "Sharing a file with customer data securely",
+          "situation": "Finance needs a spreadsheet that includes customer emails and phone numbers. You must share it without emailing the raw file and set the correct permissions and expiry.",
+          "targetPhrases": [
+            "Contains PII; sharing via restricted link",
+            "Only people in our organization with the link",
+            "Do not forward",
+            "Access expires on [date]",
+            "Redacted version attached for reference",
+            "Please confirm receipt"
+          ],
+          "successLooksLike": "A SharePoint/Drive link with org-only access and expiration, plus a brief note that labels the data as PII and requests confirmation—no attachments with raw data are sent."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "theme": "Audits, incidents, and vendor compliance handoffs",
+      "scenarios": [
+        {
+          "title": "Responding to an internal audit sampling request",
+          "situation": "Internal Audit requests three Q2 expense receipts within 48 hours while you are traveling. You need to send the documents, map each to the sampled transaction, and ask for a short extension if needed.",
+          "targetPhrases": [
+            "Per your request dated [date]",
+            "Attached are receipts for the selected transactions",
+            "Requesting a short extension until [date] due to travel",
+            "Happy to provide any additional detail",
+            "Please confirm if this satisfies the request"
+          ],
+          "successLooksLike": "One concise email with correctly labeled attachments (transaction IDs, dates, amounts), a specific extension request (if needed), and a confirmation ask—Audit can close the item without chasing you."
+        },
+        {
+          "title": "Filing a minor data incident after misdirected email",
+          "situation": "You accidentally sent a customer list (names and emails, no financial data) to one outside recipient. You must notify the Data Protection Officer and open a ticket with scope, containment, and next steps.",
+          "targetPhrases": [
+            "I’m reporting a potential data incident",
+            "Email sent to one unintended recipient",
+            "No financial data or passwords included",
+            "Recipient confirmed deletion",
+            "Incident logged as [ticket #]",
+            "Requesting guidance on notification requirements"
+          ],
+          "successLooksLike": "A complete ticket and email to the DPO that states what happened, who was affected, what data was involved, containment performed, and the ticket number—no missing fields."
+        },
+        {
+          "title": "Chasing vendor compliance documents before contract signature",
+          "situation": "Procurement needs the vendor’s SOC 2 Type II and a signed DPA before issuing a PO. The vendor is late. You must send a firm, polite deadline and offer help if they need a template.",
+          "targetPhrases": [
+            "As part of due diligence",
+            "Please provide current SOC 2 Type II and signed DPA",
+            "We cannot proceed without these documents",
+            "Deadline: [date] at [time] [timezone]",
+            "If you need a template, let us know",
+            "We will escalate per policy if not received"
+          ],
+          "successLooksLike": "A crisp email that lists required documents, a specific deadline, and the consequence of delay, with a helpful offer of templates—vendor replies with the correct attachments on time."
+        }
+      ]
+    }
+  ],
+  "cadence": {
+    "sessionsPerWeek": 2,
+    "minutesPerSession": 30
+  },
+  "successCriteria": [
+    {
+      "plainLanguage": "Everyone completes the short program and turns in clean drafts that Compliance doesn’t have to fix.",
+      "measurableProxy": "95% session completion; 85% of draft emails/tickets pass first review with zero redlines."
+    },
+    {
+      "plainLanguage": "People can spot a phish and share sensitive files the right way without asking for help.",
+      "measurableProxy": "In simulations, 90% correctly identify phishing red flags and choose the org‑only, time‑limited sharing setting."
+    },
+    {
+      "plainLanguage": "When Audit asks for documents, the reply is correct the first time.",
+      "measurableProxy": "80% of learners assemble a complete audit reply (all fields, labeled attachments) within 10 minutes."
+    }
+  ],
+  "kickoffMessage": {
+    "en": "Welcome to the 2‑week English for Compliance program for cross‑functional teams. Goal: check the box quickly and do it right. Schedule: 2 sessions per week, 30 minutes each. Deliverables: one policy‑acknowledgment email (sim), one phish report (sim), and one audit reply or incident ticket (template). All activities are in English with fast, practical feedback—no extra tests beyond the required check‑ins. Let’s get this done efficiently and accurately.",
+    "ko": "교차 기능 팀을 위한 2주간 컴플라이언스 영어 프로그램에 오신 것을 환영합니다. 목표는 빠르게 요건을 충족하면서 정확하게 수행하는 것입니다. 일정: 주 2회, 회당 30분. 과제: 정책 확인 이메일(시뮬레이션) 1개, 피싱 신고(시뮬레이션) 1개, 감사 요청 회신 또는 인시던트 티켓(템플릿) 1개. 모든 활동은 영어로 진행되며, 실무형 피드백을 빠르게 제공합니다. 필요한 체크 외의 추가 시험은 없습니다. 효율적이고 정확하게 완료합시다."
+  }
+}

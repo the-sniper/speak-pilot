@@ -70,6 +70,7 @@ export default async function EvalsPage() {
             <ScenarioRelevanceSection s={s} />
             <AdversarialSection s={s} />
             <FailureLogSection s={s} />
+            <IncompleteBriefsSection s={s} />
           </>
         )}
       </div>
@@ -307,13 +308,41 @@ function BandTableSection() {
 }
 
 function LatencyCostSection({ s }: { s: Awaited<ReturnType<typeof loadEvalsSummary>> }) {
-  const { latency, cost } = s
+  const { latency, cost, callBreakdown } = s
   return (
     <section className="flex flex-col gap-3">
       <SectionEyebrow>Latency &amp; cost</SectionEyebrow>
+      <p className="text-[12px] leading-relaxed text-[var(--ink-soft)]">
+        <strong className="text-[var(--ink)]">{callBreakdown.live}</strong> of{" "}
+        <strong className="text-[var(--ink)]">{callBreakdown.total}</strong> calls in this sweep were live
+        (real network calls); <strong className="text-[var(--ink)]">{callBreakdown.cached}</strong> were served
+        from <code className="font-mono text-[12px]">.llm-cache/</code> (a prompt this sweep — or an earlier,
+        interrupted one under the same corpus — already fetched for real). A cache hit is genuinely
+        instantaneous and free, not fast: mixing it into a latency percentile would silently understate real
+        latency, so the figures below are computed <strong className="text-[var(--ink)]">only over the
+        {" "}{latency.liveSampleCount} live call{latency.liveSampleCount === 1 ? "" : "s"}</strong>, never pooled
+        with cache hits.
+      </p>
+      {!latency.meaningful && (
+        <div className="rounded-xl border border-dashed border-[var(--accent)] bg-[var(--accent-soft)] p-4 text-[12px] leading-relaxed text-[var(--ink)]">
+          Only {latency.liveSampleCount} live call{latency.liveSampleCount === 1 ? "" : "s"} in this sweep —
+          too few to report a p50/p95 percentile with a straight face. The numbers below are shown for
+          completeness but should be read as individual samples, not a stable percentile.
+        </div>
+      )}
       <div className="grid gap-3 sm:grid-cols-2">
-        <MetricCard eyebrow="p50 latency" value={fmtMs(latency.p50)} isMock={s.sweep?.isMock ?? true} />
-        <MetricCard eyebrow="p95 latency" value={fmtMs(latency.p95)} isMock={s.sweep?.isMock ?? true} />
+        <MetricCard
+          eyebrow="p50 latency"
+          value={latency.liveSampleCount > 0 ? fmtMs(latency.p50) : "—"}
+          caption={`over ${latency.liveSampleCount} live call${latency.liveSampleCount === 1 ? "" : "s"}, cache hits excluded`}
+          isMock={s.sweep?.isMock ?? true}
+        />
+        <MetricCard
+          eyebrow="p95 latency"
+          value={latency.liveSampleCount > 0 ? fmtMs(latency.p95) : "—"}
+          caption={`over ${latency.liveSampleCount} live call${latency.liveSampleCount === 1 ? "" : "s"}, cache hits excluded`}
+          isMock={s.sweep?.isMock ?? true}
+        />
         <MetricCard
           eyebrow="Mean cost, priced calls"
           value={cost.meanKnownCost === null ? "cost unknown" : fmtCost(cost.meanKnownCost)}
@@ -445,6 +474,49 @@ function FailureLogSection({ s }: { s: Awaited<ReturnType<typeof loadEvalsSummar
           ))}
         </div>
       )}
+    </section>
+  )
+}
+
+// A brief with cohort/placement rows but no curriculum row reads as clean in
+// every other section on this page — briefsCovered counts it, and the
+// failure log above stays empty if the missing step failed via a transport
+// error on a sweep that predates adapter.ts logging those (see
+// IncompleteBrief's doc comment in src/lib/evals.ts for the real incident
+// this caught: brief 9's curriculum call failed with "fetch failed" and left
+// zero trace in agent_runs). This section exists so that gap is never
+// invisible — if the list is empty, every covered brief genuinely completed
+// the full cohort -> placement -> curriculum chain.
+function IncompleteBriefsSection({ s }: { s: Awaited<ReturnType<typeof loadEvalsSummary>> }) {
+  if (s.incompleteBriefs.length === 0) return null
+  return (
+    <section className="flex flex-col gap-3">
+      <SectionEyebrow>
+        Incomplete briefs · {s.incompleteBriefs.length} brief{s.incompleteBriefs.length === 1 ? "" : "s"} did not
+        finish the full chain
+      </SectionEyebrow>
+      <p className="text-[12px] leading-relaxed text-[var(--ink-soft)]">
+        Each of these briefs has some real rows in this sweep, but is missing at least one of the three required
+        generation steps (cohort → placement → curriculum) — most likely a transport error (a network failure,
+        not a schema violation) that interrupted generation partway through. These briefs still count toward{" "}
+        <code className="font-mono text-[12px]">briefsCovered</code> above, and a step that failed via a
+        transport error on an older sweep may not appear in the failure log even though the brief genuinely
+        did not complete — this section is the honest accounting for that gap.
+      </p>
+      <div className="flex flex-col gap-2">
+        {s.incompleteBriefs.map(b => (
+          <div
+            key={b.label}
+            className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-xl border border-dashed border-[var(--accent)] bg-[var(--accent-soft)] p-4 font-mono text-[11px]"
+          >
+            <span className="font-semibold text-[var(--ink)]">brief {b.label}</span>
+            <span className="text-[var(--ink-soft)]">
+              completed: {b.presentKinds.length > 0 ? b.presentKinds.join(", ") : "none"}
+            </span>
+            <span className="text-[var(--accent)]">missing: {b.missingKinds.join(", ")}</span>
+          </div>
+        ))}
+      </div>
     </section>
   )
 }
