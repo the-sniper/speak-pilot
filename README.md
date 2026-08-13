@@ -102,7 +102,7 @@ this codebase makes is content-addressed and cached to `.llm-cache/*.json` on fi
 so the app can run with zero API spend:
 
 ```bash
-LLM_API_KEY= REPLAY=1 npm run dev
+LLM_PROVIDER=openai LLM_API_KEY= REPLAY=1 npm run dev
 ```
 
 ### Replay verification

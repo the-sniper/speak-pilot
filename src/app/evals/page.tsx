@@ -366,39 +366,75 @@ function LatencyCostSection({ s }: { s: Awaited<ReturnType<typeof loadEvalsSumma
 
 function ScenarioRelevanceSection({ s }: { s: Awaited<ReturnType<typeof loadEvalsSummary>> }) {
   const r = s.scenarioRelevance
+  const scores = r.judgeScores.map(j => j.score)
+  const distribution = scores.reduce<Record<number, number>>((acc, sc) => {
+    acc[sc] = (acc[sc] ?? 0) + 1
+    return acc
+  }, {})
+  const distinctScoreCount = Object.keys(distribution).length
+  const zeroVariance = scores.length > 0 && distinctScoreCount === 1
+  const soleScore = zeroVariance ? Object.keys(distribution)[0] : null
+  const distributionText = Object.entries(distribution)
+    .sort((a, b) => Number(a[0]) - Number(b[0]))
+    .map(([score, count]) => `${count}×${score}`)
+    .join(", ")
+
   return (
     <section className="flex flex-col gap-3">
-      <SectionEyebrow>Scenario relevance — judge vs. human</SectionEyebrow>
+      <SectionEyebrow>Scenario relevance — judge vs. labeler (inter-model)</SectionEyebrow>
       <p className="text-[12px] leading-relaxed text-[var(--ink-soft)]">
         An LLM judge scores one scenario per brief, 0–3, against the Appendix A rubric. The judge&apos;s own
-        score is not the headline metric — <strong className="text-[var(--ink)]">agreement with a human
-        label on the same scenarios</strong> is, per the build guide: that is the difference between running
-        evals and performing them.
+        score is not the headline metric — <strong className="text-[var(--ink)]">agreement with a second,
+        independently-formed label on the same scenarios</strong> is. Both the judge and that label were
+        produced by a language model, not a person — see the disclosure below. That makes the agreement
+        number an <strong className="text-[var(--ink)]">inter-model agreement rate, not human validation</strong>.
       </p>
       <div className="grid gap-3 sm:grid-cols-2">
         <MetricCard
           eyebrow="Judge mean score"
           value={r.judgeMean === null ? "—" : `${r.judgeMean.toFixed(1)} / 3`}
-          caption={`${r.judgeScores.length} of ${r.totalBriefs} briefs judged.`}
+          caption={
+            scores.length === 0
+              ? `${r.judgeScores.length} of ${r.totalBriefs} briefs judged.`
+              : zeroVariance
+                ? `${scores.length} of ${r.totalBriefs} briefs judged, every one scored ${soleScore} / 3 — zero variance. This judge demonstrated no discriminating power between adequate and excellent on this sweep.`
+                : `${scores.length} of ${r.totalBriefs} briefs judged. Score distribution: ${distributionText}.`
+          }
           isMock={s.sweep?.isMock ?? true}
         />
         <MetricCard
-          eyebrow="Judge / human agreement"
+          eyebrow="Judge / labeler agreement (inter-model)"
           value={r.agreement === null ? "not available" : pct(r.agreement)}
-          caption={`${r.humanLabeledCount} of ${r.totalBriefs} briefs have a human label.`}
+          caption={`${r.humanLabeledCount} of ${r.totalBriefs} briefs have a labeler score.`}
           isMock={s.sweep?.isMock ?? true}
         />
       </div>
-      {r.agreement === null && (
-        <div className="rounded-xl border border-dashed border-[var(--line)] bg-[var(--paper-raised)] p-4 text-[13px] leading-relaxed text-[var(--ink-soft)]">
-          No human labels exist yet for these scenarios —{" "}
-          <code className="font-mono text-[12px]">docs/eval-human-labels.ts</code> is committed with every
-          value honestly set to <code className="font-mono text-[12px]">null</code>. Under the mock provider,
-          generated scenario text is a deterministic placeholder string, not real content — labeling it for
-          job relevance would produce a number that looks like a human judgment without being one. This gets
-          filled in by hand once Task 15&apos;s real provider sweep produces real scenarios to read.
-        </div>
-      )}
+      <div className="rounded-xl border border-dashed border-[var(--line)] bg-[var(--paper-raised)] p-4 text-[13px] leading-relaxed text-[var(--ink-soft)]">
+        {r.agreement === null ? (
+          <>
+            No labels exist yet for these scenarios —{" "}
+            <code className="font-mono text-[12px]">docs/eval-human-labels.ts</code> is committed with every
+            value honestly set to <code className="font-mono text-[12px]">null</code>. Under the mock provider,
+            generated scenario text is a deterministic placeholder string, not real content — labeling it for
+            job relevance would produce a number that looks like a judgment without being one. This gets
+            filled in once a real provider sweep produces real scenarios to read.
+          </>
+        ) : (
+          <>
+            <strong className="text-[var(--ink)]">Both the judge and the label it&apos;s checked against were
+            produced by a language model</strong>, not a person — the comparison label was written by reading
+            each brief&apos;s real generated scenario and scoring it independently against the Appendix A
+            rubric, before the judge&apos;s own scores were ever queried or viewed (see{" "}
+            <code className="font-mono text-[12px]">docs/eval-human-labels.ts</code> for the exact procedure,
+            including the SQL used, and the ordering). The number above is an{" "}
+            <strong className="text-[var(--ink)]">inter-model agreement rate, not independent human
+            validation</strong>, and must not be read as one. Labels from this repo&apos;s actual author,
+            reading the real generated scenario text themselves, would be a meaningfully stronger check and
+            are the natural next step before trusting this number for anything beyond &ldquo;the harness
+            plumbing works end to end.&rdquo;
+          </>
+        )}
+      </div>
     </section>
   )
 }
@@ -438,40 +474,74 @@ function AdversarialSection({ s }: { s: Awaited<ReturnType<typeof loadEvalsSumma
   )
 }
 
+// A failure row's `output` is null exactly when adapter.ts's transport-error
+// branch wrote it (a network failure inside fetch — no response body ever
+// arrived, so there's nothing to show) — see callWithSchema's doc comment.
+// Every OTHER ok=false row went through schema.safeParse on a response that
+// DID arrive, so `output` holds the raw (invalid) payload. That's the same
+// distinction the adapter's own comments draw, reused here so a transport
+// failure is never attributed to the model as a schema violation.
+function failureClass(f: { output: unknown }): "transport error" | "schema violation" {
+  return f.output === null ? "transport error" : "schema violation"
+}
+
 function FailureLogSection({ s }: { s: Awaited<ReturnType<typeof loadEvalsSummary>> }) {
+  const transportCount = s.failureLog.filter(f => failureClass(f) === "transport error").length
+  const schemaCount = s.failureLog.length - transportCount
   return (
     <section className="flex flex-col gap-3">
-      <SectionEyebrow>Failure log · {s.failureLog.length} schema violation{s.failureLog.length === 1 ? "" : "s"}</SectionEyebrow>
+      <SectionEyebrow>
+        Failure log · {s.failureLog.length} failure{s.failureLog.length === 1 ? "" : "s"}
+        {s.failureLog.length > 0
+          ? ` (${schemaCount} schema violation${schemaCount === 1 ? "" : "s"}, ${transportCount} transport error${transportCount === 1 ? "" : "s"})`
+          : ""}
+      </SectionEyebrow>
+      <p className="text-[12px] leading-relaxed text-[var(--ink-soft)]">
+        Two different failure classes land here, kept distinct rather than blended into one
+        &ldquo;model failure&rdquo; count: a <strong className="text-[var(--ink)]">schema violation</strong> means
+        a response arrived but didn&apos;t match the expected shape — that&apos;s on the model. A{" "}
+        <strong className="text-[var(--ink)]">transport error</strong> means the network call itself failed
+        (DNS, timeout, connection reset) before any response arrived — that&apos;s infrastructure, not the
+        model, and must not be attributed to it.
+      </p>
       {s.failureLog.length === 0 ? (
         <p className="rounded-xl border border-dashed border-[var(--line)] bg-[var(--paper-raised)] p-4 text-sm text-[var(--ink-faint)]">
-          No schema violations logged in this sweep.
+          No failures logged in this sweep.
         </p>
       ) : (
         <div className="flex flex-col gap-2">
-          {s.failureLog.map(f => (
-            <details
-              key={f.id}
-              className="group rounded-xl border border-[var(--line)] bg-[var(--paper-raised)] p-4 open:border-[var(--accent)]"
-            >
-              <summary className="flex cursor-pointer flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] text-[var(--ink-soft)]">
-                <span className="font-medium text-[var(--ink)]">{f.kind}</span>
-                <span>brief {f.briefLabel ?? "—"}</span>
-                <span>attempt {f.attempt}</span>
-                <span>{f.model}</span>
-                <span className="text-[var(--ink-faint)]">{new Date(f.createdAt).toLocaleString()}</span>
-              </summary>
-              <div className="mt-3 flex flex-col gap-2">
-                {f.error && (
-                  <p className="rounded-lg border border-[var(--band-c1)] bg-[var(--accent-soft)] p-2.5 text-[12px] leading-relaxed text-[var(--ink)]">
-                    {f.error}
-                  </p>
-                )}
-                <pre className="max-h-64 overflow-auto rounded-lg border border-[var(--line)] bg-[var(--paper)] p-3 font-mono text-[11px] leading-relaxed text-[var(--ink-soft)]">
-                  {JSON.stringify(f.output, null, 2)}
-                </pre>
-              </div>
-            </details>
-          ))}
+          {s.failureLog.map(f => {
+            const cls = failureClass(f)
+            return (
+              <details
+                key={f.id}
+                className="group rounded-xl border border-[var(--line)] bg-[var(--paper-raised)] p-4 open:border-[var(--accent)]"
+              >
+                <summary className="flex cursor-pointer flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] text-[var(--ink-soft)]">
+                  <span
+                    className={`rounded-md px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wide ${cls === "transport error" ? "bg-[var(--band-c1)] text-[var(--ink)]" : "bg-[var(--accent-soft)] text-[var(--accent)]"}`}
+                  >
+                    {cls}
+                  </span>
+                  <span className="font-medium text-[var(--ink)]">{f.kind}</span>
+                  <span>brief {f.briefLabel ?? "—"}</span>
+                  <span>attempt {f.attempt}</span>
+                  <span>{f.model}</span>
+                  <span className="text-[var(--ink-faint)]">{new Date(f.createdAt).toLocaleString()}</span>
+                </summary>
+                <div className="mt-3 flex flex-col gap-2">
+                  {f.error && (
+                    <p className="rounded-lg border border-[var(--band-c1)] bg-[var(--accent-soft)] p-2.5 text-[12px] leading-relaxed text-[var(--ink)]">
+                      {f.error}
+                    </p>
+                  )}
+                  <pre className="max-h-64 overflow-auto rounded-lg border border-[var(--line)] bg-[var(--paper)] p-3 font-mono text-[11px] leading-relaxed text-[var(--ink-soft)]">
+                    {JSON.stringify(f.output, null, 2)}
+                  </pre>
+                </div>
+              </details>
+            )
+          })}
         </div>
       )}
     </section>
