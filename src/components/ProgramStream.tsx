@@ -128,14 +128,12 @@ type Props = {
 export default function ProgramStream({ brief, onProgramId }: Props) {
   const [state, dispatch] = useReducer(reducer, initialState)
   const [attempt, setAttempt] = useState(0)
-  // Exclusive tabs (one section at a time). Follow the latest arrival while
-  // generating; once the user picks a tab, stay there until they pick again.
+  // Exclusive tabs. Stay on the first arrived section (or the user's pick) —
+  // never auto-advance as later SSE sections land.
   const [activeTab, setActiveTab] = useState<SectionKey | null>(null)
-  const [tabPinned, setTabPinned] = useState(false)
 
   useEffect(() => {
     setActiveTab(null)
-    setTabPinned(false)
   }, [attempt])
 
   useEffect(() => {
@@ -340,17 +338,14 @@ export default function ProgramStream({ brief, onProgramId }: Props) {
   const arrived = SECTION_ORDER.filter(key => state[key] !== undefined)
   const nextPending = SECTION_ORDER.find(key => state[key] === undefined) ?? null
   const programId = state.programId ?? null
-  const readyCount = arrived.length
-  const total = SECTION_ORDER.length
-  const latestArrived = arrived[arrived.length - 1] ?? null
+  const firstArrived = arrived[0] ?? null
 
-  // Unpinned: follow the latest arrived section (or the in-flight skeleton).
-  // Pinned: honor the user's click, falling back if that section isn't ready.
-  const displayTab: SectionKey | null = tabPinned
-    ? activeTab && state[activeTab] !== undefined
+  // User pick wins when that section is ready; otherwise hold the first
+  // arrived section. Only show the in-flight skeleton before anything lands.
+  const displayTab: SectionKey | null =
+    activeTab && state[activeTab] !== undefined
       ? activeTab
-      : latestArrived ?? nextPending
-    : latestArrived ?? nextPending
+      : firstArrived ?? nextPending
 
   if (state.error) {
     return <ErrorCard message={state.error} onRetry={() => setAttempt(a => a + 1)} />
@@ -361,35 +356,22 @@ export default function ProgramStream({ brief, onProgramId }: Props) {
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[var(--line)] bg-[var(--paper-raised)] px-4 py-3">
         <div className="min-w-0">
           <p className="font-display text-[13px] font-bold text-[var(--ink)]">
-            {state.done
-              ? "Program ready"
-              : nextPending
-                ? `Writing ${SECTION_LABEL[nextPending].toLowerCase()}…`
-                : "Getting started…"}
+            {state.done ? "Program ready" : "Building your program"}
           </p>
           <p className="text-[12px] text-[var(--ink-faint)]">
-            {readyCount} of {total} parts in
+            {state.done
+              ? "All six parts are ready - browse the tabs anytime."
+              : "Parts arrive in the background. Stay here, or open a tab when you want."}
           </p>
         </div>
-        <div className="flex items-center gap-3">
-          <div
-            className="h-1.5 w-28 overflow-hidden rounded-full bg-[var(--line)] sm:w-40"
-            aria-hidden="true"
+        {state.done && programId ? (
+          <Link
+            href={`/program/${programId}`}
+            className="btn-primary px-4 py-2 text-sm"
           >
-            <div
-              className="h-full rounded-full bg-[var(--accent)] transition-[width] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
-              style={{ width: `${(readyCount / total) * 100}%` }}
-            />
-          </div>
-          {state.done && programId ? (
-            <Link
-              href={`/program/${programId}`}
-              className="btn-primary px-4 py-2 text-sm"
-            >
-              See the full program
-            </Link>
-          ) : null}
-        </div>
+            See the full program
+          </Link>
+        ) : null}
       </div>
 
       <div
@@ -400,7 +382,6 @@ export default function ProgramStream({ brief, onProgramId }: Props) {
         {SECTION_ORDER.map(key => {
           const ready = state[key] !== undefined
           const selected = displayTab === key
-          const writing = !ready && nextPending === key
           return (
             <button
               key={key}
@@ -409,18 +390,13 @@ export default function ProgramStream({ brief, onProgramId }: Props) {
               id={`program-tab-${key}`}
               aria-selected={selected}
               aria-controls={`program-panel-${key}`}
-              disabled={!ready && !writing}
+              aria-disabled={!ready}
               onClick={() => {
                 if (!ready) return
                 setActiveTab(key)
-                setTabPinned(true)
               }}
-              className={`relative shrink-0 px-3.5 py-2.5 text-sm font-semibold transition-colors ${
-                selected
-                  ? "text-[var(--accent)]"
-                  : ready
-                    ? "text-[var(--ink-soft)] hover:text-[var(--ink)]"
-                    : "cursor-default text-[var(--ink-faint)] opacity-45"
+              className={`relative shrink-0 px-3.5 py-2.5 text-sm font-semibold ${
+                selected ? "text-[var(--accent)]" : "text-[var(--ink-soft)] hover:text-[var(--ink)]"
               }`}
             >
               {SECTION_LABEL[key]}
@@ -847,7 +823,7 @@ function KickoffCard({ kickoff }: { kickoff: Kickoff }) {
           </button>
         ))}
       </div>
-      <div className="rounded-2xl border border-[var(--line)] border-l-4 border-l-[var(--accent)] bg-[var(--paper-raised)] p-5">
+      <div className="rounded-2xl border border-[var(--line)] bg-[var(--paper-raised)] p-5">
         <p className="whitespace-pre-wrap font-display text-lg leading-relaxed text-[var(--ink)]">
           {kickoff[lang]}
         </p>
