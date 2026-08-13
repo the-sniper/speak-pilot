@@ -8,6 +8,7 @@ import { db } from "@/db"
 import { drafts, learners, programWeeks, programs, sessions } from "@/db/schema"
 import { __setCacheDirForTest, __setProviderForTest } from "@/lib/llm/adapter"
 import { mockProvider } from "@/lib/llm/providers/mock"
+import { pinMockProviderForTest } from "@/lib/llm/testSupport"
 import type { Provider } from "@/lib/llm/providers/types"
 import { loadCohortId } from "@/lib/placement"
 import { POST } from "./route"
@@ -18,6 +19,7 @@ import { POST } from "./route"
 let cacheDir: string
 let cohortId: string
 let learnerIds: string[]
+let restoreProviderEnv: () => void
 
 async function makeProgram(overrides: { horizonWeeks: number; currentWeek: number }): Promise<string> {
   const id = randomUUID()
@@ -72,7 +74,10 @@ function fakeProvider(name: string, respond: (weekNumber: number) => unknown): P
 
 describe("POST /api/programs/[id]/advance", () => {
   beforeAll(async () => {
-    process.env.LLM_PROVIDER = "mock"
+    // Pins LLM_PROVIDER=mock / REPLAY=0 for real, independent of .env — see
+    // testSupport.ts for why setting process.env.LLM_PROVIDER here would NOT
+    // be enough on its own.
+    restoreProviderEnv = pinMockProviderForTest()
     cacheDir = fs.mkdtempSync(path.join(os.tmpdir(), "advance-route-cache-"))
     __setCacheDirForTest(cacheDir)
     cohortId = await loadCohortId()
@@ -85,7 +90,7 @@ describe("POST /api/programs/[id]/advance", () => {
 
   afterAll(() => {
     __setCacheDirForTest(null)
-    __setProviderForTest(mockProvider)
+    restoreProviderEnv()
     fs.rmSync(cacheDir, { recursive: true, force: true })
   })
 

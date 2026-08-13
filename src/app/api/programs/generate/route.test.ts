@@ -7,6 +7,7 @@ import { db } from "@/db"
 import { placements, programs, programWeeks } from "@/db/schema"
 import { __setCacheDirForTest, __setProviderForTest } from "@/lib/llm/adapter"
 import { mockProvider } from "@/lib/llm/providers/mock"
+import { pinMockProviderForTest } from "@/lib/llm/testSupport"
 import { learnerEvidenceIds, loadLearnersWithScores } from "@/lib/placement"
 import type { ProviderCall } from "@/lib/llm/providers/types"
 import { POST } from "./route"
@@ -25,16 +26,21 @@ async function collect(res: Response) {
 // adapter.test.ts's REPLAY-stale-cache regression test — done regardless of
 // the mock-provider cache fix (1f) below, as defense in depth.
 let cacheDir: string
+let restoreProviderEnv: () => void
 
 describe("POST /api/programs/generate", () => {
   beforeAll(() => {
-    process.env.LLM_PROVIDER = "mock"
+    // Pins LLM_PROVIDER=mock / REPLAY=0 for real, independent of .env — see
+    // testSupport.ts for why setting process.env.LLM_PROVIDER here would NOT
+    // be enough on its own.
+    restoreProviderEnv = pinMockProviderForTest()
     cacheDir = fs.mkdtempSync(path.join(os.tmpdir(), "programs-generate-cache-"))
     __setCacheDirForTest(cacheDir)
   })
 
   afterAll(() => {
     __setCacheDirForTest(null)
+    restoreProviderEnv()
     fs.rmSync(cacheDir, { recursive: true, force: true })
   })
 

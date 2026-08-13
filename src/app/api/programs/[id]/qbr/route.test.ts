@@ -8,6 +8,7 @@ import { db } from "@/db"
 import { learners, programQbrs, programs, sessions } from "@/db/schema"
 import { __setCacheDirForTest, __setProviderForTest } from "@/lib/llm/adapter"
 import { mockProvider } from "@/lib/llm/providers/mock"
+import { pinMockProviderForTest } from "@/lib/llm/testSupport"
 import type { Provider } from "@/lib/llm/providers/types"
 import { loadCohortId } from "@/lib/placement"
 import { POST as advancePOST } from "../advance/route"
@@ -18,6 +19,7 @@ import { POST } from "./route"
 // seeded cohort so computeQbrFacts has real session/score data to compute
 // over.
 let cacheDir: string
+let restoreProviderEnv: () => void
 let cohortId: string
 let learnerIds: string[]
 
@@ -98,7 +100,10 @@ const BAND_LETTER_CODE = /\b(A1|A2|B1|B2|C1|C2)\b/i
 
 describe("POST /api/programs/[id]/qbr", () => {
   beforeAll(async () => {
-    process.env.LLM_PROVIDER = "mock"
+    // Pins LLM_PROVIDER=mock / REPLAY=0 for real, independent of .env — see
+    // testSupport.ts for why setting process.env.LLM_PROVIDER here would NOT
+    // be enough on its own.
+    restoreProviderEnv = pinMockProviderForTest()
     cacheDir = fs.mkdtempSync(path.join(os.tmpdir(), "qbr-route-cache-"))
     __setCacheDirForTest(cacheDir)
     cohortId = await loadCohortId()
@@ -111,7 +116,7 @@ describe("POST /api/programs/[id]/qbr", () => {
 
   afterAll(() => {
     __setCacheDirForTest(null)
-    __setProviderForTest(mockProvider)
+    restoreProviderEnv()
     fs.rmSync(cacheDir, { recursive: true, force: true })
   })
 
